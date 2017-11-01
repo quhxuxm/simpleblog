@@ -40,7 +40,7 @@ public class TestRepository {
             System.out.println(role.getName());
         }
         System.out.println(auth2.getRegisterDate());
-        Author author1 = this.authorMapper.findAuthorByAuthentication(auth1.getId());
+        Author author1 = this.authorMapper.findAuthorByAuthenticationId(auth1.getId());
         System.out.println(author1.getDescription());
         System.out.println(auth1.getType());
         Authentication testForInsert = new Authentication();
