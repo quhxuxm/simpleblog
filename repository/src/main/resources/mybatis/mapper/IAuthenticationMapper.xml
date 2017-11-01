@@ -2,16 +2,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tongwen.repository.mapper.IAuthenticationMapper">
-    <resultMap type="com.tongwen.domain.Authentication"
-               id="authenticationMapper">
+    <resultMap type="authentication" id="authenticationMapper">
         <id column="_id" property="id"/>
         <result column="token" property="token"/>
         <result column="password" property="password"/>
         <result column="register_date" property="registerDate"/>
         <result column="last_login_date" property="lastLoginDate"/>
         <result column="nick_name" property="nickName"/>
-        <result column="type" property="type"
-                javaType="com.tongwen.domain.AuthenticationType"/>
+        <result column="type" property="type" javaType="com.tongwen.domain.AuthenticationType"/>
         <collection property="roles" ofType="com.tongwen.domain.Role">
             <result column="role_id" property="id"/>
             <result column="role_name" property="name"/>
@@ -33,7 +31,6 @@
             INNER JOIN role r ON ar.role_id = r._id
         WHERE a.token = #{token};
     </select>
-
     <select id="findAuthenticationById" resultMap="authenticationMapper">
         SELECT
             a._id             AS _id,
@@ -50,15 +47,14 @@
             INNER JOIN role r ON ar.role_id = r._id
         WHERE a._id = #{id};
     </select>
-
-    <insert id="createAuthentication" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO authentication (_id, token, password, nick_name, type, register_date, last_login_date)
-        VALUES (#{authentication.id}, #{authentication.token},
-                #{authentication.password}, #{authentication.nickName},
-                #{authentication.type}, #{authentication.registerDate},
-                #{authentication.lastLoginDate})
+    <insert id="createAuthentication" useGeneratedKeys="true" keyProperty="id"
+            parameterType="authentication">
+        INSERT INTO authentication (token, password, nick_name, type, register_date, last_login_date)
+        VALUES (#{token},
+                #{password}, #{nickName},
+                #{type}, #{registerDate},
+                #{lastLoginDate})
     </insert>
-
     <insert id="assignRoleToAuthentication">
         INSERT INTO authentication_role (authentication_id, role_id)
         VALUES (#{authentication.id}, #{role.id})

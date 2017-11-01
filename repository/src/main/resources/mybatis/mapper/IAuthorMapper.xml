@@ -7,8 +7,7 @@
         <result property="description" column="description"/>
         <result property="iconImageId" column="icon_image_id"/>
     </resultMap>
-
-    <select id="findAuthorByAuthentication" resultMap="authorMapping">
+    <select id="findAuthorByAuthenticationId" resultMap="authorMapping">
         SELECT
             a._id           AS _id,
             a.description   AS description,

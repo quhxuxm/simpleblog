@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @EnableTransactionManagement
 @EnableConfigurationProperties
-@MapperScan(basePackages = "com.tongwen.repository.mapper")
+@MapperScan(basePackages = {"com.tongwen.repository.mapper", "com.tongwen.domain"})
 public class WebInitializer extends SpringBootServletInitializer {
     private static final Logger logger = LoggerFactory.getLogger(WebInitializer.class);
 
