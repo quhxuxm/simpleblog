@@ -51,7 +51,7 @@
         WHERE a._id = #{id};
     </select>
 
-    <insert id="createAuthentication" useGeneratedKeys="true">
+    <insert id="createAuthentication" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO authentication (_id, token, password, nick_name, type, register_date, last_login_date)
         VALUES (#{authentication.id}, #{authentication.token},
                 #{authentication.password}, #{authentication.nickName},

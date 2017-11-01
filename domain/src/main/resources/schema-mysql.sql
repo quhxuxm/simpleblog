@@ -4,8 +4,8 @@ CREATE TABLE authentication (
     password        VARCHAR(40) NOT NULL,
     nick_name       VARCHAR(40) NOT NULL,
     type            VARCHAR(20) NOT NULL,
-    register_date   TIMESTAMP   NOT NULL,
-    last_login_date TIMESTAMP   NOT NULL,
+    register_date   DATETIME    NOT NULL,
+    last_login_date DATETIME    NOT NULL,
     PRIMARY KEY (_id),
     CONSTRAINT UNIQUE (token),
     CONSTRAINT UNIQUE (nick_name)
