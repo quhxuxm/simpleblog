@@ -1,0 +1,12 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tongwen.repository.mapper.IAnthologyMapper">
+    <cache/>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO anthology (title, summary, create_date, publish_date, author_id, followup_number, is_default)
+        VALUES
+            (#{title}, #{summary}, #{createDate}, #{publishDate}, #{authorId},
+             #{followupNumber}, #{default})
+    </insert>
+</mapper>
