@@ -16,4 +16,7 @@
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
     </select>
+    <insert id="createAuthor" useGeneratedKeys="true" keyProperty="#{author.id}">
+        INSERT INTO author ()
+    </insert>
 </mapper>

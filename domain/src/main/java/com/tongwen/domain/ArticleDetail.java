@@ -2,18 +2,21 @@ package com.tongwen.domain;
 
 import java.util.Date;
 
-public class ArticleSummary {
+public class ArticleDetail {
     private Long id;
     private String title;
-    private String summary;
     private Date publishDate;
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
+    private String content;
     private Long viewNumber;
     private Long commentNumber;
     private Long praiseNumber;
     private Long bookmarkNumber;
+    private Long authorArticleNumber;
+    private Long authorCommentNumber;
+    private Long authorAnthologyNumber;
     private Long anthologyId;
     private String anthologyTitle;
 
@@ -31,14 +34,6 @@ public class ArticleSummary {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public Date getPublishDate() {
@@ -73,6 +68,14 @@ public class ArticleSummary {
         this.authorIconImageId = authorIconImageId;
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     public Long getViewNumber() {
         return viewNumber;
     }
@@ -103,6 +106,30 @@ public class ArticleSummary {
 
     public void setBookmarkNumber(Long bookmarkNumber) {
         this.bookmarkNumber = bookmarkNumber;
+    }
+
+    public Long getAuthorArticleNumber() {
+        return authorArticleNumber;
+    }
+
+    public void setAuthorArticleNumber(Long authorArticleNumber) {
+        this.authorArticleNumber = authorArticleNumber;
+    }
+
+    public Long getAuthorCommentNumber() {
+        return authorCommentNumber;
+    }
+
+    public void setAuthorCommentNumber(Long authorCommentNumber) {
+        this.authorCommentNumber = authorCommentNumber;
+    }
+
+    public Long getAuthorAnthologyNumber() {
+        return authorAnthologyNumber;
+    }
+
+    public void setAuthorAnthologyNumber(Long authorAnthologyNumber) {
+        this.authorAnthologyNumber = authorAnthologyNumber;
     }
 
     public Long getAnthologyId() {
