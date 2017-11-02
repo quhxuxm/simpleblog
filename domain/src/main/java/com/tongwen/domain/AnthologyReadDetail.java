@@ -3,11 +3,11 @@ package com.tongwen.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Anthology implements Serializable {
+public class AnthologyReadDetail implements Serializable {
     private Long id;
     private String title;
     private String summary;
-    private Date createDate;
+    private Date updateDate;
     private Date publishDate;
     private Long authorId;
     private String authorNickName;
@@ -39,12 +39,12 @@ public class Anthology implements Serializable {
         this.summary = summary;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public Date getPublishDate() {

@@ -1,7 +1,7 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.common.IConstant;
-import com.tongwen.domain.Anthology;
+import com.tongwen.domain.AnthologyEditDetail;
 import com.tongwen.domain.Authentication;
 import com.tongwen.domain.Author;
 import com.tongwen.domain.Role;
@@ -26,10 +26,9 @@ public class AuthorService implements IAuthorService {
     private final IAuthorMapper authorMapper;
 
     @Autowired
-    public AuthorService(IAuthenticationMapper authenticationMapper,
-            IRoleMapper roleMapper, IAuthorMapper authorMapper,
-            IAnthologyMapper anthologyMapper,
-            IAnthologyService anthologyService) {
+    public AuthorService(IAuthenticationMapper authenticationMapper, IRoleMapper roleMapper,
+        IAuthorMapper authorMapper, IAnthologyMapper anthologyMapper,
+        IAnthologyService anthologyService) {
         this.authenticationMapper = authenticationMapper;
         this.roleMapper = roleMapper;
         this.authorMapper = authorMapper;
@@ -38,16 +37,13 @@ public class AuthorService implements IAuthorService {
 
     @Transactional
     @Override
-    public void register(String token, String password, String nickName,
-            Authentication.Type type, String defaultAnthologyTitle,
-            String defaultAnthologySummary) throws ServiceException {
+    public void register(String token, String password, String nickName, Authentication.Type type,
+        String defaultAnthologyTitle, String defaultAnthologySummary) throws ServiceException {
         if (this.authenticationMapper.isTokenExist(token)) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHENTICATION_TOKEN_EXIST);
+            throw new ServiceException(ServiceException.Code.AUTHENTICATION_TOKEN_EXIST);
         }
         if (this.authenticationMapper.isNickNameExist(nickName)) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHENTICATION_NICK_NAME_EXIST);
+            throw new ServiceException(ServiceException.Code.AUTHENTICATION_NICK_NAME_EXIST);
         }
         try {
             Authentication authentication = new Authentication();
@@ -58,19 +54,19 @@ public class AuthorService implements IAuthorService {
             authentication.setRegisterDate(new Date());
             authentication.setLastLoginDate(new Date());
             this.authenticationMapper.create(authentication);
-            Role authorRole = this.roleMapper
-                    .findRoleByName(IConstant.Role.ROLE_AUTHOR.name());
+            Role authorRole = this.roleMapper.findRoleByName(IConstant.Role.ROLE_AUTHOR.name());
             this.authenticationMapper.assignRole(authentication, authorRole);
             Author author = new Author();
             this.authorMapper.create(author);
             this.authorMapper.assignAuthentication(authentication, author);
-            Anthology defaultAnthology = new Anthology();
+            AnthologyEditDetail defaultAnthology = new AnthologyEditDetail();
             defaultAnthology.setDefault(true);
             defaultAnthology.setTitle(defaultAnthologyTitle);
             defaultAnthology.setSummary(defaultAnthologySummary);
             defaultAnthology.setCreateDate(new Date());
-            this.anthologyService
-                    .createAnthology(author.getId(), defaultAnthology);
+            defaultAnthology.setUpdateDate(defaultAnthology.getCreateDate());
+            defaultAnthology.setAuthorId(author.getId());
+            this.anthologyService.createAnthology(defaultAnthology);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
@@ -78,11 +74,9 @@ public class AuthorService implements IAuthorService {
 
     @Transactional(readOnly = true)
     @Override
-    public Author getAuthor(Authentication authentication)
-            throws ServiceException {
+    public Author getAuthor(Authentication authentication) throws ServiceException {
         try {
-            return this.authorMapper
-                    .findAuthorByAuthenticationId(authentication.getId());
+            return this.authorMapper.findAuthorByAuthenticationId(authentication.getId());
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }

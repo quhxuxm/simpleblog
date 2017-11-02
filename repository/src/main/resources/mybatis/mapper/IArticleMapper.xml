@@ -2,6 +2,39 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tongwen.repository.mapper.IArticleMapper">
-    <cache />
-
+    <cache/>
+    <resultMap id="articleReadSummaryResultMap" type="articleReadSummary">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="authorNickName" column="author_nickname"/>
+        <result property="authorIconImageId" column="author_icon_image_id"/>
+        <result property="viewNumber" column="view_number"/>
+        <result property="commentNumber" column="comment_number"/>
+        <result property="praiseNumber" column="praise_number"/>
+        <result property="bookmarkNumber" column="bookmark_number"/>
+        <result property="anthologyId" column="anthology_id"/>
+        <result property="anthologyTitle" column="anthology_title"/>
+    </resultMap>
+    <select id="getArticleReadSummariesOrderByPublishDateDesc" resultMap="articleReadSummaryResultMap">
+        SELECT article._id as _id, article.title as title, article.summary as summary, article.publish_date as publish_date,
+        article.view_number as view_number, article.comment_number as comment_number,
+        article.parise_number as praise_number, article.bookmark_number as bookmark_number,
+        author._id as author_id, author.icon_image_id as author_icon_image_id,
+        anthology._id as anthology_id, anthology.title as anthology_title
+        FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
+        INNER JOIN article article ON  anthologyu._id = article.anthology_id ORDER BY article.publish_date DESC
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article (title, summary, content, create_date, anthology_id) VALUES (
+            #{title}, #{summary}, #{content}, #{createDate}, #{anthologyId}
+        );
+    </insert>
+    <update id="update">
+        UPDATE article SET title=#{title}, summary=#{summary},
+        content=#{content}, update_date=#{updateDate}, anthology_id=#{anthologyId}
+        WHERE _id = #{id}
+    </update>
 </mapper>

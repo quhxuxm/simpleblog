@@ -23,17 +23,17 @@ public class TestRepository {
     public void testService() {
         try {
             this.authorService.register("1@1.com", "password", "user1",
-                    Authentication.Type.EMAIL, "Default Anthology Title",
-                    "Default Anthology Summary");
+                    Authentication.Type.EMAIL, "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
             this.authorService.register("2@1.com", "password", "user2",
-                    Authentication.Type.EMAIL, "Default Anthology Title",
-                    "Default Anthology Summary");
+                    Authentication.Type.EMAIL, "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
             this.authorService.register("3@1.com", "password", "user3",
-                    Authentication.Type.EMAIL, "Default Anthology Title",
-                    "Default Anthology Summary");
+                    Authentication.Type.EMAIL, "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
             this.authorService.register("4@1.com", "password", "user4",
-                    Authentication.Type.EMAIL, "Default Anthology Title",
-                    "Default Anthology Summary");
+                    Authentication.Type.EMAIL, "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
             Authentication authenticatedAuthor1 = this.authenticationService
                     .authenticate("1@1.com", Authentication.Type.EMAIL);
             System.out.println(authenticatedAuthor1.getId());

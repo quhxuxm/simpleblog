@@ -1,11 +1,12 @@
 package com.tongwen.service.api;
 
-import com.tongwen.domain.Anthology;
-import com.tongwen.domain.Author;
+import com.tongwen.domain.AnthologyEditDetail;
 import com.tongwen.service.exception.ServiceException;
-import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 public interface IAnthologyService {
-    void createAnthology(long authorId, Anthology anthology)
-            throws ServiceException;
+    void createAnthology(AnthologyEditDetail anthologyEditDetail) throws ServiceException;
+
+    Map<Long, String> getAuthorAnthologyTitles(long authorId) throws ServiceException;
 }

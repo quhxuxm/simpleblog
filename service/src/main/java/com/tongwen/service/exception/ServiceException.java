@@ -2,6 +2,7 @@ package com.tongwen.service.exception;
 
 public class ServiceException extends Exception {
     public static enum Code {
+        ILLEGAL_STATUS,
         SYSTEM_ERROR,
         AUTHOR_NOT_EXIST,
         AUTHENTICATION_TOKEN_EXIST,
@@ -29,8 +30,8 @@ public class ServiceException extends Exception {
         this.code = code;
     }
 
-    public ServiceException(String message, Throwable cause,
-            boolean enableSuppression, boolean writableStackTrace, Code code) {
+    public ServiceException(String message, Throwable cause, boolean enableSuppression,
+        boolean writableStackTrace, Code code) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
     }

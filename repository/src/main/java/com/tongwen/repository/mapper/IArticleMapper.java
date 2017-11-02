@@ -1,14 +1,16 @@
 package com.tongwen.repository.mapper;
 
-import com.tongwen.domain.ArticleSummary;
-import org.apache.ibatis.annotations.Param;
+import com.tongwen.domain.ArticleEditDetail;
+import com.tongwen.domain.ArticleReadSummary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface IArticleMapper {
-    List<ArticleSummary> getArticleSummariesOrderBy(
-            @Param("orderByColumnName")
-                    String orderByColumnName);
+    List<ArticleReadSummary> getArticleReadSummariesOrderByPublishDateDesc(int start, int pageSize);
+
+    void create(ArticleEditDetail articleEditDetail);
+
+    void update(ArticleEditDetail articleEditDetail);
 }

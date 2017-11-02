@@ -3,22 +3,18 @@ package com.tongwen.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleDetail implements Serializable {
+public class ArticleReadSummary implements Serializable {
     private Long id;
     private String title;
+    private String summary;
     private Date publishDate;
-    private Date createDate;
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
-    private String content;
     private Long viewNumber;
     private Long commentNumber;
     private Long praiseNumber;
     private Long bookmarkNumber;
-    private Long authorArticleNumber;
-    private Long authorCommentNumber;
-    private Long authorAnthologyNumber;
     private Long anthologyId;
     private String anthologyTitle;
 
@@ -36,6 +32,14 @@ public class ArticleDetail implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public Date getPublishDate() {
@@ -70,14 +74,6 @@ public class ArticleDetail implements Serializable {
         this.authorIconImageId = authorIconImageId;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Long getViewNumber() {
         return viewNumber;
     }
@@ -110,30 +106,6 @@ public class ArticleDetail implements Serializable {
         this.bookmarkNumber = bookmarkNumber;
     }
 
-    public Long getAuthorArticleNumber() {
-        return authorArticleNumber;
-    }
-
-    public void setAuthorArticleNumber(Long authorArticleNumber) {
-        this.authorArticleNumber = authorArticleNumber;
-    }
-
-    public Long getAuthorCommentNumber() {
-        return authorCommentNumber;
-    }
-
-    public void setAuthorCommentNumber(Long authorCommentNumber) {
-        this.authorCommentNumber = authorCommentNumber;
-    }
-
-    public Long getAuthorAnthologyNumber() {
-        return authorAnthologyNumber;
-    }
-
-    public void setAuthorAnthologyNumber(Long authorAnthologyNumber) {
-        this.authorAnthologyNumber = authorAnthologyNumber;
-    }
-
     public Long getAnthologyId() {
         return anthologyId;
     }
@@ -148,13 +120,5 @@ public class ArticleDetail implements Serializable {
 
     public void setAnthologyTitle(String anthologyTitle) {
         this.anthologyTitle = anthologyTitle;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
     }
 }
