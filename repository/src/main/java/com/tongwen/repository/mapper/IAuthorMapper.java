@@ -7,8 +7,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAuthorMapper {
-    Author findAuthorByAuthenticationId(@Param("authenticationId") Long authenticationId);
+    Author findAuthorByAuthenticationId(
+            @Param("authenticationId")
+                    Long authenticationId);
 
-    void createAuthor(@Param("authentication") Authentication authentication,
-        @Param("author") Author author);
+    void create(Author author);
+
+    void assignAuthentication(
+            @Param("authentication")
+                    Authentication authentication,
+            @Param("author")
+                    Author author);
+
+    boolean isExist(
+            @Param("id")
+                    long id);
 }

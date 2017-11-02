@@ -53,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>com.tongwen</groupId>
-            <artifactId>repository</artifactId>
+            <artifactId>service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

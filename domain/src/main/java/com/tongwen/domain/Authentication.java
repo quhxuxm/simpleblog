@@ -1,10 +1,15 @@
 package com.tongwen.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Authentication {
+public class Authentication implements Serializable {
+    public static enum Type {
+        EMAIL
+    }
+
     private Long id;
     private String token;
     private String password;
@@ -12,7 +17,7 @@ public class Authentication {
     private Date registerDate;
     private Date lastLoginDate;
     private String nickName;
-    private AuthenticationType type;
+    private Type type;
 
     public Authentication() {
         this.roles = new HashSet<>();
@@ -66,11 +71,11 @@ public class Authentication {
         this.token = token;
     }
 
-    public AuthenticationType getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(AuthenticationType type) {
+    public void setType(Type type) {
         this.type = type;
     }
 

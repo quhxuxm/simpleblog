@@ -1,6 +1,10 @@
 package com.tongwen.common;
 
 public interface IConstant {
+    enum Role {
+        ROLE_AUTHOR;
+    }
+
     interface ISessionAttributeName {
         String AUTHENTICATED_AUTHOR = "authenticatedAuthor";
     }
@@ -14,6 +18,4 @@ public interface IConstant {
     interface IUrlFormat {
         String LOGIN_REDIRECT_URL_FORMAT = "/login?status=%s";
     }
-
-
 }

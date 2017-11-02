@@ -1,6 +1,8 @@
 package com.tongwen.domain;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     private Long id;
     private byte[] content;
     private String type;

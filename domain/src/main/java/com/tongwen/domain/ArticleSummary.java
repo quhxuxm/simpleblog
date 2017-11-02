@@ -1,8 +1,9 @@
 package com.tongwen.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleSummary {
+public class ArticleSummary implements Serializable {
     private Long id;
     private String title;
     private String summary;

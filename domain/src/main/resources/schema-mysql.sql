@@ -52,3 +52,32 @@ CREATE TABLE authentication_author (
     CONSTRAINT UNIQUE (authentication_id)
 );
 
+CREATE TABLE anthology (
+    _id             BIGINT                 AUTO_INCREMENT,
+    title           VARCHAR(40)  NOT NULL,
+    summary         VARCHAR(200) NOT NULL,
+    author_id       BIGINT       NOT NULL,
+    create_date     DATETIME     NOT NULL,
+    publish_date    DATETIME,
+    followup_number BIGINT                 DEFAULT 0,
+    is_default      BOOL         NOT NULL  DEFAULT FALSE,
+    PRIMARY KEY (_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id)
+);
+
+CREATE TABLE article (
+    _id             BIGINT AUTO_INCREMENT,
+    summary         VARCHAR(200) NOT NULL,
+    anthology_id    BIGINT       NOT NULL,
+    title           VARCHAR(200) NOT NULL,
+    content         TEXT         NOT NULL,
+    create_date     DATETIME     NOT NULL,
+    publish_date    DATETIME,
+    view_number     BIGINT DEFAULT 0,
+    commet_number   BIGINT DEFAULT 0,
+    praise_number   BIGINT DEFAULT 0,
+    bookmark_number BIGINT DEFAULT 0,
+    PRIMARY KEY (_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
+);
+

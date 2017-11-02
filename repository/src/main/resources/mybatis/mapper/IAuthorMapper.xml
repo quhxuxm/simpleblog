@@ -16,7 +16,19 @@
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
     </select>
-    <insert id="createAuthor" useGeneratedKeys="true" keyProperty="#{author.id}">
-        INSERT INTO author ()
+    <insert id="create" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO author (icon_image_id, description)
+        VALUES (#{iconImageId}, #{description})
     </insert>
+
+    <insert id="assignAuthentication">
+        INSERT INTO authentication_author (authentication_id, author_id)
+        VALUES (#{authentication.id}, #{author.id})
+    </insert>
+    <select id="isExist" resultType="_boolean">
+        SELECT EXISTS(SELECT 1
+                      FROM author
+                      WHERE _id = #{id})
+    </select>
 </mapper>

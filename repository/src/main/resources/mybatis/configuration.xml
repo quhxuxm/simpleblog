@@ -11,5 +11,6 @@
     <typeAliases>
         <typeAlias type="com.tongwen.domain.Authentication" alias="authentication"/>
         <typeAlias type="com.tongwen.domain.Role" alias="role"/>
+        <typeAlias type="com.tongwen.domain.Authentication$Type" alias="authenticationType"/>
     </typeAliases>
 </configuration>

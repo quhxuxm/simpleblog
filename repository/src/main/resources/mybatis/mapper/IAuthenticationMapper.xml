@@ -9,13 +9,14 @@
         <result column="register_date" property="registerDate"/>
         <result column="last_login_date" property="lastLoginDate"/>
         <result column="nick_name" property="nickName"/>
-        <result column="type" property="type" javaType="com.tongwen.domain.AuthenticationType"/>
+        <result column="type" property="type"
+                javaType="authenticationType"/>
         <collection property="roles" ofType="com.tongwen.domain.Role">
             <result column="role_id" property="id"/>
             <result column="role_name" property="name"/>
         </collection>
     </resultMap>
-    <select id="findAuthenticateByToken" resultMap="authenticationMapper">
+    <select id="findByTokenAndType" resultMap="authenticationMapper">
         SELECT
             a._id             AS _id,
             a.token           AS token,
@@ -29,9 +30,9 @@
         FROM authentication a
             INNER JOIN authentication_role ar ON a._id = ar.authentication_id
             INNER JOIN role r ON ar.role_id = r._id
-        WHERE a.token = #{token};
+        WHERE a.token = #{token} AND a.type = #{type};
     </select>
-    <select id="findAuthenticationById" resultMap="authenticationMapper">
+    <select id="findById" resultMap="authenticationMapper">
         SELECT
             a._id             AS _id,
             a.token           AS email,
@@ -47,7 +48,7 @@
             INNER JOIN role r ON ar.role_id = r._id
         WHERE a._id = #{id};
     </select>
-    <insert id="createAuthentication" useGeneratedKeys="true" keyProperty="id"
+    <insert id="create" useGeneratedKeys="true" keyProperty="id"
             parameterType="authentication">
         INSERT INTO authentication (token, password, nick_name, type, register_date, last_login_date)
         VALUES (#{token},
@@ -55,8 +56,20 @@
                 #{type}, #{registerDate},
                 #{lastLoginDate})
     </insert>
-    <insert id="assignRoleToAuthentication">
+    <insert id="assignRole">
         INSERT INTO authentication_role (authentication_id, role_id)
         VALUES (#{authentication.id}, #{role.id})
     </insert>
+
+    <select id="isTokenExist" resultType="_boolean">
+        SELECT EXISTS(SELECT 1
+                      FROM authentication
+                      WHERE token = #{token})
+    </select>
+
+    <select id="isNickNameExist" resultType="_boolean">
+        SELECT EXISTS(SELECT 1
+                      FROM authentication
+                      WHERE nick_name = #{nickName})
+    </select>
 </mapper>

@@ -1,11 +1,13 @@
 package com.tongwen.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleDetail {
+public class ArticleDetail implements Serializable {
     private Long id;
     private String title;
     private Date publishDate;
+    private Date createDate;
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
@@ -146,5 +148,13 @@ public class ArticleDetail {
 
     public void setAnthologyTitle(String anthologyTitle) {
         this.anthologyTitle = anthologyTitle;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
