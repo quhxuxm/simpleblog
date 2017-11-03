@@ -1,16 +1,31 @@
 package com.tongwen.repository.mapper;
 
-import com.tongwen.domain.ArticleEditDetail;
-import com.tongwen.domain.ArticleReadSummary;
+import com.tongwen.domain.Article;
+import com.tongwen.domain.ArticleSummary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface IArticleMapper {
-    List<ArticleReadSummary> getArticleReadSummariesOrderByPublishDateDesc(int start, int pageSize);
+    List<ArticleSummary> getSummariesOrderByPublishDate(int start, int pageSize,
+            boolean isDesc);
 
-    void create(ArticleEditDetail articleEditDetail);
+    List<ArticleSummary> getSummariesOrderByViewNumber(int start, int pageSize,
+            boolean isDesc);
 
-    void update(ArticleEditDetail articleEditDetail);
+    List<ArticleSummary> getSummariesOrderByCommentNumber(int start,
+            int pageSize, boolean isDesc);
+
+    List<ArticleSummary> getSummariesOrderByPraiseNumber(int start,
+            int pageSize, boolean isDesc);
+
+    List<ArticleSummary> getSummariesOrderByBookmarkNumber(int start,
+            int pageSize, boolean isDesc);
+
+    void create(Article article);
+
+    void update(Article article);
+
+    Article getOne(long id);
 }

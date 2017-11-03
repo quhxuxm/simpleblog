@@ -1,7 +1,6 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.common.IConstant;
-import com.tongwen.domain.AnthologyEditDetail;
 import com.tongwen.domain.Authentication;
 import com.tongwen.domain.Author;
 import com.tongwen.domain.Role;

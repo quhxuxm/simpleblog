@@ -3,17 +3,15 @@ package com.tongwen.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class AnthologyReadDetail implements Serializable {
+public class Anthology implements Serializable {
     private Long id;
     private String title;
     private String summary;
     private Date updateDate;
     private Date publishDate;
     private Long authorId;
-    private String authorNickName;
-    private Long authorIconImageId;
     private Long followupNumber;
-    private boolean isDefault;
+    private Long coverImageId;
 
     public Long getId() {
         return id;
@@ -63,22 +61,6 @@ public class AnthologyReadDetail implements Serializable {
         this.authorId = authorId;
     }
 
-    public String getAuthorNickName() {
-        return authorNickName;
-    }
-
-    public void setAuthorNickName(String authorNickName) {
-        this.authorNickName = authorNickName;
-    }
-
-    public Long getAuthorIconImageId() {
-        return authorIconImageId;
-    }
-
-    public void setAuthorIconImageId(Long authorIconImageId) {
-        this.authorIconImageId = authorIconImageId;
-    }
-
     public Long getFollowupNumber() {
         return followupNumber;
     }
@@ -87,11 +69,20 @@ public class AnthologyReadDetail implements Serializable {
         this.followupNumber = followupNumber;
     }
 
-    public boolean isDefault() {
-        return isDefault;
+    public Long getCoverImageId() {
+        return coverImageId;
     }
 
-    public void setDefault(boolean aDefault) {
-        isDefault = aDefault;
+    public void setCoverImageId(Long coverImageId) {
+        this.coverImageId = coverImageId;
+    }
+
+    @Override
+    public String toString() {
+        return "Anthology{" + "id=" + id + ", title='" + title + '\''
+                + ", summary='" + summary + '\'' + ", updateDate=" + updateDate
+                + ", publishDate=" + publishDate + ", authorId=" + authorId
+                + ", followupNumber=" + followupNumber + ", coverImageId="
+                + coverImageId + '}';
     }
 }

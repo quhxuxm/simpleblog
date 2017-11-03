@@ -36,9 +36,10 @@ CREATE TABLE image (
 );
 
 CREATE TABLE author (
-    _id           BIGINT AUTO_INCREMENT,
-    description   VARCHAR(200),
-    icon_image_id BIGINT,
+    _id                  BIGINT AUTO_INCREMENT,
+    description          VARCHAR(200),
+    icon_image_id        BIGINT,
+    default_anthology_id BIGINT,
     PRIMARY KEY (_id),
     FOREIGN KEY (icon_image_id) REFERENCES image (_id)
 );
@@ -66,6 +67,17 @@ CREATE TABLE anthology (
     FOREIGN KEY (author_id) REFERENCES author (_id)
 );
 
+CREATE TABLE author_default_anthology (
+    author_id    BIGINT,
+    anthology_id BIGINT,
+    PRIMARY KEY (author_id, anthology_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
+);
+
+ALTER TABLE author
+    ADD FOREIGN KEY (default_anthology_id) REFERENCES author_default_anthology (anthology_id);
+
 CREATE TABLE article (
     _id             BIGINT AUTO_INCREMENT,
     summary         VARCHAR(200) NOT NULL,
@@ -76,7 +88,7 @@ CREATE TABLE article (
     update_date     DATETIME,
     publish_date    DATETIME,
     view_number     BIGINT DEFAULT 0,
-    commet_number   BIGINT DEFAULT 0,
+    comment_number  BIGINT DEFAULT 0,
     praise_number   BIGINT DEFAULT 0,
     bookmark_number BIGINT DEFAULT 0,
     PRIMARY KEY (_id),

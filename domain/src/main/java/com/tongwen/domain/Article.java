@@ -3,20 +3,19 @@ package com.tongwen.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleReadSummary implements Serializable {
+public class Article implements Serializable {
     private Long id;
     private String title;
-    private String summary;
     private Date publishDate;
-    private Long authorId;
-    private String authorNickName;
-    private Long authorIconImageId;
+    private Date updateDate;
+    private Date createDate;
+    private String content;
+    private String summary;
     private Long viewNumber;
     private Long commentNumber;
     private Long praiseNumber;
     private Long bookmarkNumber;
     private Long anthologyId;
-    private String anthologyTitle;
 
     public Long getId() {
         return id;
@@ -34,14 +33,6 @@ public class ArticleReadSummary implements Serializable {
         this.title = title;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public Date getPublishDate() {
         return publishDate;
     }
@@ -50,28 +41,28 @@ public class ArticleReadSummary implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public String getAuthorNickName() {
-        return authorNickName;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setAuthorNickName(String authorNickName) {
-        this.authorNickName = authorNickName;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Long getAuthorIconImageId() {
-        return authorIconImageId;
+    public String getContent() {
+        return content;
     }
 
-    public void setAuthorIconImageId(Long authorIconImageId) {
-        this.authorIconImageId = authorIconImageId;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getViewNumber() {
@@ -114,11 +105,22 @@ public class ArticleReadSummary implements Serializable {
         this.anthologyId = anthologyId;
     }
 
-    public String getAnthologyTitle() {
-        return anthologyTitle;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setAnthologyTitle(String anthologyTitle) {
-        this.anthologyTitle = anthologyTitle;
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" + "id=" + id + ", title='" + title + '\''
+                + ", publishDate=" + publishDate + ", updateDate=" + updateDate
+                + ", createDate=" + createDate + ", content='" + content + '\''
+                + ", summary='" + summary + '\'' + ", viewNumber=" + viewNumber
+                + ", commentNumber=" + commentNumber + ", praiseNumber="
+                + praiseNumber + ", bookmarkNumber=" + bookmarkNumber
+                + ", anthologyId=" + anthologyId + '}';
     }
 }

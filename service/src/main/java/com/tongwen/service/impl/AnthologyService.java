@@ -1,6 +1,5 @@
 package com.tongwen.service.impl;
 
-import com.tongwen.domain.AnthologyEditDetail;
 import com.tongwen.repository.mapper.IAnthologyMapper;
 import com.tongwen.repository.mapper.IAuthorMapper;
 import com.tongwen.service.api.IAnthologyService;

@@ -21,11 +21,11 @@
     <select id="getArticleReadSummariesOrderByPublishDateDesc" resultMap="articleReadSummaryResultMap">
         SELECT article._id as _id, article.title as title, article.summary as summary, article.publish_date as publish_date,
         article.view_number as view_number, article.comment_number as comment_number,
-        article.parise_number as praise_number, article.bookmark_number as bookmark_number,
+        article.praise_number as praise_number, article.bookmark_number as bookmark_number,
         author._id as author_id, author.icon_image_id as author_icon_image_id,
         anthology._id as anthology_id, anthology.title as anthology_title
         FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
-        INNER JOIN article article ON  anthologyu._id = article.anthology_id ORDER BY article.publish_date DESC
+        INNER JOIN article article ON  anthology._id = article.anthology_id ORDER BY article.publish_date DESC
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO article (title, summary, content, create_date, anthology_id) VALUES (

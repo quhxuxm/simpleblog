@@ -1,6 +1,7 @@
 package com.tongwen.domain;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Image implements Serializable {
     private Long id;
@@ -38,5 +39,11 @@ public class Image implements Serializable {
 
     public void setMd5(String md5) {
         this.md5 = md5;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" + "id=" + id + ", content=" + Arrays.toString(content)
+                + ", type='" + type + '\'' + ", md5='" + md5 + '\'' + '}';
     }
 }

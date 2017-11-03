@@ -15,4 +15,7 @@
     <select id="findAnthologyIdAndTitleByAuthor" resultMap="idAndTitleResultMap">
         SELECT _id , title FROM anthology WHERE author_id = #{authorId}
     </select>
+    <select id="getDefaultAnthology">
+        SELECT * FROM anthology WHERE author_id = #{authorId} and is_default = TRUE;
+    </select>
 </mapper>

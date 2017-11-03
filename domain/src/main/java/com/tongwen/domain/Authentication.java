@@ -86,4 +86,13 @@ public class Authentication implements Serializable {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
+    @Override
+    public String toString() {
+        return "Authentication{" + "id=" + id + ", token='" + token + '\''
+                + ", password='" + password + '\'' + ", roles=" + roles
+                + ", registerDate=" + registerDate + ", lastLoginDate="
+                + lastLoginDate + ", nickName='" + nickName + '\'' + ", type="
+                + type + '}';
+    }
 }

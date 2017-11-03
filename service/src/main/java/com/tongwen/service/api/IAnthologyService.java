@@ -1,6 +1,5 @@
 package com.tongwen.service.api;
 
-import com.tongwen.domain.AnthologyEditDetail;
 import com.tongwen.service.exception.ServiceException;
 
 import java.util.Map;
