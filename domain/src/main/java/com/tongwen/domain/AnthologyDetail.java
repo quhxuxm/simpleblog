@@ -1,9 +1,10 @@
 package com.tongwen.domain;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Anthology implements Serializable {
+public class AnthologyDetail {
     private Long id;
     private String title;
     private String summary;
@@ -11,8 +12,15 @@ public class Anthology implements Serializable {
     private Date updateDate;
     private Date publishDate;
     private Long authorId;
+    private String authorNickName;
+    private Long authorIconImageId;
     private Long followupNumber;
     private Long coverImageId;
+    private List<ArticleSummary> articles;
+
+    public AnthologyDetail() {
+        this.articles = new ArrayList<>();
+    }
 
     public Long getId() {
         return id;
@@ -62,6 +70,22 @@ public class Anthology implements Serializable {
         this.authorId = authorId;
     }
 
+    public String getAuthorNickName() {
+        return authorNickName;
+    }
+
+    public void setAuthorNickName(String authorNickName) {
+        this.authorNickName = authorNickName;
+    }
+
+    public Long getAuthorIconImageId() {
+        return authorIconImageId;
+    }
+
+    public void setAuthorIconImageId(Long authorIconImageId) {
+        this.authorIconImageId = authorIconImageId;
+    }
+
     public Long getFollowupNumber() {
         return followupNumber;
     }
@@ -78,19 +102,19 @@ public class Anthology implements Serializable {
         this.coverImageId = coverImageId;
     }
 
+    public List<ArticleSummary> getArticles() {
+        return articles;
+    }
+
+    public void setArticles(List<ArticleSummary> articles) {
+        this.articles = articles;
+    }
+
     public Date getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Anthology{" + "id=" + id + ", title='" + title + '\'' + ", summary='" + summary
-            + '\'' + ", createDate=" + createDate + ", updateDate=" + updateDate + ", publishDate="
-            + publishDate + ", authorId=" + authorId + ", followupNumber=" + followupNumber
-            + ", coverImageId=" + coverImageId + '}';
     }
 }

@@ -7,29 +7,17 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAuthenticationMapper {
-    Authentication findByTokenAndType(
-            @Param("token")
-                    String token,
-            @Param("type")
-                    Authentication.Type type);
+    Authentication findByTokenAndType(@Param("token") String token,
+        @Param("type") Authentication.Type type);
 
-    Authentication findById(
-            @Param("id")
-                    Long id);
+    Authentication getOne(@Param("id") long id);
 
     void create(Authentication authentication);
 
-    void assignRole(
-            @Param("authentication")
-                    Authentication authentication,
-            @Param("role")
-                    Role role);
+    void assignRole(@Param("authentication") Authentication authentication,
+        @Param("role") Role role);
 
-    boolean isTokenExist(
-            @Param("token")
-                    String token);
+    boolean isTokenExist(@Param("token") String token);
 
-    boolean isNickNameExist(
-            @Param("nickName")
-                    String nickName);
+    boolean isNickNameExist(@Param("nickName") String nickName);
 }

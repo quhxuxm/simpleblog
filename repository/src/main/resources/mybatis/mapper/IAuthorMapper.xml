@@ -16,15 +16,22 @@
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
     </select>
-    <insert id="create" useGeneratedKeys="true"
-            keyProperty="id">
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO author (icon_image_id, description)
         VALUES (#{iconImageId}, #{description})
     </insert>
-
     <insert id="assignAuthentication">
         INSERT INTO authentication_author (authentication_id, author_id)
         VALUES (#{authentication.id}, #{author.id})
+    </insert>
+    <insert id="assignDefaultAnthology">
+        INSERT INTO author_default_anthology (anthology_id, author_id)
+        VALUES (#{anthology.id}, #{author.id})
+    </insert>
+    <insert id="updateDefaultAnthology">
+        UPDATE author_default_anthology
+        SET anthology_id = #{anthology.id}
+        WHERE author_id = #{author.id}
     </insert>
     <select id="isExist" resultType="_boolean">
         SELECT EXISTS(SELECT 1

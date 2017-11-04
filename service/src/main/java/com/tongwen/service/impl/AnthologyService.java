@@ -1,5 +1,6 @@
 package com.tongwen.service.impl;
 
+import com.tongwen.domain.Anthology;
 import com.tongwen.repository.mapper.IAnthologyMapper;
 import com.tongwen.repository.mapper.IAuthorMapper;
 import com.tongwen.service.api.IAnthologyService;
@@ -7,9 +8,6 @@ import com.tongwen.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
-import java.util.Map;
 
 @Service
 public class AnthologyService implements IAnthologyService {
@@ -24,26 +22,41 @@ public class AnthologyService implements IAnthologyService {
 
     @Transactional
     @Override
-    public void createAnthology(AnthologyEditDetail anthologyEditDetail) throws ServiceException {
-        if (anthologyEditDetail.getAuthorId() == null) {
-            throw new ServiceException(ServiceException.Code.ILLEGAL_STATUS);
+    public void create(Anthology anthology) throws ServiceException {
+        if (anthology.getAuthorId() == null) {
+            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
-        if (!this.authorMapper.isExist(anthologyEditDetail.getAuthorId())) {
+        if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
         }
         try {
-            this.anthologyMapper.create(anthologyEditDetail);
+            this.anthologyMapper.create(anthology);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
-    public Map<Long, String> getAuthorAnthologyTitles(long authorId) throws ServiceException {
+    public void update(Anthology anthology) throws ServiceException {
+        if (anthology.getAuthorId() == null) {
+            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+        }
+        if (!this.authorMapper.isExist(anthology.getAuthorId())) {
+            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
+        }
         try {
-            return Collections
-                .unmodifiableMap(this.anthologyMapper.findAnthologyIdAndTitleByAuthorId(authorId));
+            this.anthologyMapper.update(anthology);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Transactional
+    @Override
+    public Anthology getAnthology(long id) throws ServiceException {
+        try {
+            return this.anthologyMapper.getOne(id);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }

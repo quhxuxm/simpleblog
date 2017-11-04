@@ -2,9 +2,10 @@ package com.tongwen.service.exception;
 
 public class ServiceException extends Exception {
     public static enum Code {
-        ILLEGAL_STATUS,
         SYSTEM_ERROR,
         AUTHOR_NOT_EXIST,
+        AUTHOR_NOT_ASSIGNED,
+        ANTHOLOGY_NOT_ASSIGNED,
         AUTHENTICATION_TOKEN_EXIST,
         AUTHENTICATION_NICK_NAME_EXIST
     }

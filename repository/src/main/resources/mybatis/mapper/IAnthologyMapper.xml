@@ -3,19 +3,90 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tongwen.repository.mapper.IAnthologyMapper">
     <cache/>
-    <resultMap id="idAndTitleResultMap" type="HashMap">
-        <result property="key" column="_id"/>
-        <result property="value" column="title"/>
+    <resultMap id="anthologyMap" type="anthology">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="followupNumber" column="followup_number"/>
+        <result property="coverImageId" column="cover_image_id"/>
+    </resultMap>
+    <resultMap id="anthologyDetailMap" type="anthologyDetail">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="followupNumber" column="followup_number"/>
+        <result property="coverImageId" column="cover_image_id"/>
+        <result property="authorNickName" column="author_nick_name"/>
+        <result property="authorIconImageId" column="author_icon_image_id"/>
+        <collection property="articles" column="_id"
+                    select="com.tongwen.repository.mapper.IArticleMapper.getAllArticleSummariesInAnthology"/>
+    </resultMap>
+    <resultMap id="anthologySummaryMap" type="anthologySummary">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="followupNumber" column="followup_number"/>
+        <result property="coverImageId" column="cover_image_id"/>
+        <result property="authorNickName" column="author_nick_name"/>
+        <result property="authorIconImageId" column="author_icon_image_id"/>
+        <result property="coverImageId" column="cover_image_id"/>
     </resultMap>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO anthology (title, summary, create_date, publish_date, update_date, author_id, is_default)
+        INSERT INTO anthology (title, summary, create_date, publish_date, update_date, author_id)
         VALUES
-            (#{title}, #{summary}, #{createDate}, #{publishDate},#{updateDate}, #{authorId}, #{default})
+            (#{title}, #{summary}, #{createDate}, #{publishDate}, #{updateDate}, #{authorId})
     </insert>
-    <select id="findAnthologyIdAndTitleByAuthor" resultMap="idAndTitleResultMap">
-        SELECT _id , title FROM anthology WHERE author_id = #{authorId}
+    <select id="getAnthologyDetail" resultMap="anthologyDetailMap">
+        SELECT
+            anthology._id             AS _id,
+            anthology.title           AS title,
+            anthology.summary         AS summary,
+            anthology.create_date     AS create_date,
+            anthology.update_date     AS update_date,
+            anthology.publish_date    AS publish_data,
+            anthology.followup_number AS followup_number,
+            anthology.cover_image_id  AS cover_image_id,
+            author._id                AS author_id,
+            author.nick_name          AS author_nick_name
+        FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
+            INNER JOIN article article ON article.anthology_id = anthology._id
+        WHERE anthology._id = #{id}
     </select>
-    <select id="getDefaultAnthology">
-        SELECT * FROM anthology WHERE author_id = #{authorId} and is_default = TRUE;
+    <select id="getOne" resultMap="anthologyMap">
+        SELECT *
+        FROM anthology
+        WHERE _id = #{id}
+    </select>
+    <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap">
+        SELECT
+        anthology._id AS _id,
+        anthology.title AS title,
+        anthology.summary AS summary,
+        anthology.create_date AS create_date,
+        anthology.update_date AS update_date,
+        anthology.publish_date AS publish_data,
+        anthology.followup_number AS followup_number,
+        anthology.cover_image_id AS cover_image_id,
+        author._id AS author_id,
+        author.nick_name AS author_nick_name
+        FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
+        INNER JOIN article article ON article.anthology_id = anthology._id ORDER BY
+        anthology.publish_date
+        <if test="isDesc">
+            DESC
+        </if>
+        LIMIT #{start}, #{pageSize}
     </select>
 </mapper>

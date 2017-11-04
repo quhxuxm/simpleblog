@@ -54,22 +54,21 @@ CREATE TABLE authentication_author (
 );
 
 CREATE TABLE anthology (
-    _id             BIGINT                 AUTO_INCREMENT,
+    _id             BIGINT AUTO_INCREMENT,
     title           VARCHAR(40)  NOT NULL,
     summary         VARCHAR(200) NOT NULL,
     author_id       BIGINT       NOT NULL,
     create_date     DATETIME     NOT NULL,
     publish_date    DATETIME,
     update_date     DATETIME,
-    followup_number BIGINT                 DEFAULT 0,
-    is_default      BOOL         NOT NULL  DEFAULT FALSE,
+    followup_number BIGINT DEFAULT 0,
     PRIMARY KEY (_id),
     FOREIGN KEY (author_id) REFERENCES author (_id)
 );
 
 CREATE TABLE author_default_anthology (
-    author_id    BIGINT,
-    anthology_id BIGINT,
+    author_id    BIGINT UNIQUE,
+    anthology_id BIGINT UNIQUE,
     PRIMARY KEY (author_id, anthology_id),
     FOREIGN KEY (author_id) REFERENCES author (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id)

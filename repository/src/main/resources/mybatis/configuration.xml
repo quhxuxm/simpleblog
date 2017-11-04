@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE configuration
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
@@ -12,6 +11,11 @@
         <typeAlias type="com.tongwen.domain.Authentication" alias="authentication"/>
         <typeAlias type="com.tongwen.domain.Role" alias="role"/>
         <typeAlias type="com.tongwen.domain.Authentication$Type" alias="authenticationType"/>
-        <typeAlias type="com.tongwen.domain.ArticleReadSummary" alias="articleReadSummary"/>
+        <typeAlias type="com.tongwen.domain.ArticleSummary" alias="articleSummary"/>
+        <typeAlias type="com.tongwen.domain.ArticleDetail" alias="articleDetail"/>
+        <typeAlias type="com.tongwen.domain.AnthologyDetail" alias="anthologyDetail"/>
+        <typeAlias type="com.tongwen.domain.AnthologySummary" alias="anthologySummary"/>
+        <typeAlias type="com.tongwen.domain.Article" alias="article"/>
+        <typeAlias type="com.tongwen.domain.Anthology" alias="anthology"/>
     </typeAliases>
 </configuration>

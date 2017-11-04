@@ -1,6 +1,7 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.common.IConstant;
+import com.tongwen.domain.Anthology;
 import com.tongwen.domain.Authentication;
 import com.tongwen.domain.Author;
 import com.tongwen.domain.Role;
@@ -58,14 +59,14 @@ public class AuthorService implements IAuthorService {
             Author author = new Author();
             this.authorMapper.create(author);
             this.authorMapper.assignAuthentication(authentication, author);
-            AnthologyEditDetail defaultAnthology = new AnthologyEditDetail();
-            defaultAnthology.setDefault(true);
+            Anthology defaultAnthology = new Anthology();
             defaultAnthology.setTitle(defaultAnthologyTitle);
             defaultAnthology.setSummary(defaultAnthologySummary);
             defaultAnthology.setCreateDate(new Date());
             defaultAnthology.setUpdateDate(defaultAnthology.getCreateDate());
             defaultAnthology.setAuthorId(author.getId());
-            this.anthologyService.createAnthology(defaultAnthology);
+            this.anthologyService.create(defaultAnthology);
+            this.authorMapper.assignDefaultAnthology(defaultAnthology, author);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
