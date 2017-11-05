@@ -1,0 +1,73 @@
+body > main > section.article > article > section {
+    font-size: 16px;
+    line-height: 2em;
+}
+
+body > main > section.article > article > section img {
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main > section.article > article > section h1 {
+    font-size: 32px;
+    display: block;
+    margin: 15px;
+}
+
+body > main > section.article > article > section h2 {
+    font-size: 28px;
+}
+
+body > main > section.article > article > section h3 {
+    font-size: 24px;
+}
+
+body > main > section.article > article > section h4 {
+    font-size: 20px;
+}
+
+body > main > section.article > article > section h5 {
+    font-size: 18px;
+}
+
+body > main > section.article > article > section h6 {
+    font-size: 16px;
+}
+
+body > main > section.article > article > section p {
+    margin: 0 0 10px;
+}
+
+
+
+body > main > section.article > article > section blockquote {
+    background-color: #F3F3F3;
+    display: block;
+    border-left: 5px;
+    border-left-style: solid;
+    border-left-color: #C8C8C8;
+    padding: 20px;
+    font-style: italic;
+    margin: 15px;
+}
+
+body > main > section.article > article > section hr {
+    border-top: none;
+    border-bottom: 1px solid #C8C8C8;
+    border-left: none;
+    border-right: none;
+    margin: 15px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body > main > section.article > article > section blockquote hr{
+    margin: 0;
+    padding: 0;
+}

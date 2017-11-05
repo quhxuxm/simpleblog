@@ -1,0 +1,480 @@
+body > main > section {
+    width: 100%;
+}
+
+body > main > section.article {
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+}
+
+@media (min-width: 768px) {
+    body > main > section.article {
+        margin-left: auto;
+        margin-right: auto;
+        width: 740px;
+    }
+}
+
+body > main > section.article > article {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+body > main > section.article > article > header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+body > main > section.article > article > header > h1 {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+body > main > section.article > article > header > div.article-author-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-bottom: 15px;
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper > a {
+    margin-right: 15px;
+    font-size: 12px;
+    color: #B4B4B4;
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper > a.anthology-name {
+    padding: 5px;
+    border: 1px solid #42C02E;
+    border-radius: 5px;
+    color: #42C02E;
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper > a.anthology-name:hover {
+    background-color: rgba(81, 249, 68, 0.03);
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper > a.action:hover {
+    color: #333333;
+}
+
+body > main > section.article > article > header > div.article-additional-info-wrapper > a.action > span.number {
+    margin-left: 5px;
+}
+
+body > main > section.article > article > header > div.article-author-wrapper > a.icon-img-wrapper {
+    margin-left: 0;
+}
+
+body > main > section.article > article > header > div.article-author-wrapper > div.author-nick-name-wrapper {
+    margin-left: 10px;
+}
+
+body > main > section.article > article > header > div.article-author-wrapper > div.author-nick-name-wrapper > a.author-nick-name {
+    font-size: 13px;
+}
+
+body > main > section.article > article > header > div.article-author-wrapper > div.author-nick-name-wrapper > span.article-publish-timestamp {
+    margin-left: 3px;
+    font-size: 13px;
+    color: #B4B4B4;
+}
+
+body > main > section.article > article > section {
+    width: 100%;
+    display: block;
+    margin-bottom: 50px;
+}
+
+body > main > section.article > article > footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+body > main > section.article > article > footer > div.article-mobile-actions-wrapper {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+    width: 100%;
+}
+
+body > main > section.article > article > footer > div.article-mobile-actions-wrapper a.author-like-btn {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    border-radius: 25px;
+}
+body > main > section.article > article > footer > div.article-mobile-actions-wrapper a.author-like-btn span.author-like-btn-label-text{
+    display: inline-block;
+    border-right: 1px solid #FFFFFF;
+    padding-right: 15px;
+}
+
+body > main > section.article > article > footer > div.article-mobile-actions-wrapper a.author-like-btn span.author-like-btn-label-number{
+    display: inline-block;
+}
+
+body > main > section.article > article > footer > div.article-mobile-actions-wrapper a.author-followup-btn {
+    margin-right: auto;
+}
+
+@media (min-width: 768px) {
+    body > main > section.article > article > footer > div.author-detail-wrapper {
+        display: flex !important;
+        width: 90%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    body > main > section.article > article > footer > div.article-mobile-actions-wrapper > a.author-followup-btn {
+        display: none !important;
+    }
+
+    body > main > section.article > article > footer > div.article-mobile-actions-wrapper > a.author-like-btn {
+        justify-items: center;
+        margin-left: 0;
+
+    }
+}
+
+@media (min-width: 1024px) {
+    body > main > section.article > article > footer > div.author-detail-wrapper {
+
+        width: 80%;
+
+    }
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid #F3F3F3;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    display: none;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > hr {
+    border-top: 1px solid #F3F3F3;
+    border-bottom: none;
+    margin-left: 15px;
+    margin-right: 15px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary {
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > a.author-icon-wrapper {
+    margin: 15px;
+    margin-bottom: 0;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 15px;
+    margin-bottom: 0;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper > a.author-nick-name {
+    font-size: 16px;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper > div.author-history-wrapper {
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper > div.author-history-wrapper > a {
+    color: #B4B4B4;
+    word-break: keep-all;
+    margin-top: 15px;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper > div.author-history-wrapper > a + a {
+    margin-left: 15px;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > div.author-summary-content-wrapper > div.author-history-wrapper > a:hover {
+    color: #333333;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.summary > a.author-followup-btn {
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
+body > main > section.article > article > footer > div.author-detail-wrapper > section.description {
+    padding: 15px;
+    font-size: 13px;
+    color: #B4B4B4;
+}
+
+body > main > section.comments {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+@media (min-width: 768px) {
+    body > main > section.comments {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1024px) {
+    body > main > section.comments {
+        width: 80%;
+    }
+}
+
+body > main > section.comments > div.comment-summary {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+body > main > section.comments > div.comment-summary > span.comment-number {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+body > main > section.comments > aside.comment {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #F3F3F3;
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 15px;
+}
+
+body > main > section.comments > aside.comment > div.commenter-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+body > main > section.comments > aside.comment > div.commenter-wrapper > a.commenter-icon {
+    width: 40px;
+    height: 40px;
+}
+
+body > main > section.comments > aside.comment > div.commenter-wrapper > div.commenter-nick-name-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+body > main > section.comments > aside.comment > div.commenter-wrapper > div.commenter-nick-name-wrapper > a.commenter-nick-name {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+body > main > section.comments > aside.comment > div.commenter-wrapper > div.commenter-nick-name-wrapper > span.comment-publish-timestamp {
+    font-size: 13px;
+    color: #C8C8C8;
+}
+
+body > main > section.comments > aside.comment > section {
+    margin-bottom: 15px;
+}
+
+body > main > section.comments > aside.comment > footer {
+    font-size: 13px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+body > main > section.comments > aside.comment > footer > a {
+    color: #C8C8C8;
+}
+
+body > main > section.comments > aside.comment > footer > a:hover {
+    color: #333333;
+}
+
+body > main > section.comments > aside.comment > footer > a > span {
+    margin-right: 5px;
+}
+
+body > main > section.comments > aside.comment > footer > a + a {
+    margin-left: 15px;
+}
+
+body > main > section.comments > aside.comment > footer + ul {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border-left: 3px solid #F3F3F3;
+    padding-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    list-style: none;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li {
+    padding: 15px;
+    border-bottom: 1px solid #F3F3F3;
+    width: 100%;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li:first-of-type {
+    padding-top: 0;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li:last-of-type {
+    border-bottom: none;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li + li {
+    margin-top: 15px;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > section {
+    margin-bottom: 15px;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.reply-btn {
+    color: #C8C8C8;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.reply-btn:hover {
+    color: #333333;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.reply-btn > span {
+    margin-right: 5px;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.commenter-nick-name {
+    color: #C8C8C8;
+    margin-right: 10px;
+    border-bottom: 1px solid;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.commenter-nick-name:hover {
+    color: #333333;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > a.commenter-nick-name + span.at {
+    color: #C8C8C8;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > footer > span.comment-publish-timestamp {
+    color: #C8C8C8;
+    margin-right: 10px;
+}
+
+body > main div.comment-publisher-wrapper {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    height: 150px;
+}
+
+@media (min-width: 768px) {
+    body > main div.comment-publisher-wrapper {
+        width: 90%;
+    }
+}
+
+@media (min-width: 1024px) {
+    body > main div.comment-publisher-wrapper {
+        width: 80%;
+    }
+}
+
+body > main div.comment-publisher-wrapper > textarea {
+    margin-left: auto;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #F3F3F3;
+    height: 150px;
+    outline: none;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 16px;
+    resize: none;
+}
+
+body > main div.comment-publisher-wrapper > div.comment-publisher-btn-container {
+    align-self: flex-end;
+}
+
+body > main div.comment-publisher-wrapper > div.comment-publisher-btn-container > a.publish-comment-btn {
+    align-self: flex-end;
+    margin-left: 0;
+    margin-right: 15px;
+}
+
+body > main div.comment-publisher-wrapper > div.comment-publisher-btn-container > a.cancel-comment-btn {
+    align-self: flex-end;
+    margin-right: 15px;
+    margin-left: auto;
+    background-color: #B4B4B4;
+}
+
+body > main > section.comments > aside.comment > footer + ul > li > div.comment-publisher-wrapper {
+    width: 100%;
+}

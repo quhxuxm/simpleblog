@@ -1,0 +1,336 @@
+body > main {
+    padding-top: 0;
+}
+
+body > main > section.article-editor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-grow: 1;
+    flex-shrink: 0;
+    background-color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+}
+
+body > main > section.article-editor > ul.toolbar {
+    width: 100%;
+    display: flex;
+    list-style: none;
+    position: fixed;
+    background-color: #FFFFFF;
+    padding-top: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+body > main > section.article-editor > ul.toolbar > li {
+    float: left;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    position: relative;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper.save-btn-wrapper > a {
+    color: #42C02E;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper.publish-btn-wrapper > a {
+    color: #42C02E;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > ul.toolbar-btn-actions-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    list-style: none;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > ul.toolbar-btn-actions-menu > li {
+    width: 100%;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > span.toolbar-btn-icon-subscript {
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    color: #C8C8C8;
+    font-size: 10px;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > ul.toolbar-btn-actions-menu > li > a.action {
+    font-size: 16px;
+    width: 100%;
+    padding: 10px;
+    display: block;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > ul.toolbar-btn-actions-menu > li:hover {
+    background-color: #f8f8f8;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper:hover > ul.toolbar-btn-actions-menu {
+    display: flex;
+}
+
+body > main > section.article-editor > ul.toolbar > li.toolbar-btn-wrapper > a.action.image + input[type='file'] {
+    display: none;
+}
+
+body > main > section.article-editor > input.title-box {
+    padding: 15px;
+    font-size: 28px;
+    border: none;
+    outline: none;
+    margin-top: 75px;
+    width: 100%;
+}
+
+body > main > section.article-editor > article {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    padding: 15px;
+    border: none;
+    outline: none;
+    display: flex;
+}
+
+body > main > section.article-editor > article > section.content-box {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border: none;
+    outline: none;
+}
+
+body > main > section.article-editor > article > textarea {
+    width: 100%;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border: none;
+    outline: none;
+}
+
+body > main > section.article-editor > article > section.content-box:focus {
+    cursor: text;
+}
+
+body > main > section.article-editor > article > section.content-box:empty:after {
+    content: attr(data-placeholder);
+    color: #B4B4B4;
+}
+
+body > main > section.article-editor > article > section.content-box div.image-uploader {
+    width: 50%;
+    background-color: #FFFFFF;
+    border: 1px solid #F3F3F3;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+body > main > section.article-editor > article > section.content-box div.image-uploader > div.image-uploader-progressbar {
+    background-color: #42C02E;
+    width: 50%;
+    height: 10px;
+}
+
+div.image-uploader-wrapper {
+    display: none;
+}
+
+div.overlay {
+    display: none;
+}
+
+div.message-box-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+div.message-box-wrapper > div.message-box {
+    display: none;
+    width: auto;
+}
+
+div.message-box-wrapper > div.message-box > ul {
+    list-style: inside;
+}
+
+div.message-box-wrapper > div.message-box > ul > li.title {
+    font-size: 20px;
+    list-style: none;
+}
+
+div.message-box-wrapper > div.message-box > ul > li.errorMessage {
+    display: none;
+    list-style: inside;
+}
+
+body > div.additional-actions-wrapper {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+body > div.additional-actions-wrapper > span.trigger {
+    align-self: flex-end;
+    background-color: #F3F3F3;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    padding: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    color: #42C02E;
+}
+
+@media (min-width: 375px) {
+    body > div.additional-actions-wrapper > span.trigger {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+}
+
+body > div.additional-actions-wrapper:hover > span.trigger {
+    background-color: #e8e8e8;
+    cursor: pointer;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    list-style: none;
+    flex-shrink: 0;
+    flex-grow: 1;
+    width: 130px;
+}
+
+@media (min-width: 375px) {
+    body > div.additional-actions-wrapper ul.additional-actions-menu {
+        width: 155px;
+    }
+}
+
+body > div.additional-actions-wrapper:hover > ul.additional-actions-menu {
+    display: flex;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li {
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: flex-end;
+    width: 100%;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > ul.additional-actions-menu {
+    right: 100%;
+    bottom: 0;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li:hover > ul.additional-actions-menu {
+    display: flex;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn {
+    color: #C8C8C8;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-label {
+    background-color: #F3F3F3;
+    flex-grow: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    flex-shrink: 0;
+    padding: 5px;
+    font-size: 13px;
+}
+
+@media (min-width: 375px) {
+    body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-label {
+        font-size: 16px;
+    }
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-label > span.anthology-check-status {
+    margin-right: 5px;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-label > span.anthology-check-status.checked {
+    color: #42C02E;
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-icon {
+    margin-left: 10px;
+    border-radius: 50%;
+    font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    background-color: #F3F3F3;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+@media (min-width: 375px) {
+    body > div.additional-actions-wrapper ul.additional-actions-menu > li > a.additional-action-btn > span.additional-action-btn-icon {
+        font-size: 16px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+body > div.additional-actions-wrapper ul.additional-actions-menu > li:hover > a.additional-action-btn {
+    color: #42C02E;
+}
+
