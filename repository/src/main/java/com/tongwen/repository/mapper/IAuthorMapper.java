@@ -18,8 +18,5 @@ public interface IAuthorMapper {
     void assignDefaultAnthology(@Param("anthology") Anthology anthology,
         @Param("author") Author author);
 
-    void updateDefaultAnthology(@Param("anthology") Anthology anthology,
-        @Param("author") Author author);
-
     boolean isExist(@Param("id") long id);
 }

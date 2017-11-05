@@ -6,32 +6,30 @@
         <id property="id" column="_id"/>
         <result property="description" column="description"/>
         <result property="iconImageId" column="icon_image_id"/>
+        <result property="defaultAnthologyId" column="default_anthology_id"/>
     </resultMap>
     <select id="findAuthorByAuthenticationId" resultMap="authorMapping">
         SELECT
-            a._id           AS _id,
-            a.description   AS description,
-            a.icon_image_id AS icon_image_id
+            a._id                  AS _id,
+            a.description          AS description,
+            a.icon_image_id        AS icon_image_id,
+            a.default_anthology_id AS default_anthology_id
         FROM
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO author (icon_image_id, description)
-        VALUES (#{iconImageId}, #{description})
+        INSERT INTO author (icon_image_id, description, default_anthology_id)
+        VALUES (#{iconImageId}, #{description}, #{defaultAnthologyId})
     </insert>
     <insert id="assignAuthentication">
         INSERT INTO authentication_author (authentication_id, author_id)
         VALUES (#{authentication.id}, #{author.id})
     </insert>
     <insert id="assignDefaultAnthology">
-        INSERT INTO author_default_anthology (anthology_id, author_id)
-        VALUES (#{anthology.id}, #{author.id})
-    </insert>
-    <insert id="updateDefaultAnthology">
-        UPDATE author_default_anthology
-        SET anthology_id = #{anthology.id}
-        WHERE author_id = #{author.id}
+        UPDATE author
+        SET default_anthology_id = #{anthology.id}
+        WHERE _id = #{author.id}
     </insert>
     <select id="isExist" resultType="_boolean">
         SELECT EXISTS(SELECT 1

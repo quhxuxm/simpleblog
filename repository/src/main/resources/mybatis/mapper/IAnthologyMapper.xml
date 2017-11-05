@@ -26,8 +26,9 @@
         <result property="coverImageId" column="cover_image_id"/>
         <result property="authorNickName" column="author_nick_name"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
-        <collection property="articles" column="_id"
-                    select="com.tongwen.repository.mapper.IArticleMapper.getAllArticleSummariesInAnthology"/>
+        <collection property="articles" column="_id" javaType="list"
+                    select="com.tongwen.repository.mapper.IArticleMapper.getAllArticleSummariesInAnthology"
+                    ofType="anthologySummary"/>
     </resultMap>
     <resultMap id="anthologySummaryMap" type="anthologySummary">
         <id property="id" column="_id"/>
@@ -44,9 +45,10 @@
         <result property="coverImageId" column="cover_image_id"/>
     </resultMap>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO anthology (title, summary, create_date, publish_date, update_date, author_id)
+        INSERT INTO anthology (title, summary, create_date, publish_date, update_date, author_id, cover_image_id)
         VALUES
-            (#{title}, #{summary}, #{createDate}, #{publishDate}, #{updateDate}, #{authorId})
+            (#{title}, #{summary}, #{createDate}, #{publishDate}, #{updateDate}, #{authorId},
+             #{coverImageId})
     </insert>
     <select id="getAnthologyDetail" resultMap="anthologyDetailMap">
         SELECT
@@ -59,9 +61,12 @@
             anthology.followup_number AS followup_number,
             anthology.cover_image_id  AS cover_image_id,
             author._id                AS author_id,
-            author.nick_name          AS author_nick_name
+            authentication.nick_name  AS author_nick_name
         FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
-            INNER JOIN article article ON article.anthology_id = anthology._id
+            INNER JOIN authentication_author authenticationAndAuthor
+                ON author._id = authenticationAndAuthor.author_id
+            INNER JOIN authentication authentication
+                ON authenticationAndAuthor.authentication_id = authentication._id
         WHERE anthology._id = #{id}
     </select>
     <select id="getOne" resultMap="anthologyMap">
@@ -80,9 +85,14 @@
         anthology.followup_number AS followup_number,
         anthology.cover_image_id AS cover_image_id,
         author._id AS author_id,
-        author.nick_name AS author_nick_name
+        authentication.nick_name AS author_nick_name
         FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
-        INNER JOIN article article ON article.anthology_id = anthology._id ORDER BY
+        INNER JOIN article article ON article.anthology_id = anthology._id
+        INNER JOIN authentication_author authenticationAndAuthor
+        ON author._id = authenticationAndAuthor.author_id
+        INNER JOIN authentication authentication
+        ON authenticationAndAuthor.authentication_id = authentication._id
+        ORDER BY
         anthology.publish_date
         <if test="isDesc">
             DESC

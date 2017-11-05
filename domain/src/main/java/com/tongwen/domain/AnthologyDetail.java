@@ -1,10 +1,11 @@
 package com.tongwen.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class AnthologyDetail {
+public class AnthologyDetail implements Serializable {
     private Long id;
     private String title;
     private String summary;

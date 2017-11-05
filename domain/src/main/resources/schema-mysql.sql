@@ -62,20 +62,13 @@ CREATE TABLE anthology (
     publish_date    DATETIME,
     update_date     DATETIME,
     followup_number BIGINT DEFAULT 0,
+    cover_image_id  BIGINT,
     PRIMARY KEY (_id),
     FOREIGN KEY (author_id) REFERENCES author (_id)
 );
 
-CREATE TABLE author_default_anthology (
-    author_id    BIGINT UNIQUE,
-    anthology_id BIGINT UNIQUE,
-    PRIMARY KEY (author_id, anthology_id),
-    FOREIGN KEY (author_id) REFERENCES author (_id),
-    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
-);
-
 ALTER TABLE author
-    ADD FOREIGN KEY (default_anthology_id) REFERENCES author_default_anthology (anthology_id);
+    ADD FOREIGN KEY (default_anthology_id) REFERENCES anthology (_id);
 
 CREATE TABLE article (
     _id             BIGINT AUTO_INCREMENT,

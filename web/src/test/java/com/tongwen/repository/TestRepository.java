@@ -1,8 +1,9 @@
 package com.tongwen.repository;
 
 import com.tongwen.WebInitializer;
-import com.tongwen.domain.Authentication;
+import com.tongwen.domain.*;
 import com.tongwen.service.api.IAnthologyService;
+import com.tongwen.service.api.IArticleService;
 import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.api.IAuthorService;
 import com.tongwen.service.exception.ServiceException;
@@ -11,6 +12,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = WebInitializer.class)
@@ -21,6 +26,8 @@ public class TestRepository {
     private IAuthenticationService authenticationService;
     @Autowired
     private IAnthologyService anthologyService;
+    @Autowired
+    private IArticleService articleService;
 
     @Test
     public void testService() {
@@ -39,6 +46,35 @@ public class TestRepository {
             System.out.println(author1Authentication.getNickName());
             System.out.println(author1Authentication.getPassword());
             System.out.println(author1Authentication.getToken());
+            Author author1 = this.authorService.getAuthor(author1Authentication);
+            for (int i = 0; i < 1000; i++) {
+                Article article = new Article();
+                article.setTitle("Title " + i);
+                article.setSummary("Summary " + i);
+                article.setContent("Content " + i);
+                article.setCreateDate(new Date());
+                article.setUpdateDate(new Date());
+                article.setPublishDate(new Date(article.getCreateDate().getTime()+36000));
+                article.setAnthologyId(author1.getDefaultAnthologyId());
+                this.articleService.create(article);
+            }
+            AnthologyDetail author1DefaultAnthologyDetail =
+                this.anthologyService.getAnthologyDetail(author1.getDefaultAnthologyId());
+            List<ArticleSummary> articlesInAuthor1DefaultAnthology =
+                author1DefaultAnthologyDetail.getArticles();
+            for (ArticleSummary articleSummary : articlesInAuthor1DefaultAnthology) {
+                System.out.println(articleSummary.getSummary());
+            }
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+        System.out.println("###################################");
+        try {
+            List<ArticleSummary> articleSummaries =
+                this.articleService.getSummariesOrderByPublishDate(0, 10, true);
+            for (ArticleSummary summary : articleSummaries) {
+                System.out.println(summary.getSummary());
+            }
         } catch (ServiceException e) {
             e.printStackTrace();
         }

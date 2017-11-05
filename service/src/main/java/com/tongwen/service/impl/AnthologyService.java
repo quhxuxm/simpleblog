@@ -1,6 +1,7 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.domain.Anthology;
+import com.tongwen.domain.AnthologyDetail;
 import com.tongwen.repository.mapper.IAnthologyMapper;
 import com.tongwen.repository.mapper.IAuthorMapper;
 import com.tongwen.service.api.IAnthologyService;
@@ -57,6 +58,16 @@ public class AnthologyService implements IAnthologyService {
     public Anthology getAnthology(long id) throws ServiceException {
         try {
             return this.anthologyMapper.getOne(id);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public AnthologyDetail getAnthologyDetail(long id) throws ServiceException {
+        try {
+            return this.anthologyMapper.getAnthologyDetail(id);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }

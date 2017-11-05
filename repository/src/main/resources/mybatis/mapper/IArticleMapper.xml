@@ -53,7 +53,7 @@
         article.title AS title,
         article.summary AS summary,
         author._id AS author_id,
-        author.nicke_name AS author_nick_name,
+        authentication.nick_name AS author_nick_name,
         author.icon_image_id AS author_icon_image_id,
         article.view_number AS view_number,
         article.comment_number AS comment_number,
@@ -63,7 +63,11 @@
         anthology._id AS anthology_id,
         anthology.title AS anthology_title
         FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
-        INNER JOIN article article ON anthology._id = article.anthology_id
+        INNER JOIN article article ON anthology._id = article.anthology_id INNER JOIN
+        authentication_author authenticationAndAuthor
+        ON author._id = authenticationAndAuthor.author_id
+        INNER JOIN authentication authentication
+        ON authenticationAndAuthor.authentication_id = authentication._id
         ORDER BY article.publish_date
         <if test="isDesc">
             DESC
@@ -71,8 +75,10 @@
         LIMIT #{start}, #{pageSize}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO article (title, summary, content, create_date, anthology_id) VALUES (
-            #{title}, #{summary}, #{content}, #{createDate}, #{anthologyId}
+        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id)
+        VALUES (
+            #{title}, #{summary}, #{content}, #{createDate}, #{updateDate}, #{publishDate},
+            #{anthologyId}
         );
     </insert>
     <update id="update">
@@ -84,22 +90,26 @@
     <select id="getAllArticleSummariesInAnthology" resultMap="articleSummaryResultMap"
             parameterType="long">
         SELECT
-            article._id             AS _id,
-            article.title           AS title,
-            article.summary         AS summary,
-            author._id              AS author_id,
-            author.nicke_name       AS author_nick_name,
-            author.icon_image_id    AS author_icon_image_id,
-            article.view_number     AS view_number,
-            article.comment_number  AS comment_number,
-            article.praise_number   AS praise_number,
-            article.bookmark_number AS bookmark_number,
-            article.publish_date    AS publish_date,
-            anthology._id           AS anthology_id,
-            anthology.title         AS anthology_title
+            article._id              AS _id,
+            article.title            AS title,
+            article.summary          AS summary,
+            author._id               AS author_id,
+            authentication.nick_name AS author_nick_name,
+            author.icon_image_id     AS author_icon_image_id,
+            article.view_number      AS view_number,
+            article.comment_number   AS comment_number,
+            article.praise_number    AS praise_number,
+            article.bookmark_number  AS bookmark_number,
+            article.publish_date     AS publish_date,
+            anthology._id            AS anthology_id,
+            anthology.title          AS anthology_title
         FROM article article INNER JOIN anthology anthology ON article.anthology_id = anthology._id
             INNER JOIN author author ON author._id = anthology.author_id
-        WHERE anthology._id = ${_id}
+            INNER JOIN authentication_author authenticationAndAuthor
+                ON author._id = authenticationAndAuthor.author_id
+            INNER JOIN authentication authentication
+                ON authenticationAndAuthor.authentication_id = authentication._id
+        WHERE anthology._id = #{id}
     </select>
     <select id="getOne" resultMap="articleResultMap">
         SELECT *
@@ -108,20 +118,24 @@
     </select>
     <select id="getArticleDetail" resultMap="articleDetailResultMap">
         SELECT
-            article._id             AS _id,
-            article.title           AS title,
-            article.content         AS content,
-            author._id              AS author_id,
-            author.nicke_name       AS author_nick_name,
-            author.icon_image_id    AS author_icon_image_id,
-            article.view_number     AS view_number,
-            article.comment_number  AS comment_number,
-            article.praise_number   AS praise_number,
-            article.bookmark_number AS bookmark_number,
-            article.publish_date    AS publish_date,
-            anthology._id           AS anthology_id,
-            anthology.title         AS anthology_title
+            article._id              AS _id,
+            article.title            AS title,
+            article.content          AS content,
+            author._id               AS author_id,
+            authentication.nick_name AS author_nick_name,
+            author.icon_image_id     AS author_icon_image_id,
+            article.view_number      AS view_number,
+            article.comment_number   AS comment_number,
+            article.praise_number    AS praise_number,
+            article.bookmark_number  AS bookmark_number,
+            article.publish_date     AS publish_date,
+            anthology._id            AS anthology_id,
+            anthology.title          AS anthology_title
         FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
             INNER JOIN article article ON anthology._id = article.anthology_id
+            INNER JOIN authentication_author authenticationAndAuthor
+                ON author._id = authenticationAndAuthor.author_id
+            INNER JOIN authentication authentication
+                ON authenticationAndAuthor.authentication_id = authentication._id
     </select>
 </mapper>
