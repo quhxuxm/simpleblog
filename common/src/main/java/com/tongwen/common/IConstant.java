@@ -18,4 +18,10 @@ public interface IConstant {
     interface IUrlFormat {
         String LOGIN_REDIRECT_URL_FORMAT = "/login?status=%s";
     }
+
+    interface MessageCode {
+        String SYSTEM_ERROR_MESSAGE_CODE="jsp.register.errorMessage.systemError";
+        String ANTHOLOGY_DEFAULT_TITLE_MESSAGE_CODE = "java.anthology.title.default";
+        String ANTHOLOGY_DEFAULT_SUMMARY_MESSAGE_CODE = "java.anthology.summary.default";
+    }
 }

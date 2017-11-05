@@ -11,12 +11,9 @@ public class ArticleDetail implements Serializable {
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
-    private Long viewNumber;
-    private Long commentNumber;
-    private Long praiseNumber;
-    private Long bookmarkNumber;
     private Long anthologyId;
     private String anthologyTitle;
+    private ArticleAdditionalInfo additionalInfo;
 
     public Long getId() {
         return id;
@@ -74,38 +71,6 @@ public class ArticleDetail implements Serializable {
         this.authorIconImageId = authorIconImageId;
     }
 
-    public Long getViewNumber() {
-        return viewNumber;
-    }
-
-    public void setViewNumber(Long viewNumber) {
-        this.viewNumber = viewNumber;
-    }
-
-    public Long getCommentNumber() {
-        return commentNumber;
-    }
-
-    public void setCommentNumber(Long commentNumber) {
-        this.commentNumber = commentNumber;
-    }
-
-    public Long getPraiseNumber() {
-        return praiseNumber;
-    }
-
-    public void setPraiseNumber(Long praiseNumber) {
-        this.praiseNumber = praiseNumber;
-    }
-
-    public Long getBookmarkNumber() {
-        return bookmarkNumber;
-    }
-
-    public void setBookmarkNumber(Long bookmarkNumber) {
-        this.bookmarkNumber = bookmarkNumber;
-    }
-
     public Long getAnthologyId() {
         return anthologyId;
     }
@@ -120,5 +85,13 @@ public class ArticleDetail implements Serializable {
 
     public void setAnthologyTitle(String anthologyTitle) {
         this.anthologyTitle = anthologyTitle;
+    }
+
+    public ArticleAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

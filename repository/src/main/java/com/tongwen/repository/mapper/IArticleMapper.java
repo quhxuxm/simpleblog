@@ -32,4 +32,12 @@ public interface IArticleMapper {
     void update(Article article);
 
     Article getOne(@Param("id") long id);
+
+    void increasePraiseNumber();
+
+    void increaseCommentNumber();
+
+    void increaseBookmarkNumber();
+
+    void increaseViewNumber();
 }

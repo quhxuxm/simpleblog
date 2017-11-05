@@ -11,10 +11,7 @@ public class Article implements Serializable {
     private Date createDate;
     private String content;
     private String summary;
-    private Long viewNumber;
-    private Long commentNumber;
-    private Long praiseNumber;
-    private Long bookmarkNumber;
+    private ArticleAdditionalInfo additionalInfo;
     private Long anthologyId;
 
     public Long getId() {
@@ -65,36 +62,12 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public Long getViewNumber() {
-        return viewNumber;
+    public ArticleAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
     }
 
-    public void setViewNumber(Long viewNumber) {
-        this.viewNumber = viewNumber;
-    }
-
-    public Long getCommentNumber() {
-        return commentNumber;
-    }
-
-    public void setCommentNumber(Long commentNumber) {
-        this.commentNumber = commentNumber;
-    }
-
-    public Long getPraiseNumber() {
-        return praiseNumber;
-    }
-
-    public void setPraiseNumber(Long praiseNumber) {
-        this.praiseNumber = praiseNumber;
-    }
-
-    public Long getBookmarkNumber() {
-        return bookmarkNumber;
-    }
-
-    public void setBookmarkNumber(Long bookmarkNumber) {
-        this.bookmarkNumber = bookmarkNumber;
+    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 
     public Long getAnthologyId() {
@@ -111,16 +84,5 @@ public class Article implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    @Override
-    public String toString() {
-        return "Article{" + "id=" + id + ", title='" + title + '\''
-                + ", publishDate=" + publishDate + ", updateDate=" + updateDate
-                + ", createDate=" + createDate + ", content='" + content + '\''
-                + ", summary='" + summary + '\'' + ", viewNumber=" + viewNumber
-                + ", commentNumber=" + commentNumber + ", praiseNumber="
-                + praiseNumber + ", bookmarkNumber=" + bookmarkNumber
-                + ", anthologyId=" + anthologyId + '}';
     }
 }

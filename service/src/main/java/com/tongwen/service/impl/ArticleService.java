@@ -1,6 +1,7 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.domain.Article;
+import com.tongwen.domain.ArticleDetail;
 import com.tongwen.domain.ArticleSummary;
 import com.tongwen.repository.mapper.IArticleMapper;
 import com.tongwen.service.api.IArticleService;
@@ -41,6 +42,17 @@ public class ArticleService implements IArticleService {
         }
         try {
             this.articleMapper.update(article);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Transactional
+    @Override
+    public ArticleDetail viewDetail(long id) throws ServiceException {
+        try {
+            this.articleMapper.increaseViewNumber();
+            return this.articleMapper.getArticleDetail(id);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
