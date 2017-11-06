@@ -2,6 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tongwen.repository.mapper.IAuthorMapper">
+    <cache/>
     <resultMap type="author" id="authorMapping">
         <id property="id" column="_id"/>
         <result property="description" column="description"/>
@@ -11,15 +12,12 @@
     </resultMap>
     <resultMap type="authorAdditionalInfo" id="authorAdditionalInfoMapping">
         <id property="id" column="_id"/>
-        <result property="publishArticlesNumber"
-                column="publish_articles_number"/>
-        <result property="publishCommentsNumber"
-                column="publish_comments_number"/>
-        <result property="publishAnthologiesNumber"
-                column="publish_anthologies_number"/>
-        <result property="followedByNumber" column="publish_followedby_number"/>
+        <result property="publishArticlesNumber" column="publish_articles_number"/>
+        <result property="publishCommentsNumber" column="publish_comments_number"/>
+        <result property="publishAnthologiesNumber" column="publish_anthologies_number"/>
+        <result property="followedByNumber" column="followedby_number"/>
     </resultMap>
-    <select id="findAuthorByAuthenticationId" resultMap="authorMapping">
+    <select id="findAuthorByAuthenticationId" resultMap="authorMapping" useCache="true">
         SELECT
             a._id                  AS _id,
             a.description          AS description,
@@ -64,14 +62,13 @@
             followedby_number          = #{followedByNumber}
         WHERE _id = #{id}
     </update>
-
     <select id="getAdditionalInfo" resultMap="authorAdditionalInfoMapping">
         SELECT
             addInfo._id                        AS _id,
             addInfo.publish_articles_number    AS publish_articles_number,
             addInfo.publish_comments_number    AS publish_comments_number,
             addInfo.publish_anthologies_number AS publish_anthologies_number,
-            addInfo.publish_followedby_number  AS publish_followedby_number
+            addInfo.followedby_number          AS followedby_number
         FROM author author INNER JOIN author_additional_info addInfo
                 ON author.additional_info_id = addInfo._id
         WHERE author._id = #{authorId};

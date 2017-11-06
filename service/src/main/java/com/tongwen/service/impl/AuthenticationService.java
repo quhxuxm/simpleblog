@@ -1,10 +1,7 @@
 package com.tongwen.service.impl;
 
-import com.tongwen.common.IConstant;
 import com.tongwen.domain.Authentication;
-import com.tongwen.domain.Role;
 import com.tongwen.repository.mapper.IAuthenticationMapper;
-import com.tongwen.repository.mapper.IRoleMapper;
 import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +22,20 @@ public class AuthenticationService implements IAuthenticationService {
     @Transactional
     @Override
     public Authentication authenticate(String token, Authentication.Type type)
-            throws ServiceException {
+        throws ServiceException {
         try {
-            Authentication authentication = this.authenticationMapper
-                    .findByTokenAndType(token, type);
+            Authentication authentication =
+                this.authenticationMapper.findByTokenAndType(token, type);
             authentication.setLastLoginDate(new Date());
             this.authenticationMapper.update(authentication);
             return authentication;
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean isTokenExist(String token) throws ServiceException {
         try {
@@ -46,6 +45,7 @@ public class AuthenticationService implements IAuthenticationService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public boolean isNickNameExist(String nickName) throws ServiceException {
         try {

@@ -40,7 +40,7 @@ CREATE TABLE author_additional_info (
     publish_articles_number    BIGINT DEFAULT 0,
     publish_comments_number    BIGINT DEFAULT 0,
     publish_anthologies_number BIGINT DEFAULT 0,
-    publish_followedby_number  BIGINT DEFAULT 0,
+    followedby_number  BIGINT DEFAULT 0,
     PRIMARY KEY (_id)
 );
 

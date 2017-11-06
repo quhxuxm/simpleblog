@@ -10,6 +10,7 @@ public class ArticleDetail implements Serializable {
     private Date publishDate;
     private Long authorId;
     private String authorNickName;
+    private String authorDescription;
     private Long authorIconImageId;
     private Long anthologyId;
     private String anthologyTitle;
@@ -93,5 +94,13 @@ public class ArticleDetail implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public String getAuthorDescription() {
+        return authorDescription;
+    }
+
+    public void setAuthorDescription(String authorDescription) {
+        this.authorDescription = authorDescription;
     }
 }

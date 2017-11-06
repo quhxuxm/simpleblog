@@ -89,22 +89,22 @@
                                     <div class="author-history-wrapper">
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.publishArticles">
-                                                <fmt:param value="${article.authorAdditionalInfo.publishArticlesNumber}"/>
+                                                <fmt:param value="${authorAdditionalInfo.publishArticlesNumber}"/>
                                             </fmt:message>
                                         </a>
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.publishComments">
-                                                <fmt:param value="${article.authorAdditionalInfo.publishCommentsNumber}"/>
+                                                <fmt:param value="${authorAdditionalInfo.publishCommentsNumber}"/>
                                             </fmt:message>
                                         </a>
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.createAnthologies">
-                                                <fmt:param value="${article.authorAdditionalInfo.publishAnthologiesNumber}"/>
+                                                <fmt:param value="${authorAdditionalInfo.publishAnthologiesNumber}"/>
                                             </fmt:message>
                                         </a>
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.followedBy">
-                                                <fmt:param value="${article.authorAdditionalInfo.followedByNumber}"/>
+                                                <fmt:param value="${authorAdditionalInfo.followedByNumber}"/>
                                             </fmt:message>
                                         </a>
                                     </div>

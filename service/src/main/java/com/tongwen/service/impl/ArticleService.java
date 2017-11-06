@@ -23,8 +23,7 @@ public class ArticleService implements IArticleService {
     private int articleSummariesCollectionPageSize;
 
     @Autowired
-    public ArticleService(IArticleMapper articleMapper,
-            IAnthologyService anthologyService) {
+    public ArticleService(IArticleMapper articleMapper, IAnthologyService anthologyService) {
         this.articleMapper = articleMapper;
         this.anthologyService = anthologyService;
     }
@@ -33,19 +32,16 @@ public class ArticleService implements IArticleService {
     @Override
     public void create(Article article, Author author) throws ServiceException {
         if (article.getAnthologyId() == null) {
-            throw new ServiceException(
-                    ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
+            throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
         try {
-            Anthology targetAnthology = this.anthologyService
-                    .getAnthology(article.getAnthologyId());
+            Anthology targetAnthology =
+                this.anthologyService.getAnthology(article.getAnthologyId());
             if (targetAnthology == null) {
-                throw new ServiceException(
-                        ServiceException.Code.ANTHOLOGY_NOT_EXIST);
+                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_EXIST);
             }
             if (!targetAnthology.getAuthorId().equals(author.getId())) {
-                throw new ServiceException(
-                        ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
+                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
             }
             ArticleAdditionalInfo additionalInfo = new ArticleAdditionalInfo();
             this.articleMapper.createAdditionalInfo(additionalInfo);
@@ -69,19 +65,16 @@ public class ArticleService implements IArticleService {
     @Override
     public void update(Article article, Author author) throws ServiceException {
         if (article.getAnthologyId() == null) {
-            throw new ServiceException(
-                    ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
+            throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
         try {
-            Anthology targetAnthology = this.anthologyService
-                    .getAnthology(article.getAnthologyId());
+            Anthology targetAnthology =
+                this.anthologyService.getAnthology(article.getAnthologyId());
             if (targetAnthology == null) {
-                throw new ServiceException(
-                        ServiceException.Code.ANTHOLOGY_NOT_EXIST);
+                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_EXIST);
             }
             if (!targetAnthology.getAuthorId().equals(author.getId())) {
-                throw new ServiceException(
-                        ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
+                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
             }
             this.articleMapper.update(article);
         } catch (Exception e) {
@@ -93,8 +86,7 @@ public class ArticleService implements IArticleService {
     @Override
     public ArticleDetail viewDetail(long id) throws ServiceException {
         try {
-            ArticleAdditionalInfo additionalInfo = this.articleMapper
-                    .getAdditionalInfo(id);
+            ArticleAdditionalInfo additionalInfo = this.articleMapper.getAdditionalInfo(id);
             additionalInfo.setViewNumber(additionalInfo.getViewNumber() + 1);
             this.articleMapper.updateAdditionalInfo(additionalInfo);
             return this.articleMapper.getArticleDetail(id);
@@ -105,11 +97,12 @@ public class ArticleService implements IArticleService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ArticleSummary> getSummariesOrderByPublishDate(int start,
-            boolean isDesc) throws ServiceException {
+    public List<ArticleSummary> getSummariesOrderByPublishDate(int start, boolean isDesc)
+        throws ServiceException {
         try {
-            return this.articleMapper.getSummariesOrderByPublishDate(start,
-                    this.articleSummariesCollectionPageSize, true);
+            return this.articleMapper
+                .getSummariesOrderByPublishDate(start, this.articleSummariesCollectionPageSize,
+                    true);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
@@ -117,8 +110,7 @@ public class ArticleService implements IArticleService {
 
     @Transactional(readOnly = true)
     @Override
-    public ArticleAdditionalInfo getAdditionalInfo(long articleId)
-            throws ServiceException {
+    public ArticleAdditionalInfo getAdditionalInfo(long articleId) throws ServiceException {
         try {
             return this.articleMapper.getAdditionalInfo(articleId);
         } catch (Exception e) {
@@ -129,20 +121,23 @@ public class ArticleService implements IArticleService {
     @Transactional(readOnly = true)
     @Override
     public Map<Long, ArticleAdditionalInfo> getAdditionalInfoList(
-            List<ArticleSummary> articleSummaries) throws ServiceException {
+        List<ArticleSummary> articleSummaries) throws ServiceException {
+        if (articleSummaries == null || articleSummaries.isEmpty()) {
+            return new HashMap<>();
+        }
         try {
-            List<Long> articleIdList = articleSummaries.stream()
-                    .map(ArticleSummary::getId).collect(Collectors.toList());
-            List<ArticleAdditionalInfo> articleAdditionalInfos = this.articleMapper
-                    .getAdditionalInfoList(articleIdList);
+            List<Long> articleIdList =
+                articleSummaries.stream().map(ArticleSummary::getId).collect(Collectors.toList());
+            List<ArticleAdditionalInfo> articleAdditionalInfos =
+                this.articleMapper.getAdditionalInfoList(articleIdList);
             Map<Long, ArticleAdditionalInfo> articleAdditionalInfoMap = new HashMap<>();
             for (ArticleAdditionalInfo info : articleAdditionalInfos) {
                 articleAdditionalInfoMap.put(info.getId(), info);
             }
             Map<Long, ArticleAdditionalInfo> result = new HashMap<>();
             for (ArticleSummary articleSummary : articleSummaries) {
-                result.put(articleSummary.getId(), articleAdditionalInfoMap
-                        .get(articleSummary.getAdditionalInfoId()));
+                result.put(articleSummary.getId(),
+                    articleAdditionalInfoMap.get(articleSummary.getAdditionalInfoId()));
             }
             return result;
         } catch (Exception e) {
