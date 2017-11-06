@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface IArticleMapper {
@@ -48,7 +49,9 @@ public interface IArticleMapper {
             @Param("isDesc")
                     boolean isDesc);
 
-    ArticleDetail getArticleDetail(long id);
+    ArticleDetail getArticleDetail(
+            @Param("id")
+                    long id);
 
     void create(Article article);
 
@@ -61,6 +64,10 @@ public interface IArticleMapper {
     ArticleAdditionalInfo getAdditionalInfo(
             @Param("articleId")
                     long articleId);
+
+    List<ArticleAdditionalInfo> getAdditionalInfoList(
+            @Param("articleIdList")
+                    List<Long> articleIdList);
 
     void createAdditionalInfo(ArticleAdditionalInfo additionalInfo);
 

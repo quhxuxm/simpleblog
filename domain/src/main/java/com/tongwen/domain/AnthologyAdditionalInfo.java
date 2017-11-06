@@ -1,12 +1,22 @@
 package com.tongwen.domain;
 
-public class AnthologyAdditionalInfo {
+import java.io.Serializable;
+
+public class AnthologyAdditionalInfo implements Serializable {
     private Long id;
     private Long followupNumber;
     private Long commentNumber;
     private Long viewNumber;
     private Long bookmarkNumber;
     private Long praiseNumber;
+
+    public AnthologyAdditionalInfo() {
+        this.viewNumber = 0L;
+        this.commentNumber = 0L;
+        this.praiseNumber = 0L;
+        this.bookmarkNumber = 0L;
+        this.followupNumber = 0L;
+    }
 
     public Long getId() {
         return id;

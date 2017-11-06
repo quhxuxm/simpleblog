@@ -1,11 +1,20 @@
 package com.tongwen.domain;
 
-public class ArticleAdditionalInfo {
+import java.io.Serializable;
+
+public class ArticleAdditionalInfo implements Serializable {
     private Long id;
     private Long viewNumber;
     private Long commentNumber;
     private Long praiseNumber;
     private Long bookmarkNumber;
+
+    public ArticleAdditionalInfo() {
+        this.viewNumber = 0L;
+        this.commentNumber = 0L;
+        this.praiseNumber = 0L;
+        this.bookmarkNumber = 0L;
+    }
 
     public Long getId() {
         return id;

@@ -4,20 +4,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ attribute name="articleSummary"
-              type="com.tongwen.service.dto.ArticleSummaryDTO" %>
-<c:url var="viewArticleUrl" value="/article/${articleSummary.articleId}/view"  />
+<%@ attribute name="articleSummary" type="com.tongwen.domain.ArticleSummary" %>
+<%@ attribute name="articleAdditionalInfo"
+              type="com.tongwen.domain.ArticleAdditionalInfo" %>
+<c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
 <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
 <article>
     <c:if test="${articleSummary.coverImageId !=null}">
-        <c:url value="/dimage/${articleSummary.coverImageId}" var="articleCoverUrl"/>
+        <c:url value="/dimage/${articleSummary.coverImageId}"
+               var="articleCoverUrl"/>
         <a href="${viewArticleUrl}"
            style="background-image: url('${articleCoverUrl}')"
            class="article-cover"></a>
     </c:if>
     <div class="article-content">
         <header>
-
             <a href="${viewArticleUrl}" class="article-title">
                 <c:out value="${articleSummary.title}" escapeXml="true"/>
             </a>
@@ -48,7 +49,8 @@
                         </fmt:message>
                     </span>
                 </div>
-                <c:url var="followUpAuthorUrl" value="/author/${articleSummary.authorId}/fullowup"/>
+                <c:url var="followUpAuthorUrl"
+                       value="/author/${articleSummary.authorId}/fullowup"/>
                 <a href="${followUpAuthorUrl}" class="icon-btn">
                     <span class="fa fa-plus-circle"></span>
                     <fmt:message key="jsp.common.link.followup"/>
@@ -59,24 +61,27 @@
             <c:out value="${articleSummary.summary}" escapeXml="true"/>
         </section>
         <footer>
-            <c:url var="viewAnthologyUrl" value="/anthology/${articleSummary.anthologyId}/view"/>
-            <a href="${viewAnthologyUrl}"
-               class="anthology-name">
-                <c:out value="${articleSummary.anthologyName}" escapeXml="true"/>
+            <c:url var="viewAnthologyUrl"
+                   value="/anthology/${articleSummary.anthologyId}/view"/>
+            <a href="${viewAnthologyUrl}" class="anthology-name">
+                <c:out value="${articleSummary.anthologyTitle}"
+                       escapeXml="true"/>
             </a>
             <a href="${viewArticleUrl}" class="action">
-                <span class="fa fa-eye"></span>${articleSummary.additionalInfo.viewNumber}
+                <span class="fa fa-eye"></span>${articleAdditionalInfo.viewNumber}
             </a>
-            <c:url value="/article/${articleSummary.articleId}/praise" var="praiseArticleUrl"/>
+            <c:url value="/article/${articleSummary.id}/praise"
+                   var="praiseArticleUrl"/>
             <a href="${praiseArticleUrl}" class="action praise">
-                <span class="fa fa-heart"></span>${articleSummary.additionalInfo.praiseNumber}
+                <span class="fa fa-heart"></span>${articleAdditionalInfo.praiseNumber}
             </a>
             <a href="${viewArticleUrl}" class="action">
-                <span class="fa fa-comment"></span>${articleSummary.additionalInfo.commentNumber}
+                <span class="fa fa-comment"></span>${articleAdditionalInfo.commentNumber}
             </a>
-            <c:url value="/article/${articleSummary.articleId}/bookmark" var="bookmarkArticleUrl" />
+            <c:url value="/article/${articleSummary.id}/bookmark"
+                   var="bookmarkArticleUrl"/>
             <a href="${bookmarkArticleUrl}" class="action bookmark">
-                <span class="fa fa-bookmark"></span>${articleSummary.additionalInfo.bookmarkNumber}
+                <span class="fa fa-bookmark"></span>${articleAdditionalInfo.bookmarkNumber}
             </a>
         </footer>
     </div>

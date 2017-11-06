@@ -13,13 +13,13 @@ function articleAdditionalAction(actionBtn, actionResultElement, resultFieldName
 }
 
 function loadArticleSummariesCollection(triggerBtn, summariesCollectionContainer) {
-    var nextPageHidden = $("input[type='hidden'][name='nextPage']", summariesCollectionContainer);
-    var nextPage = nextPageHidden.attr("value");
+    var nextStartHidden = $("input[type='hidden'][name='nextStart']", summariesCollectionContainer);
+    var nextStart = nextStartHidden.attr("value");
     $.ajax({
-        url: triggerBtn.attr("href") + "?page=" + nextPage,
+        url: triggerBtn.attr("href") + "?start=" + nextStart,
         method: "GET",
         success: function (serverReturnData) {
-            nextPageHidden.remove();
+            nextStartHidden.remove();
             var lastElement = summariesCollectionContainer.children().last();
             if (lastElement.is(triggerBtn)) {
                 //Last one is the trigger button

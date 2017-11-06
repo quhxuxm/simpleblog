@@ -13,12 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
     private final IAuthorService authorService;
-    private final IArticleService articleService;
 
     @Autowired
-    public IndexController(IAuthorService authorService, IArticleService articleService) {
+    public IndexController(IAuthorService authorService) {
         this.authorService = authorService;
-        this.articleService = articleService;
     }
 
     /**
@@ -26,7 +24,7 @@ public class IndexController {
      *
      * @return The index page.
      */
-    @RequestMapping({"/index", "/"})
+    @RequestMapping({ "/index", "/" })
     public ModelAndView showIndex() {
         ModelAndView result = new ModelAndView("index");
         result.addObject("adviceAuthorSummaries", null);

@@ -13,6 +13,7 @@ public class Article implements Serializable {
     private String summary;
     private Long anthologyId;
     private Long additionalInfoId;
+    private Long coverImageId;
 
     public Long getId() {
         return id;
@@ -84,5 +85,13 @@ public class Article implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public Long getCoverImageId() {
+        return coverImageId;
+    }
+
+    public void setCoverImageId(Long coverImageId) {
+        this.coverImageId = coverImageId;
     }
 }

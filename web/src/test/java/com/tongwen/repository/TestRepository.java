@@ -16,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = WebInitializer.class)
@@ -82,8 +84,13 @@ public class TestRepository {
         try {
             List<ArticleSummary> articleSummaries = this.articleService
                     .getSummariesOrderByPublishDate(0, true);
+            Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
+                    .getAdditionalInfoList(articleSummaries);
             for (ArticleSummary summary : articleSummaries) {
                 System.out.println(summary.getSummary());
+                System.out.println(
+                        "View: " + additionalInfoMap.get(summary.getId())
+                                .getViewNumber());
             }
         } catch (ServiceException e) {
             e.printStackTrace();

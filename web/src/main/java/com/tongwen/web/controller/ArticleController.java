@@ -1,10 +1,7 @@
 package com.tongwen.web.controller;
 
 import com.tongwen.common.IConstant;
-import com.tongwen.domain.Article;
-import com.tongwen.domain.ArticleDetail;
-import com.tongwen.domain.ArticleSummary;
-import com.tongwen.domain.Author;
+import com.tongwen.domain.*;
 import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.api.IArticleService;
 import com.tongwen.service.exception.ServiceException;
@@ -22,7 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/article")
@@ -30,7 +30,6 @@ public class ArticleController {
     private static Logger logger = LoggerFactory
             .getLogger(ArticleController.class);
     private final IArticleService articleService;
-    private final IAnthologyService anthologyService;
     private final ServletContext servletContext;
     @Value("${article.title.maxLength}")
     private int titleMaxLength;
@@ -43,9 +42,8 @@ public class ArticleController {
 
     @Autowired
     public ArticleController(IArticleService articleService,
-            IAnthologyService anthologyService, ServletContext servletContext) {
+            ServletContext servletContext) {
         this.articleService = articleService;
-        this.anthologyService = anthologyService;
         this.servletContext = servletContext;
     }
 
@@ -217,9 +215,15 @@ public class ArticleController {
             response.getErrorCodes()
                     .add(ArticleEditResponse.ErrorCode.TITLE_TOO_SHORT);
         }
-        String contentPlainText = this.articleService
-                .extractArticleContentPlainText(
-                        articleEditRequest.getContent());
+        String contentPlainText = null;
+        try {
+            contentPlainText = this.articleService
+                    .extractArticleContentPlainText(
+                            articleEditRequest.getContent());
+        } catch (ServiceException e) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+        }
         if (contentPlainText == null || contentPlainText.trim().length() == 0) {
             response.getErrorCodes()
                     .add(ArticleEditResponse.ErrorCode.CONTENT_IS_EMPTY);
@@ -246,19 +250,22 @@ public class ArticleController {
                     boolean isDesc) {
         ModelAndView result = new ModelAndView(
                 "/fragment/article/summariesCollection");
-        List<ArticleSummary> articleSummariesCollectionPage = null;
+        int summariesCollectionSize = 0;
         try {
-            articleSummariesCollectionPage = this.articleService
+            List<ArticleSummary> articleSummariesCollection = this.articleService
                     .getSummariesOrderByPublishDate(start, isDesc);
+            Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
+                    .getAdditionalInfoList(articleSummariesCollection);
+            result.addObject("summariesCollection", articleSummariesCollection);
+            result.addObject("additionalInfoMap", additionalInfoMap);
+            summariesCollectionSize = articleSummariesCollection.size();
         } catch (ServiceException e) {
             logger.error(
                     "Fail to get article summaries collection because of exception.",
                     e);
         }
-        int nextStart = start + articleSummariesCollectionPage.size();
+        int nextStart = start + summariesCollectionSize;
         result.addObject("nextStart", nextStart);
-        result.addObject("summariesCollectionPage",
-                articleSummariesCollectionPage);
         return result;
     }
 }

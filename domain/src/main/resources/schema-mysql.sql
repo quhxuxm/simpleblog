@@ -100,7 +100,9 @@ CREATE TABLE article (
     update_date        DATETIME,
     publish_date       DATETIME,
     additional_info_id BIGINT       NOT NULL,
+    cover_image_id     BIGINT,
     PRIMARY KEY (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id),
-    FOREIGN KEY (additional_info_id) REFERENCES article_additional_info (_id)
+    FOREIGN KEY (additional_info_id) REFERENCES article_additional_info (_id),
+    FOREIGN KEY (cover_image_id) REFERENCES image (_id)
 );

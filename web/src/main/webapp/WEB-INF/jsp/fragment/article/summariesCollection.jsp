@@ -5,7 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
-<c:forEach var="articleSummary" items="${summariesCollectionPage.content}">
-    <tongwen:articleSummary articleSummary="${articleSummary}"/>
+<c:forEach var="articleSummary" items="${summariesCollection}">
+    <tongwen:articleSummary articleSummary="${articleSummary}"
+                            articleAdditionalInfo="${additionalInfoMap.get(articleSummary.id)}"/>
 </c:forEach>
-<input type="hidden" name="nextPage" value="${nextPage}"></input>
+<input type="hidden" name="nextStart" value="${nextStart}"/>
