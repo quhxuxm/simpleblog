@@ -27,5 +27,9 @@
                    alias="anthologyAdditionalInfo"/>
         <typeAlias type="com.tongwen.domain.ArticleAdditionalInfo"
                    alias="articleAdditionalInfo"/>
+        <typeAlias type="com.tongwen.domain.Author"
+                   alias="author"/>
+        <typeAlias type="com.tongwen.domain.AuthorAdditionalInfo"
+                   alias="authorAdditionalInfo"/>
     </typeAliases>
 </configuration>
