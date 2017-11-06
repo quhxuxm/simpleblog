@@ -2,7 +2,10 @@ package com.tongwen.service.api;
 
 import com.tongwen.domain.Anthology;
 import com.tongwen.domain.AnthologyDetail;
+import com.tongwen.domain.AnthologySummary;
 import com.tongwen.service.exception.ServiceException;
+
+import java.util.List;
 
 public interface IAnthologyService {
     void create(Anthology anthology) throws ServiceException;
@@ -12,4 +15,6 @@ public interface IAnthologyService {
     Anthology getAnthology(long id) throws ServiceException;
 
     AnthologyDetail getAnthologyDetail(long id) throws ServiceException;
+
+    List<AnthologySummary> getAnthologySummaries(long authorId) throws ServiceException;
 }

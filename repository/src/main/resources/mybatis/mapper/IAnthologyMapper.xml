@@ -61,15 +61,15 @@
     </insert>
     <select id="getAnthologyDetail" resultMap="anthologyDetailMap">
         SELECT
-            anthology._id               AS _id,
-            anthology.title             AS title,
-            anthology.summary           AS summary,
-            anthology.create_date       AS create_date,
-            anthology.update_date       AS update_date,
-            anthology.publish_date      AS publish_data,
-            anthology.cover_image_id    AS cover_image_id,
-            author._id                  AS author_id,
-            authentication.nick_name    AS author_nick_name,
+            anthology._id                AS _id,
+            anthology.title              AS title,
+            anthology.summary            AS summary,
+            anthology.create_date        AS create_date,
+            anthology.update_date        AS update_date,
+            anthology.publish_date       AS publish_data,
+            anthology.cover_image_id     AS cover_image_id,
+            author._id                   AS author_id,
+            authentication.nick_name     AS author_nick_name,
             anthology.additional_info_id AS additional_info_id
         FROM author author INNER JOIN anthology anthology
                 ON author._id = anthology.author_id
@@ -99,7 +99,6 @@
         anthology.additional_info_id AS additional_info_id
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
-        INNER JOIN article article ON article.anthology_id = anthology._id
         INNER JOIN authentication_author authenticationAndAuthor
         ON author._id = authenticationAndAuthor.author_id
         INNER JOIN authentication authentication
@@ -111,7 +110,6 @@
         </if>
         LIMIT #{start}, #{pageSize}
     </select>
-
     <select id="getAdditionalInfo" resultMap="anthologyAdditionalInfoMap">
         SELECT
             addInfo._id             AS _id,
@@ -124,8 +122,6 @@
                 ON anthology.additional_info_id = addInfo._id
         WHERE anthology._id = #{anthologyId}
     </select>
-
-
     <insert id="createAdditionalInfo" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO anthology_additional_info (view_number, praise_number, comment_number, bookmark_number, followup_number)
         VALUES (
@@ -141,4 +137,26 @@
             followup_number = #{followupNumber}
         WHERE _id = #{id}
     </update>
+    <select id="getAuthorAnthologySummaries" resultMap="anthologySummaryMap">
+        SELECT
+            anthology._id                AS _id,
+            anthology.title              AS title,
+            anthology.summary            AS summary,
+            anthology.create_date        AS create_date,
+            anthology.update_date        AS update_date,
+            anthology.publish_date       AS publish_data,
+            anthology.cover_image_id     AS cover_image_id,
+            author._id                   AS author_id,
+            authentication.nick_name     AS author_nick_name,
+            anthology.additional_info_id AS additional_info_id
+        FROM author author INNER JOIN anthology anthology ON author._id =
+                                                             anthology.author_id
+            INNER JOIN authentication_author authenticationAndAuthor
+                ON author._id = authenticationAndAuthor.author_id
+            INNER JOIN authentication authentication
+                ON authenticationAndAuthor.authentication_id = authentication._id
+        WHERE author._id = #{authorId}
+        ORDER BY
+            anthology.create_date
+    </select>
 </mapper>

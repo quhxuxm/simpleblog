@@ -19,18 +19,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Locale;
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
     private static final Logger logger = LoggerFactory.getLogger(RegisterController.class);
     private IAuthorService authorService;
     private RegisterAuthorRequestValidator registerAuthorRequestValidator;
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     public RegisterController(IAuthorService authorService,
-        RegisterAuthorRequestValidator registerAuthorRequestValidator) {
+        RegisterAuthorRequestValidator registerAuthorRequestValidator,
+        MessageSource messageSource) {
         this.registerAuthorRequestValidator = registerAuthorRequestValidator;
         this.authorService = authorService;
+        this.messageSource = messageSource;
     }
 
     @InitBinder
@@ -46,7 +50,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public String register(@Validated RegisterAuthorForm request, Errors errors) {
+    public String register(@Validated RegisterAuthorForm request, Errors errors, Locale locale) {
         ModelAndView registerPage = new ModelAndView("register");
         if (errors.hasErrors()) {
             return "register";
@@ -54,9 +58,11 @@ public class RegisterController {
         try {
             this.authorService
                 .register(request.getEmail(), request.getPassword(), request.getNickName(),
-                    Authentication.Type.EMAIL,
-                    IConstant.MessageCode.ANTHOLOGY_DEFAULT_TITLE_MESSAGE_CODE,
-                    IConstant.MessageCode.ANTHOLOGY_DEFAULT_SUMMARY_MESSAGE_CODE);
+                    Authentication.Type.EMAIL, this.messageSource
+                        .getMessage(IConstant.MessageCode.ANTHOLOGY_DEFAULT_TITLE_MESSAGE_CODE,
+                            null, locale), this.messageSource
+                        .getMessage(IConstant.MessageCode.ANTHOLOGY_DEFAULT_SUMMARY_MESSAGE_CODE,
+                            null, locale));
         } catch (ServiceException e) {
             logger.error("Fail to register user because of exception.", e);
             errors.reject(IConstant.MessageCode.SYSTEM_ERROR_MESSAGE_CODE);

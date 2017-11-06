@@ -2,6 +2,7 @@ package com.tongwen.web.controller;
 
 import com.tongwen.common.IConstant;
 import com.tongwen.domain.*;
+import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.api.IArticleService;
 import com.tongwen.service.api.IAuthorService;
 import com.tongwen.service.exception.ServiceException;
@@ -26,6 +27,7 @@ import java.util.Map;
 @RequestMapping("/article")
 public class ArticleController {
     private static Logger logger = LoggerFactory.getLogger(ArticleController.class);
+    private final IAnthologyService anthologyService;
     private final IAuthorService authorService;
     private final IArticleService articleService;
     private final ServletContext servletContext;
@@ -39,8 +41,9 @@ public class ArticleController {
     private int contentMinLength;
 
     @Autowired
-    public ArticleController(IArticleService articleService, IAuthorService authorService,
-        ServletContext servletContext) {
+    public ArticleController(IAnthologyService anthologyService, IArticleService articleService,
+        IAuthorService authorService, ServletContext servletContext) {
+        this.anthologyService = anthologyService;
         this.articleService = articleService;
         this.authorService = authorService;
         this.servletContext = servletContext;
@@ -101,6 +104,14 @@ public class ArticleController {
         ModelAndView result = new ModelAndView("article-editor");
         Author author =
             (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        try {
+            List<AnthologySummary> anthologies =
+                this.anthologyService.getAnthologySummaries(author.getId());
+            result.addObject("defaultAnthologyId", author.getDefaultAnthologyId());
+            result.addObject("anthologies", anthologies);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 

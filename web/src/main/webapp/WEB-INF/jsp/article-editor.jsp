@@ -116,10 +116,10 @@
             <span class="fa fa-cog trigger"></span>
             <ul class="additional-actions-menu">
                 <li>
-                    <c:url value="/" var="indexPageUrl" />
+                    <c:url value="/" var="indexPageUrl"/>
                     <a href="${indexPageUrl}" class="additional-action-btn">
                         <span class="additional-action-btn-label">
-                            <fmt:message key="jsp.articleEditor.additionalActionsMenu.item.returnToMainPage" />
+                            <fmt:message key="jsp.articleEditor.additionalActionsMenu.item.returnToMainPage"/>
                         </span>
                         <span class="fa fa-reply additional-action-btn-icon"></span>
                     </a>
@@ -127,21 +127,21 @@
                 <li>
                     <a href="#" class="additional-action-btn">
                         <span class="additional-action-btn-label">
-                            <fmt:message key="jsp.articleEditor.additionalActionsMenu.item.selectAnthology" />
+                            <fmt:message key="jsp.articleEditor.additionalActionsMenu.item.selectAnthology"/>
                         </span>
                         <span class="fa fa-folder-open additional-action-btn-icon"></span>
                     </a>
                     <ul class="additional-actions-menu anthology-menu">
-                        <c:forEach var="anthologyInfo" items="${anthologies}">
+                        <c:forEach var="anthologySummary" items="${anthologies}">
                             <li>
-                                <a href="#" class="additional-action-btn anthology" data-anthology-id="${anthologyInfo.id}">
+                                <a href="#" class="additional-action-btn anthology" data-anthology-id="${anthologySummary.id}">
                                     <span class="additional-action-btn-label">
-                                        <c:if test="${article.anthologyId eq anthologyInfo.id}">
+                                        <c:if test="${(article==null && defaultAnthologyId eq anthologySummary.id) || (article !=null && (article.anthologyId eq anthologySummary.id))}">
                                             <c:set var="checkStatus" value="checked"/>
                                         </c:if>
                                         <span class="fa fa-check-circle anthology-check-status ${checkStatus}"></span>
                                         <c:remove var="checkStatus"/>
-                                        ${anthologyInfo.title}
+                                        ${anthologySummary.title}
                                     </span>
                                     <span class="fa fa-book additional-action-btn-icon"></span>
                                 </a>
