@@ -11,9 +11,9 @@ public class ArticleSummary implements Serializable {
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
-    private ArticleAdditionalInfo additionalInfo;
     private Long anthologyId;
     private String anthologyTitle;
+    private Long additionalInfoId;
 
     public Long getId() {
         return id;
@@ -87,11 +87,11 @@ public class ArticleSummary implements Serializable {
         this.anthologyTitle = anthologyTitle;
     }
 
-    public ArticleAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
     }
 
-    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

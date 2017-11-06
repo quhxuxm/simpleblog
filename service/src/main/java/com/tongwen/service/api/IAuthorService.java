@@ -9,5 +9,5 @@ public interface IAuthorService {
             Authentication.Type type, String defaultAnthologyTitle,
             String defaultAnthologySummary) throws ServiceException;
 
-    Author getAuthor(Authentication authentication) throws ServiceException;
+    Author getAuthor(long authenticationId) throws ServiceException;
 }

@@ -28,7 +28,7 @@ public class ImageController {
             return;
         }
         try {
-            Image image = this.imageService.findById(imageId);
+            Image image = this.imageService.load(imageId);
             if (image == null) {
                 logger.error(
                     "Can not load the image because of the image id is not exist [id = " + imageId

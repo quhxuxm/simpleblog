@@ -54,11 +54,12 @@ CREATE TABLE authentication_author (
 );
 
 CREATE TABLE anthology_additional_info (
-    _id                 BIGINT AUTO_INCREMENT,
-    followup_numbermber BIGINT DEFAULT 0,
-    comment_number      BIGINT DEFAULT 0,
-    praise_number       BIGINT DEFAULT 0,
-    bookmark_number     BIGINT DEFAULT 0,
+    _id             BIGINT AUTO_INCREMENT,
+    view_number     BIGINT DEFAULT 0,
+    followup_number BIGINT DEFAULT 0,
+    comment_number  BIGINT DEFAULT 0,
+    praise_number   BIGINT DEFAULT 0,
+    bookmark_number BIGINT DEFAULT 0,
     PRIMARY KEY (_id)
 );
 
@@ -70,7 +71,6 @@ CREATE TABLE anthology (
     create_date        DATETIME     NOT NULL,
     publish_date       DATETIME,
     update_date        DATETIME,
-    followup_number    BIGINT DEFAULT 0,
     cover_image_id     BIGINT,
     additional_info_id BIGINT       NOT NULL,
     PRIMARY KEY (_id),

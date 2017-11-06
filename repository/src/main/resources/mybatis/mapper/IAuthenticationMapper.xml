@@ -56,6 +56,13 @@
                 #{type}, #{registerDate},
                 #{lastLoginDate})
     </insert>
+    <update id="update">
+        UPDATE authentication
+        SET password        = #{password}, nick_name = #{nickName},
+            last_login_date = #{lastLoginDate}
+        WHERE _id = #{id}
+
+    </update>
     <insert id="assignRole">
         INSERT INTO authentication_role (authentication_id, role_id)
         VALUES (#{authentication.id}, #{role.id})

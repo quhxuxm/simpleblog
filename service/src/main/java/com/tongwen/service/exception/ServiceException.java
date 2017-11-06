@@ -5,6 +5,8 @@ public class ServiceException extends Exception {
         SYSTEM_ERROR,
         AUTHOR_NOT_EXIST,
         AUTHOR_NOT_ASSIGNED,
+        ANTHOLOGY_NOT_EXIST,
+        ANTHOLOGY_NOT_BELONG_TO_AUTHOR,
         ANTHOLOGY_NOT_ASSIGNED,
         AUTHENTICATION_TOKEN_EXIST,
         AUTHENTICATION_NICK_NAME_EXIST
@@ -31,8 +33,8 @@ public class ServiceException extends Exception {
         this.code = code;
     }
 
-    public ServiceException(String message, Throwable cause, boolean enableSuppression,
-        boolean writableStackTrace, Code code) {
+    public ServiceException(String message, Throwable cause,
+            boolean enableSuppression, boolean writableStackTrace, Code code) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
     }

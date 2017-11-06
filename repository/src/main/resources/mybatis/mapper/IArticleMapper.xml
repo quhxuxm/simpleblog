@@ -11,11 +11,8 @@
         <result property="updateDate" column="update_date"/>
         <result property="createDate" column="create_date"/>
         <result property="content" column="content"/>
-        <result property="viewNumber" column="view_number"/>
-        <result property="commentNumber" column="comment_number"/>
-        <result property="praiseNumber" column="praise_number"/>
-        <result property="bookmarkNumber" column="bookmark_number"/>
         <result property="anthologyId" column="anthology_id"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
     </resultMap>
     <resultMap id="articleSummaryResultMap" type="articleSummary">
         <id property="id" column="_id"/>
@@ -25,12 +22,9 @@
         <result property="authorId" column="author_id"/>
         <result property="authorNickName" column="author_nickname"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
-        <result property="viewNumber" column="view_number"/>
-        <result property="commentNumber" column="comment_number"/>
-        <result property="praiseNumber" column="praise_number"/>
-        <result property="bookmarkNumber" column="bookmark_number"/>
         <result property="anthologyId" column="anthology_id"/>
         <result property="anthologyTitle" column="anthology_title"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
     </resultMap>
     <resultMap id="articleDetailResultMap" type="articleDetail">
         <id property="id" column="_id"/>
@@ -40,14 +34,19 @@
         <result property="authorId" column="author_id"/>
         <result property="authorNickName" column="author_nickname"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
+        <result property="anthologyId" column="anthology_id"/>
+        <result property="anthologyTitle" column="anthology_title"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
+    </resultMap>
+    <resultMap id="articleAdditionalInfoMap" type="articleAdditionalInfo">
+        <id property="id" column="_id"/>
         <result property="viewNumber" column="view_number"/>
         <result property="commentNumber" column="comment_number"/>
         <result property="praiseNumber" column="praise_number"/>
         <result property="bookmarkNumber" column="bookmark_number"/>
-        <result property="anthologyId" column="anthology_id"/>
-        <result property="anthologyTitle" column="anthology_title"/>
     </resultMap>
-    <select id="getSummariesOrderByPublishDate" resultMap="articleSummaryResultMap">
+    <select id="getSummariesOrderByPublishDate"
+            resultMap="articleSummaryResultMap">
         SELECT
         article._id AS _id,
         article.title AS title,
@@ -55,15 +54,14 @@
         author._id AS author_id,
         authentication.nick_name AS author_nick_name,
         author.icon_image_id AS author_icon_image_id,
-        article.view_number AS view_number,
-        article.comment_number AS comment_number,
-        article.praise_number AS praise_number,
-        article.bookmark_number AS bookmark_number,
         article.publish_date AS publish_date,
         anthology._id AS anthology_id,
-        anthology.title AS anthology_title
-        FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
-        INNER JOIN article article ON anthology._id = article.anthology_id INNER JOIN
+        anthology.title AS anthology_title,
+        article.additional_info_id AS additional_info_id
+        FROM author author INNER JOIN anthology anthology ON author._id =
+        anthology.author_id
+        INNER JOIN article article ON anthology._id = article.anthology_id INNER
+        JOIN
         authentication_author authenticationAndAuthor
         ON author._id = authenticationAndAuthor.author_id
         INNER JOIN authentication authentication
@@ -75,40 +73,44 @@
         LIMIT #{start}, #{pageSize}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id)
+        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id, additional_info_id)
         VALUES (
-            #{title}, #{summary}, #{content}, #{createDate}, #{updateDate}, #{publishDate},
-            #{anthologyId}
+            #{title}, #{summary}, #{content}, #{createDate}, #{updateDate},
+            #{publishDate},
+            #{anthologyId},
+            #{additionalInfoId}
         );
     </insert>
     <update id="update">
         UPDATE article
-        SET title   = #{title}, summary = #{summary},
-            content = #{content}, update_date = #{updateDate}, anthology_id = #{anthologyId}
+        SET title              = #{title}, summary = #{summary},
+            content            = #{content}, update_date = #{updateDate},
+            anthology_id       = #{anthologyId},
+            additional_info_id = #{additionalInfoId}
         WHERE _id = #{id}
     </update>
-    <select id="getAllArticleSummariesInAnthology" resultMap="articleSummaryResultMap"
+    <select id="getAllArticleSummariesInAnthology"
+            resultMap="articleSummaryResultMap"
             parameterType="long">
         SELECT
-            article._id              AS _id,
-            article.title            AS title,
-            article.summary          AS summary,
-            author._id               AS author_id,
-            authentication.nick_name AS author_nick_name,
-            author.icon_image_id     AS author_icon_image_id,
-            article.view_number      AS view_number,
-            article.comment_number   AS comment_number,
-            article.praise_number    AS praise_number,
-            article.bookmark_number  AS bookmark_number,
-            article.publish_date     AS publish_date,
-            anthology._id            AS anthology_id,
-            anthology.title          AS anthology_title
-        FROM article article INNER JOIN anthology anthology ON article.anthology_id = anthology._id
+            article._id               AS _id,
+            article.title             AS title,
+            article.summary           AS summary,
+            author._id                AS author_id,
+            authentication.nick_name  AS author_nick_name,
+            author.icon_image_id      AS author_icon_image_id,
+            article.publish_date      AS publish_date,
+            anthology._id             AS anthology_id,
+            anthology.title           AS anthology_title,
+            article.additional_info_id AS additional_info_id
+        FROM article article INNER JOIN anthology anthology
+                ON article.anthology_id = anthology._id
             INNER JOIN author author ON author._id = anthology.author_id
             INNER JOIN authentication_author authenticationAndAuthor
                 ON author._id = authenticationAndAuthor.author_id
             INNER JOIN authentication authentication
-                ON authenticationAndAuthor.authentication_id = authentication._id
+                ON authenticationAndAuthor.authentication_id =
+                   authentication._id
         WHERE anthology._id = #{id}
     </select>
     <select id="getOne" resultMap="articleResultMap">
@@ -118,24 +120,48 @@
     </select>
     <select id="getArticleDetail" resultMap="articleDetailResultMap">
         SELECT
-            article._id              AS _id,
-            article.title            AS title,
-            article.content          AS content,
-            author._id               AS author_id,
-            authentication.nick_name AS author_nick_name,
-            author.icon_image_id     AS author_icon_image_id,
-            article.view_number      AS view_number,
-            article.comment_number   AS comment_number,
-            article.praise_number    AS praise_number,
-            article.bookmark_number  AS bookmark_number,
-            article.publish_date     AS publish_date,
-            anthology._id            AS anthology_id,
-            anthology.title          AS anthology_title
-        FROM author author INNER JOIN anthology anthology ON author._id = anthology.author_id
+            article._id               AS _id,
+            article.title             AS title,
+            article.content           AS content,
+            author._id                AS author_id,
+            authentication.nick_name  AS author_nick_name,
+            author.icon_image_id      AS author_icon_image_id,
+            article.publish_date      AS publish_date,
+            anthology._id             AS anthology_id,
+            anthology.title           AS anthology_title,
+            article.additional_info_id AS additional_info_id
+        FROM author author INNER JOIN anthology anthology
+                ON author._id = anthology.author_id
             INNER JOIN article article ON anthology._id = article.anthology_id
             INNER JOIN authentication_author authenticationAndAuthor
                 ON author._id = authenticationAndAuthor.author_id
             INNER JOIN authentication authentication
-                ON authenticationAndAuthor.authentication_id = authentication._id
+                ON authenticationAndAuthor.authentication_id =
+                   authentication._id
     </select>
+    <select id="getAdditionalInfo" resultMap="articleAdditionalInfoMap">
+        SELECT
+            addInfo._id             AS _id,
+            addInfo.view_number     AS view_number,
+            addInfo.praise_number   AS praise_number,
+            addInfo.comment_number  AS comment_number,
+            addInfo.bookmark_number AS bookmark_number
+        FROM article article INNER JOIN article_additional_info addInfo
+                ON article.additional_info_id = addInfo._id
+        WHERE article._id = #{articleId} FOR UPDATE;
+    </select>
+
+    <insert id="createAdditionalInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article_additional_info (view_number, praise_number, comment_number, bookmark_number)
+        VALUES (
+            #{viewNumber}, #{praiseNumber}, #{commentNumber}, #{bookmarkNumber}
+        );
+    </insert>
+    <update id="updateAdditionalInfo">
+        UPDATE article_additional_info
+        SET view_number     = #{viewNumber}, praise_number = #{praiseNumber},
+            comment_number  = #{commentNumber},
+            bookmark_number = #{bookmarkNumber}
+        WHERE _id = #{id}
+    </update>
 </mapper>

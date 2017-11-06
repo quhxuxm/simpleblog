@@ -1,6 +1,7 @@
 package com.tongwen.service.impl;
 
 import com.tongwen.domain.Anthology;
+import com.tongwen.domain.AnthologyAdditionalInfo;
 import com.tongwen.domain.AnthologyDetail;
 import com.tongwen.repository.mapper.IAnthologyMapper;
 import com.tongwen.repository.mapper.IAuthorMapper;
@@ -16,7 +17,8 @@ public class AnthologyService implements IAnthologyService {
     private final IAnthologyMapper anthologyMapper;
 
     @Autowired
-    public AnthologyService(IAuthorMapper authorMapper, IAnthologyMapper anthologyMapper) {
+    public AnthologyService(IAuthorMapper authorMapper,
+            IAnthologyMapper anthologyMapper) {
         this.authorMapper = authorMapper;
         this.anthologyMapper = anthologyMapper;
     }
@@ -25,12 +27,16 @@ public class AnthologyService implements IAnthologyService {
     @Override
     public void create(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
         }
         try {
+            AnthologyAdditionalInfo additionalInfo = new AnthologyAdditionalInfo();
+            this.anthologyMapper.createAdditionalInfo(additionalInfo);
+            anthology.setAdditionalInfoId(additionalInfo.getId());
             this.anthologyMapper.create(anthology);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
@@ -41,7 +47,8 @@ public class AnthologyService implements IAnthologyService {
     @Override
     public void update(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);

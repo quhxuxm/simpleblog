@@ -1,12 +1,12 @@
 package com.tongwen.web.controller;
 
 import com.tongwen.common.IConstant;
+import com.tongwen.domain.Article;
 import com.tongwen.domain.ArticleDetail;
+import com.tongwen.domain.ArticleSummary;
+import com.tongwen.domain.Author;
 import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.api.IArticleService;
-import com.tongwen.service.dto.ArticleSummaryDTO;
-import com.tongwen.service.dto.AuthorDTO;
-import com.tongwen.service.dto.EditArticleDTO;
 import com.tongwen.service.exception.ServiceException;
 import com.tongwen.web.request.ArticleEditRequest;
 import com.tongwen.web.response.ArticleBookmarkResponse;
@@ -16,20 +16,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-    private static Logger logger = LoggerFactory.getLogger(ArticleController.class);
+    private static Logger logger = LoggerFactory
+            .getLogger(ArticleController.class);
     private final IArticleService articleService;
     private final IAnthologyService anthologyService;
     private final ServletContext servletContext;
@@ -43,21 +42,25 @@ public class ArticleController {
     private int contentMinLength;
 
     @Autowired
-    public ArticleController(IArticleService articleService, IAnthologyService anthologyService,
-        ServletContext servletContext) {
+    public ArticleController(IArticleService articleService,
+            IAnthologyService anthologyService, ServletContext servletContext) {
         this.articleService = articleService;
         this.anthologyService = anthologyService;
         this.servletContext = servletContext;
     }
 
     @GetMapping("/{articleId}/view")
-    public ModelAndView view(@PathVariable("articleId") Long articleId) {
+    public ModelAndView view(
+            @PathVariable("articleId")
+                    Long articleId) {
         ModelAndView result = new ModelAndView("article");
         ArticleDetail articleDetail = null;
         try {
             articleDetail = this.articleService.viewDetail(articleId);
         } catch (ServiceException e) {
-            logger.error("Fail to retrieve article for view because of exception.", e);
+            logger.error(
+                    "Fail to retrieve article for view because of exception.",
+                    e);
         }
         result.addObject("article", articleDetail);
         return result;
@@ -65,7 +68,9 @@ public class ArticleController {
 
     @GetMapping(value = "/{articleId}/praise", produces = "application/json")
     @ResponseBody
-    public ArticlePraiseResponse praise(@PathVariable("articleId") Long articleId) {
+    public ArticlePraiseResponse praise(
+            @PathVariable("articleId")
+                    Long articleId) {
         ArticlePraiseResponse praiseResponse = new ArticlePraiseResponse();
         Long praiseNumber = null;
         try {
@@ -82,7 +87,9 @@ public class ArticleController {
 
     @GetMapping(value = "/{articleId}/bookmark", produces = "application/json")
     @ResponseBody
-    public ArticleBookmarkResponse bookmark(@PathVariable("articleId") Long articleId) {
+    public ArticleBookmarkResponse bookmark(
+            @PathVariable("articleId")
+                    Long articleId) {
         ArticleBookmarkResponse bookmarkResponse = new ArticleBookmarkResponse();
         Long bookmarkNumber = null;
         try {
@@ -99,93 +106,94 @@ public class ArticleController {
     @GetMapping("/write")
     public ModelAndView showWrite(HttpSession session) {
         ModelAndView result = new ModelAndView("article-editor");
-        AuthorDTO authorDTO =
-            (AuthorDTO) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-        try {
-            result.addObject("article",
-                this.articleService.showEmptyArticleForWrite(authorDTO.getId()));
-        } catch (ServiceException e) {
-            logger.error("Fail to show write article page because of exception.", e);
-        }
-        result.addObject("anthologies",
-            this.anthologyService.getAnthologySummariesOrderByCreateDate(authorDTO.getId()));
+        Author author = (Author) session.getAttribute(
+                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         return result;
     }
 
-    @PostMapping(value = "/write", consumes = {"application/json"}, produces = {"application/json"})
+    @PostMapping(value = "/write", consumes = { "application/json" },
+            produces = { "application/json" })
     @ResponseBody
-    public ArticleEditResponse write(@RequestBody ArticleEditRequest articleEditRequest,
-        HttpSession httpSession) {
+    public ArticleEditResponse write(
+            @RequestBody
+                    ArticleEditRequest articleEditRequest,
+            HttpSession httpSession) {
         ArticleEditResponse response = new ArticleEditResponse();
         this.validateArticleEditRequest(response, articleEditRequest);
         if (!response.isSuccess()) {
             return response;
         }
-        EditArticleDTO writeArticleRequestDTO = new EditArticleDTO();
-        writeArticleRequestDTO.setContent(articleEditRequest.getContent());
-        writeArticleRequestDTO.setSummary(articleEditRequest.getSummary());
-        writeArticleRequestDTO.setTitle(articleEditRequest.getTitle());
-        writeArticleRequestDTO.setAnthologyId(articleEditRequest.getAnthologyId());
-        AuthorDTO authorDTOInSession = (AuthorDTO) httpSession
-            .getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-        Long articleId = null;
+        Article article = new Article();
+        article.setContent(articleEditRequest.getContent());
+        article.setSummary(articleEditRequest.getSummary());
+        article.setTitle(articleEditRequest.getTitle());
+        article.setAnthologyId(articleEditRequest.getAnthologyId());
+        Author authorInSession = (Author) httpSession.getAttribute(
+                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         try {
-            String imageControllerPath = this.servletContext.getContextPath() + "/dimage";
-            articleId = this.articleService
-                .writeArticle(writeArticleRequestDTO, authorDTOInSession, imageControllerPath);
+            String imageControllerPath =
+                    this.servletContext.getContextPath() + "/dimage";
+            this.articleService.create(article, authorInSession);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
             return response;
         }
-        response.setArticleId(articleId);
+        response.setArticleId(article.getId());
         response.setSuccess(true);
         return response;
     }
 
-    @GetMapping({"/{articleId}/update"})
-    public ModelAndView showArticleEdit(@PathVariable(name = "articleId") Long articleId,
-        HttpSession session) {
+    @GetMapping({ "/{articleId}/update" })
+    public ModelAndView showArticleEdit(
+            @PathVariable(name = "articleId")
+                    Long articleId, HttpSession session) {
         ModelAndView result = new ModelAndView("article-editor");
         try {
-            AuthorDTO authorDTO = (AuthorDTO) session
-                .getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-            result.addObject("article",
-                this.articleService.showArticleForEdit(articleId, authorDTO.getId()));
-            result.addObject("anthologies",
-                this.anthologyService.getAnthologySummariesOrderByCreateDate(authorDTO.getId()));
+            Author authorInSession = (Author) session.getAttribute(
+                    IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+            result.addObject("article", this.articleService.get(articleId));
         } catch (ServiceException e) {
-            logger.error("Fail to retrieve article for update because of exception.", e);
+            logger.error(
+                    "Fail to retrieve article for update because of exception.",
+                    e);
         }
         return result;
     }
 
-    @PostMapping(value = "/{articleId}/update", consumes = {"application/json"},
-        produces = {"application/json"})
+    @PostMapping(value = "/{articleId}/update",
+            consumes = { "application/json" },
+            produces = { "application/json" })
     @ResponseBody
-    public ArticleEditResponse update(@PathVariable(name = "articleId") Long articleId,
-        @RequestBody ArticleEditRequest articleEditRequest, HttpSession httpSession) {
+    public ArticleEditResponse update(
+            @PathVariable(name = "articleId")
+                    Long articleId,
+            @RequestBody
+                    ArticleEditRequest articleEditRequest,
+            HttpSession httpSession) {
         ArticleEditResponse response = new ArticleEditResponse();
         this.validateArticleEditRequest(response, articleEditRequest);
         if (!response.isSuccess()) {
             return response;
         }
-        EditArticleDTO updateArticleRequestDTO = new EditArticleDTO();
-        updateArticleRequestDTO.setContent(articleEditRequest.getContent());
-        updateArticleRequestDTO.setSummary(articleEditRequest.getSummary());
-        updateArticleRequestDTO.setTitle(articleEditRequest.getTitle());
-        updateArticleRequestDTO.setId(articleId);
-        updateArticleRequestDTO.setAnthologyId(articleEditRequest.getAnthologyId());
+        Article article = new Article();
+        article.setContent(articleEditRequest.getContent());
+        article.setSummary(articleEditRequest.getSummary());
+        article.setTitle(articleEditRequest.getTitle());
+        article.setId(articleId);
+        article.setAnthologyId(articleEditRequest.getAnthologyId());
         response.setArticleId(articleId);
-        AuthorDTO authorDTOInSession = (AuthorDTO) httpSession
-            .getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        Author authorInSession = (Author) httpSession.getAttribute(
+                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         try {
-            String imageControllerPath = this.servletContext.getContextPath() + "/dimage";
-            this.articleService
-                .updateArticle(updateArticleRequestDTO, authorDTOInSession, imageControllerPath);
+            String imageControllerPath =
+                    this.servletContext.getContextPath() + "/dimage";
+            this.articleService.update(article, authorInSession);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
             return response;
         }
         response.setSuccess(true);
@@ -193,27 +201,36 @@ public class ArticleController {
     }
 
     private void validateArticleEditRequest(ArticleEditResponse response,
-        ArticleEditRequest articleEditRequest) {
+            ArticleEditRequest articleEditRequest) {
         if (articleEditRequest.getTitle() == null
-            || articleEditRequest.getTitle().trim().length() == 0) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_IS_EMPTY);
+                || articleEditRequest.getTitle().trim().length() == 0) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.TITLE_IS_EMPTY);
         }
-        if (articleEditRequest.getTitle().trim().length() > this.titleMaxLength) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_TOO_LONG);
+        if (articleEditRequest.getTitle().trim().length()
+                > this.titleMaxLength) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.TITLE_TOO_LONG);
         }
-        if (articleEditRequest.getTitle().trim().length() < this.titleMinLength) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_TOO_SHORT);
+        if (articleEditRequest.getTitle().trim().length()
+                < this.titleMinLength) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.TITLE_TOO_SHORT);
         }
-        String contentText =
-            this.articleService.extractArticleContentText(articleEditRequest.getContent());
-        if (contentText == null || contentText.trim().length() == 0) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_IS_EMPTY);
+        String contentPlainText = this.articleService
+                .extractArticleContentPlainText(
+                        articleEditRequest.getContent());
+        if (contentPlainText == null || contentPlainText.trim().length() == 0) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.CONTENT_IS_EMPTY);
         }
-        if (contentText.trim().length() > this.contentMaxLength) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_TOO_LONG);
+        if (contentPlainText.trim().length() > this.contentMaxLength) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.CONTENT_TOO_LONG);
         }
-        if (contentText.trim().length() < this.contentMinLength) {
-            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_TOO_SHORT);
+        if (contentPlainText.trim().length() < this.contentMinLength) {
+            response.getErrorCodes()
+                    .add(ArticleEditResponse.ErrorCode.CONTENT_TOO_SHORT);
         }
         if (!response.getErrorCodes().isEmpty()) {
             response.setSuccess(false);
@@ -222,28 +239,26 @@ public class ArticleController {
 
     @GetMapping("/summariesCollection")
     public ModelAndView summariesCollection(
-        @RequestParam(name = "page", defaultValue = "0", required = false) int page,
-        @RequestParam(name = "desc", defaultValue = "true", required = false) boolean isDesc) {
-        ModelAndView result = new ModelAndView("/fragment/article/summariesCollection");
-        Page<ArticleSummaryDTO> articleSummariesCollectionPage = null;
+            @RequestParam(name = "start", defaultValue = "0", required = false)
+                    int start,
+            @RequestParam(name = "desc", defaultValue = "true",
+                    required = false)
+                    boolean isDesc) {
+        ModelAndView result = new ModelAndView(
+                "/fragment/article/summariesCollection");
+        List<ArticleSummary> articleSummariesCollectionPage = null;
         try {
-            articleSummariesCollectionPage =
-                this.articleService.getArticleSummariesOrderByPublishDate(page, isDesc);
+            articleSummariesCollectionPage = this.articleService
+                    .getSummariesOrderByPublishDate(start, isDesc);
         } catch (ServiceException e) {
-            articleSummariesCollectionPage = new PageImpl<ArticleSummaryDTO>(new ArrayList<>());
-            logger.error("Fail to get article summaries collection because of exception.", e);
+            logger.error(
+                    "Fail to get article summaries collection because of exception.",
+                    e);
         }
-        if (articleSummariesCollectionPage.hasNext()) {
-            result.addObject("nextPage",
-                articleSummariesCollectionPage.nextPageable().getPageNumber());
-        } else {
-            if (articleSummariesCollectionPage.getNumberOfElements() == 0) {
-                result.addObject("nextPage", articleSummariesCollectionPage.getNumber());
-            } else {
-                result.addObject("nextPage", articleSummariesCollectionPage.getNumber() + 1);
-            }
-        }
-        result.addObject("summariesCollectionPage", articleSummariesCollectionPage);
+        int nextStart = start + articleSummariesCollectionPage.size();
+        result.addObject("nextStart", nextStart);
+        result.addObject("summariesCollectionPage",
+                articleSummariesCollectionPage);
         return result;
     }
 }

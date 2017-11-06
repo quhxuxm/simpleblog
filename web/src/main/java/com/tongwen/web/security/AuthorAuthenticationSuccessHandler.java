@@ -1,8 +1,9 @@
 package com.tongwen.web.security;
 
 import com.tongwen.common.IConstant;
+import com.tongwen.domain.Author;
+import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.api.IAuthorService;
-import com.tongwen.service.dto.AuthorDTO;
 import com.tongwen.service.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,9 @@ public class AuthorAuthenticationSuccessHandler
             throws IOException, ServletException {
         Object principle = SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        UserDetails authorDetails = null;
+        AuthorDetails authorDetails = null;
         if (principle instanceof UserDetails) {
-            authorDetails = (UserDetails) principle;
+            authorDetails = (AuthorDetails) principle;
         }
         if (authorDetails == null) {
             logger.error(
@@ -51,19 +52,11 @@ public class AuthorAuthenticationSuccessHandler
         }
         logger.debug("Success to get author details from security context.");
         try {
-            AuthorDTO authorDTO = this.authorService
-                    .loginAuthor(authorDetails.getUsername());
-            if (authorDTO == null) {
-                logger.error("Fail to find author from database with email: "
-                        + authorDetails.getUsername());
-                response.sendRedirect(String.format(
-                        IConstant.IUrlFormat.LOGIN_REDIRECT_URL_FORMAT,
-                        IConstant.LoginStatus.ERROR_AUTHOR_NOT_EXIST));
-                return;
-            }
+            Author author = this.authorService
+                    .getAuthor(authorDetails.getAuthenticationId());
             request.getSession().setAttribute(
                     IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR,
-                    authorDTO);
+                    author);
         } catch (ServiceException e) {
             logger.error("Fail to find author from database with email: "
                             + authorDetails.getUsername() + " because of exception.",

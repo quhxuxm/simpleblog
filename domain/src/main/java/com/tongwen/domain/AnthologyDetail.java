@@ -15,9 +15,9 @@ public class AnthologyDetail implements Serializable {
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
-    private Long followupNumber;
     private Long coverImageId;
     private List<ArticleSummary> articles;
+    private Long additionalInfoId;
 
     public AnthologyDetail() {
         this.articles = new ArrayList<>();
@@ -87,14 +87,6 @@ public class AnthologyDetail implements Serializable {
         this.authorIconImageId = authorIconImageId;
     }
 
-    public Long getFollowupNumber() {
-        return followupNumber;
-    }
-
-    public void setFollowupNumber(Long followupNumber) {
-        this.followupNumber = followupNumber;
-    }
-
     public Long getCoverImageId() {
         return coverImageId;
     }
@@ -117,5 +109,13 @@ public class AnthologyDetail implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
+    }
+
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

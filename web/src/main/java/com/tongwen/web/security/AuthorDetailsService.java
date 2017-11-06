@@ -1,7 +1,8 @@
 package com.tongwen.web.security;
 
-import com.tongwen.service.api.IAuthorService;
-import com.tongwen.service.dto.AuthorSecurityDTO;
+import com.tongwen.domain.Authentication;
+import com.tongwen.domain.Role;
+import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,36 +22,38 @@ import java.util.Set;
 public class AuthorDetailsService implements UserDetailsService {
     private static final Logger logger = LoggerFactory
             .getLogger(AuthorDetailsService.class);
-    private final IAuthorService authorService;
+    private final IAuthenticationService authenticationService;
 
-    public AuthorDetailsService(IAuthorService authorService) {
-        this.authorService = authorService;
+    public AuthorDetailsService(IAuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        AuthorSecurityDTO authorSecurityDTO = null;
+        Authentication authentication = null;
         try {
-            authorSecurityDTO = this.authorService.loadByEmailForSecurityCheck(email);
+            authentication = this.authenticationService
+                    .authenticate(email, Authentication.Type.EMAIL);
         } catch (ServiceException e) {
             throw new UsernameNotFoundException(
                     "Fail to load author from database because of system exception.",
                     e);
         }
-        if (authorSecurityDTO == null) {
+        if (authentication == null) {
             throw new UsernameNotFoundException(
                     "Can not find author with email: " + email);
         }
         Set<GrantedAuthority> authorities = new HashSet<>();
-        for (String role : authorSecurityDTO.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority(role));
+        for (Role role : authentication.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
             logger.debug("Adding role: " + role + " to author[" + email + "]");
         }
         logger.debug(
                 "Success to load author from database to security context.");
-        return new User(authorSecurityDTO.getEmail(),
-                authorSecurityDTO.getPassword(), authorities);
+        return new AuthorDetails(authentication.getToken(),
+                authentication.getPassword(), authorities,
+                authentication.getId());
     }
 }

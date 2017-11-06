@@ -13,7 +13,7 @@ public class ArticleDetail implements Serializable {
     private Long authorIconImageId;
     private Long anthologyId;
     private String anthologyTitle;
-    private ArticleAdditionalInfo additionalInfo;
+    private Long additionalInfoId;
 
     public Long getId() {
         return id;
@@ -87,11 +87,11 @@ public class ArticleDetail implements Serializable {
         this.anthologyTitle = anthologyTitle;
     }
 
-    public ArticleAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
     }
 
-    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
-        this.additionalInfo = additionalInfo;
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

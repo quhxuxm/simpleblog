@@ -22,12 +22,34 @@ public class AuthenticationService implements IAuthenticationService {
         this.authenticationMapper = authenticationMapper;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public Authentication authenticate(String token, Authentication.Type type)
             throws ServiceException {
         try {
-            return this.authenticationMapper.findByTokenAndType(token, type);
+            Authentication authentication = this.authenticationMapper
+                    .findByTokenAndType(token, type);
+            authentication.setLastLoginDate(new Date());
+            this.authenticationMapper.update(authentication);
+            return authentication;
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public boolean isTokenExist(String token) throws ServiceException {
+        try {
+            return this.authenticationMapper.isTokenExist(token);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public boolean isNickNameExist(String nickName) throws ServiceException {
+        try {
+            return this.authenticationMapper.isNickNameExist(nickName);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }

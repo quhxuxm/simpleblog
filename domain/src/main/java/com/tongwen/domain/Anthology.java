@@ -11,8 +11,8 @@ public class Anthology implements Serializable {
     private Date updateDate;
     private Date publishDate;
     private Long authorId;
-    private Long followupNumber;
     private Long coverImageId;
+    private Long additionalInfoId;
 
     public Long getId() {
         return id;
@@ -62,14 +62,6 @@ public class Anthology implements Serializable {
         this.authorId = authorId;
     }
 
-    public Long getFollowupNumber() {
-        return followupNumber;
-    }
-
-    public void setFollowupNumber(Long followupNumber) {
-        this.followupNumber = followupNumber;
-    }
-
     public Long getCoverImageId() {
         return coverImageId;
     }
@@ -86,11 +78,11 @@ public class Anthology implements Serializable {
         this.createDate = createDate;
     }
 
-    @Override
-    public String toString() {
-        return "Anthology{" + "id=" + id + ", title='" + title + '\'' + ", summary='" + summary
-            + '\'' + ", createDate=" + createDate + ", updateDate=" + updateDate + ", publishDate="
-            + publishDate + ", authorId=" + authorId + ", followupNumber=" + followupNumber
-            + ", coverImageId=" + coverImageId + '}';
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
+    }
+
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

@@ -32,21 +32,30 @@ public class TestRepository {
     @Test
     public void testService() {
         try {
-            this.authorService.register("1@1.com", "password", "user1", Authentication.Type.EMAIL,
-                "Default AnthologyReadDetail Title", "Default AnthologyReadDetail Summary");
-            this.authorService.register("2@1.com", "password", "user2", Authentication.Type.EMAIL,
-                "Default AnthologyReadDetail Title", "Default AnthologyReadDetail Summary");
-            this.authorService.register("3@1.com", "password", "user3", Authentication.Type.EMAIL,
-                "Default AnthologyReadDetail Title", "Default AnthologyReadDetail Summary");
-            this.authorService.register("4@1.com", "password", "user4", Authentication.Type.EMAIL,
-                "Default AnthologyReadDetail Title", "Default AnthologyReadDetail Summary");
-            Authentication author1Authentication =
-                this.authenticationService.authenticate("1@1.com", Authentication.Type.EMAIL);
+            this.authorService.register("1@1.com", "password", "user1",
+                    Authentication.Type.EMAIL,
+                    "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
+            this.authorService.register("2@1.com", "password", "user2",
+                    Authentication.Type.EMAIL,
+                    "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
+            this.authorService.register("3@1.com", "password", "user3",
+                    Authentication.Type.EMAIL,
+                    "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
+            this.authorService.register("4@1.com", "password", "user4",
+                    Authentication.Type.EMAIL,
+                    "Default AnthologyReadDetail Title",
+                    "Default AnthologyReadDetail Summary");
+            Authentication author1Authentication = this.authenticationService
+                    .authenticate("1@1.com", Authentication.Type.EMAIL);
             System.out.println(author1Authentication.getId());
             System.out.println(author1Authentication.getNickName());
             System.out.println(author1Authentication.getPassword());
             System.out.println(author1Authentication.getToken());
-            Author author1 = this.authorService.getAuthor(author1Authentication);
+            Author author1 = this.authorService
+                    .getAuthor(author1Authentication.getId());
             for (int i = 0; i < 1000; i++) {
                 Article article = new Article();
                 article.setTitle("Title " + i);
@@ -54,14 +63,15 @@ public class TestRepository {
                 article.setContent("Content " + i);
                 article.setCreateDate(new Date());
                 article.setUpdateDate(new Date());
-                article.setPublishDate(new Date(article.getCreateDate().getTime()+36000));
+                article.setPublishDate(
+                        new Date(article.getCreateDate().getTime() + 36000));
                 article.setAnthologyId(author1.getDefaultAnthologyId());
-                this.articleService.create(article);
+                this.articleService.create(article, author1);
             }
-            AnthologyDetail author1DefaultAnthologyDetail =
-                this.anthologyService.getAnthologyDetail(author1.getDefaultAnthologyId());
-            List<ArticleSummary> articlesInAuthor1DefaultAnthology =
-                author1DefaultAnthologyDetail.getArticles();
+            AnthologyDetail author1DefaultAnthologyDetail = this.anthologyService
+                    .getAnthologyDetail(author1.getDefaultAnthologyId());
+            List<ArticleSummary> articlesInAuthor1DefaultAnthology = author1DefaultAnthologyDetail
+                    .getArticles();
             for (ArticleSummary articleSummary : articlesInAuthor1DefaultAnthology) {
                 System.out.println(articleSummary.getSummary());
             }
@@ -70,8 +80,8 @@ public class TestRepository {
         }
         System.out.println("###################################");
         try {
-            List<ArticleSummary> articleSummaries =
-                this.articleService.getSummariesOrderByPublishDate(0, 10, true);
+            List<ArticleSummary> articleSummaries = this.articleService
+                    .getSummariesOrderByPublishDate(0, true);
             for (ArticleSummary summary : articleSummaries) {
                 System.out.println(summary.getSummary());
             }

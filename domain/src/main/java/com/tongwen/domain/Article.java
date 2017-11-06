@@ -11,8 +11,8 @@ public class Article implements Serializable {
     private Date createDate;
     private String content;
     private String summary;
-    private ArticleAdditionalInfo additionalInfo;
     private Long anthologyId;
+    private Long additionalInfoId;
 
     public Long getId() {
         return id;
@@ -62,14 +62,6 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public ArticleAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
-        this.additionalInfo = additionalInfo;
-    }
-
     public Long getAnthologyId() {
         return anthologyId;
     }
@@ -84,5 +76,13 @@ public class Article implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
+    }
+
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

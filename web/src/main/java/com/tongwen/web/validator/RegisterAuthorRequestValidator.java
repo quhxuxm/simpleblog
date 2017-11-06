@@ -1,5 +1,6 @@
 package com.tongwen.web.validator;
 
+import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.api.IAuthorService;
 import com.tongwen.service.exception.ServiceException;
 import com.tongwen.web.constraints.RegisterAuthorConstraints;
@@ -16,7 +17,7 @@ import org.springframework.validation.Validator;
 public class RegisterAuthorRequestValidator implements Validator {
     private static final Logger logger = LoggerFactory
             .getLogger(RegisterAuthorRequestValidator.class);
-    private final IAuthorService authorService;
+    private final IAuthenticationService authenticationService;
     private RegisterAuthorConstraints registerAuthorConstraints;
     @Value("jsp.register.errorMessage.nickName.empty")
     private String nickNameEmptyErrorCode;
@@ -41,9 +42,10 @@ public class RegisterAuthorRequestValidator implements Validator {
     @Value("jsp.register.errorMessage.password.maxSize")
     private String passwordMaxSizeErrorCode;
 
-    public RegisterAuthorRequestValidator(IAuthorService authorService,
+    public RegisterAuthorRequestValidator(
+            IAuthenticationService authenticationService,
             RegisterAuthorConstraints registerAuthorConstraints) {
-        this.authorService = authorService;
+        this.authenticationService = authenticationService;
         this.registerAuthorConstraints = registerAuthorConstraints;
     }
 
@@ -59,8 +61,7 @@ public class RegisterAuthorRequestValidator implements Validator {
             errors.rejectValue("nickName", this.nickNameEmptyErrorCode);
             return;
         }
-        int nickNameLength = registerAuthorForm.getNickName().trim()
-                .length();
+        int nickNameLength = registerAuthorForm.getNickName().trim().length();
         if (nickNameLength < this.registerAuthorConstraints
                 .getNickNameMinLength()) {
             errors.rejectValue("nickName", this.nickNameMinSizeErrorCode,
@@ -78,7 +79,7 @@ public class RegisterAuthorRequestValidator implements Validator {
             return;
         }
         try {
-            if (this.authorService
+            if (this.authenticationService
                     .isNickNameExist(registerAuthorForm.getNickName())) {
                 errors.rejectValue("nickName",
                         this.nickNameAlreadyExistErrorCode);
@@ -99,8 +100,8 @@ public class RegisterAuthorRequestValidator implements Validator {
             return;
         }
         try {
-            if (this.authorService
-                    .isEmailExist(registerAuthorForm.getEmail())) {
+            if (this.authenticationService
+                    .isTokenExist(registerAuthorForm.getEmail())) {
                 errors.rejectValue("email", this.emailAlreadyExistErrorCode);
             }
         } catch (ServiceException e) {
@@ -113,8 +114,7 @@ public class RegisterAuthorRequestValidator implements Validator {
             errors.rejectValue("email", this.passwordEmptyErrorCode);
             return;
         }
-        int passwordLength = registerAuthorForm.getPassword().trim()
-                .length();
+        int passwordLength = registerAuthorForm.getPassword().trim().length();
         if (passwordLength < this.registerAuthorConstraints
                 .getPasswordMinLength()) {
             errors.rejectValue("password", this.passwordMinSizeErrorCode,
