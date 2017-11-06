@@ -7,8 +7,8 @@
 <!DOCTYPE html>
 <c:url value="/author/${article.authorId}" var="authorUrl"/>
 <c:choose>
-    <c:when test="${article.authorIconId!=null}">
-        <c:url value="/dimage/${article.authorIconId}" var="authorIconUrl"/>
+    <c:when test="${article.authorIconImageId!=null}">
+        <c:url value="/dimage/${article.authorIconImageId}" var="authorIconUrl"/>
     </c:when>
     <c:otherwise>
         <c:url value="/image/defaultAuthorIcon.jpg" var="authorIconUrl"/>
@@ -59,15 +59,15 @@
                             <a href="#" class="anthology-name">${article.anthologyTitle}</a>
                             <a href="#" class="action">
                                 <fmt:message key="jsp.article.label.read"/>
-                                <span class="number">${article.additionalInfo.viewNumber}</span>
+                                <span class="number">${articleAdditionalInfo.viewNumber}</span>
                             </a>
                             <a href="#" class="action">
                                 <fmt:message key="jsp.article.label.comment"/>
-                                <span class="number">${article.additionalInfo.commentNumber}</span>
+                                <span class="number">${articleAdditionalInfo.commentNumber}</span>
                             </a>
                             <a href="#" class="action">
                                 <fmt:message key="jsp.article.label.bookmark"/>
-                                <span class="number">${article.additionalInfo.bookmarkNumber}</span>
+                                <span class="number">${articleAdditionalInfo.bookmarkNumber}</span>
                             </a>
                         </div>
                     </header>
@@ -89,7 +89,7 @@
                                     <div class="author-history-wrapper">
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.publishArticles">
-                                                <fmt:param value="${article.authorAdditionalInfo.publishArticleNumber}"/>
+                                                <fmt:param value="${article.authorAdditionalInfo.publishArticlesNumber}"/>
                                             </fmt:message>
                                         </a>
                                         <a href="#">
@@ -99,7 +99,7 @@
                                         </a>
                                         <a href="#">
                                             <fmt:message key="jsp.article.label.createAnthologies">
-                                                <fmt:param value="${article.authorAdditionalInfo.createAnthologiesNumber}"/>
+                                                <fmt:param value="${article.authorAdditionalInfo.publishAnthologiesNumber}"/>
                                             </fmt:message>
                                         </a>
                                         <a href="#">

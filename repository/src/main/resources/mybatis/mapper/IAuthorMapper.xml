@@ -7,33 +7,51 @@
         <result property="description" column="description"/>
         <result property="iconImageId" column="icon_image_id"/>
         <result property="defaultAnthologyId" column="default_anthology_id"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
     </resultMap>
     <select id="findAuthorByAuthenticationId" resultMap="authorMapping">
         SELECT
             a._id                  AS _id,
             a.description          AS description,
             a.icon_image_id        AS icon_image_id,
-            a.default_anthology_id AS default_anthology_id
+            a.default_anthology_id AS default_anthology_id,
+            a.additional_info_id   AS additional_info_id
         FROM
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO author (icon_image_id, description, default_anthology_id)
-        VALUES (#{iconImageId}, #{description}, #{defaultAnthologyId})
+        INSERT INTO author (icon_image_id, description, default_anthology_id, additional_info_id)
+        VALUES (#{iconImageId}, #{description}, #{defaultAnthologyId},
+                #{additionalInfoId})
     </insert>
     <insert id="assignAuthentication">
         INSERT INTO authentication_author (authentication_id, author_id)
         VALUES (#{authentication.id}, #{author.id})
     </insert>
-    <insert id="assignDefaultAnthology">
+    <update id="assignDefaultAnthology">
         UPDATE author
         SET default_anthology_id = #{anthology.id}
         WHERE _id = #{author.id}
-    </insert>
+    </update>
     <select id="isExist" resultType="_boolean">
         SELECT EXISTS(SELECT 1
                       FROM author
                       WHERE _id = #{id})
     </select>
+    <insert id="createAdditionalInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO author_additional_info (publish_articles_number, publish_comments_number, publish_anthologies_number, followedby_number)
+        VALUES (
+            #{publishArticlesNumber}, #{publishCommentsNumber},
+            #{publishAnthologiesNumber}, #{followedByNumber}
+        );
+    </insert>
+    <update id="updateAdditionalInfo">
+        UPDATE author_additional_info
+        SET publish_articles_number    = #{publishArticlesNumber},
+            publish_comments_number    = #{publishCommentsNumber},
+            publish_anthologies_number = #{publishAnthologiesNumber},
+            followedby_number          = #{followedByNumber}
+        WHERE _id = #{id}
+    </update>
 </mapper>

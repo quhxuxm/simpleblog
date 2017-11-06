@@ -10,6 +10,7 @@ public class Author implements Serializable {
     private Long iconImageId;
     private String description;
     private Long defaultAnthologyId;
+    private Long additionalInfoId;
 
     public Author() {
     }
@@ -46,10 +47,11 @@ public class Author implements Serializable {
         this.defaultAnthologyId = defaultAnthologyId;
     }
 
-    @Override
-    public String toString() {
-        return "Author{" + "id=" + id + ", iconImageId=" + iconImageId
-                + ", description='" + description + '\''
-                + ", defaultAnthologyId=" + defaultAnthologyId + '}';
+    public Long getAdditionalInfoId() {
+        return additionalInfoId;
+    }
+
+    public void setAdditionalInfoId(Long additionalInfoId) {
+        this.additionalInfoId = additionalInfoId;
     }
 }

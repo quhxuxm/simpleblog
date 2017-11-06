@@ -35,13 +35,24 @@ CREATE TABLE image (
     CONSTRAINT UNIQUE (md5)
 );
 
+CREATE TABLE author_additional_info (
+    _id                        BIGINT AUTO_INCREMENT,
+    publish_articles_number    BIGINT DEFAULT 0,
+    publish_comments_number    BIGINT DEFAULT 0,
+    publish_anthologies_number BIGINT DEFAULT 0,
+    publish_followedby_number  BIGINT DEFAULT 0,
+    PRIMARY KEY (_id)
+);
+
 CREATE TABLE author (
     _id                  BIGINT AUTO_INCREMENT,
     description          VARCHAR(200),
     icon_image_id        BIGINT,
     default_anthology_id BIGINT,
+    additional_info_id   BIGINT UNIQUE  NOT NULL,
     PRIMARY KEY (_id),
-    FOREIGN KEY (icon_image_id) REFERENCES image (_id)
+    FOREIGN KEY (icon_image_id) REFERENCES image (_id),
+    FOREIGN KEY (additional_info_id) REFERENCES author_additional_info (_id)
 );
 
 CREATE TABLE authentication_author (
@@ -65,14 +76,14 @@ CREATE TABLE anthology_additional_info (
 
 CREATE TABLE anthology (
     _id                BIGINT AUTO_INCREMENT,
-    title              VARCHAR(40)  NOT NULL,
-    summary            VARCHAR(200) NOT NULL,
-    author_id          BIGINT       NOT NULL,
-    create_date        DATETIME     NOT NULL,
+    title              VARCHAR(40)        NOT NULL,
+    summary            VARCHAR(200)       NOT NULL,
+    author_id          BIGINT             NOT NULL,
+    create_date        DATETIME           NOT NULL,
     publish_date       DATETIME,
     update_date        DATETIME,
     cover_image_id     BIGINT,
-    additional_info_id BIGINT       NOT NULL,
+    additional_info_id BIGINT UNIQUE      NOT NULL,
     PRIMARY KEY (_id),
     FOREIGN KEY (author_id) REFERENCES author (_id),
     FOREIGN KEY (additional_info_id) REFERENCES anthology_additional_info (_id)
@@ -92,14 +103,14 @@ CREATE TABLE article_additional_info (
 
 CREATE TABLE article (
     _id                BIGINT AUTO_INCREMENT,
-    summary            VARCHAR(200) NOT NULL,
-    anthology_id       BIGINT       NOT NULL,
-    title              VARCHAR(200) NOT NULL,
-    content            TEXT         NOT NULL,
-    create_date        DATETIME     NOT NULL,
+    summary            VARCHAR(200)      NOT NULL,
+    anthology_id       BIGINT            NOT NULL,
+    title              VARCHAR(200)      NOT NULL,
+    content            TEXT              NOT NULL,
+    create_date        DATETIME          NOT NULL,
     update_date        DATETIME,
     publish_date       DATETIME,
-    additional_info_id BIGINT       NOT NULL,
+    additional_info_id BIGINT UNIQUE     NOT NULL,
     cover_image_id     BIGINT,
     PRIMARY KEY (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id),

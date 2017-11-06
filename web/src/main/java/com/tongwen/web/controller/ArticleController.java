@@ -52,15 +52,18 @@ public class ArticleController {
             @PathVariable("articleId")
                     Long articleId) {
         ModelAndView result = new ModelAndView("article");
-        ArticleDetail articleDetail = null;
         try {
-            articleDetail = this.articleService.viewDetail(articleId);
+            ArticleDetail articleDetail = this.articleService
+                    .viewDetail(articleId);
+            result.addObject("article", articleDetail);
+            ArticleAdditionalInfo additionalInfo = this.articleService
+                    .getAdditionalInfo(articleId);
+            result.addObject("articleAdditionalInfo", additionalInfo);
         } catch (ServiceException e) {
             logger.error(
                     "Fail to retrieve article for view because of exception.",
                     e);
         }
-        result.addObject("article", articleDetail);
         return result;
     }
 

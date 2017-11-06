@@ -59,6 +59,9 @@ public class AuthorService implements IAuthorService {
                     .findRoleByName(IConstant.Role.ROLE_AUTHOR.name());
             this.authenticationMapper.assignRole(authentication, authorRole);
             Author author = new Author();
+            AuthorAdditionalInfo authorAdditionalInfo = new AuthorAdditionalInfo();
+            this.authorMapper.createAdditionalInfo(authorAdditionalInfo);
+            author.setAdditionalInfoId(authorAdditionalInfo.getId());
             this.authorMapper.create(author);
             this.authorMapper.assignAuthentication(authentication, author);
             Anthology defaultAnthology = new Anthology();
