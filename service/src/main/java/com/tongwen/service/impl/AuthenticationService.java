@@ -22,10 +22,13 @@ public class AuthenticationService implements IAuthenticationService {
     @Transactional
     @Override
     public Authentication authenticate(String token, Authentication.Type type)
-        throws ServiceException {
+            throws ServiceException {
         try {
-            Authentication authentication =
-                this.authenticationMapper.findByTokenAndType(token, type);
+            Authentication authentication = this.authenticationMapper
+                    .findByTokenAndType(token, type);
+            if (authentication == null) {
+                return null;
+            }
             authentication.setLastLoginDate(new Date());
             this.authenticationMapper.update(authentication);
             return authentication;

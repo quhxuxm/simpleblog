@@ -28,7 +28,7 @@ CREATE TABLE authentication_role (
 
 CREATE TABLE image (
     _id     BIGINT AUTO_INCREMENT,
-    content BINARY              NOT NULL,
+    content BLOB             NOT NULL,
     type    VARCHAR(20)         NOT NULL,
     md5     VARCHAR(128) UNIQUE NOT NULL,
     PRIMARY KEY (_id)
