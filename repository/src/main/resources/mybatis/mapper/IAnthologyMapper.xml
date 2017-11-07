@@ -59,7 +59,8 @@
              #{authorId},
              #{coverImageId}, #{additionalInfoId})
     </insert>
-    <select id="getAnthologyDetail" resultMap="anthologyDetailMap">
+    <select id="getAnthologyDetail" resultMap="anthologyDetailMap"
+            useCache="true">
         SELECT
             anthology._id                AS _id,
             anthology.title              AS title,
@@ -80,12 +81,13 @@
                    authentication._id
         WHERE anthology._id = #{id}
     </select>
-    <select id="getOne" resultMap="anthologyMap">
+    <select id="getOne" resultMap="anthologyMap" useCache="true">
         SELECT *
         FROM anthology
         WHERE _id = #{id}
     </select>
-    <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap">
+    <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap"
+            useCache="true">
         SELECT
         anthology._id AS _id,
         anthology.title AS title,
@@ -154,7 +156,8 @@
             INNER JOIN authentication_author authenticationAndAuthor
                 ON author._id = authenticationAndAuthor.author_id
             INNER JOIN authentication authentication
-                ON authenticationAndAuthor.authentication_id = authentication._id
+                ON authenticationAndAuthor.authentication_id =
+                   authentication._id
         WHERE author._id = #{authorId}
         ORDER BY
             anthology.create_date

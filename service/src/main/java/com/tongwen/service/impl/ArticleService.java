@@ -26,9 +26,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ArticleService implements IArticleService {
-    private static final Logger logger = LoggerFactory.getLogger(ArticleService.class);
-    private static final String ARTICLE_ACCEPTABLE_TAGS =
-        "b, blockquote, br, div, em, h1, h2, h3, h4, i, img, p, pre, q, strike, strong";
+    private static final Logger logger = LoggerFactory
+            .getLogger(ArticleService.class);
+    private static final String ARTICLE_ACCEPTABLE_TAGS = "b, blockquote, br, div, em, h1, h2, h3, h4, i, img, p, pre, q, strike, strong";
     private static final String IMG_SELECTOR = "img";
     private final IAnthologyService anthologyService;
     private final IImageService imageService;
@@ -37,8 +37,8 @@ public class ArticleService implements IArticleService {
     private int articleSummariesCollectionPageSize;
 
     @Autowired
-    public ArticleService(IArticleMapper articleMapper, IAnthologyService anthologyService,
-        IImageService imageService) {
+    public ArticleService(IArticleMapper articleMapper,
+            IAnthologyService anthologyService, IImageService imageService) {
         this.articleMapper = articleMapper;
         this.anthologyService = anthologyService;
         this.imageService = imageService;
@@ -52,74 +52,101 @@ public class ArticleService implements IArticleService {
         return whitelist;
     }
 
-    private void parseAndCleanupArticleContent(String articleContent, Article article,
-        String imageBasePath) {
-        articleContent = Jsoup.clean(articleContent, this.createArticleContentWhitelist());
-        Document contentDocument = Jsoup.parse(articleContent);
+    private void parseAndCleanupArticleContent(Article article,
+            String imageBasePath) {
+        String cleanedArticleContent = Jsoup.clean(article.getContent(),
+                this.createArticleContentWhitelist());
+        Document contentDocument = Jsoup.parse(cleanedArticleContent);
         Elements imgElements = contentDocument.select(IMG_SELECTOR);
+        Long parsedCoverImageId = null;
         for (Element imgElement : imgElements) {
-            Image image = null;
             //Save a new image.
             String src = imgElement.attr("src");
-            if (src != null) {
-                if (src.startsWith(imageBasePath)) {
-                    continue;
-                }
-                if (src.startsWith("data:")) {
-                    String[] srcParts = src.split(",");
-                    if (srcParts.length >= 2) {
-                        String typePart = srcParts[0];
-                        if (!typePart.contains(";")) {
-                            logger.warn("Fail to parse the image because of src format incorrect.");
-                            continue;
-                        }
-                        int typeEndIndex = typePart.indexOf(";");
-                        String type = typePart.substring("data:".length(), typeEndIndex);
-                        String srcBase64Part = srcParts[1];
-                        try {
-                            byte[] imageByteArray = Base64.getDecoder().decode(srcBase64Part);
-                            String md5 = this.imageService.md5(imageByteArray);
-                            image = this.imageService.findByMd5(md5);
-                            if (image == null) {
-                                image = this.imageService.create(imageByteArray, type);
-                            }
-                            image.setType(type);
-                        } catch (Exception e) {
-                            logger.warn("Fail to parse the image because of exception.", e);
-                            continue;
-                        }
-                    }
-                }
-            }
-            if (image == null) {
+            if (src == null) {
                 imgElement.remove();
-                logger.warn("Ignore the image because it fail to store into database.");
+                logger.warn(
+                        "Ignore the image because it fail to store into database.");
+                continue;
             }
-            imgElement.attr("src", imageBasePath + "/" + image.getId());
-            article.getImages().add(image);
+            if (src.startsWith(imageBasePath)) {
+                continue;
+            }
+            if (!src.startsWith("data:")) {
+                imgElement.remove();
+                logger.warn(
+                        "Ignore the image because it fail to store into database.");
+                continue;
+            }
+            String[] srcParts = src.split(",");
+            if (srcParts.length < 2) {
+                imgElement.remove();
+                logger.warn(
+                        "Ignore the image because it fail to store into database.");
+                continue;
+            }
+            String typePart = srcParts[0];
+            if (!typePart.contains(";")) {
+                logger.warn(
+                        "Fail to parse the image because of src format incorrect.");
+                continue;
+            }
+            int typeEndIndex = typePart.indexOf(";");
+            String type = typePart.substring("data:".length(), typeEndIndex);
+            String srcBase64Part = srcParts[1];
+            try {
+                byte[] imageByteArray = Base64.getDecoder()
+                        .decode(srcBase64Part);
+                String md5 = this.imageService.md5(imageByteArray);
+                Image image = this.imageService.loadByMd5(md5);
+                if (image == null) {
+                    image = new Image();
+                    image.setContent(imageByteArray);
+                    image.setMd5(md5);
+                    image.setType(type);
+                    this.imageService.create(image);
+                }
+                imgElement.attr("src", imageBasePath + "/" + image.getId());
+                if (parsedCoverImageId == null) {
+                    parsedCoverImageId = image.getId();
+                }
+            } catch (Exception e) {
+                imgElement.remove();
+                logger.warn("Fail to parse the image because of exception.", e);
+            }
         }
         article.setContent(contentDocument.body().html());
+        if (article.getCoverImageId() == null) {
+            article.setCoverImageId(parsedCoverImageId);
+            return;
+        }
+        if (!article.getCoverImageId().equals(parsedCoverImageId)) {
+            article.setCoverImageId(parsedCoverImageId);
+        }
     }
 
     @Transactional
     @Override
     public void create(Article article, Author author, String imageBasePath)
-        throws ServiceException {
+            throws ServiceException {
         if (article.getAnthologyId() == null) {
-            throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
         try {
-            Anthology targetAnthology =
-                this.anthologyService.getAnthology(article.getAnthologyId());
+            Anthology targetAnthology = this.anthologyService
+                    .getAnthology(article.getAnthologyId());
             if (targetAnthology == null) {
-                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_EXIST);
+                throw new ServiceException(
+                        ServiceException.Code.ANTHOLOGY_NOT_EXIST);
             }
             if (!targetAnthology.getAuthorId().equals(author.getId())) {
-                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
+                throw new ServiceException(
+                        ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
             }
             ArticleAdditionalInfo additionalInfo = new ArticleAdditionalInfo();
             this.articleMapper.createAdditionalInfo(additionalInfo);
             article.setAdditionalInfoId(additionalInfo.getId());
+            parseAndCleanupArticleContent(article, imageBasePath);
             this.articleMapper.create(article);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
@@ -138,19 +165,23 @@ public class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void update(Article article, Author author, String imageBasePath)
-        throws ServiceException {
+            throws ServiceException {
         if (article.getAnthologyId() == null) {
-            throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
         try {
-            Anthology targetAnthology =
-                this.anthologyService.getAnthology(article.getAnthologyId());
+            Anthology targetAnthology = this.anthologyService
+                    .getAnthology(article.getAnthologyId());
             if (targetAnthology == null) {
-                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_EXIST);
+                throw new ServiceException(
+                        ServiceException.Code.ANTHOLOGY_NOT_EXIST);
             }
             if (!targetAnthology.getAuthorId().equals(author.getId())) {
-                throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
+                throw new ServiceException(
+                        ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
             }
+            parseAndCleanupArticleContent(article, imageBasePath);
             this.articleMapper.update(article);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
@@ -161,7 +192,8 @@ public class ArticleService implements IArticleService {
     @Override
     public ArticleDetail viewDetail(long id) throws ServiceException {
         try {
-            ArticleAdditionalInfo additionalInfo = this.articleMapper.getAdditionalInfo(id);
+            ArticleAdditionalInfo additionalInfo = this.articleMapper
+                    .getAdditionalInfo(id);
             additionalInfo.setViewNumber(additionalInfo.getViewNumber() + 1);
             this.articleMapper.updateAdditionalInfo(additionalInfo);
             return this.articleMapper.getArticleDetail(id);
@@ -172,12 +204,11 @@ public class ArticleService implements IArticleService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ArticleSummary> getSummariesOrderByPublishDate(int start, boolean isDesc)
-        throws ServiceException {
+    public List<ArticleSummary> getSummariesOrderByPublishDate(int start,
+            boolean isDesc) throws ServiceException {
         try {
-            return this.articleMapper
-                .getSummariesOrderByPublishDate(start, this.articleSummariesCollectionPageSize,
-                    true);
+            return this.articleMapper.getSummariesOrderByPublishDate(start,
+                    this.articleSummariesCollectionPageSize, true);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
@@ -185,7 +216,8 @@ public class ArticleService implements IArticleService {
 
     @Transactional(readOnly = true)
     @Override
-    public ArticleAdditionalInfo getAdditionalInfo(long articleId) throws ServiceException {
+    public ArticleAdditionalInfo getAdditionalInfo(long articleId)
+            throws ServiceException {
         try {
             return this.articleMapper.getAdditionalInfo(articleId);
         } catch (Exception e) {
@@ -196,23 +228,23 @@ public class ArticleService implements IArticleService {
     @Transactional(readOnly = true)
     @Override
     public Map<Long, ArticleAdditionalInfo> getAdditionalInfoList(
-        List<ArticleSummary> articleSummaries) throws ServiceException {
+            List<ArticleSummary> articleSummaries) throws ServiceException {
         if (articleSummaries == null || articleSummaries.isEmpty()) {
             return new HashMap<>();
         }
         try {
-            List<Long> articleIdList =
-                articleSummaries.stream().map(ArticleSummary::getId).collect(Collectors.toList());
-            List<ArticleAdditionalInfo> articleAdditionalInfos =
-                this.articleMapper.getAdditionalInfoList(articleIdList);
+            List<Long> articleIdList = articleSummaries.stream()
+                    .map(ArticleSummary::getId).collect(Collectors.toList());
+            List<ArticleAdditionalInfo> articleAdditionalInfos = this.articleMapper
+                    .getAdditionalInfoList(articleIdList);
             Map<Long, ArticleAdditionalInfo> articleAdditionalInfoMap = new HashMap<>();
             for (ArticleAdditionalInfo info : articleAdditionalInfos) {
                 articleAdditionalInfoMap.put(info.getId(), info);
             }
             Map<Long, ArticleAdditionalInfo> result = new HashMap<>();
             for (ArticleSummary articleSummary : articleSummaries) {
-                result.put(articleSummary.getId(),
-                    articleAdditionalInfoMap.get(articleSummary.getAdditionalInfoId()));
+                result.put(articleSummary.getId(), articleAdditionalInfoMap
+                        .get(articleSummary.getAdditionalInfoId()));
             }
             return result;
         } catch (Exception e) {
@@ -222,7 +254,8 @@ public class ArticleService implements IArticleService {
 
     @Override
     public String extractArticleContentPlainText(String content) {
-        String cleanedContextHtml = Jsoup.clean(content, this.createArticleContentWhitelist());
+        String cleanedContextHtml = Jsoup
+                .clean(content, this.createArticleContentWhitelist());
         Document contentDocument = Jsoup.parse(cleanedContextHtml);
         return contentDocument.text();
     }

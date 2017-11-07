@@ -68,7 +68,7 @@ public class TestRepository {
                 article.setPublishDate(
                         new Date(article.getCreateDate().getTime() + 36000));
                 article.setAnthologyId(author1.getDefaultAnthologyId());
-                this.articleService.create(article, author1);
+                this.articleService.create(article, author1, "/dimage");
             }
             AnthologyDetail author1DefaultAnthologyDetail = this.anthologyService
                     .getAnthologyDetail(author1.getDefaultAnthologyId());

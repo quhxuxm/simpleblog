@@ -15,7 +15,8 @@ import java.security.NoSuchAlgorithmException;
 
 @Service
 public class ImageService implements IImageService {
-    private static final Logger logger = LoggerFactory.getLogger(ImageService.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(ImageService.class);
     private final IImageMapper imageMapper;
 
     @Autowired
@@ -38,10 +39,30 @@ public class ImageService implements IImageService {
         try {
             md5Generator = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            logger.error("Fail to convert image content to md5 because of exception.", e);
+            logger.error(
+                    "Fail to convert image content to md5 because of exception.",
+                    e);
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
         md5Generator.update(content);
         return new BigInteger(1, md5Generator.digest()).toString(16);
+    }
+
+    @Override
+    public Image loadByMd5(String md5) throws ServiceException {
+        try {
+            return this.imageMapper.findByMd5(md5);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public void create(Image image) throws ServiceException {
+        try {
+            this.imageMapper.create(image);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
     }
 }
