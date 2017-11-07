@@ -8,28 +8,20 @@
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
     <typeAliases>
-        <typeAlias type="com.tongwen.domain.Authentication"
-                   alias="authentication"/>
+        <typeAlias type="com.tongwen.domain.Authentication" alias="authentication"/>
         <typeAlias type="com.tongwen.domain.Role" alias="role"/>
-        <typeAlias type="com.tongwen.domain.Authentication$Type"
-                   alias="authenticationType"/>
-        <typeAlias type="com.tongwen.domain.ArticleSummary"
-                   alias="articleSummary"/>
-        <typeAlias type="com.tongwen.domain.ArticleDetail"
-                   alias="articleDetail"/>
-        <typeAlias type="com.tongwen.domain.AnthologyDetail"
-                   alias="anthologyDetail"/>
-        <typeAlias type="com.tongwen.domain.AnthologySummary"
-                   alias="anthologySummary"/>
+        <typeAlias type="com.tongwen.domain.Authentication$Type" alias="authenticationType"/>
+        <typeAlias type="com.tongwen.domain.ArticleSummary" alias="articleSummary"/>
+        <typeAlias type="com.tongwen.domain.ArticleDetail" alias="articleDetail"/>
+        <typeAlias type="com.tongwen.domain.AnthologyDetail" alias="anthologyDetail"/>
+        <typeAlias type="com.tongwen.domain.AnthologySummary" alias="anthologySummary"/>
         <typeAlias type="com.tongwen.domain.Article" alias="article"/>
         <typeAlias type="com.tongwen.domain.Anthology" alias="anthology"/>
         <typeAlias type="com.tongwen.domain.AnthologyAdditionalInfo"
                    alias="anthologyAdditionalInfo"/>
-        <typeAlias type="com.tongwen.domain.ArticleAdditionalInfo"
-                   alias="articleAdditionalInfo"/>
-        <typeAlias type="com.tongwen.domain.Author"
-                   alias="author"/>
-        <typeAlias type="com.tongwen.domain.AuthorAdditionalInfo"
-                   alias="authorAdditionalInfo"/>
+        <typeAlias type="com.tongwen.domain.ArticleAdditionalInfo" alias="articleAdditionalInfo"/>
+        <typeAlias type="com.tongwen.domain.Author" alias="author"/>
+        <typeAlias type="com.tongwen.domain.AuthorAdditionalInfo" alias="authorAdditionalInfo"/>
+        <typeAlias type="com.tongwen.domain.Image" alias="image"/>
     </typeAliases>
 </configuration>

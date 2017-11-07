@@ -28,11 +28,10 @@ CREATE TABLE authentication_role (
 
 CREATE TABLE image (
     _id     BIGINT AUTO_INCREMENT,
-    content BINARY       NOT NULL,
-    type    VARCHAR(20)  NOT NULL,
-    md5     VARCHAR(128) NOT NULL,
-    PRIMARY KEY (_id),
-    CONSTRAINT UNIQUE (md5)
+    content BINARY              NOT NULL,
+    type    VARCHAR(20)         NOT NULL,
+    md5     VARCHAR(128) UNIQUE NOT NULL,
+    PRIMARY KEY (_id)
 );
 
 CREATE TABLE author_additional_info (
@@ -40,7 +39,7 @@ CREATE TABLE author_additional_info (
     publish_articles_number    BIGINT DEFAULT 0,
     publish_comments_number    BIGINT DEFAULT 0,
     publish_anthologies_number BIGINT DEFAULT 0,
-    followedby_number  BIGINT DEFAULT 0,
+    followedby_number          BIGINT DEFAULT 0,
     PRIMARY KEY (_id)
 );
 

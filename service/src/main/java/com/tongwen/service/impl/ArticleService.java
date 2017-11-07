@@ -4,12 +4,21 @@ import com.tongwen.domain.*;
 import com.tongwen.repository.mapper.IArticleMapper;
 import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.api.IArticleService;
+import com.tongwen.service.api.IImageService;
 import com.tongwen.service.exception.ServiceException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.safety.Whitelist;
+import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,20 +26,85 @@ import java.util.stream.Collectors;
 
 @Service
 public class ArticleService implements IArticleService {
+    private static final Logger logger = LoggerFactory.getLogger(ArticleService.class);
+    private static final String ARTICLE_ACCEPTABLE_TAGS =
+        "b, blockquote, br, div, em, h1, h2, h3, h4, i, img, p, pre, q, strike, strong";
+    private static final String IMG_SELECTOR = "img";
     private final IAnthologyService anthologyService;
+    private final IImageService imageService;
     private final IArticleMapper articleMapper;
     @Value("${article.summariesCollection.pageSize}")
     private int articleSummariesCollectionPageSize;
 
     @Autowired
-    public ArticleService(IArticleMapper articleMapper, IAnthologyService anthologyService) {
+    public ArticleService(IArticleMapper articleMapper, IAnthologyService anthologyService,
+        IImageService imageService) {
         this.articleMapper = articleMapper;
         this.anthologyService = anthologyService;
+        this.imageService = imageService;
+    }
+
+    private Whitelist createArticleContentWhitelist() {
+        Whitelist whitelist = new Whitelist();
+        whitelist.preserveRelativeLinks(true);
+        whitelist.addTags(ARTICLE_ACCEPTABLE_TAGS.split(","));
+        whitelist.addAttributes("img", "src");
+        return whitelist;
+    }
+
+    private void parseAndCleanupArticleContent(String articleContent, Article article,
+        String imageBasePath) {
+        articleContent = Jsoup.clean(articleContent, this.createArticleContentWhitelist());
+        Document contentDocument = Jsoup.parse(articleContent);
+        Elements imgElements = contentDocument.select(IMG_SELECTOR);
+        for (Element imgElement : imgElements) {
+            Image image = null;
+            //Save a new image.
+            String src = imgElement.attr("src");
+            if (src != null) {
+                if (src.startsWith(imageBasePath)) {
+                    continue;
+                }
+                if (src.startsWith("data:")) {
+                    String[] srcParts = src.split(",");
+                    if (srcParts.length >= 2) {
+                        String typePart = srcParts[0];
+                        if (!typePart.contains(";")) {
+                            logger.warn("Fail to parse the image because of src format incorrect.");
+                            continue;
+                        }
+                        int typeEndIndex = typePart.indexOf(";");
+                        String type = typePart.substring("data:".length(), typeEndIndex);
+                        String srcBase64Part = srcParts[1];
+                        try {
+                            byte[] imageByteArray = Base64.getDecoder().decode(srcBase64Part);
+                            String md5 = this.imageService.md5(imageByteArray);
+                            image = this.imageService.findByMd5(md5);
+                            if (image == null) {
+                                image = this.imageService.create(imageByteArray, type);
+                            }
+                            image.setType(type);
+                        } catch (Exception e) {
+                            logger.warn("Fail to parse the image because of exception.", e);
+                            continue;
+                        }
+                    }
+                }
+            }
+            if (image == null) {
+                imgElement.remove();
+                logger.warn("Ignore the image because it fail to store into database.");
+            }
+            imgElement.attr("src", imageBasePath + "/" + image.getId());
+            article.getImages().add(image);
+        }
+        article.setContent(contentDocument.body().html());
     }
 
     @Transactional
     @Override
-    public void create(Article article, Author author) throws ServiceException {
+    public void create(Article article, Author author, String imageBasePath)
+        throws ServiceException {
         if (article.getAnthologyId() == null) {
             throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
@@ -63,7 +137,8 @@ public class ArticleService implements IArticleService {
 
     @Transactional
     @Override
-    public void update(Article article, Author author) throws ServiceException {
+    public void update(Article article, Author author, String imageBasePath)
+        throws ServiceException {
         if (article.getAnthologyId() == null) {
             throw new ServiceException(ServiceException.Code.ANTHOLOGY_NOT_ASSIGNED);
         }
@@ -147,7 +222,9 @@ public class ArticleService implements IArticleService {
 
     @Override
     public String extractArticleContentPlainText(String content) {
-        return null;
+        String cleanedContextHtml = Jsoup.clean(content, this.createArticleContentWhitelist());
+        Document contentDocument = Jsoup.parse(cleanedContextHtml);
+        return contentDocument.text();
     }
 
     @Override

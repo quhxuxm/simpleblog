@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tongwen.repository.mapper.IRoleMapper">
+    <cache/>
+    <resultMap id="imageMap" type="image">
+        <id property="id" column="_id"/>
+        <result property="content" column="content"/>
+        <result property="type" column="type"/>
+        <result property="md5" column="md5"/>
+    </resultMap>
+    <select id="findByMd5" resultMap="imageMap">
+        SELECT *
+        FROM image
+        WHERE md5 = #{md5}
+    </select>
+    <select id="findById" resultMap="imageMap">
+        SELECT *
+        FROM image
+        WHERE _id = #{id}
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO image (_id, content, md5, type) VALUES (#{id}, #{content}, #{md5}, #{type})
+    </insert>
+</mapper>

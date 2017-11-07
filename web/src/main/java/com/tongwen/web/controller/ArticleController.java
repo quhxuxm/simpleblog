@@ -132,8 +132,8 @@ public class ArticleController {
         Author authorInSession =
             (Author) httpSession.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         try {
-            String imageControllerPath = this.servletContext.getContextPath() + "/dimage";
-            this.articleService.create(article, authorInSession);
+            String imageBasePath = this.servletContext.getContextPath() + "/dimage";
+            this.articleService.create(article, authorInSession, imageBasePath);
         } catch (Exception e) {
             response.setSuccess(false);
             response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
@@ -152,6 +152,10 @@ public class ArticleController {
             Author authorInSession =
                 (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
             result.addObject("article", this.articleService.get(articleId));
+            List<AnthologySummary> anthologies =
+                this.anthologyService.getAnthologySummaries(authorInSession.getId());
+            result.addObject("defaultAnthologyId", authorInSession.getDefaultAnthologyId());
+            result.addObject("anthologies", anthologies);
         } catch (ServiceException e) {
             logger.error("Fail to retrieve article for update because of exception.", e);
         }
@@ -178,8 +182,8 @@ public class ArticleController {
         Author authorInSession =
             (Author) httpSession.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         try {
-            String imageControllerPath = this.servletContext.getContextPath() + "/dimage";
-            this.articleService.update(article, authorInSession);
+            String imageBasePath = this.servletContext.getContextPath() + "/dimage";
+            this.articleService.update(article, authorInSession, imageBasePath);
         } catch (Exception e) {
             response.setSuccess(false);
             response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);

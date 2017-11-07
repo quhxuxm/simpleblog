@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public interface IArticleService {
-    void create(Article article, Author author) throws ServiceException;
+    void create(Article article, Author author, String imageBasePath) throws ServiceException;
 
     Article get(long id) throws ServiceException;
 
-    void update(Article article, Author author) throws ServiceException;
+    void update(Article article, Author author, String imageBasePath) throws ServiceException;
 
     ArticleDetail viewDetail(long id) throws ServiceException;
 
@@ -19,15 +19,13 @@ public interface IArticleService {
 
     long bookmarkArticle(long id) throws ServiceException;
 
-    List<ArticleSummary> getSummariesOrderByPublishDate(int start,
-            boolean isDesc) throws ServiceException;
+    List<ArticleSummary> getSummariesOrderByPublishDate(int start, boolean isDesc)
+        throws ServiceException;
 
-    ArticleAdditionalInfo getAdditionalInfo(long articleId)
-            throws ServiceException;
+    ArticleAdditionalInfo getAdditionalInfo(long articleId) throws ServiceException;
 
     Map<Long, ArticleAdditionalInfo> getAdditionalInfoList(List<ArticleSummary> articleSummaries)
-            throws ServiceException;
+        throws ServiceException;
 
-    String extractArticleContentPlainText(String content)
-            throws ServiceException;
+    String extractArticleContentPlainText(String content) throws ServiceException;
 }
