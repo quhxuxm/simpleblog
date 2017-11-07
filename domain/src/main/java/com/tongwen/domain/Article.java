@@ -14,6 +14,13 @@ public class Article implements Serializable {
     private Long anthologyId;
     private Long additionalInfoId;
     private Long coverImageId;
+    private Boolean isPublished;
+
+    public Article() {
+        this.createDate = new Date();
+        this.updateDate = this.createDate;
+        this.isPublished = false;
+    }
 
     public Long getId() {
         return id;
@@ -93,5 +100,13 @@ public class Article implements Serializable {
 
     public void setCoverImageId(Long coverImageId) {
         this.coverImageId = coverImageId;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

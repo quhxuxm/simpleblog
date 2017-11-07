@@ -15,6 +15,7 @@ public class ArticleDetail implements Serializable {
     private Long anthologyId;
     private String anthologyTitle;
     private Long additionalInfoId;
+    private Boolean isPublished;
 
     public Long getId() {
         return id;
@@ -102,5 +103,13 @@ public class ArticleDetail implements Serializable {
 
     public void setAuthorDescription(String authorDescription) {
         this.authorDescription = authorDescription;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

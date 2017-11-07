@@ -18,6 +18,7 @@ public class AnthologyDetail implements Serializable {
     private Long coverImageId;
     private List<ArticleSummary> articles;
     private Long additionalInfoId;
+    private Boolean isPublished;
 
     public AnthologyDetail() {
         this.articles = new ArrayList<>();
@@ -117,5 +118,13 @@ public class AnthologyDetail implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

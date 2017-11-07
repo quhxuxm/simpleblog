@@ -20,16 +20,18 @@ public class AnthologyService implements IAnthologyService {
     private final IAnthologyMapper anthologyMapper;
 
     @Autowired
-    public AnthologyService(IAuthorMapper authorMapper, IAnthologyMapper anthologyMapper) {
+    public AnthologyService(IAuthorMapper authorMapper,
+            IAnthologyMapper anthologyMapper) {
         this.authorMapper = authorMapper;
         this.anthologyMapper = anthologyMapper;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public void create(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
@@ -44,11 +46,12 @@ public class AnthologyService implements IAnthologyService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public void update(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(
+                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
@@ -60,7 +63,7 @@ public class AnthologyService implements IAnthologyService {
         }
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public Anthology getAnthology(long id) throws ServiceException {
         try {
@@ -82,7 +85,8 @@ public class AnthologyService implements IAnthologyService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<AnthologySummary> getAnthologySummaries(long authorId) throws ServiceException {
+    public List<AnthologySummary> getAnthologySummaries(long authorId)
+            throws ServiceException {
         try {
             return this.anthologyMapper.getAuthorAnthologySummaries(authorId);
         } catch (Exception e) {

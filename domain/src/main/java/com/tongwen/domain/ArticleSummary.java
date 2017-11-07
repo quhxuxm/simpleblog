@@ -15,6 +15,7 @@ public class ArticleSummary implements Serializable {
     private String anthologyTitle;
     private Long additionalInfoId;
     private Long coverImageId;
+    private Boolean isPublished;
 
     public Long getId() {
         return id;
@@ -102,5 +103,13 @@ public class ArticleSummary implements Serializable {
 
     public void setCoverImageId(Long coverImageId) {
         this.coverImageId = coverImageId;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

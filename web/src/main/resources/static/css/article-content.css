@@ -41,6 +41,7 @@ body > main > section.article > article > section h6 {
 
 body > main > section.article > article > section p {
     margin: 0 0 10px;
+    word-wrap: break-word;
 }
 
 

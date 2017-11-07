@@ -20,7 +20,7 @@
         <tongwen:nav />
         <main>
             <section class="article-summaries">
-                <jsp:include page="/article/summariesCollection" flush="true"/>
+                <jsp:include page="/article/summariesCollection"/>
                 <c:url var="articleSummariesCollectionUrl" value="/article/summariesCollection"/>
                 <a href="${articleSummariesCollectionUrl}" class="load-more-article-btn">
                     <fmt:message key="jsp.index.link.loadMore"/>

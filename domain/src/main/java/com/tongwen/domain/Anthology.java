@@ -13,6 +13,13 @@ public class Anthology implements Serializable {
     private Long authorId;
     private Long coverImageId;
     private Long additionalInfoId;
+    private Boolean isPublished;
+
+    public Anthology() {
+        this.createDate = new Date();
+        this.updateDate = this.createDate;
+        this.isPublished = false;
+    }
 
     public Long getId() {
         return id;
@@ -84,5 +91,13 @@ public class Anthology implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

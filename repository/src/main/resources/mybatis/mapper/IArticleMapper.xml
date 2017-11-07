@@ -14,6 +14,7 @@
         <result property="anthologyId" column="anthology_id"/>
         <result property="additionalInfoId" column="additional_info_id"/>
         <result property="coverImageId" column="cover_image_id"/>
+        <result property="published" column="is_published"/>
     </resultMap>
     <resultMap id="articleSummaryResultMap" type="articleSummary">
         <id property="id" column="_id"/>
@@ -27,6 +28,7 @@
         <result property="anthologyTitle" column="anthology_title"/>
         <result property="additionalInfoId" column="additional_info_id"/>
         <result property="coverImageId" column="cover_image_id"/>
+        <result property="published" column="is_published"/>
     </resultMap>
     <resultMap id="articleDetailResultMap" type="articleDetail">
         <id property="id" column="_id"/>
@@ -40,6 +42,7 @@
         <result property="anthologyId" column="anthology_id"/>
         <result property="anthologyTitle" column="anthology_title"/>
         <result property="additionalInfoId" column="additional_info_id"/>
+        <result property="published" column="is_published"/>
     </resultMap>
     <resultMap id="articleAdditionalInfoMap" type="articleAdditionalInfo">
         <id property="id" column="_id"/>
@@ -48,7 +51,8 @@
         <result property="praiseNumber" column="praise_number"/>
         <result property="bookmarkNumber" column="bookmark_number"/>
     </resultMap>
-    <select id="getSummariesOrderByPublishDate" resultMap="articleSummaryResultMap" useCache="true">
+    <select id="getSummariesOrderByPublishDate"
+            resultMap="articleSummaryResultMap" useCache="true">
         SELECT
         article._id AS _id,
         article.title AS title,
@@ -60,7 +64,8 @@
         anthology._id AS anthology_id,
         anthology.title AS anthology_title,
         article.additional_info_id AS additional_info_id,
-        article.cover_image_id AS cover_image_id
+        article.cover_image_id AS cover_image_id,
+        article.is_published AS is_published
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
         INNER JOIN article article ON anthology._id = article.anthology_id INNER
@@ -69,6 +74,7 @@
         ON author._id = authenticationAndAuthor.author_id
         INNER JOIN authentication authentication
         ON authenticationAndAuthor.authentication_id = authentication._id
+        WHERE article.publish_date IS NOT NULL AND article.is_published = TRUE
         ORDER BY article.publish_date
         <if test="isDesc">
             DESC
@@ -76,13 +82,14 @@
         LIMIT #{start}, #{pageSize}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id, additional_info_id, cover_image_id)
+        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id, additional_info_id, cover_image_id, is_published)
         VALUES (
             #{title}, #{summary}, #{content}, #{createDate}, #{updateDate},
             #{publishDate},
             #{anthologyId},
             #{additionalInfoId},
-            #{coverImageId}
+            #{coverImageId},
+            #{published}
         );
     </insert>
     <update id="update">
@@ -91,10 +98,12 @@
             content            = #{content}, update_date = #{updateDate},
             anthology_id       = #{anthologyId},
             additional_info_id = #{additionalInfoId},
-            cover_image_id     = #{coverImageId}
+            cover_image_id     = #{coverImageId},
+            is_published       = #{published}
         WHERE _id = #{id}
     </update>
-    <select id="getAllArticleSummariesInAnthology" resultMap="articleSummaryResultMap"
+    <select id="getAllPublishedArticleSummariesInAnthology"
+            resultMap="articleSummaryResultMap"
             parameterType="long">
         SELECT
             article._id                AS _id,
@@ -107,7 +116,8 @@
             anthology._id              AS anthology_id,
             anthology.title            AS anthology_title,
             article.additional_info_id AS additional_info_id,
-            article.cover_image_id     AS cover_image_id
+            article.cover_image_id     AS cover_image_id,
+            article.is_published       AS is_published
         FROM article article INNER JOIN anthology anthology
                 ON article.anthology_id = anthology._id
             INNER JOIN author author ON author._id = anthology.author_id
@@ -116,14 +126,16 @@
             INNER JOIN authentication authentication
                 ON authenticationAndAuthor.authentication_id =
                    authentication._id
-        WHERE anthology._id = #{id}
+        WHERE anthology._id = #{id} AND article.publish_date IS NOT NULL AND
+              article.is_publish = TRUE
     </select>
     <select id="getOne" resultMap="articleResultMap" useCache="true">
         SELECT *
         FROM article
         WHERE _id = #{id};
     </select>
-    <select id="getArticleDetail" resultMap="articleDetailResultMap" useCache="true">
+    <select id="getArticleDetail" resultMap="articleDetailResultMap"
+            useCache="true">
         SELECT
             article._id                AS _id,
             article.title              AS title,
@@ -135,7 +147,8 @@
             article.publish_date       AS publish_date,
             anthology._id              AS anthology_id,
             anthology.title            AS anthology_title,
-            article.additional_info_id AS additional_info_id
+            article.additional_info_id AS additional_info_id,
+            article.is_published       AS is_published
         FROM author author INNER JOIN anthology anthology
                 ON author._id = anthology.author_id
             INNER JOIN article article ON anthology._id = article.anthology_id
@@ -167,7 +180,8 @@
         FROM article article INNER JOIN article_additional_info addInfo
         ON article.additional_info_id = addInfo._id
         WHERE article._id IN
-        <foreach collection="articleIdList" item="articleId" separator="," open="(" close=")">
+        <foreach collection="articleIdList" item="articleId" separator=","
+                 open="(" close=")">
             #{articleId}
         </foreach>
     </select>

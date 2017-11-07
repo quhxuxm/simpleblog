@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,7 +55,7 @@ public class ArticleService implements IArticleService {
                 this.createArticleContentWhitelist());
         Document contentDocument = Jsoup.parse(cleanedArticleContent);
         Elements imgElements = contentDocument.select(IMG_SELECTOR);
-        Long parsedCoverImageId = null;
+        Long coverImageId = null;
         for (Element imgElement : imgElements) {
             //Save a new image.
             String src = imgElement.attr("src");
@@ -69,6 +66,16 @@ public class ArticleService implements IArticleService {
                 continue;
             }
             if (src.startsWith(imageBasePath)) {
+                if (coverImageId != null) {
+                    continue;
+                }
+                try {
+                    coverImageId = Long.parseLong(
+                            src.substring(imageBasePath.length() + 1));
+                } catch (NumberFormatException e) {
+                    logger.warn(
+                            "Ignore the image because it fail to store into database.");
+                }
                 continue;
             }
             if (!src.startsWith("data:")) {
@@ -106,25 +113,20 @@ public class ArticleService implements IArticleService {
                     this.imageService.create(image);
                 }
                 imgElement.attr("src", imageBasePath + "/" + image.getId());
-                if (parsedCoverImageId == null) {
-                    parsedCoverImageId = image.getId();
+                if (coverImageId != null) {
+                    continue;
                 }
+                coverImageId = image.getId();
             } catch (Exception e) {
                 imgElement.remove();
                 logger.warn("Fail to parse the image because of exception.", e);
             }
         }
         article.setContent(contentDocument.body().html());
-        if (article.getCoverImageId() == null) {
-            article.setCoverImageId(parsedCoverImageId);
-            return;
-        }
-        if (!article.getCoverImageId().equals(parsedCoverImageId)) {
-            article.setCoverImageId(parsedCoverImageId);
-        }
+        article.setCoverImageId(coverImageId);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public void create(Article article, Author author, String imageBasePath)
             throws ServiceException {
@@ -162,7 +164,7 @@ public class ArticleService implements IArticleService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public void update(Article article, Author author, String imageBasePath)
             throws ServiceException {
@@ -181,6 +183,7 @@ public class ArticleService implements IArticleService {
                 throw new ServiceException(
                         ServiceException.Code.ANTHOLOGY_NOT_BELONG_TO_AUTHOR);
             }
+            article.setUpdateDate(new Date());
             parseAndCleanupArticleContent(article, imageBasePath);
             this.articleMapper.update(article);
         } catch (Exception e) {
@@ -188,7 +191,7 @@ public class ArticleService implements IArticleService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public ArticleDetail viewDetail(long id) throws ServiceException {
         try {
@@ -260,11 +263,13 @@ public class ArticleService implements IArticleService {
         return contentDocument.text();
     }
 
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public long praiseArticle(long id) throws ServiceException {
         return 0;
     }
 
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public long bookmarkArticle(long id) throws ServiceException {
         return 0;

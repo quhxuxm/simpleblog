@@ -15,6 +15,7 @@ public class AnthologySummary implements Serializable {
     private Long authorIconImageId;
     private Long coverImageId;
     private Long additionalInfoId;
+    private Boolean isPublished;
 
     public Long getId() {
         return id;
@@ -102,5 +103,13 @@ public class AnthologySummary implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public Boolean getPublished() {
+        return isPublished;
+    }
+
+    public void setPublished(Boolean published) {
+        isPublished = published;
     }
 }

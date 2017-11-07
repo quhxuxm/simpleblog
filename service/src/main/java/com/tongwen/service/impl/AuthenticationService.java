@@ -19,7 +19,7 @@ public class AuthenticationService implements IAuthenticationService {
         this.authenticationMapper = authenticationMapper;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public Authentication authenticate(String token, Authentication.Type type)
             throws ServiceException {

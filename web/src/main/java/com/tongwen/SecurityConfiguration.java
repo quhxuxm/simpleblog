@@ -20,13 +20,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public SecurityConfiguration(UserDetailsService userDetailsService,
-        AuthenticationSuccessHandler authenticationSuccessHandler) {
+            AuthenticationSuccessHandler authenticationSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.authenticationSuccessHandler = authenticationSuccessHandler;
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
         auth.userDetailsService(this.userDetailsService);
     }
 
@@ -37,14 +38,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().ignoringAntMatchers("/register", "/login").and().authorizeRequests()
-            .antMatchers("/", "/css/**", "/fonts/**", "/js/**", "/image/**", "/login", "/index",
-                "/api/**", "/register", "/dimage/**", "/article/summariesCollection","/article/*/view", "/author/**")
-            .permitAll().antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')").anyRequest()
-            .access("hasRole('ROLE_AUTHOR') and isAuthenticated()").and().formLogin()
-            .loginPage("/login").successHandler(this.authenticationSuccessHandler).and().logout()
-            .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
-            .clearAuthentication(true).invalidateHttpSession(true).and().securityContext()
-            .securityContextRepository(new HttpSessionSecurityContextRepository());
+        http.csrf().ignoringAntMatchers("/register", "/login").and()
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/fonts/**", "/js/**", "/image/**",
+                        "/login", "/index", "/api/**", "/register",
+                        "/dimage/**", "/article/summariesCollection",
+                        "/article/*/view", "/author/**", "/anthology/*/view")
+                .permitAll().antMatchers("/admin/**")
+                .access("hasRole('ROLE_ADMIN')").anyRequest()
+                .access("hasRole('ROLE_AUTHOR') and isAuthenticated()").and()
+                .formLogin().loginPage("/login")
+                .successHandler(this.authenticationSuccessHandler).and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").clearAuthentication(true)
+                .invalidateHttpSession(true).and().securityContext()
+                .securityContextRepository(
+                        new HttpSessionSecurityContextRepository());
     }
 }

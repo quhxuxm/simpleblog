@@ -28,7 +28,7 @@ CREATE TABLE authentication_role (
 
 CREATE TABLE image (
     _id     BIGINT AUTO_INCREMENT,
-    content BLOB             NOT NULL,
+    content LONGBLOB            NOT NULL,
     type    VARCHAR(20)         NOT NULL,
     md5     VARCHAR(128) UNIQUE NOT NULL,
     PRIMARY KEY (_id)
@@ -83,6 +83,7 @@ CREATE TABLE anthology (
     update_date        DATETIME,
     cover_image_id     BIGINT,
     additional_info_id BIGINT UNIQUE      NOT NULL,
+    is_published       BOOL               NOT NULL,
     PRIMARY KEY (_id),
     FOREIGN KEY (author_id) REFERENCES author (_id),
     FOREIGN KEY (additional_info_id) REFERENCES anthology_additional_info (_id)
@@ -111,6 +112,7 @@ CREATE TABLE article (
     publish_date       DATETIME,
     additional_info_id BIGINT UNIQUE     NOT NULL,
     cover_image_id     BIGINT,
+    is_published       BOOL              NOT NULL,
     PRIMARY KEY (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id),
     FOREIGN KEY (additional_info_id) REFERENCES article_additional_info (_id),
