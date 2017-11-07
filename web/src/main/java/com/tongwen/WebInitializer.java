@@ -15,12 +15,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @EnableTransactionManagement
 @EnableConfigurationProperties
-@MapperScan(basePackages = {"com.tongwen.repository.mapper", "com.tongwen.domain"})
+@MapperScan(basePackages = { "com.tongwen.repository.mapper",
+        "com.tongwen.domain" })
 public class WebInitializer extends SpringBootServletInitializer {
-    private static final Logger logger = LoggerFactory.getLogger(WebInitializer.class);
+    private static final Logger logger = LoggerFactory
+            .getLogger(WebInitializer.class);
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    protected SpringApplicationBuilder configure(
+            SpringApplicationBuilder application) {
         logger.info("System is running in tomcat container.");
         return application.sources(WebInitializer.class);
     }
