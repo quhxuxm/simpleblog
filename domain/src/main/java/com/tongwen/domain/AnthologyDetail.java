@@ -16,12 +16,10 @@ public class AnthologyDetail implements Serializable {
     private String authorNickName;
     private Long authorIconImageId;
     private Long coverImageId;
-    private List<ArticleSummary> articles;
     private Long additionalInfoId;
     private Boolean isPublished;
 
     public AnthologyDetail() {
-        this.articles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -94,14 +92,6 @@ public class AnthologyDetail implements Serializable {
 
     public void setCoverImageId(Long coverImageId) {
         this.coverImageId = coverImageId;
-    }
-
-    public List<ArticleSummary> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<ArticleSummary> articles) {
-        this.articles = articles;
     }
 
     public Date getCreateDate() {

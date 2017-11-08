@@ -28,9 +28,11 @@
         <result property="authorIconImageId" column="author_icon_image_id"/>
         <result property="additionalInfoId" column="additional_info_id"/>
         <result property="published" column="is_published"/>
+        <!--
         <collection property="articles" column="_id" javaType="list"
                     select="com.tongwen.repository.mapper.IArticleMapper.getAllPublishedArticleSummariesInAnthology"
                     ofType="anthologySummary"/>
+                    -->
     </resultMap>
     <resultMap id="anthologySummaryMap" type="anthologySummary">
         <id property="id" column="_id"/>
@@ -103,7 +105,7 @@
         author._id AS author_id,
         authentication.nick_name AS author_nick_name,
         anthology.additional_info_id AS additional_info_id,
-        anthology.is_published       AS is_published
+        anthology.is_published AS is_published
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
         INNER JOIN authentication_author authenticationAndAuthor

@@ -72,8 +72,9 @@ public class TestRepository {
             }
             AnthologyDetail author1DefaultAnthologyDetail = this.anthologyService
                     .getAnthologyDetail(author1.getDefaultAnthologyId());
-            List<ArticleSummary> articlesInAuthor1DefaultAnthology = author1DefaultAnthologyDetail
-                    .getArticles();
+            List<ArticleSummary> articlesInAuthor1DefaultAnthology = this.articleService
+                    .getPublishedArticleSummariesInAnthology(
+                            author1DefaultAnthologyDetail.getId(), 0, true);
             for (ArticleSummary articleSummary : articlesInAuthor1DefaultAnthology) {
                 System.out.println(articleSummary.getSummary());
             }

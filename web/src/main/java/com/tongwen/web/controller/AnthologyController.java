@@ -1,5 +1,6 @@
 package com.tongwen.web.controller;
 
+import com.tongwen.domain.AnthologyAdditionalInfo;
 import com.tongwen.domain.AnthologyDetail;
 import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.exception.ServiceException;
@@ -27,9 +28,14 @@ public class AnthologyController {
     public ModelAndView view(
             @PathVariable("anthologyId")
                     Long anthologyId) throws Exception {
+        ModelAndView result = new ModelAndView("anthology");
         AnthologyDetail anthologyDetail = this.anthologyService
                 .getAnthologyDetail(anthologyId);
-        return new ModelAndView("anthology");
+        AnthologyAdditionalInfo anthologyAdditionalInfo = this.anthologyService
+                .getAdditionalInfo(anthologyDetail.getId());
+        result.addObject("anthologyDetail", anthologyDetail);
+        result.addObject("anthologyAdditionalInfo", anthologyAdditionalInfo);
+        return result;
     }
 
     @PostMapping("/create")

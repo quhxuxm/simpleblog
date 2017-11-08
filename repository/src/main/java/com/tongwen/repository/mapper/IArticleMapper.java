@@ -49,6 +49,26 @@ public interface IArticleMapper {
             @Param("isDesc")
                     boolean isDesc);
 
+    List<ArticleSummary> getPublishedArticleSummariesInAnthology(
+            @Param("anthologyId")
+                    long anthologyId,
+            @Param("start")
+                    int start,
+            @Param("pageSize")
+                    int pageSize,
+            @Param("isDesc")
+                    boolean isDesc);
+
+    List<ArticleSummary> getAllArticleSummariesInAnthology(
+            @Param("anthologyId")
+                    long anthologyId,
+            @Param("start")
+                    int start,
+            @Param("pageSize")
+                    int pageSize,
+            @Param("isDesc")
+                    boolean isDesc);
+
     ArticleDetail getArticleDetail(
             @Param("id")
                     long id);

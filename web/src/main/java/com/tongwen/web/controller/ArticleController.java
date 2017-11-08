@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -251,18 +252,56 @@ public class ArticleController {
         }
     }
 
-    @GetMapping("/summariesCollection")
-    public ModelAndView summariesCollection(
+    @GetMapping("/allPublishedArticleSummariesCollection")
+    public ModelAndView allPublishedArticleSummariesCollection(
             @RequestParam(name = "start", defaultValue = "0", required = false)
                     int start,
             @RequestParam(name = "desc", defaultValue = "true",
                     required = false)
                     boolean isDesc) throws Exception {
+        List<ArticleSummary> articleSummariesCollection = this.articleService
+                .getSummariesOrderByPublishDate(start, isDesc);
+        return this.preparedArticleSummariesCollectionToModelAndView(
+                articleSummariesCollection, start);
+    }
+
+    @GetMapping("/anthologyArticleSummariesCollection/{anthologyId}")
+    public ModelAndView anthologyArticleSummariesCollection(
+            @PathVariable(name = "anthologyId", required = true)
+                    long anthologyId,
+            @RequestParam(name = "start", defaultValue = "0", required = false)
+                    int start,
+            @RequestParam(name = "desc", defaultValue = "true",
+                    required = false)
+                    boolean isDesc, HttpSession session) throws Exception {
+        Author authorInSession = (Author) session.getAttribute(
+                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        Anthology anthology = this.anthologyService.getAnthology(anthologyId);
+        if (anthology == null) {
+            return this.preparedArticleSummariesCollectionToModelAndView(
+                    new ArrayList<>(), start);
+        }
+        if (authorInSession != null && (anthology.getAuthorId()
+                .equals(authorInSession.getId()))) {
+            List<ArticleSummary> articleSummariesCollection = this.articleService
+                    .getAllArticleSummariesInAnthology(anthologyId, start,
+                            isDesc);
+            return this.preparedArticleSummariesCollectionToModelAndView(
+                    articleSummariesCollection, start);
+        }
+        List<ArticleSummary> articleSummariesCollection = this.articleService
+                .getPublishedArticleSummariesInAnthology(anthologyId, start,
+                        isDesc);
+        return this.preparedArticleSummariesCollectionToModelAndView(
+                articleSummariesCollection, start);
+    }
+
+    private ModelAndView preparedArticleSummariesCollectionToModelAndView(
+            List<ArticleSummary> articleSummariesCollection, int start)
+            throws ServiceException {
         ModelAndView result = new ModelAndView(
                 "/fragment/article/summariesCollection");
         int summariesCollectionSize = 0;
-        List<ArticleSummary> articleSummariesCollection = this.articleService
-                .getSummariesOrderByPublishDate(start, isDesc);
         Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
                 .getAdditionalInfoList(articleSummariesCollection);
         result.addObject("summariesCollection", articleSummariesCollection);

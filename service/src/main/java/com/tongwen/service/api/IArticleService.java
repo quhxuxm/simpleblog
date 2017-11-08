@@ -24,6 +24,13 @@ public interface IArticleService {
     List<ArticleSummary> getSummariesOrderByPublishDate(int start,
             boolean isDesc) throws ServiceException;
 
+    List<ArticleSummary> getPublishedArticleSummariesInAnthology(
+            long anthologyId, int start, boolean isDesc)
+            throws ServiceException;
+
+    List<ArticleSummary> getAllArticleSummariesInAnthology(long anthologyId,
+            int start, boolean isDesc) throws ServiceException;
+
     ArticleAdditionalInfo getAdditionalInfo(long articleId)
             throws ServiceException;
 

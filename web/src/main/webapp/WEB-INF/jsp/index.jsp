@@ -20,10 +20,10 @@
         <tongwen:nav />
         <main>
             <section class="article-summaries">
-                <jsp:include page="/article/summariesCollection"/>
-                <c:url var="articleSummariesCollectionUrl" value="/article/summariesCollection"/>
-                <a href="${articleSummariesCollectionUrl}" class="load-more-article-btn">
-                    <fmt:message key="jsp.index.link.loadMore"/>
+                <jsp:include page="/article/allPublishedArticleSummariesCollection"/>
+                <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
+                <a href="${allPublishedArticleSummariesCollection}" class="load-more-article-btn">
+                    <fmt:message key="jsp.common.link.loadMore"/>
                 </a>
             </section>
             <aside>
@@ -92,7 +92,7 @@
                     </c:forEach>
                     <li class="load-more-author-btn">
                         <a href="#">
-                            <fmt:message key="jsp.index.link.loadMore"/>
+                            <fmt:message key="jsp.common.link.loadMore"/>
                         </a>
                     </li>
                 </ul>

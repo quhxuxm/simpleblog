@@ -93,4 +93,14 @@ public class AnthologyService implements IAnthologyService {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
     }
+
+    @Override
+    public AnthologyAdditionalInfo getAdditionalInfo(long anthologyId)
+            throws ServiceException {
+        try {
+            return this.anthologyMapper.getAdditionalInfo(anthologyId);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
 }

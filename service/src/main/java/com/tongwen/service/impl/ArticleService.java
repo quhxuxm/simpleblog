@@ -211,7 +211,33 @@ public class ArticleService implements IArticleService {
             boolean isDesc) throws ServiceException {
         try {
             return this.articleMapper.getSummariesOrderByPublishDate(start,
-                    this.articleSummariesCollectionPageSize, true);
+                    this.articleSummariesCollectionPageSize, isDesc);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public List<ArticleSummary> getPublishedArticleSummariesInAnthology(
+            long anthologyId, int start, boolean isDesc)
+            throws ServiceException {
+        try {
+            return this.articleMapper
+                    .getPublishedArticleSummariesInAnthology(anthologyId, start,
+                            this.articleSummariesCollectionPageSize, isDesc);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public List<ArticleSummary> getAllArticleSummariesInAnthology(
+            long anthologyId, int start, boolean isDesc)
+            throws ServiceException {
+        try {
+            return this.articleMapper
+                    .getAllArticleSummariesInAnthology(anthologyId, start,
+                            this.articleSummariesCollectionPageSize, isDesc);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
