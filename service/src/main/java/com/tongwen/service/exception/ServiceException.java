@@ -38,4 +38,8 @@ public class ServiceException extends Exception {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
     }
+
+    public Code getCode() {
+        return code;
+    }
 }

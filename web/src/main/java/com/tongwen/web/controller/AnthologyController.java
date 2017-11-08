@@ -26,12 +26,9 @@ public class AnthologyController {
     @GetMapping("/{anthologyId}/view")
     public ModelAndView view(
             @PathVariable("anthologyId")
-                    Long anthologyId) {
-        try {
-            AnthologyDetail anthologyDetail= this.anthologyService.getAnthologyDetail(anthologyId);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+                    Long anthologyId) throws Exception {
+        AnthologyDetail anthologyDetail = this.anthologyService
+                .getAnthologyDetail(anthologyId);
         return new ModelAndView("anthology");
     }
 
@@ -43,7 +40,7 @@ public class AnthologyController {
     @PostMapping("/{anthologyId}/update")
     public ModelAndView update(
             @PathVariable("anthologyId")
-                    Long anthologyId, HttpSession session) {
+                    Long anthologyId, HttpSession session) throws Exception {
         return null;
     }
 }

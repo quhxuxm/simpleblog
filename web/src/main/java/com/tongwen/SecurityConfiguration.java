@@ -43,8 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/css/**", "/fonts/**", "/js/**", "/image/**",
                         "/login", "/index", "/api/**", "/register",
                         "/dimage/**", "/article/summariesCollection",
-                        "/article/*/view", "/author/**", "/anthology/*/view")
-                .permitAll().antMatchers("/admin/**")
+                        "/article/*/view", "/author/**", "/anthology/*/view",
+                        "/error").permitAll().antMatchers("/admin/**")
                 .access("hasRole('ROLE_ADMIN')").anyRequest()
                 .access("hasRole('ROLE_AUTHOR') and isAuthenticated()").and()
                 .formLogin().loginPage("/login")

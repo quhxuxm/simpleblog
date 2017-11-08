@@ -1,0 +1,19 @@
+body > main.error {
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 30px;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+body > main.error div.message-box.error {
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 20px;
+}

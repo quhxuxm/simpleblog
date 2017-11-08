@@ -55,23 +55,16 @@ public class ArticleController {
     @GetMapping("/{articleId}/view")
     public ModelAndView view(
             @PathVariable("articleId")
-                    Long articleId) {
+                    Long articleId) throws Exception {
         ModelAndView result = new ModelAndView("article");
-        try {
-            ArticleDetail articleDetail = this.articleService
-                    .viewDetail(articleId);
-            result.addObject("article", articleDetail);
-            ArticleAdditionalInfo additionalInfo = this.articleService
-                    .getAdditionalInfo(articleId);
-            result.addObject("articleAdditionalInfo", additionalInfo);
-            AuthorAdditionalInfo authorAdditionalInfo = this.authorService
-                    .getAdditionalInfo(articleDetail.getAuthorId());
-            result.addObject("authorAdditionalInfo", authorAdditionalInfo);
-        } catch (ServiceException e) {
-            logger.error(
-                    "Fail to retrieve article for view because of exception.",
-                    e);
-        }
+        ArticleDetail articleDetail = this.articleService.viewDetail(articleId);
+        result.addObject("article", articleDetail);
+        ArticleAdditionalInfo additionalInfo = this.articleService
+                .getAdditionalInfo(articleId);
+        result.addObject("articleAdditionalInfo", additionalInfo);
+        AuthorAdditionalInfo authorAdditionalInfo = this.authorService
+                .getAdditionalInfo(articleDetail.getAuthorId());
+        result.addObject("authorAdditionalInfo", authorAdditionalInfo);
         return result;
     }
 
@@ -113,19 +106,14 @@ public class ArticleController {
     }
 
     @GetMapping("/write")
-    public ModelAndView showWrite(HttpSession session) {
+    public ModelAndView showWrite(HttpSession session) throws Exception {
         ModelAndView result = new ModelAndView("article-editor");
         Author author = (Author) session.getAttribute(
                 IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-        try {
-            List<AnthologySummary> anthologies = this.anthologyService
-                    .getAnthologySummaries(author.getId());
-            result.addObject("defaultAnthologyId",
-                    author.getDefaultAnthologyId());
-            result.addObject("anthologies", anthologies);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+        List<AnthologySummary> anthologies = this.anthologyService
+                .getAnthologySummaries(author.getId());
+        result.addObject("defaultAnthologyId", author.getDefaultAnthologyId());
+        result.addObject("anthologies", anthologies);
         return result;
     }
 
@@ -168,22 +156,16 @@ public class ArticleController {
     @GetMapping({ "/{articleId}/update" })
     public ModelAndView showArticleEdit(
             @PathVariable(name = "articleId")
-                    Long articleId, HttpSession session) {
+                    Long articleId, HttpSession session) throws Exception {
         ModelAndView result = new ModelAndView("article-editor");
-        try {
-            Author authorInSession = (Author) session.getAttribute(
-                    IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-            result.addObject("article", this.articleService.get(articleId));
-            List<AnthologySummary> anthologies = this.anthologyService
-                    .getAnthologySummaries(authorInSession.getId());
-            result.addObject("defaultAnthologyId",
-                    authorInSession.getDefaultAnthologyId());
-            result.addObject("anthologies", anthologies);
-        } catch (ServiceException e) {
-            logger.error(
-                    "Fail to retrieve article for update because of exception.",
-                    e);
-        }
+        Author authorInSession = (Author) session.getAttribute(
+                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        result.addObject("article", this.articleService.get(articleId));
+        List<AnthologySummary> anthologies = this.anthologyService
+                .getAnthologySummaries(authorInSession.getId());
+        result.addObject("defaultAnthologyId",
+                authorInSession.getDefaultAnthologyId());
+        result.addObject("anthologies", anthologies);
         return result;
     }
 
@@ -275,23 +257,17 @@ public class ArticleController {
                     int start,
             @RequestParam(name = "desc", defaultValue = "true",
                     required = false)
-                    boolean isDesc) {
+                    boolean isDesc) throws Exception {
         ModelAndView result = new ModelAndView(
                 "/fragment/article/summariesCollection");
         int summariesCollectionSize = 0;
-        try {
-            List<ArticleSummary> articleSummariesCollection = this.articleService
-                    .getSummariesOrderByPublishDate(start, isDesc);
-            Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
-                    .getAdditionalInfoList(articleSummariesCollection);
-            result.addObject("summariesCollection", articleSummariesCollection);
-            result.addObject("additionalInfoMap", additionalInfoMap);
-            summariesCollectionSize = articleSummariesCollection.size();
-        } catch (ServiceException e) {
-            logger.error(
-                    "Fail to get article summaries collection because of exception.",
-                    e);
-        }
+        List<ArticleSummary> articleSummariesCollection = this.articleService
+                .getSummariesOrderByPublishDate(start, isDesc);
+        Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
+                .getAdditionalInfoList(articleSummariesCollection);
+        result.addObject("summariesCollection", articleSummariesCollection);
+        result.addObject("additionalInfoMap", additionalInfoMap);
+        summariesCollectionSize = articleSummariesCollection.size();
         int nextStart = start + summariesCollectionSize;
         result.addObject("nextStart", nextStart);
         return result;
