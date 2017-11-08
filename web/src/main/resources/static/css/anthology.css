@@ -12,6 +12,7 @@ body > main section.anthology-summary {
     justify-content: flex-start;
     align-items: center;
     width: 100%;
+    border-bottom: 1px solid #F3F3F3;
 }
 body > main section.anthology-summary > a.anthology-cover {
     width: 150px;
@@ -27,6 +28,10 @@ body > main section.anthology-summary > div.anthology-content > section {
     margin-bottom: 15px;
 }
 body > main section.anthology-summary > div.anthology-content > footer {
+    font-size: 13px;
+    color: #B4B4B4;
+}
+body > main section.anthology-summary > div.anthology-actions-wrapper{
 
 }
 body > main section.article-summaries {

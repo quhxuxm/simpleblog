@@ -32,12 +32,16 @@
                         <c:out escapeXml="true" value="${anthologyDetail.summary}" />
                     </section>
                     <footer>
-                        <fmt:message key="jsp.anthology.label.totalBookmarkNumber">
+                        <fmt:message key="jsp.anthology.label.totalFollowup">
                             <fmt:param value="${anthologyAdditionalInfo.bookmarkNumber}"/>
                         </fmt:message>
                     </footer>
                 </div>
                 <div class="anthology-actions-wrapper">
+                    <a href="#" class="icon-btn lg">
+                        <span class="fa fa-plus-circle"></span>
+                        <fmt:message key="jsp.common.link.followup"/>
+                    </a>
                 </div>
             </section>
             <section class="article-summaries">
