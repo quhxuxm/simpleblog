@@ -1,9 +1,10 @@
 package com.tongwen.web.controller;
 
+import com.tongwen.common.IConstant;
 import com.tongwen.domain.AnthologyAdditionalInfo;
 import com.tongwen.domain.AnthologyDetail;
+import com.tongwen.domain.Author;
 import com.tongwen.service.api.IAnthologyService;
-import com.tongwen.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,16 +26,25 @@ public class AnthologyController {
     }
 
     @GetMapping("/{anthologyId}/view")
-    public ModelAndView view(
-            @PathVariable("anthologyId")
-                    Long anthologyId) throws Exception {
+    public ModelAndView view(@PathVariable("anthologyId") Long anthologyId, HttpSession session)
+        throws Exception {
         ModelAndView result = new ModelAndView("anthology");
-        AnthologyDetail anthologyDetail = this.anthologyService
-                .getAnthologyDetail(anthologyId);
-        AnthologyAdditionalInfo anthologyAdditionalInfo = this.anthologyService
-                .getAdditionalInfo(anthologyDetail.getId());
+        AnthologyDetail anthologyDetail = this.anthologyService.getAnthologyDetail(anthologyId);
+        AnthologyAdditionalInfo anthologyAdditionalInfo =
+            this.anthologyService.getAdditionalInfo(anthologyDetail.getId());
         result.addObject("anthologyDetail", anthologyDetail);
         result.addObject("anthologyAdditionalInfo", anthologyAdditionalInfo);
+        Author authorInSession =
+            (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        if (authorInSession == null) {
+            result.addObject("isAnthologyBelongToAuthor", false);
+            return result;
+        }
+        if (!anthologyDetail.getAuthorId().equals(authorInSession.getId())) {
+            result.addObject("isAnthologyBelongToAuthor", false);
+            return result;
+        }
+        result.addObject("isAnthologyBelongToAuthor", true);
         return result;
     }
 
@@ -44,9 +54,8 @@ public class AnthologyController {
     }
 
     @PostMapping("/{anthologyId}/update")
-    public ModelAndView update(
-            @PathVariable("anthologyId")
-                    Long anthologyId, HttpSession session) throws Exception {
+    public ModelAndView update(@PathVariable("anthologyId") Long anthologyId, HttpSession session)
+        throws Exception {
         return null;
     }
 }

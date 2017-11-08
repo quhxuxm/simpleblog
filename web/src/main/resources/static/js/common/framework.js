@@ -28,7 +28,7 @@ $(document).ready(function () {
     });
 
     $(".load-more-article-btn").click(function(){
-        loadArticleSummariesCollection($(this), $(".article-summaries"));
+        loadArticleSummariesCollection($(this), $(".summaries"));
         return false;
     });
 });

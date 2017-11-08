@@ -19,7 +19,7 @@
     <body>
         <tongwen:nav />
         <main>
-            <section class="article-summaries">
+            <section class="summaries">
                 <jsp:include page="/article/allPublishedArticleSummariesCollection"/>
                 <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
                 <a href="${allPublishedArticleSummariesCollection}" class="load-more-article-btn">

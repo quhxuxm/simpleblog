@@ -291,6 +291,16 @@ a.icon-btn.lg {
     padding-top: 5px;
 }
 
+a.icon-btn.reverse{
+    background-color: #FFFFFF;
+    color: #42C02E;
+    border: 1px solid #42C02E;
+}
+
+a.icon-btn.reverse:hover{
+    background-color: #F3F3F3;
+}
+
 a.icon-btn > span {
     margin-right: 5px;
 }

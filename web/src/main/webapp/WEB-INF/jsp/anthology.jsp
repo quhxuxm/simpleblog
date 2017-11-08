@@ -19,32 +19,45 @@
     <body>
         <tongwen:nav/>
         <main>
-            <section class="anthology-summary">
-                <c:if test="${anthologyDetail.coverImageId != null}">
-                    <a class="anthology-cover"></a>
-                </c:if>
 
-                <div class="anthology-content">
-                    <header class="anthology-title">
-                        <h1><c:out escapeXml="true" value="${anthologyDetail.title}" /></h1>
-                    </header>
-                    <section>
-                        <c:out escapeXml="true" value="${anthologyDetail.summary}" />
-                    </section>
-                    <footer>
-                        <fmt:message key="jsp.anthology.label.totalFollowup">
-                            <fmt:param value="${anthologyAdditionalInfo.bookmarkNumber}"/>
-                        </fmt:message>
-                    </footer>
-                </div>
-                <div class="anthology-actions-wrapper">
-                    <a href="#" class="icon-btn lg">
-                        <span class="fa fa-plus-circle"></span>
-                        <fmt:message key="jsp.common.link.followup"/>
-                    </a>
-                </div>
-            </section>
-            <section class="article-summaries">
+            <section class="summaries">
+                <article class="anthology-summary">
+                    <!--
+                    <c:if test="${anthologyDetail.coverImageId != null}">
+                        <a class="anthology-cover"></a>
+                    </c:if>
+                    -->
+
+                    <a class="anthology-cover"></a>
+
+                    <div class="anthology-content">
+                        <header class="anthology-title">
+                            <h1><c:out escapeXml="true" value="${anthologyDetail.title}" /></h1>
+                        </header>
+                        <footer>
+                            <fmt:message key="jsp.anthology.label.totalFollowup">
+                                <fmt:param value="${anthologyAdditionalInfo.bookmarkNumber}"/>
+                            </fmt:message>
+                        </footer>
+                    </div>
+                    <div class="anthology-actions-wrapper">
+                        <c:choose >
+                            <c:when test="${isAnthologyBelongToAuthor}">
+                                <a href="#" class="icon-btn reverse lg">
+                                    <span class="fa fa-pencil"></span>
+                                    <fmt:message key="jsp.common.link.update"/>
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="#" class="icon-btn reverse lg">
+                                    <span class="fa fa-plus-circle"></span>
+                                    <fmt:message key="jsp.common.link.followup"/>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </article>
+
                 <jsp:include
                         page="/article/anthologyArticleSummariesCollection/${anthologyDetail.id}"/>
                 <c:url var="anthologyArticleSummariesCollection"
@@ -54,6 +67,77 @@
                     <fmt:message key="jsp.common.link.loadMore"/>
                 </a>
             </section>
+            <aside>
+                <ul class="operations">
+                    <li>
+                        <a href="#">
+                            <fmt:message key="jsp.index.link.hotArticles"/>
+                            <span class="fa fa-fire"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <fmt:message key="jsp.index.link.hotAnthologies"/>
+                            <span class="fa fa-book"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <fmt:message key="jsp.index.link.hotLabels"/>
+                            <span class="fa fa-tag"></span>
+                        </a>
+                    </li>
+                    <li class="advice-author">
+                        <a href="#">
+                            <fmt:message key="jsp.index.linkOrTitle.adviceAuthors" />
+                            <span class="fa fa-users"></span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="authors">
+                    <li class="title">
+                        <a href="#">
+                            <fmt:message key="jsp.index.linkOrTitle.adviceAuthors" />
+                            <span class="fa fa-refresh"></span>
+                        </a>
+                    </li>
+                    <c:forEach items="${adviceAuthorSummaries}" var="adviceAuthorSummary">
+                        <li class="author">
+                            <div class="author-info-wrapper">
+                                <a href="#" class="author-info-icon-wrapper">
+                                    <c:choose>
+                                        <c:when test="${adviceAuthorSummary.iconImageId == null}">
+                                            <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:url var="authorIconImageUrl"
+                                                   value="/dimage/${adviceAuthorSummary.iconImageId}"/>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <img src="${authorIconImageUrl}">
+                                </a>
+                                <a href="#" class="nick-name-and-follower-number">
+                                    <span class="nick-name">${adviceAuthorSummary.nickName}</span>
+                                    <span class="follower-number">
+                                        <fmt:message key="jsp.index.label.followupNumber">
+                                            <fmt:param value="${adviceAuthorSummary.additionalInfo.followupNumber}"/>
+                                        </fmt:message>
+                                    </span>
+                                </a>
+                            </div>
+                            <a href="#" class="icon-btn">
+                                <span class="fa fa-plus-circle"></span>
+                                <fmt:message key="jsp.common.link.followup" />
+                            </a>
+                        </li>
+                    </c:forEach>
+                    <li class="load-more-author-btn">
+                        <a href="#">
+                            <fmt:message key="jsp.common.link.loadMore"/>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
         </main>
         <tongwen:footer/>
     </body>
