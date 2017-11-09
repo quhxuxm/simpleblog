@@ -22,7 +22,7 @@
         <result property="summary" column="summary"/>
         <result property="publishDate" column="publish_date"/>
         <result property="authorId" column="author_id"/>
-        <result property="authorNickName" column="author_nickname"/>
+        <result property="authorNickName" column="author_nick_name"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
         <result property="anthologyId" column="anthology_id"/>
         <result property="anthologyTitle" column="anthology_title"/>
@@ -36,7 +36,7 @@
         <result property="content" column="content"/>
         <result property="publishDate" column="publish_date"/>
         <result property="authorId" column="author_id"/>
-        <result property="authorNickName" column="author_nickname"/>
+        <result property="authorNickName" column="author_nick_name"/>
         <result property="authorDescription" column="author_description"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
         <result property="anthologyId" column="anthology_id"/>

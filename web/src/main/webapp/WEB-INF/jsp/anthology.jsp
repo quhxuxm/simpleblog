@@ -70,9 +70,7 @@
             <aside>
                 <article>
                     <header>
-                        <h1>
-                            <fmt:message key="jsp.anthology.label.anthologyDescription"/>
-                        </h1>
+                        <fmt:message key="jsp.anthology.label.anthologyDescription"/>
                     </header>
                     <section>
                         <c:out value="${anthologyDetail.summary}" escapeXml="true"/>
@@ -80,9 +78,118 @@
                 </article>
                 <ul class="authors">
                     <li class="title">
-                        <h1>
-                            <fmt:message key="jsp.anthology.label.participant" />
-                        </h1>
+                        <fmt:message key="jsp.anthology.label.participant" />
+                    </li>
+                    <li class="author">
+                        <div class="author-info-wrapper">
+                            <a href="#" class="author-info-icon-wrapper">
+                                <c:choose>
+                                    <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                        <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url var="authorIconImageUrl"
+                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                                <img src="${authorIconImageUrl}">
+                            </a>
+                            <a href="#" class="nick-name-and-follower-number">
+                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
+                            </a>
+                        </div>
+                        <a href="#" class="icon-btn">
+                            <span class="fa fa-plus-circle"></span>
+                            <fmt:message key="jsp.common.link.followup" />
+                        </a>
+                    </li>
+
+
+                    <li class="author">
+                        <div class="author-info-wrapper">
+                            <a href="#" class="author-info-icon-wrapper">
+                                <c:choose>
+                                    <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                        <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url var="authorIconImageUrl"
+                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                                <img src="${authorIconImageUrl}">
+                            </a>
+                            <a href="#" class="nick-name-and-follower-number">
+                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
+                            </a>
+                        </div>
+                        <a href="#" class="icon-btn">
+                            <span class="fa fa-plus-circle"></span>
+                            <fmt:message key="jsp.common.link.followup" />
+                        </a>
+                    </li>
+
+
+                    <li class="author">
+                        <div class="author-info-wrapper">
+                            <a href="#" class="author-info-icon-wrapper">
+                                <c:choose>
+                                    <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                        <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url var="authorIconImageUrl"
+                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                                <img src="${authorIconImageUrl}">
+                            </a>
+                            <a href="#" class="nick-name-and-follower-number">
+                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
+                            </a>
+                        </div>
+                        <a href="#" class="icon-btn">
+                            <span class="fa fa-plus-circle"></span>
+                            <fmt:message key="jsp.common.link.followup" />
+                        </a>
+                    </li>
+
+
+                    <li class="author">
+                        <div class="author-info-wrapper">
+                            <a href="#" class="author-info-icon-wrapper">
+                                <c:choose>
+                                    <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                        <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:url var="authorIconImageUrl"
+                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                                <img src="${authorIconImageUrl}">
+                            </a>
+                            <a href="#" class="nick-name-and-follower-number">
+                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
+                            </a>
+                        </div>
+                        <a href="#" class="icon-btn">
+                            <span class="fa fa-plus-circle"></span>
+                            <fmt:message key="jsp.common.link.followup" />
+                        </a>
+                    </li>
+
+                    <li class="load-more-author-btn">
+                        <a href="#">
+                            <fmt:message key="jsp.common.link.loadMore"/>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <ul class="authors">
+                    <li class="title">
+                        <fmt:message key="jsp.anthology.label.follower" />
                     </li>
                     <li class="author">
                         <div class="author-info-wrapper">
