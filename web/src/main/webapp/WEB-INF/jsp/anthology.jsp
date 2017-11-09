@@ -288,30 +288,7 @@
                             </c:choose>
                             <img src="${authorIconImageUrl}">
                         </a>
-                        <a href="#" class="follower-icon-wrapper">
-                            <c:choose>
-                                <c:when test="${anthologyDetail.authorIconImageId == null}">
-                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:url var="authorIconImageUrl"
-                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
-                                </c:otherwise>
-                            </c:choose>
-                            <img src="${authorIconImageUrl}">
-                        </a>
-                        <a href="#" class="follower-icon-wrapper">
-                            <c:choose>
-                                <c:when test="${anthologyDetail.authorIconImageId == null}">
-                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:url var="authorIconImageUrl"
-                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
-                                </c:otherwise>
-                            </c:choose>
-                            <img src="${authorIconImageUrl}">
-                        </a>
+
                     </li>
                 </ul>
             </aside>
