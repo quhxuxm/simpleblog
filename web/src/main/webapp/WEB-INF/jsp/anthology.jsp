@@ -93,18 +93,13 @@
                                     </c:when>
                                     <c:otherwise>
                                         <c:url var="authorIconImageUrl"
-                                               value="/dimage/${adviceAuthorSummary.iconImageId}"/>
+                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
                                     </c:otherwise>
                                 </c:choose>
                                 <img src="${authorIconImageUrl}">
                             </a>
                             <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">${adviceAuthorSummary.nickName}</span>
-                                <span class="follower-number">
-                                        <fmt:message key="jsp.index.label.followupNumber">
-                                            <fmt:param value="${adviceAuthorSummary.additionalInfo.followupNumber}"/>
-                                        </fmt:message>
-                                    </span>
+                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
                             </a>
                         </div>
                         <a href="#" class="icon-btn">
@@ -112,36 +107,6 @@
                             <fmt:message key="jsp.common.link.followup" />
                         </a>
                     </li>
-                    <c:forEach items="${adviceAuthorSummaries}" var="adviceAuthorSummary">
-                        <li class="author">
-                            <div class="author-info-wrapper">
-                                <a href="#" class="author-info-icon-wrapper">
-                                    <c:choose>
-                                        <c:when test="${adviceAuthorSummary.iconImageId == null}">
-                                            <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <c:url var="authorIconImageUrl"
-                                                   value="/dimage/${adviceAuthorSummary.iconImageId}"/>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    <img src="${authorIconImageUrl}">
-                                </a>
-                                <a href="#" class="nick-name-and-follower-number">
-                                    <span class="nick-name">${adviceAuthorSummary.nickName}</span>
-                                    <span class="follower-number">
-                                        <fmt:message key="jsp.index.label.followupNumber">
-                                            <fmt:param value="${adviceAuthorSummary.additionalInfo.followupNumber}"/>
-                                        </fmt:message>
-                                    </span>
-                                </a>
-                            </div>
-                            <a href="#" class="icon-btn">
-                                <span class="fa fa-plus-circle"></span>
-                                <fmt:message key="jsp.common.link.followup" />
-                            </a>
-                        </li>
-                    </c:forEach>
                     <li class="load-more-author-btn">
                         <a href="#">
                             <fmt:message key="jsp.common.link.loadMore"/>
