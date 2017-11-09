@@ -56,7 +56,8 @@
                             </a>
                         </div>
                         <div class="article-additional-info-wrapper">
-                            <a href="#" class="anthology-name">${article.anthologyTitle}</a>
+                            <c:url value="/anthology/${article.anthologyId}/view" var="anthologyUrl"/>
+                            <a href="${anthologyUrl}" class="anthology-name">${article.anthologyTitle}</a>
                             <a href="#" class="action">
                                 <fmt:message key="jsp.article.label.read"/>
                                 <span class="number">${articleAdditionalInfo.viewNumber}</span>

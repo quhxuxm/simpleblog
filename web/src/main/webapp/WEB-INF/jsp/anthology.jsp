@@ -187,36 +187,130 @@
 
                 </ul>
 
-                <ul class="authors">
+                <ul class="followers">
                     <li class="title">
                         <fmt:message key="jsp.anthology.label.follower" />
                     </li>
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <c:choose>
-                                    <c:when test="${anthologyDetail.authorIconImageId == null}">
-                                        <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:url var="authorIconImageUrl"
-                                               value="/dimage/${anthologyDetail.authorIconImageId}"/>
-                                    </c:otherwise>
-                                </c:choose>
-                                <img src="${authorIconImageUrl}">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">${anthologyDetail.authorNickName }</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>
-                            <fmt:message key="jsp.common.link.followup" />
+                    <li class="follower-icons-container">
+                        <a href="#" class="follower-icon-wrapper">
+                        <c:choose>
+                            <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                            </c:when>
+                            <c:otherwise>
+                                <c:url var="authorIconImageUrl"
+                                       value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                            </c:otherwise>
+                        </c:choose>
+                        <img src="${authorIconImageUrl}">
+                    </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
                         </a>
-                    </li>
-                    <li class="load-more-author-btn">
-                        <a href="#">
-                            <fmt:message key="jsp.common.link.loadMore"/>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
+                        </a>
+                        <a href="#" class="follower-icon-wrapper">
+                            <c:choose>
+                                <c:when test="${anthologyDetail.authorIconImageId == null}">
+                                    <c:url var="authorIconImageUrl" value="/image/defaultAuthorIcon.jpg"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:url var="authorIconImageUrl"
+                                           value="/dimage/${anthologyDetail.authorIconImageId}"/>
+                                </c:otherwise>
+                            </c:choose>
+                            <img src="${authorIconImageUrl}">
                         </a>
                     </li>
                 </ul>
