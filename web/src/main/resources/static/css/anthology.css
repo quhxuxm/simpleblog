@@ -1,5 +1,5 @@
 body > main {
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 @media (min-width: 768px) {
