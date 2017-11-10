@@ -83,6 +83,18 @@
             <a href="${bookmarkArticleUrl}" class="action bookmark">
                 <span class="fa fa-bookmark"></span>${articleAdditionalInfo.bookmarkNumber}
             </a>
+
+            <c:url value="/article/${articleSummary.id}/remove"
+                   var="removeArticleUrl"/>
+            <a href="${removeArticleUrl}" class="action remove">
+                <span class="fa fa-trash"></span>
+            </a>
+
+            <c:url value="/article/${articleSummary.id}/update"
+                   var="updateArticleUrl"/>
+            <a href="${updateArticleUrl}" class="action update">
+                <span class="fa fa-pencil"></span>
+            </a>
         </footer>
     </div>
 </article>
