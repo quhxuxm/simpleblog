@@ -28,8 +28,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
-    private static Logger logger = LoggerFactory
-            .getLogger(ArticleController.class);
+    private static Logger logger = LoggerFactory.getLogger(ArticleController.class);
     private final IAnthologyService anthologyService;
     private final IAuthorService authorService;
     private final IArticleService articleService;
@@ -44,9 +43,8 @@ public class ArticleController {
     private int contentMinLength;
 
     @Autowired
-    public ArticleController(IAnthologyService anthologyService,
-            IArticleService articleService, IAuthorService authorService,
-            ServletContext servletContext) {
+    public ArticleController(IAnthologyService anthologyService, IArticleService articleService,
+        IAuthorService authorService, ServletContext servletContext) {
         this.anthologyService = anthologyService;
         this.articleService = articleService;
         this.authorService = authorService;
@@ -54,26 +52,21 @@ public class ArticleController {
     }
 
     @GetMapping("/{articleId}/view")
-    public ModelAndView view(
-            @PathVariable("articleId")
-                    Long articleId) throws Exception {
+    public ModelAndView view(@PathVariable("articleId") Long articleId) throws Exception {
         ModelAndView result = new ModelAndView("article");
         ArticleDetail articleDetail = this.articleService.viewDetail(articleId);
         result.addObject("article", articleDetail);
-        ArticleAdditionalInfo additionalInfo = this.articleService
-                .getAdditionalInfo(articleId);
+        ArticleAdditionalInfo additionalInfo = this.articleService.getAdditionalInfo(articleId);
         result.addObject("articleAdditionalInfo", additionalInfo);
-        AuthorAdditionalInfo authorAdditionalInfo = this.authorService
-                .getAdditionalInfo(articleDetail.getAuthorId());
+        AuthorAdditionalInfo authorAdditionalInfo =
+            this.authorService.getAdditionalInfo(articleDetail.getAuthorId());
         result.addObject("authorAdditionalInfo", authorAdditionalInfo);
         return result;
     }
 
     @GetMapping(value = "/{articleId}/praise", produces = "application/json")
     @ResponseBody
-    public ArticlePraiseResponse praise(
-            @PathVariable("articleId")
-                    Long articleId) {
+    public ArticlePraiseResponse praise(@PathVariable("articleId") Long articleId) {
         ArticlePraiseResponse praiseResponse = new ArticlePraiseResponse();
         Long praiseNumber = null;
         try {
@@ -90,9 +83,7 @@ public class ArticleController {
 
     @GetMapping(value = "/{articleId}/bookmark", produces = "application/json")
     @ResponseBody
-    public ArticleBookmarkResponse bookmark(
-            @PathVariable("articleId")
-                    Long articleId) {
+    public ArticleBookmarkResponse bookmark(@PathVariable("articleId") Long articleId) {
         ArticleBookmarkResponse bookmarkResponse = new ArticleBookmarkResponse();
         Long bookmarkNumber = null;
         try {
@@ -109,22 +100,19 @@ public class ArticleController {
     @GetMapping("/write")
     public ModelAndView showWrite(HttpSession session) throws Exception {
         ModelAndView result = new ModelAndView("article-editor");
-        Author author = (Author) session.getAttribute(
-                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-        List<AnthologySummary> anthologies = this.anthologyService
-                .getAnthologySummaries(author.getId());
+        Author author =
+            (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        List<AnthologySummary> anthologies =
+            this.anthologyService.getAnthologySummaries(author.getId(), 0, false);
         result.addObject("defaultAnthologyId", author.getDefaultAnthologyId());
         result.addObject("anthologies", anthologies);
         return result;
     }
 
-    @PostMapping(value = "/write", consumes = { "application/json" },
-            produces = { "application/json" })
+    @PostMapping(value = "/write", consumes = {"application/json"}, produces = {"application/json"})
     @ResponseBody
-    public ArticleEditResponse write(
-            @RequestBody
-                    ArticleEditRequest articleEditRequest,
-            HttpSession httpSession) {
+    public ArticleEditResponse write(@RequestBody ArticleEditRequest articleEditRequest,
+        HttpSession httpSession) {
         ArticleEditResponse response = new ArticleEditResponse();
         this.validateArticleEditRequest(response, articleEditRequest);
         if (!response.isSuccess()) {
@@ -137,16 +125,14 @@ public class ArticleController {
         article.setAnthologyId(articleEditRequest.getAnthologyId());
         article.setPublished(articleEditRequest.isPublish());
         article.setPublishDate(new Date());
-        Author authorInSession = (Author) httpSession.getAttribute(
-                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        Author authorInSession =
+            (Author) httpSession.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         try {
-            String imageBasePath =
-                    this.servletContext.getContextPath() + "/dimage";
+            String imageBasePath = this.servletContext.getContextPath() + "/dimage";
             this.articleService.create(article, authorInSession, imageBasePath);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
             return response;
         }
         response.setArticleId(article.getId());
@@ -154,32 +140,25 @@ public class ArticleController {
         return response;
     }
 
-    @GetMapping({ "/{articleId}/update" })
-    public ModelAndView showArticleEdit(
-            @PathVariable(name = "articleId")
-                    Long articleId, HttpSession session) throws Exception {
+    @GetMapping({"/{articleId}/update"})
+    public ModelAndView showArticleEdit(@PathVariable(name = "articleId") Long articleId,
+        HttpSession session) throws Exception {
         ModelAndView result = new ModelAndView("article-editor");
-        Author authorInSession = (Author) session.getAttribute(
-                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        Author authorInSession =
+            (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         result.addObject("article", this.articleService.get(articleId));
-        List<AnthologySummary> anthologies = this.anthologyService
-                .getAnthologySummaries(authorInSession.getId());
-        result.addObject("defaultAnthologyId",
-                authorInSession.getDefaultAnthologyId());
+        List<AnthologySummary> anthologies =
+            this.anthologyService.getAnthologySummaries(authorInSession.getId(), 0, false);
+        result.addObject("defaultAnthologyId", authorInSession.getDefaultAnthologyId());
         result.addObject("anthologies", anthologies);
         return result;
     }
 
-    @PostMapping(value = "/{articleId}/update",
-            consumes = { "application/json" },
-            produces = { "application/json" })
+    @PostMapping(value = "/{articleId}/update", consumes = {"application/json"},
+        produces = {"application/json"})
     @ResponseBody
-    public ArticleEditResponse update(
-            @PathVariable(name = "articleId")
-                    Long articleId,
-            @RequestBody
-                    ArticleEditRequest articleEditRequest,
-            HttpSession httpSession) {
+    public ArticleEditResponse update(@PathVariable(name = "articleId") Long articleId,
+        @RequestBody ArticleEditRequest articleEditRequest, HttpSession httpSession) {
         ArticleEditResponse response = new ArticleEditResponse();
         this.validateArticleEditRequest(response, articleEditRequest);
         if (!response.isSuccess()) {
@@ -194,15 +173,13 @@ public class ArticleController {
             article.setPublished(articleEditRequest.isPublish());
             article.setPublishDate(new Date());
             response.setArticleId(articleId);
-            Author authorInSession = (Author) httpSession.getAttribute(
-                    IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
-            String imageBasePath =
-                    this.servletContext.getContextPath() + "/dimage";
+            Author authorInSession = (Author) httpSession
+                .getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+            String imageBasePath = this.servletContext.getContextPath() + "/dimage";
             this.articleService.update(article, authorInSession, imageBasePath);
         } catch (Exception e) {
             response.setSuccess(false);
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
             return response;
         }
         response.setSuccess(true);
@@ -210,42 +187,32 @@ public class ArticleController {
     }
 
     private void validateArticleEditRequest(ArticleEditResponse response,
-            ArticleEditRequest articleEditRequest) {
+        ArticleEditRequest articleEditRequest) {
         if (articleEditRequest.getTitle() == null
-                || articleEditRequest.getTitle().trim().length() == 0) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.TITLE_IS_EMPTY);
+            || articleEditRequest.getTitle().trim().length() == 0) {
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_IS_EMPTY);
         }
-        if (articleEditRequest.getTitle().trim().length()
-                > this.titleMaxLength) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.TITLE_TOO_LONG);
+        if (articleEditRequest.getTitle().trim().length() > this.titleMaxLength) {
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_TOO_LONG);
         }
-        if (articleEditRequest.getTitle().trim().length()
-                < this.titleMinLength) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.TITLE_TOO_SHORT);
+        if (articleEditRequest.getTitle().trim().length() < this.titleMinLength) {
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.TITLE_TOO_SHORT);
         }
         String contentPlainText = null;
         try {
-            contentPlainText = this.articleService
-                    .extractArticleContentPlainText(
-                            articleEditRequest.getContent());
+            contentPlainText =
+                this.articleService.extractArticleContentPlainText(articleEditRequest.getContent());
         } catch (ServiceException e) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
         }
         if (contentPlainText == null || contentPlainText.trim().length() == 0) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.CONTENT_IS_EMPTY);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_IS_EMPTY);
         }
         if (contentPlainText.trim().length() > this.contentMaxLength) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.CONTENT_TOO_LONG);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_TOO_LONG);
         }
         if (contentPlainText.trim().length() < this.contentMinLength) {
-            response.getErrorCodes()
-                    .add(ArticleEditResponse.ErrorCode.CONTENT_TOO_SHORT);
+            response.getErrorCodes().add(ArticleEditResponse.ErrorCode.CONTENT_TOO_SHORT);
         }
         if (!response.getErrorCodes().isEmpty()) {
             response.setSuccess(false);
@@ -254,56 +221,45 @@ public class ArticleController {
 
     @GetMapping("/allPublishedArticleSummariesCollection")
     public ModelAndView allPublishedArticleSummariesCollection(
-            @RequestParam(name = "start", defaultValue = "0", required = false)
-                    int start,
-            @RequestParam(name = "desc", defaultValue = "true",
-                    required = false)
-                    boolean isDesc) throws Exception {
-        List<ArticleSummary> articleSummariesCollection = this.articleService
-                .getSummariesOrderByPublishDate(start, isDesc);
-        return this.preparedArticleSummariesCollectionToModelAndView(
-                articleSummariesCollection, start);
+        @RequestParam(name = "start", defaultValue = "0", required = false) int start,
+        @RequestParam(name = "desc", defaultValue = "true", required = false) boolean isDesc)
+        throws Exception {
+        List<ArticleSummary> articleSummariesCollection =
+            this.articleService.getSummariesOrderByPublishDate(start, isDesc);
+        return this
+            .preparedArticleSummariesCollectionToModelAndView(articleSummariesCollection, start);
     }
 
     @GetMapping("/anthologyArticleSummariesCollection/{anthologyId}")
     public ModelAndView anthologyArticleSummariesCollection(
-            @PathVariable(name = "anthologyId", required = true)
-                    long anthologyId,
-            @RequestParam(name = "start", defaultValue = "0", required = false)
-                    int start,
-            @RequestParam(name = "desc", defaultValue = "true",
-                    required = false)
-                    boolean isDesc, HttpSession session) throws Exception {
-        Author authorInSession = (Author) session.getAttribute(
-                IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
+        @PathVariable(name = "anthologyId", required = true) long anthologyId,
+        @RequestParam(name = "start", defaultValue = "0", required = false) int start,
+        @RequestParam(name = "desc", defaultValue = "true", required = false) boolean isDesc,
+        HttpSession session) throws Exception {
+        Author authorInSession =
+            (Author) session.getAttribute(IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR);
         Anthology anthology = this.anthologyService.getAnthology(anthologyId);
         if (anthology == null) {
-            return this.preparedArticleSummariesCollectionToModelAndView(
-                    new ArrayList<>(), start);
+            return this.preparedArticleSummariesCollectionToModelAndView(new ArrayList<>(), start);
         }
-        if (authorInSession != null && (anthology.getAuthorId()
-                .equals(authorInSession.getId()))) {
-            List<ArticleSummary> articleSummariesCollection = this.articleService
-                    .getAllArticleSummariesInAnthology(anthologyId, start,
-                            isDesc);
-            return this.preparedArticleSummariesCollectionToModelAndView(
-                    articleSummariesCollection, start);
+        if (authorInSession != null && (anthology.getAuthorId().equals(authorInSession.getId()))) {
+            List<ArticleSummary> articleSummariesCollection =
+                this.articleService.getAllArticleSummariesInAnthology(anthologyId, start, isDesc);
+            return this.preparedArticleSummariesCollectionToModelAndView(articleSummariesCollection,
+                start);
         }
-        List<ArticleSummary> articleSummariesCollection = this.articleService
-                .getPublishedArticleSummariesInAnthology(anthologyId, start,
-                        isDesc);
-        return this.preparedArticleSummariesCollectionToModelAndView(
-                articleSummariesCollection, start);
+        List<ArticleSummary> articleSummariesCollection =
+            this.articleService.getPublishedArticleSummariesInAnthology(anthologyId, start, isDesc);
+        return this
+            .preparedArticleSummariesCollectionToModelAndView(articleSummariesCollection, start);
     }
 
     private ModelAndView preparedArticleSummariesCollectionToModelAndView(
-            List<ArticleSummary> articleSummariesCollection, int start)
-            throws ServiceException {
-        ModelAndView result = new ModelAndView(
-                "/fragment/article/summariesCollection");
+        List<ArticleSummary> articleSummariesCollection, int start) throws ServiceException {
+        ModelAndView result = new ModelAndView("/fragment/article/summariesCollection");
         int summariesCollectionSize = 0;
-        Map<Long, ArticleAdditionalInfo> additionalInfoMap = this.articleService
-                .getAdditionalInfoList(articleSummariesCollection);
+        Map<Long, ArticleAdditionalInfo> additionalInfoMap =
+            this.articleService.getAdditionalInfoList(articleSummariesCollection);
         result.addObject("summariesCollection", articleSummariesCollection);
         result.addObject("additionalInfoMap", additionalInfoMap);
         summariesCollectionSize = articleSummariesCollection.size();

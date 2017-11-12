@@ -7,6 +7,7 @@
 <%@ attribute name="showSearchBtn" type="java.lang.Boolean" required="false" %>
 <%@ attribute name="showLoginAndRegisterBtn" type="java.lang.Boolean" required="false"  %>
 <%@ attribute name="showWriteArticleBtn" type="java.lang.Boolean" required="false"%>
+
 <c:if test="${showSearchBtn == null}">
     <c:set var="showSearchBtn" value="true"/>
 </c:if>

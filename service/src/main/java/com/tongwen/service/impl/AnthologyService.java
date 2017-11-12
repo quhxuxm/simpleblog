@@ -9,6 +9,7 @@ import com.tongwen.repository.mapper.IAuthorMapper;
 import com.tongwen.service.api.IAnthologyService;
 import com.tongwen.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +19,11 @@ import java.util.List;
 public class AnthologyService implements IAnthologyService {
     private final IAuthorMapper authorMapper;
     private final IAnthologyMapper anthologyMapper;
+    @Value("${anthology.summariesCollection.pageSize}")
+    private int anthologySummariesCollectionPageSize;
 
     @Autowired
-    public AnthologyService(IAuthorMapper authorMapper,
-            IAnthologyMapper anthologyMapper) {
+    public AnthologyService(IAuthorMapper authorMapper, IAnthologyMapper anthologyMapper) {
         this.authorMapper = authorMapper;
         this.anthologyMapper = anthologyMapper;
     }
@@ -30,8 +32,7 @@ public class AnthologyService implements IAnthologyService {
     @Override
     public void create(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
@@ -50,8 +51,7 @@ public class AnthologyService implements IAnthologyService {
     @Override
     public void update(Anthology anthology) throws ServiceException {
         if (anthology.getAuthorId() == null) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHOR_NOT_ASSIGNED);
+            throw new ServiceException(ServiceException.Code.AUTHOR_NOT_ASSIGNED);
         }
         if (!this.authorMapper.isExist(anthology.getAuthorId())) {
             throw new ServiceException(ServiceException.Code.AUTHOR_NOT_EXIST);
@@ -85,18 +85,18 @@ public class AnthologyService implements IAnthologyService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<AnthologySummary> getAnthologySummaries(long authorId)
-            throws ServiceException {
+    public List<AnthologySummary> getAnthologySummaries(long authorId, int start, boolean isDesc)
+        throws ServiceException {
         try {
-            return this.anthologyMapper.getAuthorAnthologySummaries(authorId);
+            return this.anthologyMapper.getAuthorAnthologySummaries(authorId, start,
+                this.anthologySummariesCollectionPageSize, isDesc);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
     }
 
     @Override
-    public AnthologyAdditionalInfo getAdditionalInfo(long anthologyId)
-            throws ServiceException {
+    public AnthologyAdditionalInfo getAdditionalInfo(long anthologyId) throws ServiceException {
         try {
             return this.anthologyMapper.getAdditionalInfo(anthologyId);
         } catch (Exception e) {

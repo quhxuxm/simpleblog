@@ -11,7 +11,6 @@ import com.tongwen.service.api.IAuthorService;
 import com.tongwen.service.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -24,10 +23,9 @@ public class AuthorService implements IAuthorService {
     private final IAuthorMapper authorMapper;
 
     @Autowired
-    public AuthorService(IAuthenticationMapper authenticationMapper,
-            IRoleMapper roleMapper, IAuthorMapper authorMapper,
-            IAnthologyMapper anthologyMapper,
-            IAnthologyService anthologyService) {
+    public AuthorService(IAuthenticationMapper authenticationMapper, IRoleMapper roleMapper,
+        IAuthorMapper authorMapper, IAnthologyMapper anthologyMapper,
+        IAnthologyService anthologyService) {
         this.authenticationMapper = authenticationMapper;
         this.roleMapper = roleMapper;
         this.authorMapper = authorMapper;
@@ -36,16 +34,13 @@ public class AuthorService implements IAuthorService {
 
     @Transactional(rollbackFor = ServiceException.class)
     @Override
-    public void register(String token, String password, String nickName,
-            Authentication.Type type, String defaultAnthologyTitle,
-            String defaultAnthologySummary) throws ServiceException {
+    public void register(String token, String password, String nickName, Authentication.Type type,
+        String defaultAnthologyTitle, String defaultAnthologySummary) throws ServiceException {
         if (this.authenticationMapper.isTokenExist(token)) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHENTICATION_TOKEN_EXIST);
+            throw new ServiceException(ServiceException.Code.AUTHENTICATION_TOKEN_EXIST);
         }
         if (this.authenticationMapper.isNickNameExist(nickName)) {
-            throw new ServiceException(
-                    ServiceException.Code.AUTHENTICATION_NICK_NAME_EXIST);
+            throw new ServiceException(ServiceException.Code.AUTHENTICATION_NICK_NAME_EXIST);
         }
         try {
             Authentication authentication = new Authentication();
@@ -56,8 +51,7 @@ public class AuthorService implements IAuthorService {
             authentication.setRegisterDate(new Date());
             authentication.setLastLoginDate(new Date());
             this.authenticationMapper.create(authentication);
-            Role authorRole = this.roleMapper
-                    .findRoleByName(IConstant.Role.ROLE_AUTHOR.name());
+            Role authorRole = this.roleMapper.findRoleByName(IConstant.Role.ROLE_AUTHOR.name());
             this.authenticationMapper.assignRole(authentication, authorRole);
             Author author = new Author();
             AuthorAdditionalInfo authorAdditionalInfo = new AuthorAdditionalInfo();
@@ -80,10 +74,9 @@ public class AuthorService implements IAuthorService {
 
     @Transactional(readOnly = true)
     @Override
-    public Author getAuthor(long authenticationId) throws ServiceException {
+    public Author getAuthenticatedAuthor(long authenticationId) throws ServiceException {
         try {
-            return this.authorMapper
-                    .findAuthorByAuthenticationId(authenticationId);
+            return this.authorMapper.findAuthorByAuthenticationId(authenticationId);
         } catch (Exception e) {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
@@ -91,8 +84,17 @@ public class AuthorService implements IAuthorService {
 
     @Transactional(readOnly = true)
     @Override
-    public AuthorAdditionalInfo getAdditionalInfo(long authorId)
-            throws ServiceException {
+    public Author getAuthor(long authorId) throws ServiceException {
+        try {
+            return this.authorMapper.getAuthorById(authorId);
+        } catch (Exception e) {
+            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
+        }
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public AuthorAdditionalInfo getAdditionalInfo(long authorId) throws ServiceException {
         try {
             return this.authorMapper.getAdditionalInfo(authorId);
         } catch (Exception e) {

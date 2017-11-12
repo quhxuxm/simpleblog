@@ -5,9 +5,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ attribute name="articleSummary" type="com.tongwen.domain.ArticleSummary" %>
-<%@ attribute name="articleAdditionalInfo"
-              type="com.tongwen.domain.ArticleAdditionalInfo" %>
+<%@ attribute name="anthologySummary" type="com.tongwen.domain.AnthologySummary" %>
+<%@ attribute name="anthologyAdditionalInfo"
+              type="com.tongwen.domain.AnthologyAdditionalInfo" %>
 
 <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
 <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>

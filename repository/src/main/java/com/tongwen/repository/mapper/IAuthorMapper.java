@@ -11,35 +11,24 @@ import java.util.List;
 
 @Repository
 public interface IAuthorMapper {
-    Author findAuthorByAuthenticationId(
-            @Param("authenticationId")
-                    Long authenticationId);
+    Author findAuthorByAuthenticationId(@Param("authenticationId") long authenticationId);
+
+    Author getAuthorById(@Param("id") long authorId);
 
     void create(Author author);
 
-    void assignAuthentication(
-            @Param("authentication")
-                    Authentication authentication,
-            @Param("author")
-                    Author author);
+    void assignAuthentication(@Param("authentication") Authentication authentication,
+        @Param("author") Author author);
 
-    void assignDefaultAnthology(
-            @Param("anthology")
-                    Anthology anthology,
-            @Param("author")
-                    Author author);
+    void assignDefaultAnthology(@Param("anthology") Anthology anthology,
+        @Param("author") Author author);
 
-    boolean isExist(
-            @Param("id")
-                    long id);
+    boolean isExist(@Param("id") long id);
 
-    AuthorAdditionalInfo getAdditionalInfo(
-            @Param("authorId")
-                    long authorId);
+    AuthorAdditionalInfo getAdditionalInfo(@Param("authorId") long authorId);
 
     List<AuthorAdditionalInfo> getAdditionalInfoList(
-            @Param("authorIdList")
-                    List<Long> authorIdList);
+        @Param("authorIdList") List<Long> authorIdList);
 
     void createAdditionalInfo(AuthorAdditionalInfo additionalInfo);
 

@@ -13,11 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = WebInitializer.class)
@@ -57,7 +55,7 @@ public class TestRepository {
             System.out.println(author1Authentication.getPassword());
             System.out.println(author1Authentication.getToken());
             Author author1 = this.authorService
-                    .getAuthor(author1Authentication.getId());
+                    .getAuthenticatedAuthor(author1Authentication.getId());
             for (int i = 0; i < 1000; i++) {
                 Article article = new Article();
                 article.setTitle("Title " + i);

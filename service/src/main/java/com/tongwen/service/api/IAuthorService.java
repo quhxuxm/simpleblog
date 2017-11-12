@@ -9,7 +9,9 @@ public interface IAuthorService {
     void register(String token, String password, String nickName, Authentication.Type type,
         String defaultAnthologyTitle, String defaultAnthologySummary) throws ServiceException;
 
-    Author getAuthor(long authenticationId) throws ServiceException;
+    Author getAuthenticatedAuthor(long authenticationId) throws ServiceException;
+
+    Author getAuthor(long authorId) throws ServiceException;
 
     AuthorAdditionalInfo getAdditionalInfo(long authorId) throws ServiceException;
 }

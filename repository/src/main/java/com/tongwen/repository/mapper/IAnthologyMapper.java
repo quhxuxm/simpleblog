@@ -34,5 +34,7 @@ public interface IAnthologyMapper {
 
     void updateAdditionalInfo(AnthologyAdditionalInfo additionalInfo);
 
-    List<AnthologySummary> getAuthorAnthologySummaries(@Param("authorId") long authorId);
+    List<AnthologySummary> getAuthorAnthologySummaries(@Param("authorId") long authorId,
+        @Param("start") int start, @Param("pageSize") int pageSize,
+        @Param("isDesc") boolean isDesc);
 }

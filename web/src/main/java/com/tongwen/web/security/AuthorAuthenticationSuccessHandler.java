@@ -2,7 +2,6 @@ package com.tongwen.web.security;
 
 import com.tongwen.common.IConstant;
 import com.tongwen.domain.Author;
-import com.tongwen.service.api.IAuthenticationService;
 import com.tongwen.service.api.IAuthorService;
 import com.tongwen.service.exception.ServiceException;
 import org.slf4j.Logger;
@@ -18,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 
 @Component
 public class AuthorAuthenticationSuccessHandler
@@ -53,7 +51,7 @@ public class AuthorAuthenticationSuccessHandler
         logger.debug("Success to get author details from security context.");
         try {
             Author author = this.authorService
-                    .getAuthor(authorDetails.getAuthenticationId());
+                    .getAuthenticatedAuthor(authorDetails.getAuthenticationId());
             request.getSession().setAttribute(
                     IConstant.ISessionAttributeName.AUTHENTICATED_AUTHOR,
                     author);
