@@ -22,20 +22,29 @@
 
             <section class="summaries">
                 <article class="author-summary">
-                    <!--
-                    <c:if test="${author.iconImageId != null}">
-                        <a class="anthology-cover"></a>
-                    </c:if>
-                    -->
 
-                    <a class="author-icon"></a>
+                    <c:choose>
+                        <c:when test="${author.iconImageId==null}">
+                            <c:url var="authorIconImageUrl"
+                                   value="/image/defaultAuthorIcon.jpg"/>
+                        </c:when>
+                        <c:otherwise>
+                            <c:url var="authorIconImageUrl"
+                                   value="/dimage/${author.iconImageId}"/>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <a class="author-icon" >
+                        <img src="${authorIconImageUrl}">
+                    </a>
+
 
                     <div class="author-detail-content">
                         <header class="author-nick-name">
                             <h1><c:out escapeXml="true" value="${author.nickName}" /></h1>
                         </header>
                         <footer>
-                            <fmt:message key="jsp.anthology.label.totalFollowup">
+                            <fmt:message key="jsp.author.label.totalFollowup">
                                 <fmt:param value="${additionalInfo.followedByNumber}"/>
                             </fmt:message>
                         </footer>
