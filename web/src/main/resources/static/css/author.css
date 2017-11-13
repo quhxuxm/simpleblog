@@ -96,9 +96,13 @@ body > main section.summaries > article.author-summary {
 
 body > main section.summaries > article.author-summary > a.author-icon {
     width: 100px;
-    height: 80px;
+    height: 100px;
     margin-right: 15px;
-    background-color: brown;
+}
+
+body > main section.summaries > article.author-summary > a.author-icon > img{
+    width: 100%;
+    height: 100%;
 }
 
 body > main section.summaries > article.author-summary > div.author-detail-content {
