@@ -68,9 +68,24 @@
                 </article>
 
                 <ul class="summaries-category">
-                    <li class="anthologies">文集</li>
-                    <li class="articles">文章</li>
-                    <li class="comments">评论</li>
+                    <li class="anthologies">
+                        <a href="#" class="action">
+                            <span class="fa fa-book"></span>
+                            所有文集
+                        </a>
+                    </li>
+                    <li class="articles">
+                        <a href="#" class="action">
+                            <span class="fa fa-file"></span>
+                            所有文章
+                        </a>
+                    </li>
+                    <li class="comments">
+                        <a href="#" class="action">
+                            <span class="fa fa-comments"></span>
+                            所有评论
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="summaries-category-content-wrapper">

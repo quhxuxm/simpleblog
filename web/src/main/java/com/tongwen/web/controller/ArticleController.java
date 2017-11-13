@@ -133,6 +133,7 @@ public class ArticleController {
         } catch (Exception e) {
             response.setSuccess(false);
             response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            logger.error("Fail to create article because of exception.", e);
             return response;
         }
         response.setArticleId(article.getId());
@@ -180,6 +181,7 @@ public class ArticleController {
         } catch (Exception e) {
             response.setSuccess(false);
             response.getErrorCodes().add(ArticleEditResponse.ErrorCode.SYSTEM_ERROR);
+            logger.error("Fail to update article because of exception.", e);
             return response;
         }
         response.setSuccess(true);
