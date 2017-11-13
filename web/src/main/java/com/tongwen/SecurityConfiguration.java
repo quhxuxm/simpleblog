@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/dimage/**",
                         "/article/allPublishedArticleSummariesCollection",
                         "/article/anthologyArticleSummariesCollection/**",
+                        "/anthology/authorAnthologySummariesCollection/**",
                         "/article/*/view", "/author/**", "/anthology/*/view",
                         "/error").permitAll().antMatchers("/admin/**")
                 .access("hasRole('ROLE_ADMIN')").anyRequest()

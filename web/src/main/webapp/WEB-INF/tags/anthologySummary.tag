@@ -9,11 +9,11 @@
 <%@ attribute name="anthologyAdditionalInfo"
               type="com.tongwen.domain.AnthologyAdditionalInfo" %>
 
-<c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
-<c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
+<c:url var="viewAnthologyUrl" value="/anthology/${anthologySummary.id}/view"/>
+<c:url var="viewAuthorUrl" value="/author/${anthologySummary.authorId}/view"/>
 
 <c:choose>
-    <c:when test="${sessionScope.authenticatedAuthor != null && sessionScope.authenticatedAuthor.id eq articleSummary.authorId}">
+    <c:when test="${sessionScope.authenticatedAuthor != null && sessionScope.authenticatedAuthor.id eq anthologySummary.authorId}">
         <c:set value="${true}" var="isOwner" />
     </c:when>
     <c:otherwise>
@@ -21,109 +21,83 @@
     </c:otherwise>
 </c:choose>
 <article>
-    <c:if test="${articleSummary.coverImageId !=null}">
-        <c:url value="/dimage/${articleSummary.coverImageId}"
-               var="articleCoverUrl"/>
-        <a href="${viewArticleUrl}"
-           style="background-image: url('${articleCoverUrl}')"
-           class="article-cover"></a>
+    <c:if test="${anthologySummary.coverImageId !=null}">
+        <c:url value="/dimage/${anthologySummary.coverImageId}"
+               var="anthologyCoverUrl"/>
+        <a href="${viewAnthologyUrl}"
+           style="background-image: url('${anthologyCoverUrl}')"
+           class="anthology-cover"></a>
     </c:if>
-    <div class="article-content">
+    <div class="anthology-content">
         <header>
-            <a href="${viewArticleUrl}" class="article-title">
-                <c:out value="${articleSummary.title}" escapeXml="true"/>
+            <a href="${viewAnthologyUrl}" class="anthology-title">
+                <c:out value="${anthologySummary.title}" escapeXml="true"/>
             </a>
-            <div class="article-author-wrapper">
+            <div class="anthology-author-wrapper">
                 <a href="${viewAuthorUrl}" class="icon-img-wrapper">
                     <c:choose>
-                        <c:when test="${articleSummary.authorIconImageId ==null}">
+                        <c:when test="${anthologySummary.authorIconImageId ==null}">
                             <c:url var="authorIconImageUrl"
                                    value="/image/defaultAuthorIcon.jpg"/>
                         </c:when>
                         <c:otherwise>
                             <c:url var="authorIconImageUrl"
-                                   value="/dimage/${articleSummary.authorIconImageId}"/>
+                                   value="/dimage/${anthologySummary.authorIconImageId}"/>
                         </c:otherwise>
                     </c:choose>
                     <img src="${authorIconImageUrl}">
                 </a>
                 <div class="author-nick-name-wrapper">
                     <a href="${viewAuthorUrl}"
-                       class="author-nick-name"> ${articleSummary.authorNickName} </a>
-                    <span class="article-publish-timestamp">
+                       class="author-nick-name"> ${anthologySummary.authorNickName} </a>
+                    <span class="anthology-publish-timestamp">
                         <fmt:message key="jsp.article.label.publishOn">
                             <fmt:formatDate
-                                    value="${articleSummary.publishDate}"
-                                    var="articlePublishDate"
+                                    value="${anthologySummary.publishDate}"
+                                    var="anthologyPublishDate"
                                     pattern="yyyy-MM-dd"/>
-                            <fmt:param value="${articlePublishDate}"/>
+                            <fmt:param value="${anthologyPublishDate}"/>
                         </fmt:message>
                     </span>
                 </div>
-                <c:url var="followUpAuthorUrl"
-                       value="/author/${articleSummary.authorId}/fullowup"/>
-                <a href="${followUpAuthorUrl}" class="icon-btn">
+                <c:url var="followupAuthorUrl"
+                       value="/author/${anthologySummary.authorId}/fullowup"/>
+                <a href="${followupAuthorUrl}" class="icon-btn">
                     <span class="fa fa-plus-circle"></span>
                     <fmt:message key="jsp.common.link.followup"/>
                 </a>
             </div>
         </header>
         <section>
-            <c:out value="${articleSummary.summary}" escapeXml="true"/>
+            <c:out value="${anthologySummary.summary}" escapeXml="true"/>
         </section>
         <footer>
-            <c:url var="viewAnthologyUrl"
-                   value="/anthology/${articleSummary.anthologyId}/view"/>
-            <a href="${viewAnthologyUrl}" class="anthology-name">
-                <c:out value="${articleSummary.anthologyTitle}"
-                       escapeXml="true"/>
-            </a>
             <c:choose>
                 <c:when test="${isOwner}">
-                    <a href="${viewArticleUrl}" class="action">
-                        <span class="fa fa-eye"></span>${articleAdditionalInfo.viewNumber}
-                    </a>
-                    <c:url value="/article/${articleSummary.id}/praise"
-                           var="praiseArticleUrl"/>
-                    <a href="${praiseArticleUrl}" class="action praise">
-                        <span class="fa fa-heart"></span>${articleAdditionalInfo.praiseNumber}
-                    </a>
-                    <a href="${viewArticleUrl}" class="action">
-                        <span class="fa fa-comment"></span>${articleAdditionalInfo.commentNumber}
-                    </a>
-                    <c:url value="/article/${articleSummary.id}/bookmark"
-                           var="bookmarkArticleUrl"/>
-                    <a href="${bookmarkArticleUrl}" class="action bookmark">
-                        <span class="fa fa-bookmark"></span>${articleAdditionalInfo.bookmarkNumber}
+
+                    <c:url value="/anthology/${anthologySummary.id}/followup"
+                           var="followupAnthologyUrl"/>
+                    <a href="${followupAnthologyUrl}" class="action bookmark">
+                        <span class="fa fa-bookmark"></span>${anthologyAdditionalInfo.bookmarkNumber}
                     </a>
 
-                    <c:url value="/article/${articleSummary.id}/remove"
+                    <c:url value="/anthology/${anthologySummary.id}/remove"
                            var="removeArticleUrl"/>
                     <a href="${removeArticleUrl}" class="action remove">
                         <span class="fa fa-trash"></span>
                     </a>
-                    <c:url value="/article/${articleSummary.id}/update"
+                    <c:url value="/anthology/${anthologySummary.id}/update"
                            var="updateArticleUrl"/>
                     <a href="${updateArticleUrl}" class="action update">
                         <span class="fa fa-pencil"></span>
                     </a>
                 </c:when>
                 <c:otherwise>
-                    <a href="${viewArticleUrl}" class="action">
-                        <span class="fa fa-eye"></span>${articleAdditionalInfo.viewNumber}
-                    </a>
-                    <c:url value="/article/${articleSummary.id}/praise"
-                           var="praiseArticleUrl"/>
-                    <a href="${praiseArticleUrl}" class="action praise">
-                        <span class="fa fa-heart"></span>${articleAdditionalInfo.praiseNumber}
-                    </a>
-                    <a href="${viewArticleUrl}" class="action">
-                        <span class="fa fa-comment"></span>${articleAdditionalInfo.commentNumber}
-                    </a>
-                    <c:url value="/article/${articleSummary.id}/bookmark"
-                           var="bookmarkArticleUrl"/>
-                    <a href="${bookmarkArticleUrl}" class="action bookmark">
-                        <span class="fa fa-bookmark"></span>${articleAdditionalInfo.bookmarkNumber}
+
+                    <c:url value="/anthology/${anthologySummary.id}/followup"
+                           var="followupAnthologyUrl"/>
+                    <a href="${followupAnthologyUrl}" class="action bookmark">
+                        <span class="fa fa-bookmark"></span>${anthologyAdditionalInfo.bookmarkNumber}
                     </a>
                 </c:otherwise>
             </c:choose>

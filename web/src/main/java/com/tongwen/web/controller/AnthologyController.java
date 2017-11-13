@@ -79,7 +79,7 @@ public class AnthologyController {
             additionalInfoMap.put(anthologySummary.getId(),
                 this.anthologyService.getAdditionalInfo(anthologySummary.getId()));
         }
-        result.addObject("additionalInfoMap", additionalInfoMap);
+        result.addObject("anthologyAdditionalInfoMap", additionalInfoMap);
         return result;
     }
 }
