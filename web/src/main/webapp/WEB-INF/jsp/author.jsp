@@ -67,15 +67,22 @@
                     </div>
                 </article>
 
-                <jsp:include
-                        page="/anthology/authorAnthologySummariesCollection/${author.id}"/>
+                <ul class="summaries-category">
+                    <li class="anthologies">文集</li>
+                    <li class="articles">文章</li>
+                    <li class="comments">评论</li>
+                </ul>
 
-                <c:url var="authorAnthologySummariesCollectionUrl"
-                       value="/anthology/authorAnthologySummariesCollection/${author.id}"/>
-                <a href="${authorAnthologySummariesCollectionUrl}"
-                   class="load-more-btn">
-                    <fmt:message key="jsp.common.link.loadMore"/>
-                </a>
+                <div class="summaries-category-content-wrapper">
+                    <jsp:include
+                            page="/anthology/authorAnthologySummariesCollection/${author.id}"/>
+                    <c:url var="authorAnthologySummariesCollectionUrl"
+                           value="/anthology/authorAnthologySummariesCollection/${author.id}"/>
+                    <a href="${authorAnthologySummariesCollectionUrl}"
+                       class="load-more-btn">
+                        <fmt:message key="jsp.common.link.loadMore"/>
+                    </a>
+                </div>
             </section>
             <aside>
                 <article>
