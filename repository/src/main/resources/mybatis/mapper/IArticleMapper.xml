@@ -58,7 +58,7 @@
         article.title AS title,
         article.summary AS summary,
         author._id AS author_id,
-        authentication.nick_name AS author_nick_name,
+        author.nick_name AS author_nick_name,
         author.icon_image_id AS author_icon_image_id,
         article.publish_date AS publish_date,
         anthology._id AS anthology_id,
@@ -68,12 +68,7 @@
         article.is_published AS is_published
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
-        INNER JOIN article article ON anthology._id = article.anthology_id INNER
-        JOIN
-        authentication_author authenticationAndAuthor
-        ON author._id = authenticationAndAuthor.author_id
-        INNER JOIN authentication authentication
-        ON authenticationAndAuthor.authentication_id = authentication._id
+        INNER JOIN article article ON anthology._id = article.anthology_id
         WHERE article.publish_date IS NOT NULL AND article.is_published = TRUE
         ORDER BY article.publish_date
         <if test="isDesc">
@@ -110,7 +105,7 @@
         article.title AS title,
         article.summary AS summary,
         author._id AS author_id,
-        authentication.nick_name AS author_nick_name,
+        author.nick_name AS author_nick_name,
         author.icon_image_id AS author_icon_image_id,
         article.publish_date AS publish_date,
         anthology._id AS anthology_id,
@@ -121,11 +116,7 @@
         FROM article article INNER JOIN anthology anthology
         ON article.anthology_id = anthology._id
         INNER JOIN author author ON author._id = anthology.author_id
-        INNER JOIN authentication_author authenticationAndAuthor
-        ON author._id = authenticationAndAuthor.author_id
-        INNER JOIN authentication authentication
-        ON authenticationAndAuthor.authentication_id =
-        authentication._id
+
         WHERE anthology._id = #{anthologyId} AND article.publish_date IS NOT
         NULL AND
         article.is_published = TRUE ORDER BY article.publish_date
@@ -143,7 +134,7 @@
         article.title AS title,
         article.summary AS summary,
         author._id AS author_id,
-        authentication.nick_name AS author_nick_name,
+        author.nick_name AS author_nick_name,
         author.icon_image_id AS author_icon_image_id,
         article.publish_date AS publish_date,
         anthology._id AS anthology_id,
@@ -154,12 +145,8 @@
         FROM article article INNER JOIN anthology anthology
         ON article.anthology_id = anthology._id
         INNER JOIN author author ON author._id = anthology.author_id
-        INNER JOIN authentication_author authenticationAndAuthor
-        ON author._id = authenticationAndAuthor.author_id
-        INNER JOIN authentication authentication
-        ON authenticationAndAuthor.authentication_id =
-        authentication._id
-        WHERE anthology._id = #{anthologyId} ORDER BY article.publish_date, article.create_date
+        WHERE anthology._id = #{anthologyId} ORDER BY article.publish_date,
+        article.create_date
         <if test="isDesc">
             DESC
         </if>
@@ -177,7 +164,7 @@
             article.title              AS title,
             article.content            AS content,
             author._id                 AS author_id,
-            authentication.nick_name   AS author_nick_name,
+            author.nick_name   AS author_nick_name,
             author.icon_image_id       AS author_icon_image_id,
             author.description         AS author_description,
             article.publish_date       AS publish_date,
@@ -188,11 +175,6 @@
         FROM author author INNER JOIN anthology anthology
                 ON author._id = anthology.author_id
             INNER JOIN article article ON anthology._id = article.anthology_id
-            INNER JOIN authentication_author authenticationAndAuthor
-                ON author._id = authenticationAndAuthor.author_id
-            INNER JOIN authentication authentication
-                ON authenticationAndAuthor.authentication_id =
-                   authentication._id
         WHERE article._id = #{id}
     </select>
     <select id="getAdditionalInfo" resultMap="articleAdditionalInfoMap">

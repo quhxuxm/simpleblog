@@ -30,8 +30,4 @@ public interface IAuthenticationMapper {
     boolean isTokenExist(
             @Param("token")
                     String token);
-
-    boolean isNickNameExist(
-            @Param("nickName")
-                    String nickName);
 }

@@ -23,7 +23,7 @@
             <section class="summaries">
                 <article class="author-summary">
                     <!--
-                    <c:if test="${author.coverImageId != null}">
+                    <c:if test="${author.iconImageId != null}">
                         <a class="anthology-cover"></a>
                     </c:if>
                     -->

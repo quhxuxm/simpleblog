@@ -2,13 +2,12 @@ CREATE TABLE authentication (
     _id             BIGINT AUTO_INCREMENT,
     token           VARCHAR(40) NOT NULL,
     password        VARCHAR(40) NOT NULL,
-    nick_name       VARCHAR(40) NOT NULL,
     type            VARCHAR(20) NOT NULL,
     register_date   DATETIME    NOT NULL,
     last_login_date DATETIME    NOT NULL,
     PRIMARY KEY (_id),
-    CONSTRAINT UNIQUE (token),
-    CONSTRAINT UNIQUE (nick_name)
+    CONSTRAINT UNIQUE (token)
+
 );
 
 CREATE TABLE role (
@@ -49,6 +48,7 @@ CREATE TABLE author (
     icon_image_id        BIGINT,
     default_anthology_id BIGINT,
     additional_info_id   BIGINT UNIQUE  NOT NULL,
+    nick_name            VARCHAR(40)    NOT NULL UNIQUE,
     PRIMARY KEY (_id),
     FOREIGN KEY (icon_image_id) REFERENCES image (_id),
     FOREIGN KEY (additional_info_id) REFERENCES author_additional_info (_id)

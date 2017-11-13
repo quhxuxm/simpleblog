@@ -16,7 +16,6 @@ public class Authentication implements Serializable {
     private Set<Role> roles;
     private Date registerDate;
     private Date lastLoginDate;
-    private String nickName;
     private Type type;
 
     public Authentication() {
@@ -77,22 +76,5 @@ public class Authentication implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    @Override
-    public String toString() {
-        return "Authentication{" + "id=" + id + ", token='" + token + '\''
-                + ", password='" + password + '\'' + ", roles=" + roles
-                + ", registerDate=" + registerDate + ", lastLoginDate="
-                + lastLoginDate + ", nickName='" + nickName + '\'' + ", type="
-                + type + '}';
     }
 }

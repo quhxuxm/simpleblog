@@ -64,7 +64,8 @@
              #{authorId},
              #{coverImageId}, #{additionalInfoId}, #{published})
     </insert>
-    <select id="getAnthologyDetail" resultMap="anthologyDetailMap" useCache="true">
+    <select id="getAnthologyDetail" resultMap="anthologyDetailMap"
+            useCache="true">
         SELECT
             anthology._id                AS _id,
             anthology.title              AS title,
@@ -74,16 +75,11 @@
             anthology.publish_date       AS publish_data,
             anthology.cover_image_id     AS cover_image_id,
             author._id                   AS author_id,
-            authentication.nick_name     AS author_nick_name,
+            author.nick_name             AS author_nick_name,
             anthology.additional_info_id AS additional_info_id,
             anthology.is_published       AS is_published
         FROM author author INNER JOIN anthology anthology
                 ON author._id = anthology.author_id
-            INNER JOIN authentication_author authenticationAndAuthor
-                ON author._id = authenticationAndAuthor.author_id
-            INNER JOIN authentication authentication
-                ON authenticationAndAuthor.authentication_id =
-                   authentication._id
         WHERE anthology._id = #{id}
     </select>
     <select id="getOne" resultMap="anthologyMap" useCache="true">
@@ -91,7 +87,8 @@
         FROM anthology
         WHERE _id = #{id}
     </select>
-    <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap" useCache="true">
+    <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap"
+            useCache="true">
         SELECT
         anthology._id AS _id,
         anthology.title AS title,
@@ -101,15 +98,11 @@
         anthology.publish_date AS publish_data,
         anthology.cover_image_id AS cover_image_id,
         author._id AS author_id,
-        authentication.nick_name AS author_nick_name,
+        author.nick_name AS author_nick_name,
         anthology.additional_info_id AS additional_info_id,
         anthology.is_published AS is_published
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
-        INNER JOIN authentication_author authenticationAndAuthor
-        ON author._id = authenticationAndAuthor.author_id
-        INNER JOIN authentication authentication
-        ON authenticationAndAuthor.authentication_id = authentication._id
         ORDER BY
         anthology.publish_date
         <if test="isDesc">
@@ -154,16 +147,11 @@
         anthology.publish_date AS publish_data,
         anthology.cover_image_id AS cover_image_id,
         author._id AS author_id,
-        authentication.nick_name AS author_nick_name,
+        author.nick_name AS author_nick_name,
         anthology.additional_info_id AS additional_info_id,
         anthology.is_published AS is_published
         FROM author author INNER JOIN anthology anthology ON author._id =
         anthology.author_id
-        INNER JOIN authentication_author authenticationAndAuthor
-        ON author._id = authenticationAndAuthor.author_id
-        INNER JOIN authentication authentication
-        ON authenticationAndAuthor.authentication_id =
-        authentication._id
         WHERE author._id = #{authorId}
         ORDER BY
         anthology.create_date

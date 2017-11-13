@@ -9,7 +9,6 @@
         <result column="password" property="password"/>
         <result column="register_date" property="registerDate"/>
         <result column="last_login_date" property="lastLoginDate"/>
-        <result column="nick_name" property="nickName"/>
         <result column="type" property="type"
                 javaType="authenticationType"/>
         <collection property="roles" ofType="com.tongwen.domain.Role">
@@ -26,7 +25,6 @@
             a.last_login_date AS last_login_date,
             r._id             AS role_id,
             r.name            AS role_name,
-            a.nick_name       AS nick_name,
             a.type            AS type
         FROM authentication a
             INNER JOIN authentication_role ar ON a._id = ar.authentication_id
@@ -42,7 +40,6 @@
             a.last_login_date AS last_login_date,
             r._id             AS role_id,
             r.name            AS role_name,
-            a.nick_name       AS nick_name,
             a.type            AS type
         FROM authentication a
             INNER JOIN authentication_role ar ON a._id = ar.authentication_id
@@ -51,15 +48,15 @@
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id"
             parameterType="authentication">
-        INSERT INTO authentication (token, password, nick_name, type, register_date, last_login_date)
+        INSERT INTO authentication (token, password, type, register_date, last_login_date)
         VALUES (#{token},
-                #{password}, #{nickName},
+                #{password},
                 #{type}, #{registerDate},
                 #{lastLoginDate})
     </insert>
     <update id="update">
         UPDATE authentication
-        SET password        = #{password}, nick_name = #{nickName},
+        SET password        = #{password},
             last_login_date = #{lastLoginDate}
         WHERE _id = #{id}
 
@@ -75,9 +72,4 @@
                       WHERE token = #{token})
     </select>
 
-    <select id="isNickNameExist" resultType="_boolean">
-        SELECT EXISTS(SELECT 1
-                      FROM authentication
-                      WHERE nick_name = #{nickName})
-    </select>
 </mapper>

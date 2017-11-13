@@ -47,14 +47,4 @@ public class AuthenticationService implements IAuthenticationService {
             throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
         }
     }
-
-    @Transactional(readOnly = true)
-    @Override
-    public boolean isNickNameExist(String nickName) throws ServiceException {
-        try {
-            return this.authenticationMapper.isNickNameExist(nickName);
-        } catch (Exception e) {
-            throw new ServiceException(e, ServiceException.Code.SYSTEM_ERROR);
-        }
-    }
 }

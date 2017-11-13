@@ -7,23 +7,29 @@
         <id property="id" column="_id"/>
         <result property="description" column="description"/>
         <result property="iconImageId" column="icon_image_id"/>
+        <result property="nickName" column="nick_name"/>
         <result property="defaultAnthologyId" column="default_anthology_id"/>
         <result property="additionalInfoId" column="additional_info_id"/>
     </resultMap>
     <resultMap type="authorAdditionalInfo" id="authorAdditionalInfoMapping">
         <id property="id" column="_id"/>
-        <result property="publishArticlesNumber" column="publish_articles_number"/>
-        <result property="publishCommentsNumber" column="publish_comments_number"/>
-        <result property="publishAnthologiesNumber" column="publish_anthologies_number"/>
+        <result property="publishArticlesNumber"
+                column="publish_articles_number"/>
+        <result property="publishCommentsNumber"
+                column="publish_comments_number"/>
+        <result property="publishAnthologiesNumber"
+                column="publish_anthologies_number"/>
         <result property="followedByNumber" column="followedby_number"/>
     </resultMap>
-    <select id="findAuthorByAuthenticationId" resultMap="authorMapping" useCache="true">
+    <select id="findAuthorByAuthenticationId" resultMap="authorMapping"
+            useCache="true">
         SELECT
             a._id                  AS _id,
             a.description          AS description,
             a.icon_image_id        AS icon_image_id,
             a.default_anthology_id AS default_anthology_id,
-            a.additional_info_id   AS additional_info_id
+            a.additional_info_id   AS additional_info_id,
+            a.nick_name            AS nick_name
         FROM
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE aa.authentication_id = #{authenticationId}
@@ -34,15 +40,16 @@
             a.description          AS description,
             a.icon_image_id        AS icon_image_id,
             a.default_anthology_id AS default_anthology_id,
-            a.additional_info_id   AS additional_info_id
+            a.additional_info_id   AS additional_info_id,
+            a.nick_name            AS nick_name
         FROM
             author a INNER JOIN authentication_author aa ON a._id = aa.author_id
         WHERE a._id = #{id}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO author (icon_image_id, description, default_anthology_id, additional_info_id)
+        INSERT INTO author (icon_image_id, description, default_anthology_id, additional_info_id, nick_name)
         VALUES (#{iconImageId}, #{description}, #{defaultAnthologyId},
-                #{additionalInfoId})
+                #{additionalInfoId}, #{nickName})
     </insert>
     <insert id="assignAuthentication">
         INSERT INTO authentication_author (authentication_id, author_id)
@@ -83,5 +90,11 @@
         FROM author author INNER JOIN author_additional_info addInfo
                 ON author.additional_info_id = addInfo._id
         WHERE author._id = #{authorId};
+    </select>
+
+    <select id="isNickNameExist" resultType="_boolean">
+        SELECT EXISTS(SELECT 1
+                      FROM author
+                      WHERE nick_name = #{nickName})
     </select>
 </mapper>

@@ -11,6 +11,7 @@ public class Author implements Serializable {
     private String description;
     private Long defaultAnthologyId;
     private Long additionalInfoId;
+    private String nickName;
 
     public Author() {
     }
@@ -53,5 +54,13 @@ public class Author implements Serializable {
 
     public void setAdditionalInfoId(Long additionalInfoId) {
         this.additionalInfoId = additionalInfoId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

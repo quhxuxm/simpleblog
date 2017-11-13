@@ -18,6 +18,7 @@ public class RegisterAuthorRequestValidator implements Validator {
     private static final Logger logger = LoggerFactory
             .getLogger(RegisterAuthorRequestValidator.class);
     private final IAuthenticationService authenticationService;
+    private final IAuthorService authorService;
     private RegisterAuthorConstraints registerAuthorConstraints;
     @Value("jsp.register.errorMessage.nickName.empty")
     private String nickNameEmptyErrorCode;
@@ -44,8 +45,10 @@ public class RegisterAuthorRequestValidator implements Validator {
 
     public RegisterAuthorRequestValidator(
             IAuthenticationService authenticationService,
+            IAuthorService authorService,
             RegisterAuthorConstraints registerAuthorConstraints) {
         this.authenticationService = authenticationService;
+        this.authorService = authorService;
         this.registerAuthorConstraints = registerAuthorConstraints;
     }
 
@@ -79,7 +82,7 @@ public class RegisterAuthorRequestValidator implements Validator {
             return;
         }
         try {
-            if (this.authenticationService
+            if (this.authorService
                     .isNickNameExist(registerAuthorForm.getNickName())) {
                 errors.rejectValue("nickName",
                         this.nickNameAlreadyExistErrorCode);

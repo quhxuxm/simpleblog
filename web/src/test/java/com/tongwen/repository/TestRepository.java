@@ -51,7 +51,6 @@ public class TestRepository {
             Authentication author1Authentication = this.authenticationService
                     .authenticate("1@1.com", Authentication.Type.EMAIL);
             System.out.println(author1Authentication.getId());
-            System.out.println(author1Authentication.getNickName());
             System.out.println(author1Authentication.getPassword());
             System.out.println(author1Authentication.getToken());
             Author author1 = this.authorService

@@ -66,7 +66,7 @@ public class AnthologyController {
         @RequestParam(name = "start", defaultValue = "0", required = false) int start,
         @RequestParam(name = "desc", defaultValue = "true", required = false) boolean isDesc,
         HttpSession session) throws ServiceException {
-        ModelAndView result = new ModelAndView("anthology/summariesCollection");
+        ModelAndView result = new ModelAndView("/fragment/anthology/summariesCollection");
         List<AnthologySummary> summariesCollection =
             this.anthologyService.getAnthologySummaries(authorId, start, isDesc);
         result.addObject("summariesCollection", summariesCollection);

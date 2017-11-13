@@ -9,6 +9,4 @@ public interface IAuthenticationService {
             throws ServiceException;
 
     boolean isTokenExist(String token) throws ServiceException;
-
-    boolean isNickNameExist(String nickName) throws ServiceException;
 }
