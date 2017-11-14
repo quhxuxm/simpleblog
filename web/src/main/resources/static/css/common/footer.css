@@ -1,0 +1,28 @@
+body > footer {
+    width: 100%;
+    background-color: #FFFFFF;
+    height: 200px;
+}
+
+body > footer > ul {
+    list-style: none;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+body > footer > ul > li + li {
+    margin-left: 15px;
+}
+
+@media (min-width: 1200px) {
+    body > footer > ul {
+        width: 960px;
+        padding-left: 0;
+    }
+}

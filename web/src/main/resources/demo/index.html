@@ -8,7 +8,11 @@
         <title>标题</title>
         <link href="../static/css/font-awesome.css" type="text/css"
               rel="stylesheet"/>
-        <link href="../static/css/framework.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/common/nav.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/common/footer.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/common/layout.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/common/component.css" type="text/css" rel="stylesheet"/>
+        <link href="../static/css/common/card.css" type="text/css" rel="stylesheet"/>
         <link href="../static/css/index.css" type="text/css" rel="stylesheet"/>
     </head>
     <body>
@@ -56,28 +60,21 @@
             </ul>
         </nav>
         <main>
-            <section class="summaries">
-                <article>
-                    <a href="#" style="background-image: url('../static/image/defaultAuthorIcon.jpg')" class="article-cover"></a>
-                    <div class="article-content">
+            <section class="card-container">
+                <div class="card">
+                    <header>
+                        <a href="#" class="icon-img-wrapper">
+                            <img src="../static/image/defaultAuthorIcon.jpg">
+                        </a>
+                        <a href="#" class="author-nick-name">
+                            作者1
+                        </a>
+                        <span class="timestamp">2017/10/10</span>
+                    </header>
+                    <a href="#" style="background-image: url('../static/image/defaultAuthorIcon.jpg')" class="cover"></a>
+                    <article>
                         <header>
-                            <a href="#" class="article-title">
-                                文章标题1
-                            </a>
-                            <div class="article-author-wrapper">
-                                <a href="#" class="icon-img-wrapper">
-                                    <img src="../static/image/defaultAuthorIcon.jpg">
-                                </a>
-                                <div class="author-nick-name-wrapper">
-                                    <a href="#" class="author-nick-name">
-                                        作者1
-                                    </a>
-                                    <span class="article-publish-timestamp">发布于2017/10/10</span>
-                                </div>
-                                <a href="#" class="icon-btn">
-                                    <span class="fa fa-plus-circle"></span>关注
-                                </a>
-                            </div>
+                            <a href="#">文章标题1</a>
                         </header>
                         <section>
                             文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
@@ -86,267 +83,25 @@
                             文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
                             文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
                         </section>
-                        <footer>
-                            <a href="#" class="anthology-name">文集1</a>
-                            <a href="#" class="action">
-                                <span class="fa fa-eye"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-heart"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-comment"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-bookmark"></span>1000
-                            </a>
-                        </footer>
-                    </div>
-                </article>
-                <article>
-                    <div class="article-content">
-                        <header>
-                            <a href="#" class="article-title">
-                                文章标题1
-                            </a>
-                            <div class="article-author-wrapper">
-                                <a href="#" class="icon-img-wrapper">
-                                    <img src="../static/image/defaultAuthorIcon.jpg">
-                                </a>
-                                <div class="author-nick-name-wrapper">
-                                    <a href="#" class="author-nick-name">
-                                        作者1
-                                    </a>
-                                    <span class="article-publish-timestamp">发布于2017/10/10</span>
-                                </div>
-                                <a href="#" class="icon-btn">
-                                    <span class="fa fa-plus-circle"></span>关注
-                                </a>
-                            </div>
-                        </header>
-                        <section>
-                            文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
-                            文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
-                            文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
-                            文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
-                            文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容，文章内容
-                        </section>
-                        <footer>
-                            <a href="#" class="anthology-name">文集1</a>
-                            <a href="#" class="action">
-                                <span class="fa fa-eye"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-heart"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-comment"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-bookmark"></span>1000
-                            </a>
-                        </footer>
-                    </div>
-                </article>
-                <article>
-                    <div class="article-content">
-                        <header>
-                            <a href="#" class="article-title">
-                                文章标题1
-                            </a>
-                            <div class="article-author-wrapper">
-                                <a href="#" class="icon-img-wrapper">
-                                    <img src="../static/image/defaultAuthorIcon.jpg">
-                                </a>
-                                <div class="author-nick-name-wrapper">
-                                    <a href="#" class="author-nick-name">
-                                        作者1
-                                    </a>
-                                    <span class="article-publish-timestamp">发布于2017/10/10</span>
-                                </div>
-                                <a href="#" class="icon-btn">
-                                    <span class="fa fa-plus-circle"></span>关注
-                                </a>
-                            </div>
-                        </header>
-                        <section>
-                            文章内容
-                        </section>
-                        <footer>
-                            <a href="#" class="anthology-name">文集1</a>
-                            <a href="#" class="action">
-                                <span class="fa fa-eye"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-heart"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-comment"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-bookmark"></span>1000
-                            </a>
-                        </footer>
-                    </div>
-                </article>
-                <article>
-                    <a href="#" style="background-image: url('../static/image/defaultAuthorIcon.jpg')" class="article-cover"></a>
-                    <div class="article-content">
-                        <header>
-                            <a href="#" class="article-title">
-                                文章标题1
-                            </a>
-                            <div class="article-author-wrapper">
-                                <a href="#" class="icon-img-wrapper">
-                                    <img src="../static/image/defaultAuthorIcon.jpg">
-                                </a>
-                                <div class="author-nick-name-wrapper">
-                                    <a href="#" class="author-nick-name">
-                                        作者1
-                                    </a>
-                                    <span class="article-publish-timestamp">发布于2017/10/10</span>
-                                </div>
-                                <a href="#" class="icon-btn">
-                                    <span class="fa fa-plus-circle"></span>关注
-                                </a>
-                            </div>
-                        </header>
-                        <section>
-                            文章内容
-                        </section>
-                        <footer>
-                            <a href="#" class="anthology-name">文集1</a>
-                            <a href="#" class="action">
-                                <span class="fa fa-eye"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-heart"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-comment"></span>1000
-                            </a>
-                            <a href="#"  class="action">
-                                <span class="fa fa-bookmark"></span>1000
-                            </a>
-                        </footer>
-                    </div>
-                </article>
+                    </article>
 
-                <a href="#" class="load-more-article-btn">加载更多...</a>
+                    <footer>
+                        <a href="#" class="anthology-name">文集1</a>
+                        <a href="#" class="action">
+                            <span class="fa fa-eye"></span>1000
+                        </a>
+                        <a href="#" class="action">
+                            <span class="fa fa-heart"></span>1000
+                        </a>
+                        <a href="#" class="action">
+                            <span class="fa fa-comment"></span>1000
+                        </a>
+                        <a href="#" class="action">
+                            <span class="fa fa-bookmark"></span>1000
+                        </a>
+                    </footer>
+                </div>
             </section>
-            <aside>
-                <ul class="operations">
-                    <li>
-                        <a href="#">
-                            热门文章<span class="fa fa-fire"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            热门文集<span class="fa fa-book"></span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            热门标签<span class="fa fa-tag"></span>
-                        </a>
-                    </li>
-
-                    <li class="advice-author">
-                        <a href="#">
-                            推荐作者<span class="fa fa-users"></span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="authors">
-                    <li class="title">
-                        <a href="#">
-                            推荐作者
-                            <span class="fa fa-refresh"></span>
-                        </a>
-                    </li>
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <img src="../static/image/defaultAuthorIcon.jpg">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">作者1</span>
-                                <span class="follower-number">1000个关注</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>关注
-                        </a>
-                    </li>
-
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <img src="../static/image/defaultAuthorIcon.jpg">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">作者1</span>
-                                <span class="follower-number">1000个关注</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>关注
-                        </a>
-                    </li>
-
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <img src="../static/image/defaultAuthorIcon.jpg">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">作者1</span>
-                                <span class="follower-number">1000个关注</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>关注
-                        </a>
-                    </li>
-
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <img src="../static/image/defaultAuthorIcon.jpg">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">作者1</span>
-                                <span class="follower-number">1000个关注</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>关注
-                        </a>
-                    </li>
-
-                    <li class="author">
-                        <div class="author-info-wrapper">
-                            <a href="#" class="author-info-icon-wrapper">
-                                <img src="../static/image/defaultAuthorIcon.jpg">
-                            </a>
-                            <a href="#" class="nick-name-and-follower-number">
-                                <span class="nick-name">作者1</span>
-                                <span class="follower-number">1000个关注</span>
-                            </a>
-                        </div>
-                        <a href="#" class="icon-btn">
-                            <span class="fa fa-plus-circle"></span>关注
-                        </a>
-                    </li>
-
-                    <li class="load-more-author-btn">
-                        <a href="#">加载更多...</a>
-                    </li>
-
-                </ul>
-            </aside>
         </main>
         <footer>
             <ul>

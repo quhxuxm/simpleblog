@@ -6,7 +6,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
 <c:forEach var="articleSummary" items="${summariesCollection}">
-    <tongwen:articleSummary articleSummary="${articleSummary}"
-                            articleAdditionalInfo="${additionalInfoMap.get(articleSummary.id)}"/>
+    <tongwen:card articleSummary="${articleSummary}"
+                  articleAdditionalInfo="${additionalInfoMap.get(articleSummary.id)}"/>
 </c:forEach>
 <input type="hidden" name="nextStart" value="${nextStart}"/>

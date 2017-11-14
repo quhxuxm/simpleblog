@@ -1,0 +1,47 @@
+section.card-container {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+section.card-container > div.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
+}
+
+section.card-container > div.card > header {
+    width: 100%;
+}
+
+section.card-container > div.card > a.cover {
+    width: 100%;
+    height: 185px;
+    display: block;
+}
+
+section.card-container > div.card > article {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+section.card-container > div.card > article > header {
+    width: 100%;
+}
+
+section.card-container > div.card > article > section {
+    width: 100%;
+}
+
+section.card-container > div.card > footer {
+    width: 100%;
+}
