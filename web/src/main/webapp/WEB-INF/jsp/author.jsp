@@ -9,9 +9,9 @@
 <html lang="zh_CN">
     <tongwen:head>
         <jsp:attribute name="additional">
-            <c:url value="/js/common/article.js" var="articleJsUrl"/>
+            <c:url value="/js/author.js" var="authorJsUrl"/>
             <script type="application/javascript"
-                    src="${articleJsUrl}"></script>
+                    src="${authorJsUrl}"></script>
             <c:url value="/css/author.css" var="authorCssUrl"/>
             <link href="${authorCssUrl}" type="text/css" rel="stylesheet"/>
         </jsp:attribute>
