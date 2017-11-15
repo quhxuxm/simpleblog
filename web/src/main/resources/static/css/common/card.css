@@ -1,47 +1,106 @@
 section.card-container {
-    max-width: 1200px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 100%;
 }
-
 section.card-container > div.card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 3px hsla(0,0%,4%,.1), 0 0 0 1px hsla(0,0%,4%,.1);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    width: 100%;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.87);
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
 }
-
 section.card-container > div.card > header {
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 15px;
+    padding-bottom: 15px;
 }
 
-section.card-container > div.card > a.cover {
+
+section.card-container > div.card > header > a.author-icon-wrapper {
+    width: 36px;
+    height: 36px;
+}
+section.card-container > div.card > header > a.author-icon-wrapper > img {
     width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+section.card-container > div.card > header > a.author-nick-name {
+    margin-left: 6px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    font-weight: 500;
+}
+section.card-container > div.card > header > span.publish-time {
+    justify-self: flex-end;
+    margin-right: 15px;
+    margin-left: auto;
+    color: rgba(0, 0, 0, 0.54);
+}
+section.card-container > div.card > header > span.card-header-actions-trigger {
+    justify-self: flex-end;
+    margin-right: 0;
+    color: #757575;
+    font-size: 18px;
+}
+section.card-container > div.card > article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+section.card-container > div.card > article > header {
+    text-decoration: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    padding: 15px;
+}
+section.card-container > div.card > article > header > h1 {
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 28px;
+    max-height: 56px;
+    white-space: normal;
+}
+section.card-container > div.card > article > header > h1 > a {
+
+}
+section.card-container > div.card > article > a.card-cover {
     height: 185px;
     display: block;
 }
+section.card-container > div.card > article > section {
+    margin-left: 15px;
+    margin-right: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 20px;
+    font-size: 14px;
+    word-wrap: break-word;
+    text-align: start;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 15px;
+}
 
-section.card-container > div.card > article {
-    width: 100%;
-
+section.card-container > div.card >  article >footer {
+    margin: 15px;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
     justify-content: flex-start;
 }
+section.card-container > div.card > footer > a.anthology-name {
 
-section.card-container > div.card > article > header {
-    width: 100%;
-}
-
-section.card-container > div.card > article > section {
-    width: 100%;
-}
-
-section.card-container > div.card > footer {
-    width: 100%;
 }

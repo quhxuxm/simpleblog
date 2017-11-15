@@ -2,6 +2,7 @@ body > footer {
     width: 100%;
     background-color: #FFFFFF;
     height: 200px;
+    margin-top: 20px;
 }
 
 body > footer > ul {
