@@ -31,4 +31,6 @@ $(document).ready(function () {
         loadArticleSummariesCollection($(this), $(".summaries"));
         return false;
     });
+
+
 });
