@@ -32,6 +32,12 @@ $(document).ready(function () {
         return false;
     });
 
-
+    $('.card-container').masonry({
+        // set itemSelector so .grid-sizer is not used in layout
+        itemSelector: '.card-container > div.card',
+        // use element for option
+        columnWidth: '.card-container > div.card',
+        percentPosition: true
+    })
 
 });
