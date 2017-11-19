@@ -32,15 +32,24 @@ $(document).ready(function () {
         return false;
     });
 
-    $('.card-container').masonry({
-        // set itemSelector so .grid-sizer is not used in layout
-        itemSelector: '.card-container > div.card',
-        // use element for option
-        columnWidth: '.card-container > div.card',
-        percentPosition: true,
-        gutter:'.card-container > div.card',
-        transitionDuration:0,
-        resize:true
-    })
+/*    $(window).resize(function(){
+        var cardContainerWrapper = $("body>main");
+        var cardContainer = $(".card-container", cardContainerWrapper);
+        var cardContainerColumns = $(">.card-container-column", cardContainer);
+        var cardContainerWidth = parseInt(cardContainer.width());
+        var allCards = $(">div.card", cardContainerColumns);
+        if(cardContainerWidth < 568 ){
+            if(cardContainerColumns.length > 1){
+
+            }
+            return;
+        }
+        if(cardContainerWidth < 960 && cardContainerWidth >= 568){
+            return;
+        }
+        if(cardContainerWidth >= 960){
+            return;
+        }
+    });*/
 
 });
