@@ -37,7 +37,10 @@ $(document).ready(function () {
         itemSelector: '.card-container > div.card',
         // use element for option
         columnWidth: '.card-container > div.card',
-        percentPosition: true
+        percentPosition: true,
+        gutter:'.card-container > div.card',
+        transitionDuration:0,
+        resize:true
     })
 
 });
