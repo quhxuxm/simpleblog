@@ -6,7 +6,13 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
 <c:forEach var="articleSummary" items="${summariesCollection}">
-    <tongwen:card articleSummary="${articleSummary}"
-                  articleAdditionalInfo="${additionalInfoMap.get(articleSummary.id)}"/>
+    <tongwen:card authorIconImageId="${articleSummary.authorIcomImageId}"
+                  summary="${articleSummary.summary}"
+                  authorNickName="${articleSummary.authorNickName}"
+                  publishDate="${articleSummary.publishDate}"
+                  coverImageId="${articleSummary.coverImageId}"
+                  title="${articleSummary.title}" commentList=""
+                  currentAuthorIconImageId="" currentAuthorNickName=""
+                  viewAuthorUrl="" viewDetailUrl=""/>
 </c:forEach>
 <input type="hidden" name="nextStart" value="${nextStart}"/>
