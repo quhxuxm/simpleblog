@@ -1,5 +1,6 @@
 .card-container {
-    display: block;
+    display: flex;
+    flex-direction: row;
     column-count: 1;
     column-gap: 15px;
     width: 100%;

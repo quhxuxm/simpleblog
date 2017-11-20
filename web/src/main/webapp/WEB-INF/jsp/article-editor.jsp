@@ -18,7 +18,7 @@
     </tongwen:head>
     <body>
         <main>
-            <c:url var="articleEditActionsBaseUrl" value="/article/"></c:url>
+            <c:url var="articleEditActionsBaseUrl" value="/article/"/>
             <section class="article article-editor" data-url="${articleEditActionsBaseUrl}" data-articleId="${article.id}" data-csrfHeader="${_csrf.headerName}" data-csrfToken="${_csrf.token}">
                 <ul class="toolbar">
                     <li class="toolbar-btn-wrapper save-btn-wrapper">

@@ -22,9 +22,6 @@
             <section class="card-container">
                 <jsp:include page="/article/allPublishedArticleSummariesCollection"/>
                 <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
-                <a href="${allPublishedArticleSummariesCollection}" class="load-more-article-btn">
-                    <fmt:message key="jsp.common.link.loadMore"/>
-                </a>
             </section>
         </main>
         <tongwen:footer/>

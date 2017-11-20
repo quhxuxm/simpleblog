@@ -6,12 +6,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
 <c:forEach var="articleSummary" items="${summariesCollection}">
-    <tongwen:card authorIconImageId="${articleSummary.authorIcomImageId}"
+    <tongwen:card authorIconImageId="${articleSummary.authorIconImageId}"
                   summary="${articleSummary.summary}"
                   authorNickName="${articleSummary.authorNickName}"
                   publishDate="${articleSummary.publishDate}"
                   coverImageId="${articleSummary.coverImageId}"
-                  title="${articleSummary.title}" commentList=""
+                  title="${articleSummary.title}" commentList="${null}"
                   currentAuthorIconImageId="" currentAuthorNickName=""
                   viewAuthorUrl="" viewDetailUrl=""/>
 </c:forEach>

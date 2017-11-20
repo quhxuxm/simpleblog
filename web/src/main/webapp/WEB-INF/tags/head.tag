@@ -13,11 +13,24 @@
     </title>
     <c:url var="fontAwesomeCssUrl" value="/css/font-awesome.css"/>
     <link href="${fontAwesomeCssUrl}" type="text/css" rel="stylesheet"/>
-    <c:url var="frameworkCssUrl" value="/css/framework.css"/>
-    <link href="${frameworkCssUrl}" type="text/css" rel="stylesheet"/>
+    <c:url var="layoutCssUrl" value="/css/layout.css"/>
+    <link href="${layoutCssUrl}" type="text/css" rel="stylesheet"/>
+
+    <c:url var="navCssUrl" value="/css/nav.css"/>
+    <link href="${navCssUrl}" type="text/css" rel="stylesheet"/>
+
+    <c:url var="footerCssUrl" value="/css/footer.css"/>
+    <link href="${footerCssUrl}" type="text/css" rel="stylesheet"/>
+
+    <c:url var="componentCssUrl" value="/css/component.css"/>
+    <link href="${componentCssUrl}" type="text/css" rel="stylesheet"/>
+
+    <c:url var="cardCssUrl" value="/css/card.css"/>
+    <link href="${cardCssUrl}" type="text/css" rel="stylesheet"/>
+
     <c:url var="jQueryUrl" value="/js/jquery-3.2.1.js"/>
     <script type="application/javascript" src="${jQueryUrl}"></script>
-    <c:url var="frameworkScriptUrl" value="/js/common/framework.js" />
+    <c:url var="frameworkScriptUrl" value="/js/framework.js" />
     <script type="application/javascript" src="${frameworkScriptUrl}"></script>
     <jsp:invoke fragment="additional"  />
 </head>
