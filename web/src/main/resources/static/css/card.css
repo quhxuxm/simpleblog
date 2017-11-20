@@ -1,8 +1,5 @@
 .card-container {
-    display: flex;
-    flex-direction: row;
     column-count: 1;
-    column-gap: 15px;
     width: 100%;
     column-fill: balance;
 }
@@ -20,6 +17,13 @@
 }
 
 .card-container > div.card {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+}
+
+.card-container > div.card > div.card-inner {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -33,10 +37,11 @@
     box-sizing: border-box;
     flex-grow: 0;
     flex-shrink: 0;
-    margin-bottom: 15px;
+    width: 100%;
+    height: 100%;
 }
 
-.card-container > div.card > header {
+.card-container > div.card > div.card-inner > header {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -46,20 +51,20 @@
     flex-wrap: wrap;
 }
 
-.card-container > div.card > header > a.author-icon-wrapper {
+.card-container > div.card > div.card-inner > header > a.author-icon-wrapper {
     width: 36px;
     height: 36px;
     flex-shrink: 0;
     flex-grow: 0;
 }
 
-.card-container > div.card > header > a.author-icon-wrapper > img {
+.card-container > div.card > div.card-inner > header > a.author-icon-wrapper > img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-.card-container > div.card > header > a.author-nick-name {
+.card-container > div.card > div.card-inner > header > a.author-nick-name {
     margin-left: 6px;
     text-decoration: none;
     text-overflow: ellipsis;
@@ -71,7 +76,7 @@
     flex-shrink: 0;
 }
 
-.card-container > div.card > header > span.publish-time {
+.card-container > div.card > div.card-inner > header > span.publish-time {
     justify-self: flex-end;
     margin-right: 15px;
     color: rgba(0, 0, 0, 0.54);
@@ -80,7 +85,7 @@
     flex-shrink: 0;
 }
 
-.card-container > div.card > header > span.card-header-actions-trigger {
+.card-container > div.card > div.card-inner > header > span.card-header-actions-trigger {
     justify-self: flex-end;
     margin-right: 0;
     margin-left: auto;
@@ -92,7 +97,7 @@
     flex-shrink: 0;
 }
 
-.card-container > div.card > article {
+.card-container > div.card > div.card-inner > article {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -100,7 +105,7 @@
     justify-content: flex-start;
 }
 
-.card-container > div.card > article > header {
+.card-container > div.card > div.card-inner > article > header {
     text-decoration: none;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -108,7 +113,7 @@
     padding: 15px;
 }
 
-.card-container > div.card > article > header > h1 {
+.card-container > div.card > div.card-inner > article > header > h1 {
     font-weight: 300;
     font-size: 21px;
     line-height: 28px;
@@ -116,23 +121,23 @@
     white-space: normal;
 }
 
-.card-container > div.card > article > header > h1 > a {
+.card-container > div.card > div.card-inner > article > header > h1 > a {
 
 }
 
-.card-container > div.card > article > a.card-cover {
+.card-container > div.card > div.card-inner > article > a.card-cover {
     height: 250px;
     display: block;
 }
 
-.card-container > div.card > article > section {
+.card-container > div.card > div.card-inner > article > section {
     margin-left: 15px;
     margin-right: 15px;
     overflow: hidden;
     padding-bottom: 15px;
 }
 
-.card-container > div.card > article > section > p {
+.card-container > div.card > div.card-inner > article > section > p {
     text-overflow: ellipsis;
     max-height: 180px;
     line-height: 20px;
@@ -143,7 +148,7 @@
     display: block;
 }
 
-.card-container > div.card > article > footer {
+.card-container > div.card > div.card-inner > article > footer {
     margin: 15px;
     display: flex;
     flex-direction: row;
@@ -151,12 +156,12 @@
     align-items: center;
 }
 
-.card-container > div.card > article > footer > a.action.left {
+.card-container > div.card > div.card-inner > article > footer > a.action.left {
     justify-self: flex-start;
     margin-right: auto;
 }
 
-.card-container > div.card > article > footer > a.action {
+.card-container > div.card > div.card-inner > article > footer > a.action {
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -170,23 +175,23 @@
     font-size: 18px;
 }
 
-.card-container > div.card > article > footer > a.action:hover {
+.card-container > div.card > div.card-inner > article > footer > a.action:hover {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.26);
     background: #f5f5f5;
     color: rgba(0, 0, 0, 0.54);
     fill: rgba(0, 0, 0, 0.54);
 }
 
-.card-container > div.card > article > footer > a.action + a.action {
+.card-container > div.card > div.card-inner > article > footer > a.action + a.action {
     margin-left: 5px;
 }
 
-.card-container > div.card > div.comment-section {
+.card-container > div.card > div.card-inner > div.comment-section {
     padding: 15px;
     border-top: 1px solid #ebebeb;
 }
 
-.card-container > div.card > div.comment-section > ul {
+.card-container > div.card > div.card-inner > div.comment-section > ul {
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -194,7 +199,7 @@
     justify-content: flex-start;
 }
 
-.card-container > div.card > div.comment-section > ul > li {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -206,21 +211,21 @@
 
 }
 
-.card-container > div.card > div.comment-section > ul.expand {
+.card-container > div.card > div.card-inner > div.comment-section > ul.expand {
     max-height: 400px;
     overflow-y: auto;
     margin-bottom: 15px;
 }
 
-.card-container > div.card > div.comment-section > ul.expand > li {
+.card-container > div.card > div.card-inner > div.comment-section > ul.expand > li {
     height: auto;
 }
 
-.card-container > div.card > div.comment-section > ul > li + li {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li + li {
     margin-top: 15px;
 }
 
-.card-container > div.card > div.comment-section > ul > li > a.commenter-icon-wrapper {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li > a.commenter-icon-wrapper {
     width: 36px;
     height: 36px;
     flex-shrink: 0;
@@ -229,13 +234,13 @@
     align-self: flex-start;
 }
 
-.card-container > div.card > div.comment-section > ul > li > a.commenter-icon-wrapper > img {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li > a.commenter-icon-wrapper > img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-.card-container > div.card > div.comment-section > ul > li > article {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li > article {
     height: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -245,7 +250,7 @@
     margin-right: 5px;
 }
 
-.card-container > div.card > div.comment-section > ul > li > article > a.commenter-nick-name {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li > article > a.commenter-nick-name {
     display: inline-block;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -257,7 +262,7 @@
     float: left;
 }
 
-.card-container > div.card > div.comment-section > ul > li > article > section {
+.card-container > div.card > div.card-inner > div.comment-section > ul > li > article > section {
     float: left;
     clear: both;
     line-height: 22px;
@@ -266,7 +271,7 @@
     overflow: hidden;
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -280,20 +285,20 @@
 
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor > a.commenter-icon-wrapper {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor > a.commenter-icon-wrapper {
     width: 36px;
     height: 36px;
     flex-shrink: 0;
     flex-grow: 0;
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor > a.commenter-icon-wrapper > img {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor > a.commenter-icon-wrapper > img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor > div.comment-editor-operation-panel {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor > div.comment-editor-operation-panel {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -303,7 +308,7 @@
     color: rgba(68, 68, 68, 0.502);
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor > div.comment-editor-operation-panel > textarea {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor > div.comment-editor-operation-panel > textarea {
     resize: none;
     width: 100%;
     padding: 15px;
@@ -315,7 +320,7 @@
     margin-bottom: 15px;
 }
 
-.card-container > div.card > div.comment-section > div.comment-editor > div.comment-editor-operation-panel > a {
+.card-container > div.card > div.card-inner > div.comment-section > div.comment-editor > div.comment-editor-operation-panel > a {
     align-self: flex-end;
     margin-left: auto;
     margin-right: 15px;

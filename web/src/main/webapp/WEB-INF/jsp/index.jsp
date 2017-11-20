@@ -24,6 +24,5 @@
                 <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
             </section>
         </main>
-        <tongwen:footer/>
     </body>
 </html>
