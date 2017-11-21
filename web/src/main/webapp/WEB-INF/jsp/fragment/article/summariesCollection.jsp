@@ -12,7 +12,7 @@
                   publishDate="${articleSummary.publishDate}"
                   coverImageId="${articleSummary.coverImageId}"
                   title="${articleSummary.title}" commentList="${null}"
-                  currentAuthorIconImageId="" currentAuthorNickName=""
+                  currentAuthorIconImageId="${null}" currentAuthorNickName="${null}"
                   viewAuthorUrl="" viewDetailUrl=""/>
 </c:forEach>
 <input type="hidden" name="nextStart" value="${nextStart}"/>

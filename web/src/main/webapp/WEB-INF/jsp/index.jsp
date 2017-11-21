@@ -8,12 +8,12 @@
 <html lang="zh_CN">
     <tongwen:head>
         <jsp:attribute name="additional">
-            <c:url value="/js/common/article.js" var="articleJsUrl" />
+            <c:url value="/js/article.js" var="articleJsUrl" />
             <script type="application/javascript" src="${articleJsUrl}"></script>
             <c:url value="/css/index.css" var="indexCssUrl"/>
             <link href="${indexCssUrl}" type="text/css" rel="stylesheet"/>
-            <c:url value="/js/index.js" var="indexJsUrl" />
-            <script type="application/javascript" src="${indexJsUrl}"></script>
+            <c:url value="/js/card.js" var="cardJsUrl" />
+            <script type="application/javascript" src="${cardJsUrl}"></script>
         </jsp:attribute>
     </tongwen:head>
     <body>

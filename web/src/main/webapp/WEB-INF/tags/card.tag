@@ -60,11 +60,37 @@
             </c:if>
             <footer>
                 <a href="#" class="action left fa fa-heart-o"></a>
-                <a href="#" class="action fa fa-commenting-o"></a>
+                <a href="#" class="expand-comment action fa fa-commenting-o"></a>
                 <a href="#" class="action fa fa-bookmark-o"></a>
             </footer>
         </article>
         <div class="comment-section">
+            <c:if test="${commentList != null && commentList.size() > 0}">
+                <c:set value="${commentList.get(commentList.size()-1)}" var="lastComment" />
+                <ul>
+                        <li>
+                            <c:set var="currentCommenterIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
+                            <c:if test="${lastComment.commenterIconImageId!=null}">
+                                <c:url var="currentCommenterIconImageUrl"
+                                       value="/dimage/${lastComment.commenterIconImageId}"/>
+                            </c:if>
+                            <c:url var="currentCommenterUrl" value="/author/${lastComment.commenterId}/view"/>
+                            <a href="${currentCommenterUrl}" class="commenter-icon-wrapper">
+                                <img src="${currentCommenterIconImageUrl}">
+                            </a>
+                            <article>
+                                <a href="${currentCommenterIconImageUrl}" class="commenter-nick-name">
+                                    <c:out value="${lastComment.commenterNickName}" escapeXml="true"/>
+                                </a>
+                                <section>
+                                    <c:out value="${lastComment.text}" escapeXml="true"/>
+                                </section>
+                            </article>
+                        </li>
+                </ul>
+            </c:if>
+
+<%--
             <ul class="expand">
                 <c:forEach var="currentComment" items="${commentList}">
                     <li>
@@ -88,6 +114,8 @@
                     </li>
                 </c:forEach>
             </ul>
+--%>
+
             <div class="comment-editor">
                 <c:set var="currentAuthorIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
                 <c:if test="${currentAuthorIconImageId!=null}">
