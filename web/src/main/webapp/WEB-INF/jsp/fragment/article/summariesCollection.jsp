@@ -6,13 +6,20 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
 <c:forEach var="articleSummary" items="${summariesCollection}">
+    <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
+    <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
     <tongwen:card authorIconImageId="${articleSummary.authorIconImageId}"
                   summary="${articleSummary.summary}"
                   authorNickName="${articleSummary.authorNickName}"
                   publishDate="${articleSummary.publishDate}"
                   coverImageId="${articleSummary.coverImageId}"
                   title="${articleSummary.title}" commentList="${null}"
-                  currentAuthorIconImageId="${null}" currentAuthorNickName="${null}"
-                  viewAuthorUrl="" viewDetailUrl=""/>
+                  currentAuthorIconImageId="${sessionScope.get('authenticatedAuthor').iconImageId}"
+                  currentAuthorNickName="${sessionScope.get('authenticatedAuthor').nickName}"
+                  additionalActions="${null}" viewAuthorUrl="${viewAuthorUrl}"
+                  viewDetailUrl="${viewArticleUrl}"/>
+    <c:remove var="viewArticleUrl"/>
+    <c:remove var="viewAuthorUrl"/>
 </c:forEach>
+
 <input type="hidden" name="nextStart" value="${nextStart}"/>

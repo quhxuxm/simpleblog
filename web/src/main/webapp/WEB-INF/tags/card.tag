@@ -15,11 +15,13 @@
 <%@ attribute name="currentAuthorIconImageId" type="java.lang.Long" %>
 <%@ attribute name="currentAuthorNickName" type="java.lang.String" %>
 <%@ attribute name="commentList" type="java.util.List" %>
+<%@ attribute name="additionalActions" type="java.util.List" %>
 <c:url var="defaultAuthorIconImageUrl" value="/image/author.jpg"/>
 <div class="card">
     <div class="card-inner">
         <header>
-            <c:set var="cardAuthorIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
+            <c:set var="cardAuthorIconImageUrl"
+                   value="${defaultAuthorIconImageUrl}"/>
             <c:if test="${authorIconImageId!=null}">
                 <c:url var="cardAuthorIconImageUrl"
                        value="/dimage/${authorIconImageId}"/>
@@ -31,15 +33,33 @@
                 <c:out value="${authorNickName}" escapeXml="true"/>
             </a>
             <span class="publish-time">
-            <fmt:message key="jsp.article.label.publishOn">
-                <fmt:formatDate
-                        value="${publishDate}"
-                        var="formatCardPublishDate"
-                        pattern="yyyy-MM-dd"/>
-                <fmt:param value="${formatCardPublishDate}"/>
-            </fmt:message>
-        </span>
-            <span class="card-header-actions-trigger fa fa-ellipsis-v"></span>
+                <fmt:message key="jsp.article.label.publishOn">
+                    <fmt:formatDate value="${publishDate}"
+                                    var="formatCardPublishDate"
+                                    pattern="yyyy-MM-dd"/>
+                    <fmt:param value="${formatCardPublishDate}"/>
+                </fmt:message>
+            </span>
+            <c:if test="${additionalActions != null && additionalActions.size() != 0}">
+                <span class="card-header-actions-trigger fa fa-ellipsis-v">
+                    <ul>
+                        <c:forEach var="currentAdditionalAction"
+                                   items="${additionalActions}">
+                            <c:if test="${currentAdditionalAction.matchSecurity}">
+                                <li>
+                                    <a href="${currentAdditionalAction.url}"
+                                       data-is-ajax="${currentAdditionalAction.isAjax}"
+                                       data-refresh-target="${currentAdditionalAction.refreshTarget}">
+                                        <c:out value="${currentAdditionalAction.label}"
+                                               escapeXml="true"/>
+                                    </a>
+                                </li>
+                            </c:if>
+
+                        </c:forEach>
+                    </ul>
+                </span>
+            </c:if>
         </header>
         <article>
             <header>
@@ -56,68 +76,77 @@
             </section>
             <c:if test="${coverImageId !=null}">
                 <c:url value="/dimage/${coverImageId}" var="coverImageUrl"/>
-                <a href="${viewDetailUrl}" style="background-image: url('${coverImageUrl}')" class="card-cover"></a>
+                <a href="${viewDetailUrl}"
+                   style="background-image: url('${coverImageUrl}')"
+                   class="card-cover"></a>
             </c:if>
             <footer>
                 <a href="#" class="action left fa fa-heart-o"></a>
-                <a href="#" class="expand-comment action fa fa-commenting-o"></a>
+                <a href="#"
+                   class="expand-comment action fa fa-commenting-o"></a>
                 <a href="#" class="action fa fa-bookmark-o"></a>
             </footer>
         </article>
         <div class="comment-section">
             <c:if test="${commentList != null && commentList.size() > 0}">
-                <c:set value="${commentList.get(commentList.size()-1)}" var="lastComment" />
+                <c:set value="${commentList.get(commentList.size()-1)}"
+                       var="lastComment"/>
                 <ul>
-                        <li>
-                            <c:set var="currentCommenterIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
-                            <c:if test="${lastComment.commenterIconImageId!=null}">
-                                <c:url var="currentCommenterIconImageUrl"
-                                       value="/dimage/${lastComment.commenterIconImageId}"/>
-                            </c:if>
-                            <c:url var="currentCommenterUrl" value="/author/${lastComment.commenterId}/view"/>
-                            <a href="${currentCommenterUrl}" class="commenter-icon-wrapper">
-                                <img src="${currentCommenterIconImageUrl}">
-                            </a>
-                            <article>
-                                <a href="${currentCommenterIconImageUrl}" class="commenter-nick-name">
-                                    <c:out value="${lastComment.commenterNickName}" escapeXml="true"/>
-                                </a>
-                                <section>
-                                    <c:out value="${lastComment.text}" escapeXml="true"/>
-                                </section>
-                            </article>
-                        </li>
-                </ul>
-            </c:if>
-
-<%--
-            <ul class="expand">
-                <c:forEach var="currentComment" items="${commentList}">
                     <li>
-                        <c:set var="currentCommenterIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
-                        <c:if test="${currentComment.commenterIconImageId!=null}">
+                        <c:set var="currentCommenterIconImageUrl"
+                               value="${defaultAuthorIconImageUrl}"/>
+                        <c:if test="${lastComment.commenterIconImageId!=null}">
                             <c:url var="currentCommenterIconImageUrl"
-                                   value="/dimage/${currentComment.commenterIconImageId}"/>
+                                   value="/dimage/${lastComment.commenterIconImageId}"/>
                         </c:if>
-                        <c:url var="currentCommenterUrl" value="/author/${currentComment.commenterId}/view"/>
-                        <a href="${currentCommenterUrl}" class="commenter-icon-wrapper">
+                        <c:url var="currentCommenterUrl"
+                               value="/author/${lastComment.commenterId}/view"/>
+                        <a href="${currentCommenterUrl}"
+                           class="commenter-icon-wrapper">
                             <img src="${currentCommenterIconImageUrl}">
                         </a>
                         <article>
-                            <a href="${currentCommenterIconImageUrl}" class="commenter-nick-name">
-                                <c:out value="${currentComment.commenterNickName}" escapeXml="true"/>
+                            <a href="${currentCommenterIconImageUrl}"
+                               class="commenter-nick-name">
+                                <c:out value="${lastComment.commenterNickName}"
+                                       escapeXml="true"/>
                             </a>
                             <section>
-                                <c:out value="${currentComment.text}" escapeXml="true"/>
+                                <c:out value="${lastComment.text}"
+                                       escapeXml="true"/>
                             </section>
                         </article>
                     </li>
-                </c:forEach>
-            </ul>
---%>
-
+                </ul>
+            </c:if>
+            <%--
+                        <ul class="expand">
+                            <c:forEach var="currentComment" items="${commentList}">
+                                <li>
+                                    <c:set var="currentCommenterIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
+                                    <c:if test="${currentComment.commenterIconImageId!=null}">
+                                        <c:url var="currentCommenterIconImageUrl"
+                                               value="/dimage/${currentComment.commenterIconImageId}"/>
+                                    </c:if>
+                                    <c:url var="currentCommenterUrl" value="/author/${currentComment.commenterId}/view"/>
+                                    <a href="${currentCommenterUrl}" class="commenter-icon-wrapper">
+                                        <img src="${currentCommenterIconImageUrl}">
+                                    </a>
+                                    <article>
+                                        <a href="${currentCommenterIconImageUrl}" class="commenter-nick-name">
+                                            <c:out value="${currentComment.commenterNickName}" escapeXml="true"/>
+                                        </a>
+                                        <section>
+                                            <c:out value="${currentComment.text}" escapeXml="true"/>
+                                        </section>
+                                    </article>
+                                </li>
+                            </c:forEach>
+                        </ul>
+            --%>
             <div class="comment-editor">
-                <c:set var="currentAuthorIconImageUrl" value="${defaultAuthorIconImageUrl}"/>
+                <c:set var="currentAuthorIconImageUrl"
+                       value="${defaultAuthorIconImageUrl}"/>
                 <c:if test="${currentAuthorIconImageId!=null}">
                     <c:url var="currentAuthorIconImageUrl"
                            value="/dimage/${currentAuthorIconImageId}"/>
@@ -126,10 +155,13 @@
                     <img src="${currentAuthorIconImageUrl}">
                 </a>
                 <div class="comment-editor-operation-panel">
-                    <fmt:message key="tag.card.link.comment.editor.placeHolder" var="commentEditorPlaceholder"/>
-                    <textarea title="" placeholder="${commentEditorPlaceholder}"></textarea>
+                    <fmt:message key="tag.card.link.comment.editor.placeHolder"
+                                 var="commentEditorPlaceholder"/>
+                    <textarea title=""
+                              placeholder="${commentEditorPlaceholder}"></textarea>
                     <a href="#" class="">
-                        <fmt:message key="tag.card.link.comment.editor.btn.publish"/>
+                        <fmt:message
+                                key="tag.card.link.comment.editor.btn.publish"/>
                     </a>
                 </div>
             </div>

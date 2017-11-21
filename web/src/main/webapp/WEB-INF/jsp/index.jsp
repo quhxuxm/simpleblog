@@ -16,7 +16,7 @@
             <script type="application/javascript" src="${cardJsUrl}"></script>
         </jsp:attribute>
     </tongwen:head>
-    <body>
+    <body id="index">
         <tongwen:nav />
         <main>
             <section class="card-container">

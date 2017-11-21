@@ -87,6 +87,22 @@
     cursor: pointer;
     flex-grow: 0;
     flex-shrink: 0;
+    position: relative;
+}
+.card-container > div.card > div.card-inner > header > span.card-header-actions-trigger > ul {
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    padding: 15px;
+}
+.card-container > div.card > div.card-inner > header > span.card-header-actions-trigger > ul > li {
+    padding: 15px;
+    width: 100%;
 }
 .card-container > div.card > div.card-inner > article {
     width: 100%;
