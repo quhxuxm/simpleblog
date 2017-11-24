@@ -32,24 +32,6 @@ $(document).ready(function () {
         return false;
     });
 
-/*    $(window).resize(function(){
-        var cardContainerWrapper = $("body>main");
-        var cardContainer = $(".card-container", cardContainerWrapper);
-        var cardContainerColumns = $(">.card-container-column", cardContainer);
-        var cardContainerWidth = parseInt(cardContainer.width());
-        var allCards = $(">div.card", cardContainerColumns);
-        if(cardContainerWidth < 568 ){
-            if(cardContainerColumns.length > 1){
 
-            }
-            return;
-        }
-        if(cardContainerWidth < 960 && cardContainerWidth >= 568){
-            return;
-        }
-        if(cardContainerWidth >= 960){
-            return;
-        }
-    });*/
 
 });

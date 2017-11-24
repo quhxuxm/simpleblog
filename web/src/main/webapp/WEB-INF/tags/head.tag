@@ -30,6 +30,7 @@
 
     <c:url var="jQueryUrl" value="/js/jquery-3.2.1.js"/>
     <script type="application/javascript" src="${jQueryUrl}"></script>
+
     <c:url var="frameworkScriptUrl" value="/js/framework.js" />
     <script type="application/javascript" src="${frameworkScriptUrl}"></script>
     <jsp:invoke fragment="additional"  />

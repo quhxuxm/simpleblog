@@ -16,8 +16,9 @@
 <%@ attribute name="currentAuthorNickName" type="java.lang.String" %>
 <%@ attribute name="commentList" type="java.util.List" %>
 <%@ attribute name="additionalActions" type="java.util.List" %>
+<%@ attribute name="index" type="java.lang.Integer" %>
 <c:url var="defaultAuthorIconImageUrl" value="/image/author.jpg"/>
-<div class="card">
+<div class="card" data-index="${index}">
     <div class="card-inner">
         <header>
             <c:set var="cardAuthorIconImageUrl"

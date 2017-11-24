@@ -10,6 +10,7 @@ import com.tongwen.web.request.ArticleEditRequest;
 import com.tongwen.web.response.ArticleBookmarkResponse;
 import com.tongwen.web.response.ArticleEditResponse;
 import com.tongwen.web.response.ArticlePraiseResponse;
+import com.tongwen.web.response.common.CardInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/article")
@@ -262,7 +264,19 @@ public class ArticleController {
         int summariesCollectionSize = 0;
         Map<Long, ArticleAdditionalInfo> additionalInfoMap =
             this.articleService.getAdditionalInfoList(articleSummariesCollection);
-        result.addObject("summariesCollection", articleSummariesCollection);
+        List<CardInfo> cardInfoList = articleSummariesCollection.stream().map(articleSummary -> {
+            CardInfo cardInfo = new CardInfo();
+            cardInfo.setId(articleSummary.getId());
+            cardInfo.setAuthorId(articleSummary.getAuthorId());
+            cardInfo.setAuthorNickName(articleSummary.getAuthorNickName());
+            cardInfo.setTitle(articleSummary.getTitle());
+            cardInfo.setSummary(articleSummary.getSummary());
+            cardInfo.setPublishDate(articleSummary.getPublishDate());
+            cardInfo.setCoverImageId(articleSummary.getCoverImageId());
+            cardInfo.setAuthorIconImageId(articleSummary.getAuthorIconImageId());
+            return cardInfo;
+        }).collect(Collectors.toList());
+        result.addObject("summariesCollection", cardInfoList);
         result.addObject("additionalInfoMap", additionalInfoMap);
         summariesCollectionSize = articleSummariesCollection.size();
         int nextStart = start + summariesCollectionSize;
