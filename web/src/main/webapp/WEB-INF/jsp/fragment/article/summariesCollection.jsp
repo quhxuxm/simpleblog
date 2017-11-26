@@ -9,7 +9,7 @@
     <c:forEach var="articleSummary" items="${summariesCollection}" varStatus="loop">
         <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
         <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
-        <tongwen:card index="${loop.index}" authorIconImageId="${articleSummary.authorIconImageId}"
+        <tongwen:card index="${loop.index + nextStart}" authorIconImageId="${articleSummary.authorIconImageId}"
                       summary="${articleSummary.summary}"
                       authorNickName="${articleSummary.authorNickName}"
                       publishDate="${articleSummary.publishDate}"

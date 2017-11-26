@@ -151,6 +151,7 @@
 .card-container > div.card-container-column > div.card > div.card-inner > article > a.card-cover {
     height: 250px;
     display: block;
+    background-position:center;
 }
 
 .card-container > div.card-container-column > div.card > div.card-inner > article > section {
