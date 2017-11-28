@@ -5,6 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="tongwen" tagdir="/WEB-INF/tags" %>
+<c:url var="articleSummariesCollectionUrl" value="/article/allPublishedArticleSummariesCollection" >
+    <c:param name="start" value="${nextStart}"/>
+</c:url>
+<input id="summariesCollectionUrlInput"  type="hidden" value="${articleSummariesCollectionUrl}" />
 <div class="card-container-column">
     <c:forEach var="articleSummary" items="${summariesCollection}" varStatus="loop">
         <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
@@ -23,5 +27,3 @@
         <c:remove var="viewAuthorUrl"/>
     </c:forEach>
 </div>
-
-<input type="hidden" name="nextStart" value="${nextStart}"/>
