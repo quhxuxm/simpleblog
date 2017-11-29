@@ -1,23 +1,24 @@
 $(document).ready(function () {
     function layout() {
-        var cardContainer = $("body>main>section.card-container");
-        var containerColumns = $(">div.card-container-column", cardContainer);
-        var cards = [];
-        containerColumns.each(function () {
-            $(">div.card", $(this)).each(function () {
-                cards.push($(this));
-            })
-        });
-        cards.sort(function (a, b) {
-            var aIndex = parseInt(a.attr("data-index"));
-            var bIndex = parseInt(b.attr("data-index"));
-            return aIndex - bIndex;
-        });
-        var numberOfCards = cards.length;
-        var numberOfContainerColumns = containerColumns.length;
+
         var windowWidth = parseInt($(window).width());
         var windowHeight = parseInt($(window).height());
         if (windowWidth <= 568) {
+            var cardContainer = $("body>main>section.card-container");
+            var containerColumns = $(">div.card-container-column", cardContainer);
+            var cards = [];
+            containerColumns.each(function () {
+                $(">div.card", $(this)).each(function () {
+                    cards.push($(this));
+                })
+            });
+            cards.sort(function (a, b) {
+                var aIndex = parseInt(a.attr("data-index"));
+                var bIndex = parseInt(b.attr("data-index"));
+                return aIndex - bIndex;
+            });
+            var numberOfCards = cards.length;
+            var numberOfContainerColumns = containerColumns.length;
             cardContainer.removeClass("three-columns");
             cardContainer.removeClass("two-columns");
             if (numberOfContainerColumns > 1) {
@@ -36,6 +37,21 @@ $(document).ready(function () {
             return;
         }
         if (windowWidth > 568 && windowWidth <= 960) {
+            var cardContainer = $("body>main>section.card-container");
+            var containerColumns = $(">div.card-container-column", cardContainer);
+            var cards = [];
+            containerColumns.each(function () {
+                $(">div.card", $(this)).each(function () {
+                    cards.push($(this));
+                })
+            });
+            cards.sort(function (a, b) {
+                var aIndex = parseInt(a.attr("data-index"));
+                var bIndex = parseInt(b.attr("data-index"));
+                return aIndex - bIndex;
+            });
+            var numberOfCards = cards.length;
+            var numberOfContainerColumns = containerColumns.length;
             cardContainer.removeClass("three-columns");
             cardContainer.addClass("two-columns");
 
@@ -72,6 +88,21 @@ $(document).ready(function () {
             }
         }
         if (windowWidth > 960) {
+            var cardContainer = $("body>main>section.card-container");
+            var containerColumns = $(">div.card-container-column", cardContainer);
+            var cards = [];
+            containerColumns.each(function () {
+                $(">div.card", $(this)).each(function () {
+                    cards.push($(this));
+                })
+            });
+            cards.sort(function (a, b) {
+                var aIndex = parseInt(a.attr("data-index"));
+                var bIndex = parseInt(b.attr("data-index"));
+                return aIndex - bIndex;
+            });
+            var numberOfCards = cards.length;
+            var numberOfContainerColumns = containerColumns.length;
             cardContainer.removeClass("two-columns");
             cardContainer.addClass("three-columns");
             if (numberOfContainerColumns === 2) {
