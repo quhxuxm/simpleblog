@@ -182,17 +182,18 @@ $(document).ready(function () {
         //当 滚动条距底部的距离 + 滚动条滚动的距离 >= 文档的高度 - 窗口的高度
         //换句话说：（滚动条滚动的距离 + 窗口的高度 = 文档的高度）  这个是基本的公式
         if ((BOTTOM_OFFSET + scrollTop) >= docHeight - windowHeight) {
-            var loadingUrl = $("#summariesCollectionUrlInput").val();
+            var cardContainer = $(".card-container");
+            var cardContainerColumns = $("div.card-container-column", cardContainer);
+            var loadingUrl =cardContainer.attr("data-url");
             $.ajax({
                 url: loadingUrl,
                 method: "GET",
                 success: function (serverReturnData) {
-                    var newLoadingUrl = $("#summariesCollectionUrlInput", serverReturnData).val();
-                    var loadedCards = $("div.card", serverReturnData);
-                    var loadedCardContainerColumns = $(".card-container>div.card-container-column");
-                    $("#summariesCollectionUrlInput").val(newLoadingUrl)
-                    for(var i=0;i<loadedCards.length;i++){
-                        loadedCardContainerColumns[i % loadedCardContainerColumns.length].append(loadedCards[i]);
+                    cardContainer.attr("data-url", $(serverReturnData).attr("data-url"));
+                    var cardsLoaded = $(".card",serverReturnData);
+                    for(var i=0;i<cardsLoaded.length;i++) {
+                        var currentCardColumnIndex = i % cardContainerColumns.length;
+                        cardContainerColumns[currentCardColumnIndex].append(cardsLoaded[i])
                     }
                 }
             });

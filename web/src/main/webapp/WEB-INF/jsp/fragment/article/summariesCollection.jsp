@@ -8,22 +8,23 @@
 <c:url var="articleSummariesCollectionUrl" value="/article/allPublishedArticleSummariesCollection" >
     <c:param name="start" value="${nextStart}"/>
 </c:url>
-<input id="summariesCollectionUrlInput"  type="hidden" value="${articleSummariesCollectionUrl}" />
-<div class="card-container-column">
-    <c:forEach var="articleSummary" items="${summariesCollection}" varStatus="loop">
-        <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
-        <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
-        <tongwen:card index="${loop.index + nextStart}" authorIconImageId="${articleSummary.authorIconImageId}"
-                      summary="${articleSummary.summary}"
-                      authorNickName="${articleSummary.authorNickName}"
-                      publishDate="${articleSummary.publishDate}"
-                      coverImageId="${articleSummary.coverImageId}"
-                      title="${articleSummary.title}" commentList="${null}"
-                      currentAuthorIconImageId="${sessionScope.get('authenticatedAuthor').iconImageId}"
-                      currentAuthorNickName="${sessionScope.get('authenticatedAuthor').nickName}"
-                      additionalActions="${null}" viewAuthorUrl="${viewAuthorUrl}"
-                      viewDetailUrl="${viewArticleUrl}"/>
-        <c:remove var="viewArticleUrl"/>
-        <c:remove var="viewAuthorUrl"/>
-    </c:forEach>
-</div>
+<section class="card-container" data-url="${articleSummariesCollectionUrl}">
+    <div class="card-container-column">
+        <c:forEach var="articleSummary" items="${summariesCollection}" varStatus="loop">
+            <c:url var="viewArticleUrl" value="/article/${articleSummary.id}/view"/>
+            <c:url var="viewAuthorUrl" value="/author/${articleSummary.authorId}/view"/>
+            <tongwen:card index="${loop.index + nextStart}" authorIconImageId="${articleSummary.authorIconImageId}"
+                          summary="${articleSummary.summary}"
+                          authorNickName="${articleSummary.authorNickName}"
+                          publishDate="${articleSummary.publishDate}"
+                          coverImageId="${articleSummary.coverImageId}"
+                          title="${articleSummary.title}" commentList="${null}"
+                          currentAuthorIconImageId="${sessionScope.get('authenticatedAuthor').iconImageId}"
+                          currentAuthorNickName="${sessionScope.get('authenticatedAuthor').nickName}"
+                          additionalActions="${null}" viewAuthorUrl="${viewAuthorUrl}"
+                          viewDetailUrl="${viewArticleUrl}"/>
+            <c:remove var="viewArticleUrl"/>
+            <c:remove var="viewAuthorUrl"/>
+        </c:forEach>
+    </div>
+</section>

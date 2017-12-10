@@ -19,10 +19,8 @@
     <body id="index">
         <tongwen:nav />
         <main>
-            <section class="card-container">
-                <jsp:include page="/article/allPublishedArticleSummariesCollection"/>
-                <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
-            </section>
+            <jsp:include page="/article/allPublishedArticleSummariesCollection"/>
+            <c:url var="allPublishedArticleSummariesCollection" value="/article/allPublishedArticleSummariesCollection"/>
         </main>
     </body>
 </html>
