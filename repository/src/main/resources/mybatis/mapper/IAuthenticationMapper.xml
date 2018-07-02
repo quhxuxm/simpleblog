@@ -1,7 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.tongwen.repository.mapper.IAuthenticationMapper">
+<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.IAuthenticationMapper">
     <cache/>
     <resultMap type="authentication" id="authenticationMapper">
         <id column="_id" property="id"/>
@@ -11,7 +11,7 @@
         <result column="last_login_date" property="lastLoginDate"/>
         <result column="type" property="type"
                 javaType="authenticationType"/>
-        <collection property="roles" ofType="com.tongwen.domain.Role">
+        <collection property="roles" ofType="com.quhxuxm.quh.project.simpleblog.domain.Role">
             <result column="role_id" property="id"/>
             <result column="role_name" property="name"/>
         </collection>

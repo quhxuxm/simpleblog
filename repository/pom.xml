@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>root</artifactId>
-        <groupId>com.tongwen</groupId>
+        <groupId>com.quhxuxm.quh.project.simpleblog</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../root/pom.xml</relativePath>
     </parent>
@@ -20,12 +20,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.tongwen</groupId>
+            <groupId>com.quhxuxm.quh.project.simpleblog</groupId>
             <artifactId>domain</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.tongwen</groupId>
+            <groupId>com.quhxuxm.quh.project.simpleblog</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
