@@ -13,11 +13,11 @@
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Authentication$Type" alias="authenticationType"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleSummary" alias="articleSummary"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleDetail" alias="articleDetail"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AnthologyDetail" alias="anthologyDetail"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.view.AnthologyDetail" alias="anthologyDetail"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AnthologySummary" alias="anthologySummary"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Article" alias="article"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Anthology" alias="anthology"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AnthologyAdditionalInfo"
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology" alias="anthology"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo"
                    alias="anthologyAdditionalInfo"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleAdditionalInfo" alias="articleAdditionalInfo"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Author" alias="author"/>

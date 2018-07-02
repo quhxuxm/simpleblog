@@ -12,43 +12,12 @@
         <result property="publishDate" column="publish_date"/>
         <result property="authorId" column="author_id"/>
         <result property="coverImageId" column="cover_image_id"/>
-        <result property="additionalInfoId" column="additional_info_id"/>
-        <result property="published" column="is_published"/>
-    </resultMap>
-    <resultMap id="anthologyDetailMap" type="anthologyDetail">
-        <id property="id" column="_id"/>
-        <result property="title" column="title"/>
-        <result property="summary" column="summary"/>
-        <result property="createDate" column="create_date"/>
-        <result property="updateDate" column="update_date"/>
-        <result property="publishDate" column="publish_date"/>
-        <result property="authorId" column="author_id"/>
-        <result property="coverImageId" column="cover_image_id"/>
         <result property="authorNickName" column="author_nick_name"/>
         <result property="authorIconImageId" column="author_icon_image_id"/>
         <result property="additionalInfoId" column="additional_info_id"/>
         <result property="published" column="is_published"/>
-        <!--
-        <collection property="articles" column="_id" javaType="list"
-                    select="com.tongwen.repository.mapper.IArticleMapper.getAllPublishedArticleSummariesInAnthology"
-                    ofType="anthologySummary"/>
-                    -->
     </resultMap>
-    <resultMap id="anthologySummaryMap" type="anthologySummary">
-        <id property="id" column="_id"/>
-        <result property="title" column="title"/>
-        <result property="summary" column="summary"/>
-        <result property="createDate" column="create_date"/>
-        <result property="updateDate" column="update_date"/>
-        <result property="publishDate" column="publish_date"/>
-        <result property="authorId" column="author_id"/>
-        <result property="coverImageId" column="cover_image_id"/>
-        <result property="authorNickName" column="author_nick_name"/>
-        <result property="authorIconImageId" column="author_icon_image_id"/>
-        <result property="coverImageId" column="cover_image_id"/>
-        <result property="additionalInfoId" column="additional_info_id"/>
-        <result property="published" column="is_published"/>
-    </resultMap>
+
     <resultMap id="anthologyAdditionalInfoMap" type="anthologyAdditionalInfo">
         <id property="id" column="_id"/>
         <result property="viewNumber" column="view_number"/>
@@ -56,6 +25,7 @@
         <result property="praiseNumber" column="praise_number"/>
         <result property="bookmarkNumber" column="bookmark_number"/>
         <result property="followupNumber" column="followup_number"/>
+        <result property="articleNumber" column="article_number"/>
     </resultMap>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO anthology (title, summary, create_date, publish_date, update_date, author_id, cover_image_id, additional_info_id, is_published)
@@ -64,7 +34,7 @@
              #{authorId},
              #{coverImageId}, #{additionalInfoId}, #{published})
     </insert>
-    <select id="getAnthologyDetail" resultMap="anthologyDetailMap"
+    <select id="getOne" resultMap="anthologyMap"
             useCache="true">
         SELECT
             anthology._id                AS _id,
@@ -82,11 +52,7 @@
                 ON author._id = anthology.author_id
         WHERE anthology._id = #{id}
     </select>
-    <select id="getOne" resultMap="anthologyMap" useCache="true">
-        SELECT *
-        FROM anthology
-        WHERE _id = #{id}
-    </select>
+
     <select id="getSummariesOrderByPublishDate" resultMap="anthologySummaryMap"
             useCache="true">
         SELECT
@@ -117,7 +83,8 @@
             addInfo.praise_number   AS praise_number,
             addInfo.comment_number  AS comment_number,
             addInfo.bookmark_number AS bookmark_number,
-            addInfo.followup_number AS followup_number
+            addInfo.followup_number AS followup_number,
+            addInfo.article_number AS article_number
         FROM anthology anthology INNER JOIN anthology_additional_info addInfo
                 ON anthology.additional_info_id = addInfo._id
         WHERE anthology._id = #{anthologyId}

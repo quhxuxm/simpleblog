@@ -1,6 +1,7 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
 import com.quhxuxm.quh.project.simpleblog.domain.*;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology;
 import com.tongwen.domain.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;

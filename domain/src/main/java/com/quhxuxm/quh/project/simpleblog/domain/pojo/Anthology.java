@@ -1,9 +1,9 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
+package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class AnthologySummary implements Serializable {
+public class Anthology implements Serializable {
     private Long id;
     private String title;
     private String summary;
@@ -11,11 +11,15 @@ public class AnthologySummary implements Serializable {
     private Date updateDate;
     private Date publishDate;
     private Long authorId;
-    private String authorNickName;
-    private Long authorIconImageId;
     private Long coverImageId;
     private Long additionalInfoId;
     private Boolean isPublished;
+
+    public Anthology() {
+        this.createDate = new Date();
+        this.updateDate = this.createDate;
+        this.isPublished = false;
+    }
 
     public Long getId() {
         return id;
@@ -63,22 +67,6 @@ public class AnthologySummary implements Serializable {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
-    }
-
-    public String getAuthorNickName() {
-        return authorNickName;
-    }
-
-    public void setAuthorNickName(String authorNickName) {
-        this.authorNickName = authorNickName;
-    }
-
-    public Long getAuthorIconImageId() {
-        return authorIconImageId;
-    }
-
-    public void setAuthorIconImageId(Long authorIconImageId) {
-        this.authorIconImageId = authorIconImageId;
     }
 
     public Long getCoverImageId() {

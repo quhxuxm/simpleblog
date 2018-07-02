@@ -1,9 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.repository;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Article;
-import com.quhxuxm.quh.project.simpleblog.domain.ArticleAdditionalInfo;
-import com.quhxuxm.quh.project.simpleblog.domain.ArticleDetail;
-import com.quhxuxm.quh.project.simpleblog.domain.ArticleSummary;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Article;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.ArticleAdditionalInfo;
+import com.quhxuxm.quh.project.simpleblog.domain.view.ArticleDetail;
+import com.quhxuxm.quh.project.simpleblog.domain.view.ArticleSummary;
 import com.tongwen.domain.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

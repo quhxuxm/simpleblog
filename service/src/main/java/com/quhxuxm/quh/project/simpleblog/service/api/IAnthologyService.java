@@ -1,9 +1,7 @@
 package com.quhxuxm.quh.project.simpleblog.service.api;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologyAdditionalInfo;
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologyDetail;
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologySummary;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology;
 import com.quhxuxm.quh.project.simpleblog.service.exception.ServiceException;
 
 import java.util.List;

@@ -2,6 +2,7 @@ package com.quhxuxm.quh.project.simpleblog.repository;
 
 import com.quhxuxm.quh.project.simpleblog.Main;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
+import com.quhxuxm.quh.project.simpleblog.domain.view.AnthologyDetail;
 import com.tongwen.domain.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;

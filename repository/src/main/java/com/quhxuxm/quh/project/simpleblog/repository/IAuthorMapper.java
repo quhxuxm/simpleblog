@@ -1,6 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.repository;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.domain.Author;
 import com.quhxuxm.quh.project.simpleblog.domain.AuthorAdditionalInfo;

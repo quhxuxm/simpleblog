@@ -1,8 +1,6 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologyAdditionalInfo;
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologyDetail;
-import com.quhxuxm.quh.project.simpleblog.domain.AnthologySummary;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo;
 import com.quhxuxm.quh.project.simpleblog.domain.Author;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyService;
 import com.quhxuxm.quh.project.simpleblog.service.exception.ServiceException;

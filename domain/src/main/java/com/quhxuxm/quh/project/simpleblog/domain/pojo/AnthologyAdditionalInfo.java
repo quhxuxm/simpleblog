@@ -1,5 +1,4 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
-
+package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 import java.io.Serializable;
 
 public class AnthologyAdditionalInfo implements Serializable {
@@ -9,6 +8,7 @@ public class AnthologyAdditionalInfo implements Serializable {
     private Long viewNumber;
     private Long bookmarkNumber;
     private Long praiseNumber;
+    private Long articleNumber;
 
     public AnthologyAdditionalInfo() {
         this.viewNumber = 0L;
@@ -16,6 +16,7 @@ public class AnthologyAdditionalInfo implements Serializable {
         this.praiseNumber = 0L;
         this.bookmarkNumber = 0L;
         this.followupNumber = 0L;
+        this.articleNumber = 0L;
     }
 
     public Long getId() {
@@ -64,5 +65,13 @@ public class AnthologyAdditionalInfo implements Serializable {
 
     public void setPraiseNumber(Long praiseNumber) {
         this.praiseNumber = praiseNumber;
+    }
+
+    public Long getArticleNumber() {
+        return articleNumber;
+    }
+
+    public void setArticleNumber(Long articleNumber) {
+        this.articleNumber = articleNumber;
     }
 }
