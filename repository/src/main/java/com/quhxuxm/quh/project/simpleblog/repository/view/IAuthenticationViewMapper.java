@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.repository.view;
-
 import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 import com.quhxuxm.quh.project.simpleblog.domain.view.AuthenticationSummary;
 import org.apache.ibatis.annotations.Param;

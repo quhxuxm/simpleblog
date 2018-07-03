@@ -1,10 +1,13 @@
 package com.quhxuxm.quh.project.simpleblog.repository.pojo;
 import com.quhxuxm.quh.project.simpleblog.domain.pojo.ArticleComment;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface IArticleCommentPojoMapper {
     void update(ArticleComment comment);
 
     void create(ArticleComment comment);
 
-    ArticleComment findOneById(Long id);
+    ArticleComment findOneById(@Param("id") Long id);
 }

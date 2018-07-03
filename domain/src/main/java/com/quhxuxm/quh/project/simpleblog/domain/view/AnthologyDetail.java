@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.domain.view;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +22,9 @@ public class AnthologyDetail implements Serializable {
     private Long articleNumber;
     private String authorNickName;
     private Long authorIconImageId;
+    private Boolean isShared;
     private Set<String> tags;
+    private Set<AuthorDetail> participants;
 
     public AnthologyDetail() {
         this.tags = new HashSet<>();
@@ -171,5 +172,21 @@ public class AnthologyDetail implements Serializable {
 
     public void setTags(Set<String> tags) {
         this.tags = tags;
+    }
+
+    public Set<AuthorDetail> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Set<AuthorDetail> participants) {
+        this.participants = participants;
+    }
+
+    public Boolean getShared() {
+        return isShared;
+    }
+
+    public void setShared(Boolean shared) {
+        isShared = shared;
     }
 }

@@ -1,30 +1,3 @@
-CREATE TABLE authentication (
-    _id             BIGINT AUTO_INCREMENT,
-    token           VARCHAR(40) NOT NULL,
-    password        VARCHAR(40) NOT NULL,
-    type            VARCHAR(20) NOT NULL,
-    register_date   DATETIME    NOT NULL,
-    last_login_date DATETIME    NOT NULL,
-    PRIMARY KEY (_id),
-    CONSTRAINT UNIQUE (token)
-
-);
-
-CREATE TABLE role (
-    _id  BIGINT AUTO_INCREMENT,
-    name VARCHAR(40) NOT NULL,
-    PRIMARY KEY (_id),
-    CONSTRAINT UNIQUE (name)
-);
-
-CREATE TABLE authentication_role (
-    authentication_id BIGINT,
-    role_id           BIGINT,
-    PRIMARY KEY (authentication_id, role_id),
-    FOREIGN KEY (authentication_id) REFERENCES authentication (_id),
-    FOREIGN KEY (role_id) REFERENCES role (_id)
-);
-
 CREATE TABLE resource (
     _id       BIGINT AUTO_INCREMENT,
     content   LONGBLOB            NOT NULL,
@@ -46,7 +19,7 @@ CREATE TABLE author (
     _id                  BIGINT AUTO_INCREMENT,
     description          VARCHAR(200),
     icon_image_id        BIGINT,
-    default_anthology_id BIGINT,
+    default_anthology_id BIGINT NOT NULL,
     additional_info_id   BIGINT UNIQUE  NOT NULL,
     nick_name            VARCHAR(40)    NOT NULL UNIQUE,
     PRIMARY KEY (_id),
@@ -54,13 +27,32 @@ CREATE TABLE author (
     FOREIGN KEY (additional_info_id) REFERENCES author_additional_info (_id)
 );
 
-CREATE TABLE authentication_author (
-    authentication_id BIGINT,
-    author_id         BIGINT,
-    PRIMARY KEY (authentication_id, author_id),
-    FOREIGN KEY (authentication_id) REFERENCES authentication (_id),
+CREATE TABLE role (
+    _id  BIGINT AUTO_INCREMENT,
+    name VARCHAR(40) NOT NULL,
+    PRIMARY KEY (_id),
+    CONSTRAINT UNIQUE (name)
+);
+
+CREATE TABLE author_role (
+    author_id BIGINT,
+    role_id           BIGINT,
+    PRIMARY KEY (author_id, role_id),
     FOREIGN KEY (author_id) REFERENCES author (_id),
-    CONSTRAINT UNIQUE (authentication_id)
+    FOREIGN KEY (role_id) REFERENCES role (_id)
+);
+
+CREATE TABLE authentication (
+    _id             BIGINT AUTO_INCREMENT,
+    token           VARCHAR(40) NOT NULL,
+    password        VARCHAR(40) NOT NULL,
+    type            VARCHAR(20) NOT NULL,
+    register_date   DATETIME    NOT NULL,
+    last_login_date DATETIME    NOT NULL,
+    author_id BIGINT NOT NULL,
+    PRIMARY KEY (_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    CONSTRAINT UNIQUE (token)
 );
 
 CREATE TABLE anthology_additional_info (

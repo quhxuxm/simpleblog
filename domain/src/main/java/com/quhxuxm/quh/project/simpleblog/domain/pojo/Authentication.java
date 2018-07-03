@@ -1,30 +1,19 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Authentication implements Serializable {
-    public static enum Type {
-        EMAIL,
-        WEICHAT,
-        QQ,
-        NETEASY,
-        USERNAME
+    public enum Type {
+        EMAIL, WECHAT, QQ, NETEASE, USERNAME
     }
 
     private Long id;
     private String token;
     private String password;
-    private Set<Role> roles;
     private Date registerDate;
     private Date lastLoginDate;
     private Type type;
-
-    public Authentication() {
-        this.roles = new HashSet<>();
-    }
+    private Long authorId;
 
     public Long getId() {
         return id;
@@ -40,14 +29,6 @@ public class Authentication implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
     public Date getRegisterDate() {
@@ -80,5 +61,13 @@ public class Authentication implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 }

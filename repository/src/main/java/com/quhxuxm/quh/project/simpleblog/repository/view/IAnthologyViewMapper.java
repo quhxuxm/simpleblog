@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.repository.view;
-
 import com.quhxuxm.quh.project.simpleblog.domain.view.AnthologyDetail;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
