@@ -156,3 +156,30 @@ CREATE TABLE anthology_tag (
     FOREIGN KEY (tag_id) REFERENCES tag (_id)
 );
 
+CREATE TABLE article_comment(
+    _id BIGINT AUTO_INCREMENT,
+    author_id BIGINT NOT NULL,
+    create_date        DATETIME          NOT NULL,
+    update_date        DATETIME,
+    content            TEXT              NOT NULL,
+    parent_id BIGINT NOT NULL,
+    article_id       BIGINT NOT NULL,
+    PRIMARY KEY (_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (parent_id) REFERENCES article_comment (_id),
+    FOREIGN KEY (article_id) REFERENCES article (_id)
+);
+
+CREATE TABLE anthology_comment(
+    _id BIGINT AUTO_INCREMENT,
+    author_id BIGINT NOT NULL,
+    create_date        DATETIME          NOT NULL,
+    update_date        DATETIME,
+    content            TEXT              NOT NULL,
+    parent_id BIGINT NOT NULL,
+    anthology_id       BIGINT NOT NULL,
+    PRIMARY KEY (_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (parent_id) REFERENCES anthology_comment (_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
+);

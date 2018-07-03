@@ -1,12 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
-
-import javax.activation.MimeType;
 import java.io.Serializable;
 
 public class Resource implements Serializable {
     private Long id;
     private byte[] content;
-    private MimeType mimeType;
+    private String mimeType;
     private String md5;
 
     public Long getId() {
@@ -25,11 +23,11 @@ public class Resource implements Serializable {
         this.content = content;
     }
 
-    public MimeType getMimeType() {
+    public String getMimeType() {
         return mimeType;
     }
 
-    public void setMimeType(MimeType mimeType) {
+    public void setMimeType(String mimeType) {
         this.mimeType = mimeType;
     }
 
