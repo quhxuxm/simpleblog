@@ -5,11 +5,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITagPojoMapper {
-    void save(Tag tag);
+    void create(Tag tag);
 
-    void update(Tag tag);
+    Tag findOneByText(
+            @Param("text")
+                    String text);
 
-    Tag findOneByText(@Param("text") String text);
-
-    Tag findOneById(@Param("id") long id);
+    Tag findOneById(
+            @Param("id")
+                    long id);
 }

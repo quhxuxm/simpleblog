@@ -1,7 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Author implements Serializable {
     private Long id;
@@ -10,10 +8,8 @@ public class Author implements Serializable {
     private Long defaultAnthologyId;
     private Long additionalInfoId;
     private String nickName;
-    private Set<Role> roles;
 
     public Author() {
-        this.roles = new HashSet<>();
     }
 
     public Long getIconImageId() {
@@ -62,13 +58,5 @@ public class Author implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }

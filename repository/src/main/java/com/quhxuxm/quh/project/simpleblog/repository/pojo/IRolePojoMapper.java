@@ -5,7 +5,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IRolePojoMapper {
-    Role findOneByName(@Param("name") String name);
+    Role findOneByName(
+            @Param("name")
+                    String name);
 
-    Role findOneById(@Param("id") long id);
+    Role findOneById(
+            @Param("id")
+                    long id);
+
+    void create(Role role);
 }

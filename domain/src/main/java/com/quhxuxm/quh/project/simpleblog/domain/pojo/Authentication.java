@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Authentication implements Serializable {
     public enum Type {
-        EMAIL, WECHAT, QQ, NETEASE, USERNAME
+        EMAIL, WECHAT, QQ, NETEASE, XIAOMI, USERNAME
     }
 
     private Long id;
@@ -14,6 +14,11 @@ public class Authentication implements Serializable {
     private Date lastLoginDate;
     private Type type;
     private Long authorId;
+    private Boolean enable;
+
+    public Authentication() {
+        this.enable = true;
+    }
 
     public Long getId() {
         return id;
@@ -69,5 +74,13 @@ public class Authentication implements Serializable {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

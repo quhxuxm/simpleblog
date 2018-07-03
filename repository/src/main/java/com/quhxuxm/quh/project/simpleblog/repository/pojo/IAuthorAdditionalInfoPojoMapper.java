@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IAuthorAdditionalInfoPojoMapper {
-    AuthorAdditionalInfo findOneByAuthorId(@Param("authorId") long authorId);
+    AuthorAdditionalInfo findOneById(
+            @Param("id")
+                    long id);
 
     void create(AuthorAdditionalInfo additionalInfo);
 
