@@ -192,3 +192,12 @@ CREATE TABLE author_follower(
     FOREIGN KEY (author_id) REFERENCES author (_id),
     FOREIGN KEY (follower_id) REFERENCES author (_id)
 );
+
+CREATE TABLE  anthology_participant(
+    author_id BIGINT NOT NULL,
+    anthology_id BIGINT NOT NULL,
+    participate_date DATETIME          NOT NULL,
+    PRIMARY KEY  (author_id, anthology_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
+);

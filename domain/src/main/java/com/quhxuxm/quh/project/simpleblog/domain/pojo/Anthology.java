@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +13,7 @@ public class Anthology implements Serializable {
     private Long coverImageId;
     private Long additionalInfoId;
     private Boolean isPublished;
+    private Boolean isShared;
 
     public Anthology() {
         this.createDate = new Date();
@@ -99,5 +99,13 @@ public class Anthology implements Serializable {
 
     public void setPublished(Boolean published) {
         isPublished = published;
+    }
+
+    public Boolean getShared() {
+        return isShared;
+    }
+
+    public void setShared(Boolean shared) {
+        isShared = shared;
     }
 }
