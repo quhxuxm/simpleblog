@@ -183,3 +183,12 @@ CREATE TABLE anthology_comment(
     FOREIGN KEY (parent_id) REFERENCES anthology_comment (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
 );
+
+CREATE TABLE author_follower(
+    author_id BIGINT NOT NULL,
+    follower_id BIGINT NOT NULL,
+    follow_date DATETIME          NOT NULL,
+    PRIMARY KEY  (author_id, follower_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (follower_id) REFERENCES author (_id)
+);
