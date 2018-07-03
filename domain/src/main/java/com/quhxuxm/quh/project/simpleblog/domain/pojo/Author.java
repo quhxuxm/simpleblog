@@ -1,4 +1,4 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
+package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
 import java.io.Serializable;
 import java.util.Date;

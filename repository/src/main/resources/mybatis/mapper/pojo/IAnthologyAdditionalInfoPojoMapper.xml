@@ -1,0 +1,68 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyAdditionalInfoPojoMapper">
+    <cache/>
+    <resultMap id="anthologyAdditionalInfoPojo" type="anthologyAdditionalInfo">
+        <id property="id" column="_id"/>
+        <result property="viewNumber" column="view_number"/>
+        <result property="commentNumber" column="comment_number"/>
+        <result property="praiseNumber" column="praise_number"/>
+        <result property="bookmarkNumber" column="bookmark_number"/>
+        <result property="followupNumber" column="followup_number"/>
+        <result property="articleNumber" column="article_number"/>
+    </resultMap>
+    <select id="findOneByAnthologyId" resultMap="anthologyAdditionalInfoPojo">
+        <![CDATA[
+        SELECT
+            addInfo._id             AS _id,
+            addInfo.view_number     AS view_number,
+            addInfo.praise_number   AS praise_number,
+            addInfo.comment_number  AS comment_number,
+            addInfo.bookmark_number AS bookmark_number,
+            addInfo.followup_number AS followup_number,
+            addInfo.article_number  AS article_number
+        FROM anthology anthology
+            INNER JOIN
+            anthology_additional_info addInfo
+                ON
+                    anthology.additional_info_id = addInfo._id
+        WHERE
+            anthology._id = #{anthologyId}
+        ]]>
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+        INSERT INTO anthology_additional_info (
+            view_number,
+            praise_number,
+            comment_number,
+            bookmark_number,
+            followup_number,
+            article_number
+        )
+        VALUES (
+            #{viewNumber},
+            #{praiseNumber},
+            #{commentNumber},
+            #{bookmarkNumber},
+            #{followupNumber},
+            #{articleNumber}
+        )
+        ]]>
+    </insert>
+    <update id="update">
+        <![CDATA[
+        UPDATE anthology_additional_info
+        SET
+            view_number     = #{viewNumber},
+            praise_number   = #{praiseNumber},
+            comment_number  = #{commentNumber},
+            bookmark_number = #{bookmarkNumber},
+            followup_number = #{followupNumber},
+            article_number  = #{articleNumber}
+        WHERE
+            _id = #{id}
+        ]]>
+    </update>
+</mapper>

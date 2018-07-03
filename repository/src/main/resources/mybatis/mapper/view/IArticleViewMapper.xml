@@ -1,0 +1,219 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.view.IArticleViewMapper">
+    <cache/>
+    <resultMap id="articleResultMap" type="article">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="createDate" column="create_date"/>
+        <result property="content" column="content"/>
+        <result property="anthologyId" column="anthology_id"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
+        <result property="coverImageId" column="cover_image_id"/>
+        <result property="published" column="is_published"/>
+    </resultMap>
+    <resultMap id="articleSummaryResultMap" type="articleSummary">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="summary" column="summary"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="authorNickName" column="author_nick_name"/>
+        <result property="authorIconImageId" column="author_icon_image_id"/>
+        <result property="anthologyId" column="anthology_id"/>
+        <result property="anthologyTitle" column="anthology_title"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
+        <result property="coverImageId" column="cover_image_id"/>
+        <result property="published" column="is_published"/>
+    </resultMap>
+    <resultMap id="articleDetailResultMap" type="articleDetail">
+        <id property="id" column="_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="publishDate" column="publish_date"/>
+        <result property="authorId" column="author_id"/>
+        <result property="authorNickName" column="author_nick_name"/>
+        <result property="authorDescription" column="author_description"/>
+        <result property="authorIconImageId" column="author_icon_image_id"/>
+        <result property="anthologyId" column="anthology_id"/>
+        <result property="anthologyTitle" column="anthology_title"/>
+        <result property="additionalInfoId" column="additional_info_id"/>
+        <result property="published" column="is_published"/>
+    </resultMap>
+    <resultMap id="articleAdditionalInfoMap" type="articleAdditionalInfo">
+        <id property="id" column="_id"/>
+        <result property="viewNumber" column="view_number"/>
+        <result property="commentNumber" column="comment_number"/>
+        <result property="praiseNumber" column="praise_number"/>
+        <result property="bookmarkNumber" column="bookmark_number"/>
+    </resultMap>
+    <select id="getSummariesOrderByPublishDate"
+            resultMap="articleSummaryResultMap" useCache="true">
+        SELECT
+        article._id AS _id,
+        article.title AS title,
+        article.summary AS summary,
+        author._id AS author_id,
+        author.nick_name AS author_nick_name,
+        author.icon_image_id AS author_icon_image_id,
+        article.publish_date AS publish_date,
+        anthology._id AS anthology_id,
+        anthology.title AS anthology_title,
+        article.additional_info_id AS additional_info_id,
+        article.cover_image_id AS cover_image_id,
+        article.is_published AS is_published
+        FROM author author INNER JOIN anthology anthology ON author._id =
+        anthology.author_id
+        INNER JOIN article article ON anthology._id = article.anthology_id
+        WHERE article.publish_date IS NOT NULL AND article.is_published = TRUE
+        ORDER BY article.publish_date
+        <if test="isDesc">
+            DESC
+        </if>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article (title, summary, content, create_date, update_date, publish_date, anthology_id, additional_info_id, cover_image_id, is_published)
+        VALUES (
+            #{title}, #{summary}, #{content}, #{createDate}, #{updateDate},
+            #{publishDate},
+            #{anthologyId},
+            #{additionalInfoId},
+            #{coverImageId},
+            #{published}
+        );
+    </insert>
+    <update id="update">
+        UPDATE article
+        SET title              = #{title}, summary = #{summary},
+            content            = #{content}, update_date = #{updateDate},
+            anthology_id       = #{anthologyId},
+            additional_info_id = #{additionalInfoId},
+            cover_image_id     = #{coverImageId},
+            is_published       = #{published}
+        WHERE _id = #{id}
+    </update>
+    <select id="getPublishedArticleSummariesInAnthology"
+            resultMap="articleSummaryResultMap"
+    >
+        SELECT
+        article._id AS _id,
+        article.title AS title,
+        article.summary AS summary,
+        author._id AS author_id,
+        author.nick_name AS author_nick_name,
+        author.icon_image_id AS author_icon_image_id,
+        article.publish_date AS publish_date,
+        anthology._id AS anthology_id,
+        anthology.title AS anthology_title,
+        article.additional_info_id AS additional_info_id,
+        article.cover_image_id AS cover_image_id,
+        article.is_published AS is_published
+        FROM article article INNER JOIN anthology anthology
+        ON article.anthology_id = anthology._id
+        INNER JOIN author author ON author._id = anthology.author_id
+
+        WHERE anthology._id = #{anthologyId} AND article.publish_date IS NOT
+        NULL AND
+        article.is_published = TRUE ORDER BY article.publish_date
+        <if test="isDesc">
+            DESC
+        </if>
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+    <select id="getAllArticleSummariesInAnthology"
+            resultMap="articleSummaryResultMap"
+            parameterType="long">
+        SELECT
+        article._id AS _id,
+        article.title AS title,
+        article.summary AS summary,
+        author._id AS author_id,
+        author.nick_name AS author_nick_name,
+        author.icon_image_id AS author_icon_image_id,
+        article.publish_date AS publish_date,
+        anthology._id AS anthology_id,
+        anthology.title AS anthology_title,
+        article.additional_info_id AS additional_info_id,
+        article.cover_image_id AS cover_image_id,
+        article.is_published AS is_published
+        FROM article article INNER JOIN anthology anthology
+        ON article.anthology_id = anthology._id
+        INNER JOIN author author ON author._id = anthology.author_id
+        WHERE anthology._id = #{anthologyId} ORDER BY article.publish_date,
+        article.create_date
+        <if test="isDesc">
+            DESC
+        </if>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="getOne" resultMap="articleResultMap" useCache="true">
+        SELECT *
+        FROM article
+        WHERE _id = #{id};
+    </select>
+    <select id="getArticleDetail" resultMap="articleDetailResultMap"
+            useCache="true">
+        SELECT
+            article._id                AS _id,
+            article.title              AS title,
+            article.content            AS content,
+            author._id                 AS author_id,
+            author.nick_name   AS author_nick_name,
+            author.icon_image_id       AS author_icon_image_id,
+            author.description         AS author_description,
+            article.publish_date       AS publish_date,
+            anthology._id              AS anthology_id,
+            anthology.title            AS anthology_title,
+            article.additional_info_id AS additional_info_id,
+            article.is_published       AS is_published
+        FROM author author INNER JOIN anthology anthology
+                ON author._id = anthology.author_id
+            INNER JOIN article article ON anthology._id = article.anthology_id
+        WHERE article._id = #{id}
+    </select>
+    <select id="getAdditionalInfo" resultMap="articleAdditionalInfoMap">
+        SELECT
+            addInfo._id             AS _id,
+            addInfo.view_number     AS view_number,
+            addInfo.praise_number   AS praise_number,
+            addInfo.comment_number  AS comment_number,
+            addInfo.bookmark_number AS bookmark_number
+        FROM article article INNER JOIN article_additional_info addInfo
+                ON article.additional_info_id = addInfo._id
+        WHERE article._id = #{articleId};
+    </select>
+    <select id="getAdditionalInfoList" resultMap="articleAdditionalInfoMap">
+        SELECT
+        addInfo._id AS _id,
+        addInfo.view_number AS view_number,
+        addInfo.praise_number AS praise_number,
+        addInfo.comment_number AS comment_number,
+        addInfo.bookmark_number AS bookmark_number
+        FROM article article INNER JOIN article_additional_info addInfo
+        ON article.additional_info_id = addInfo._id
+        WHERE article._id IN
+        <foreach collection="articleIdList" item="articleId" separator=","
+                 open="(" close=")">
+            #{articleId}
+        </foreach>
+    </select>
+    <insert id="createAdditionalInfo" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO article_additional_info (view_number, praise_number, comment_number, bookmark_number)
+        VALUES (
+            #{viewNumber}, #{praiseNumber}, #{commentNumber}, #{bookmarkNumber}
+        );
+    </insert>
+    <update id="updateAdditionalInfo">
+        UPDATE article_additional_info
+        SET view_number     = #{viewNumber}, praise_number = #{praiseNumber},
+            comment_number  = #{commentNumber},
+            bookmark_number = #{bookmarkNumber}
+        WHERE _id = #{id}
+    </update>
+</mapper>

@@ -25,11 +25,11 @@ CREATE TABLE authentication_role (
     FOREIGN KEY (role_id) REFERENCES role (_id)
 );
 
-CREATE TABLE image (
-    _id     BIGINT AUTO_INCREMENT,
-    content LONGBLOB            NOT NULL,
-    type    VARCHAR(20)         NOT NULL,
-    md5     VARCHAR(128) UNIQUE NOT NULL,
+CREATE TABLE resource (
+    _id       BIGINT AUTO_INCREMENT,
+    content   LONGBLOB            NOT NULL,
+    mime_type VARCHAR(20)         NOT NULL,
+    md5       VARCHAR(128) UNIQUE NOT NULL,
     PRIMARY KEY (_id)
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE author (
     additional_info_id   BIGINT UNIQUE  NOT NULL,
     nick_name            VARCHAR(40)    NOT NULL UNIQUE,
     PRIMARY KEY (_id),
-    FOREIGN KEY (icon_image_id) REFERENCES image (_id),
+    FOREIGN KEY (icon_image_id) REFERENCES resource (_id),
     FOREIGN KEY (additional_info_id) REFERENCES author_additional_info (_id)
 );
 
@@ -70,6 +70,7 @@ CREATE TABLE anthology_additional_info (
     comment_number  BIGINT DEFAULT 0,
     praise_number   BIGINT DEFAULT 0,
     bookmark_number BIGINT DEFAULT 0,
+    article_number  BIGINT DEFAULT 0,
     PRIMARY KEY (_id)
 );
 
@@ -116,5 +117,42 @@ CREATE TABLE article (
     PRIMARY KEY (_id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (_id),
     FOREIGN KEY (additional_info_id) REFERENCES article_additional_info (_id),
-    FOREIGN KEY (cover_image_id) REFERENCES image (_id)
+    FOREIGN KEY (cover_image_id) REFERENCES resource (_id)
 );
+
+CREATE TABLE tag (
+    _id  BIGINT AUTO_INCREMENT,
+    text VARCHAR(20) NOT NULL UNIQUE,
+    PRIMARY KEY (_id)
+);
+
+CREATE TABLE author_tag (
+    author_id BIGINT NOT NULL,
+    tag_id    BIGINT NOT NULL,
+    selected  BOOL   NOT NULL,
+    weight    DOUBLE NOT NULL,
+    PRIMARY KEY (author_id, tag_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (tag_id) REFERENCES tag (_id)
+);
+
+CREATE TABLE article_tag (
+    article_id BIGINT NOT NULL,
+    tag_id     BIGINT NOT NULL,
+    selected   BOOL   NOT NULL,
+    weight     DOUBLE NOT NULL,
+    PRIMARY KEY (article_id, tag_id),
+    FOREIGN KEY (article_id) REFERENCES article (_id),
+    FOREIGN KEY (tag_id) REFERENCES tag (_id)
+);
+
+CREATE TABLE anthology_tag (
+    anthology_id BIGINT NOT NULL,
+    tag_id       BIGINT NOT NULL,
+    selected     BOOL   NOT NULL,
+    weight       DOUBLE NOT NULL,
+    PRIMARY KEY (anthology_id, tag_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id),
+    FOREIGN KEY (tag_id) REFERENCES tag (_id)
+);
+

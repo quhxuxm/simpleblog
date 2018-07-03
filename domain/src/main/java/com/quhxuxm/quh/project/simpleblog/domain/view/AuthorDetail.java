@@ -1,19 +1,22 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
+package com.quhxuxm.quh.project.simpleblog.domain.view;
 
-import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-public class AuthorAdditionalInfo implements Serializable {
+public class AuthorDetail {
     private Long id;
+    private Long iconImageId;
+    private String description;
+    private Long defaultAnthologyId;
+    private String nickName;
     private Long publishArticlesNumber;
     private Long publishCommentsNumber;
     private Long publishAnthologiesNumber;
     private Long followedByNumber;
+    private Set<String> tags;
 
-    public AuthorAdditionalInfo() {
-        this.publishAnthologiesNumber = 0L;
-        this.publishArticlesNumber = 0L;
-        this.publishCommentsNumber = 0L;
-        this.followedByNumber = 0L;
+    public AuthorDetail() {
+        this.tags = new HashSet<>();
     }
 
     public Long getId() {
@@ -22,6 +25,38 @@ public class AuthorAdditionalInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getIconImageId() {
+        return iconImageId;
+    }
+
+    public void setIconImageId(Long iconImageId) {
+        this.iconImageId = iconImageId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getDefaultAnthologyId() {
+        return defaultAnthologyId;
+    }
+
+    public void setDefaultAnthologyId(Long defaultAnthologyId) {
+        this.defaultAnthologyId = defaultAnthologyId;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public Long getPublishArticlesNumber() {
@@ -54,5 +89,13 @@ public class AuthorAdditionalInfo implements Serializable {
 
     public void setFollowedByNumber(Long followedByNumber) {
         this.followedByNumber = followedByNumber;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 }

@@ -1,12 +1,12 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
+package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
+import javax.activation.MimeType;
 import java.io.Serializable;
-import java.util.Arrays;
 
-public class Image implements Serializable {
+public class Resource implements Serializable {
     private Long id;
     private byte[] content;
-    private String type;
+    private MimeType mimeType;
     private String md5;
 
     public Long getId() {
@@ -25,12 +25,12 @@ public class Image implements Serializable {
         this.content = content;
     }
 
-    public String getType() {
-        return type;
+    public MimeType getMimeType() {
+        return mimeType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMimeType(MimeType mimeType) {
+        this.mimeType = mimeType;
     }
 
     public String getMd5() {
@@ -39,11 +39,5 @@ public class Image implements Serializable {
 
     public void setMd5(String md5) {
         this.md5 = md5;
-    }
-
-    @Override
-    public String toString() {
-        return "Image{" + "id=" + id + ", content=" + Arrays.toString(content)
-                + ", type='" + type + '\'' + ", md5='" + md5 + '\'' + '}';
     }
 }

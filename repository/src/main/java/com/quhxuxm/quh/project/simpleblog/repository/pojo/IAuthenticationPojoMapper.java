@@ -1,19 +1,18 @@
-package com.quhxuxm.quh.project.simpleblog.repository;
+package com.quhxuxm.quh.project.simpleblog.repository.pojo;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
-import com.quhxuxm.quh.project.simpleblog.domain.Role;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IAuthenticationMapper {
+public interface IAuthenticationPojoMapper {
     Authentication findByTokenAndType(
             @Param("token")
                     String token,
             @Param("type")
                     Authentication.Type type);
 
-    Authentication getOne(
+    Authentication findOneById(
             @Param("id")
                     long id);
 
@@ -22,12 +21,18 @@ public interface IAuthenticationMapper {
     void update(Authentication authentication);
 
     void assignRole(
-            @Param("authentication")
-                    Authentication authentication,
-            @Param("role")
-                    Role role);
+            @Param("authenticationId")
+                    Long authenticationId,
+            @Param("roleId")
+                    Long roleId);
 
     boolean isTokenExist(
             @Param("token")
                     String token);
+
+    void assignAuthentication(
+            @Param("authenticationId")
+                    long authenticationId,
+            @Param("authorId")
+                    long authorId);
 }

@@ -8,20 +8,22 @@
         <setting name="lazyLoadingEnabled" value="true"/>
     </settings>
     <typeAliases>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Authentication" alias="authentication"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Role" alias="role"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Authentication$Type" alias="authenticationType"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleSummary" alias="articleSummary"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleDetail" alias="articleDetail"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.view.AnthologyDetail" alias="anthologyDetail"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AnthologySummary" alias="anthologySummary"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication" alias="authentication"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role" alias="role"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication$Type" alias="authenticationType"/>
+
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Article" alias="article"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology" alias="anthology"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo"
                    alias="anthologyAdditionalInfo"/>
         <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleAdditionalInfo" alias="articleAdditionalInfo"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Author" alias="author"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AuthorAdditionalInfo" alias="authorAdditionalInfo"/>
-        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.Image" alias="image"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author" alias="author"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorAdditionalInfo" alias="authorAdditionalInfo"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Resource" alias="image"/>
+
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleSummary" alias="articleSummary"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.ArticleDetail" alias="articleDetail"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.view.AnthologyDetail" alias="anthologyDetail"/>
+        <typeAlias type="com.quhxuxm.quh.project.simpleblog.domain.AnthologySummary" alias="anthologySummary"/>
     </typeAliases>
 </configuration>

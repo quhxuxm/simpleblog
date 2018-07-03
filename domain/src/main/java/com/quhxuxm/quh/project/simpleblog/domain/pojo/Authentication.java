@@ -1,4 +1,4 @@
-package com.quhxuxm.quh.project.simpleblog.domain;
+package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,7 +7,11 @@ import java.util.Set;
 
 public class Authentication implements Serializable {
     public static enum Type {
-        EMAIL
+        EMAIL,
+        WEICHAT,
+        QQ,
+        NETEASY,
+        USERNAME
     }
 
     private Long id;

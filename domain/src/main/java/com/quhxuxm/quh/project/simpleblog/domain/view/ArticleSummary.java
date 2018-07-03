@@ -2,6 +2,8 @@ package com.quhxuxm.quh.project.simpleblog.domain.view;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ArticleSummary implements Serializable {
     private Long id;
@@ -13,9 +15,17 @@ public class ArticleSummary implements Serializable {
     private Long authorIconImageId;
     private Long anthologyId;
     private String anthologyTitle;
-    private Long additionalInfoId;
     private Long coverImageId;
     private Boolean isPublished;
+    private Long viewNumber;
+    private Long commentNumber;
+    private Long praiseNumber;
+    private Long bookmarkNumber;
+    private Set<String> tags;
+
+    public ArticleSummary() {
+        this.tags = new HashSet<>();
+    }
 
     public Long getId() {
         return id;
@@ -89,14 +99,6 @@ public class ArticleSummary implements Serializable {
         this.anthologyTitle = anthologyTitle;
     }
 
-    public Long getAdditionalInfoId() {
-        return additionalInfoId;
-    }
-
-    public void setAdditionalInfoId(Long additionalInfoId) {
-        this.additionalInfoId = additionalInfoId;
-    }
-
     public Long getCoverImageId() {
         return coverImageId;
     }
@@ -111,5 +113,45 @@ public class ArticleSummary implements Serializable {
 
     public void setPublished(Boolean published) {
         isPublished = published;
+    }
+
+    public Long getViewNumber() {
+        return viewNumber;
+    }
+
+    public void setViewNumber(Long viewNumber) {
+        this.viewNumber = viewNumber;
+    }
+
+    public Long getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(Long commentNumber) {
+        this.commentNumber = commentNumber;
+    }
+
+    public Long getPraiseNumber() {
+        return praiseNumber;
+    }
+
+    public void setPraiseNumber(Long praiseNumber) {
+        this.praiseNumber = praiseNumber;
+    }
+
+    public Long getBookmarkNumber() {
+        return bookmarkNumber;
+    }
+
+    public void setBookmarkNumber(Long bookmarkNumber) {
+        this.bookmarkNumber = bookmarkNumber;
+    }
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 }
