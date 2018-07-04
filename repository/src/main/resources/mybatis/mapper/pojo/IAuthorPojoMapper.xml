@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorPojoMapper">
     <cache/>
-    <resultMap type="author" id="authorMapping">
+    <resultMap type="author" id="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author">
         <id property="id" column="_id"/>
         <result property="description" column="description"/>
         <result property="iconImageId" column="icon_image_id"/>
@@ -11,7 +11,7 @@
         <result property="defaultAnthologyId" column="default_anthology_id"/>
         <result property="additionalInfoId" column="additional_info_id"/>
     </resultMap>
-    <resultMap type="authorAdditionalInfo" id="authorAdditionalInfoMapping">
+    <resultMap type="authorAdditionalInfo" id="com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorAdditionalInfo">
         <id property="id" column="_id"/>
         <result property="publishArticlesNumber"
                 column="publish_articles_number"/>

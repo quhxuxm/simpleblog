@@ -3,24 +3,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IResourceMapper">
     <cache/>
-    <resultMap id="imageMap" type="image">
+    <resultMap id="imageMap" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Resource">
         <id property="id" column="_id"/>
         <result property="content" column="content"/>
-        <result property="type" column="type"/>
+        <result property="type" column="mime_type"/>
         <result property="md5" column="md5"/>
     </resultMap>
     <select id="findByMd5" resultMap="imageMap" useCache="true">
         SELECT *
-        FROM image
+        FROM resource
         WHERE md5 = #{md5}
     </select>
     <select id="findById" resultMap="imageMap" useCache="true">
         SELECT *
-        FROM image
+        FROM resource
         WHERE _id = #{id}
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO image (_id, content, md5, type)
+        INSERT INTO resource (_id, content, md5, mime_type)
         VALUES (#{id}, #{content}, #{md5}, #{type})
     </insert>
 </mapper>

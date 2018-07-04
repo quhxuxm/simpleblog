@@ -18,7 +18,7 @@
         <result property="published" column="is_published"/>
     </resultMap>
 
-    <resultMap id="anthologyAdditionalInfoMap" type="anthologyAdditionalInfo">
+    <resultMap id="anthologyAdditionalInfoMap" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo">
         <id property="id" column="_id"/>
         <result property="viewNumber" column="view_number"/>
         <result property="commentNumber" column="comment_number"/>

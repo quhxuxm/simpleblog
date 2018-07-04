@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IRolePojoMapper">
     <cache/>
-    <resultMap id="roleMap" type="role">
+    <resultMap id="roleMap" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role">
         <id property="id" column="_id" javaType="long"/>
         <result property="name" column="name" javaType="string"/>
     </resultMap>

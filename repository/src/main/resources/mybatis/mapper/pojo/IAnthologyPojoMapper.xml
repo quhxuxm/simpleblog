@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyPojoMapper">
     <cache/>
-    <resultMap id="anthologyPojo" type="anthology">
+    <resultMap id="anthologyPojo" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology">
         <id property="id" column="_id"/>
         <result property="title" column="title"/>
         <result property="summary" column="summary"/>
