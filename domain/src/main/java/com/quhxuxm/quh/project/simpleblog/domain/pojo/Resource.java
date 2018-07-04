@@ -1,7 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
 import java.io.Serializable;
 
 public class Resource implements Serializable {
+    private static final long serialVersionUID = -7001454343688484844L;
     private Long id;
     private byte[] content;
     private String mimeType;

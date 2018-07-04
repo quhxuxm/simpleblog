@@ -1,8 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class AnthologyComment implements Serializable {
+    private static final long serialVersionUID = 883134394638579144L;
     private Long id;
     private Long authorId;
     private Date createDate;

@@ -1,7 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class AuthorFollower {
+public class AuthorFollower implements Serializable {
+    private static final long serialVersionUID = -772343683934230934L;
     private Long authorId;
     private Long followerId;
     private Date followDate;

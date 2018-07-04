@@ -1,7 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
 import java.io.Serializable;
 
 public class AnthologyAdditionalInfo implements Serializable {
+    private static final long serialVersionUID = 3118971567859072683L;
     private Long id;
     private Long followupNumber;
     private Long commentNumber;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Article implements Serializable {
+    private static final long serialVersionUID = 8070388670184979679L;
     private Long id;
     private String title;
     private Date publishDate;

@@ -1,8 +1,11 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Authentication implements Serializable {
+    private static final long serialVersionUID = 3930090769307969321L;
+
     public enum Type {
         EMAIL, WECHAT, QQ, NETEASE, XIAOMI, USERNAME
     }

@@ -3,6 +3,7 @@ package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 import java.io.Serializable;
 
 public class ArticleAdditionalInfo implements Serializable {
+    private static final long serialVersionUID = -2638419427009756150L;
     private Long id;
     private Long viewNumber;
     private Long commentNumber;

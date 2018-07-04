@@ -1,6 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
-public class ArticleTag {
+import java.io.Serializable;
+
+public class ArticleTag implements Serializable {
+    private static final long serialVersionUID = 5077971124151612394L;
     private Long articleId;
     private Long tagId;
     private Boolean selected;

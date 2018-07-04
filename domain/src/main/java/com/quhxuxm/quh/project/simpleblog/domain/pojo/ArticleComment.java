@@ -1,7 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleComment {
+public class ArticleComment implements Serializable {
+    private static final long serialVersionUID = -8397645527218208099L;
     private Long id;
     private Long authorId;
     private Date createDate;

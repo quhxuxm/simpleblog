@@ -1,6 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 
-public class AnthologyTag {
+import java.io.Serializable;
+
+public class AnthologyTag implements Serializable {
+    private static final long serialVersionUID = 8705523091082159065L;
     private Long anthologyId;
     private Long tagId;
     private Boolean selected;
