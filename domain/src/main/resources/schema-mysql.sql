@@ -19,7 +19,6 @@ CREATE TABLE author (
     _id                  BIGINT AUTO_INCREMENT,
     description          VARCHAR(200),
     icon_image_id        BIGINT,
-    default_anthology_id BIGINT NOT NULL,
     additional_info_id   BIGINT UNIQUE  NOT NULL,
     nick_name            VARCHAR(40)    NOT NULL UNIQUE,
     PRIMARY KEY (_id),
@@ -82,8 +81,13 @@ CREATE TABLE anthology (
     FOREIGN KEY (additional_info_id) REFERENCES anthology_additional_info (_id)
 );
 
-ALTER TABLE author
-    ADD FOREIGN KEY (default_anthology_id) REFERENCES anthology (_id);
+CREATE TABLE author_default_anthology(
+    author_id BIGINT NOT NULL,
+    anthology_id BIGINT NOT NULL,
+    PRIMARY KEY(author_id),
+    FOREIGN KEY (author_id) REFERENCES author (_id),
+    FOREIGN KEY (anthology_id) REFERENCES anthology (_id)
+);
 
 CREATE TABLE article_additional_info (
     _id             BIGINT AUTO_INCREMENT,
