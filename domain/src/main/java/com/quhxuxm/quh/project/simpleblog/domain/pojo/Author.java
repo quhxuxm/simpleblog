@@ -1,11 +1,12 @@
 package com.quhxuxm.quh.project.simpleblog.domain.pojo;
+
 import java.io.Serializable;
 
 public class Author implements Serializable {
+    private static final long serialVersionUID = -2652995801468036436L;
     private Long id;
     private Long iconImageId;
     private String description;
-    private Long defaultAnthologyId;
     private Long additionalInfoId;
     private String nickName;
 
@@ -34,14 +35,6 @@ public class Author implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getDefaultAnthologyId() {
-        return defaultAnthologyId;
-    }
-
-    public void setDefaultAnthologyId(Long defaultAnthologyId) {
-        this.defaultAnthologyId = defaultAnthologyId;
     }
 
     public Long getAdditionalInfoId() {
