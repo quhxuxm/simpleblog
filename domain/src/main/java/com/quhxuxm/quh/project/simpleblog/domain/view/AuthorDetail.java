@@ -1,9 +1,11 @@
 package com.quhxuxm.quh.project.simpleblog.domain.view;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AuthorDetail {
+public class AuthorDetail implements Serializable {
+    private static final long serialVersionUID = -2593721411811893664L;
     private Long id;
     private Long iconImageId;
     private String description;

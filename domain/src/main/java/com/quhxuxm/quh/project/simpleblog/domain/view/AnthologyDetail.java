@@ -1,10 +1,12 @@
 package com.quhxuxm.quh.project.simpleblog.domain.view;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 public class AnthologyDetail implements Serializable {
+    private static final long serialVersionUID = -99824323736227221L;
     private Long id;
     private String title;
     private String summary;

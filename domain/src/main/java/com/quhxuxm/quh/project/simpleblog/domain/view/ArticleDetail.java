@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ArticleDetail implements Serializable {
+    private static final long serialVersionUID = -4101155119453395404L;
     private Long id;
     private String title;
     private Date publishDate;

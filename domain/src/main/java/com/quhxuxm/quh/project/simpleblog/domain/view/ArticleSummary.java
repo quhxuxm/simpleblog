@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ArticleSummary implements Serializable {
+    private static final long serialVersionUID = -1818759519139061916L;
     private Long id;
     private String title;
     private String summary;

@@ -2,9 +2,11 @@ package com.quhxuxm.quh.project.simpleblog.domain.view;
 
 import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AuthenticationSummary {
+public class AuthenticationSummary implements Serializable {
+    private static final long serialVersionUID = 4116604459336919324L;
     private Long id;
     private Date registerDate;
     private Date lastLoginDate;
