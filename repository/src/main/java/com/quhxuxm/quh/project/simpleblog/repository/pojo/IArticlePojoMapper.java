@@ -9,5 +9,7 @@ public interface IArticlePojoMapper {
 
     void update(Article article);
 
-    Article findOneById(@Param("id") long id);
+    Article findOneById(
+            @Param("id")
+                    long id);
 }

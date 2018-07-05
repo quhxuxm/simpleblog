@@ -7,7 +7,9 @@ import java.util.List;
 
 @Repository
 public interface IAnthologyPojoMapper {
-    Anthology findOneById(@Param("id") long id);
+    Anthology findOneById(
+            @Param("id")
+                    long id);
 
     void update(Anthology anthology);
 

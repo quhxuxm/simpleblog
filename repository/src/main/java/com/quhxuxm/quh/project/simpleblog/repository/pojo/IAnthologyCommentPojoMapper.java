@@ -9,5 +9,7 @@ public interface IAnthologyCommentPojoMapper {
 
     void create(AnthologyComment comment);
 
-    AnthologyComment findOneById(@Param("id") Long id);
+    AnthologyComment findOneById(
+            @Param("id")
+                    Long id);
 }

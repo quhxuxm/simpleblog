@@ -5,9 +5,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IResourceMapper {
-    Resource findOneByMd5(@Param("md5") String md5);
+    Resource findOneByMd5(
+            @Param("md5")
+                    String md5);
 
-    Resource findOneById(@Param("id") long id);
+    Resource findOneById(
+            @Param("id")
+                    long id);
 
     void create(Resource resource);
 

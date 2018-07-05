@@ -51,7 +51,8 @@ CREATE TABLE authentication (
     author_id BIGINT NOT NULL,
     PRIMARY KEY (_id),
     FOREIGN KEY (author_id) REFERENCES author (_id),
-    CONSTRAINT UNIQUE (token)
+    CONSTRAINT UNIQUE (token),
+    CONSTRAINT UNIQUE (type, author_id)
 );
 
 CREATE TABLE anthology_additional_info (

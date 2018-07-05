@@ -9,6 +9,22 @@ public interface IAuthorPojoMapper {
             @Param("id")
                     long authorId);
 
+    Author findOneByUserName(
+            @Param("userName")
+                    String userName);
+
+    Author findOneByNickName(
+            @Param("nickName")
+                    String nickName);
+
+    boolean isNickNameExist(
+            @Param("nickName")
+                    String nickName);
+
+    boolean isUserNameExist(
+            @Param("userName")
+                    String userName);
+
     void create(Author author);
 
     void update(Author author);

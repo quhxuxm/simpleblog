@@ -9,5 +9,7 @@ public interface IArticleCommentPojoMapper {
 
     void create(ArticleComment comment);
 
-    ArticleComment findOneById(@Param("id") Long id);
+    ArticleComment findOneById(
+            @Param("id")
+                    Long id);
 }
