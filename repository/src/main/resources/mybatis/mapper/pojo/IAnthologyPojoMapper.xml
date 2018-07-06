@@ -1,43 +1,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyPojoMapper">
-    <cache/>
-    <resultMap id="anthologyPojo" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology">
-        <id property="id" column="_id"/>
-        <result property="title" column="title"/>
-        <result property="summary" column="summary"/>
-        <result property="createDate" column="create_date"/>
-        <result property="updateDate" column="update_date"/>
-        <result property="publishDate" column="publish_date"/>
-        <result property="authorId" column="author_id"/>
-        <result property="coverImageId" column="cover_image_id"/>
-        <result property="authorNickName" column="author_nick_name"/>
-        <result property="authorIconImageId" column="author_icon_image_id"/>
-        <result property="additionalInfoId" column="additional_info_id"/>
-        <result property="published" column="is_published"/>
-    </resultMap>
-    <select id="findOneById" resultMap="anthologyPojo"
-            useCache="true">
+<mapper
+	namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyPojoMapper">
+	<cache />
+	<select id="findOneById"
+		resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology" 
+		useCache="true">
         <![CDATA[
-        SELECT
-            anthology._id                AS _id,
-            anthology.title              AS title,
-            anthology.summary            AS summary,
-            anthology.create_date        AS create_date,
-            anthology.update_date        AS update_date,
-            anthology.publish_date       AS publish_data,
-            anthology.cover_image_id     AS cover_image_id,
-            author._id                   AS author_id,
-            author.nick_name             AS author_nick_name,
-            anthology.additional_info_id AS additional_info_id,
-            anthology.is_published       AS is_published
-        FROM author author INNER JOIN anthology anthology
-                ON author._id = anthology.author_id
-        WHERE anthology._id = #{id}
+        SELECT * FROM anthology WHERE anthology._id = #{id}
         ]]>
-    </select>
-    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+	</select>
+	<insert id="create" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
         INSERT INTO anthology (
             title,
@@ -62,8 +36,8 @@
             #{published}
         )
         ]]>
-    </insert>
-    <update id="update">
+	</insert>
+	<update id="update">
         <![CDATA[
         UPDATE anthology
         SET
@@ -76,5 +50,5 @@
         WHERE
             _id = #{id}
         ]]>
-    </update>
+	</update>
 </mapper>
