@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class AuthorAdditionalInfo implements Serializable {
     private static final long serialVersionUID = -4874948031108285296L;
     private Long id;
-    private Long publishArticlesNumber;
-    private Long publishCommentsNumber;
-    private Long publishAnthologiesNumber;
+    private Long articlesNumber;
+    private Long commentsNumber;
+    private Long anthologiesNumber;
     private Long followedByNumber;
 
     public AuthorAdditionalInfo() {
-        this.publishAnthologiesNumber = 0L;
-        this.publishArticlesNumber = 0L;
-        this.publishCommentsNumber = 0L;
+        this.articlesNumber = 0L;
+        this.commentsNumber = 0L;
+        this.anthologiesNumber = 0L;
         this.followedByNumber = 0L;
     }
 
@@ -25,30 +25,6 @@ public class AuthorAdditionalInfo implements Serializable {
         this.id = id;
     }
 
-    public Long getPublishArticlesNumber() {
-        return publishArticlesNumber;
-    }
-
-    public void setPublishArticlesNumber(Long publishArticlesNumber) {
-        this.publishArticlesNumber = publishArticlesNumber;
-    }
-
-    public Long getPublishCommentsNumber() {
-        return publishCommentsNumber;
-    }
-
-    public void setPublishCommentsNumber(Long publishCommentsNumber) {
-        this.publishCommentsNumber = publishCommentsNumber;
-    }
-
-    public Long getPublishAnthologiesNumber() {
-        return publishAnthologiesNumber;
-    }
-
-    public void setPublishAnthologiesNumber(Long publishAnthologiesNumber) {
-        this.publishAnthologiesNumber = publishAnthologiesNumber;
-    }
-
     public Long getFollowedByNumber() {
         return followedByNumber;
     }
@@ -56,4 +32,29 @@ public class AuthorAdditionalInfo implements Serializable {
     public void setFollowedByNumber(Long followedByNumber) {
         this.followedByNumber = followedByNumber;
     }
+
+    public Long getArticlesNumber() {
+        return articlesNumber;
+    }
+
+    public void setArticlesNumber(Long articlesNumber) {
+        this.articlesNumber = articlesNumber;
+    }
+
+    public Long getCommentsNumber() {
+        return commentsNumber;
+    }
+
+    public void setCommentsNumber(Long commentsNumber) {
+        this.commentsNumber = commentsNumber;
+    }
+
+    public Long getAnthologiesNumber() {
+        return anthologiesNumber;
+    }
+
+    public void setAnthologiesNumber(Long anthologiesNumber) {
+        this.anthologiesNumber = anthologiesNumber;
+    }
+
 }

@@ -1,18 +1,26 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IRolePojoMapper">
-    <cache/>
-    <resultMap id="roleMap" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role">
-        <id property="id" column="_id" javaType="long"/>
-        <result property="name" column="name" javaType="string"/>
-    </resultMap>
-    <select id="findRoleByName" resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role" resultMap="roleMap"
-            useCache="true" >
+<mapper
+    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IRolePojoMapper">
+    <cache />
+    <select id="findOneByName"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role"
+        useCache="true">
         <![CDATA[
-
-             SELECT * FROM role WHERE name = #{name}
-
+             select * from role where name = #{name}
         ]]>
     </select>
+    <select id="findOneById"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Role">
+        <![CDATA[
+            select * from role where id = #{id}
+        ]]>
+    </select>
+    <insert id="create" flushCache="true" keyProperty="id"
+        useGeneratedKeys="true">
+        <![CDATA[
+            insert into role (id, name) values (#{id}, #{name})
+        ]]>
+    </insert>
 </mapper>

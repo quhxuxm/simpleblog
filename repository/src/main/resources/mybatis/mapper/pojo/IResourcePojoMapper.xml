@@ -1,26 +1,36 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IResourceMapper">
-    <cache/>
-    <resultMap id="imageMap" type="com.quhxuxm.quh.project.simpleblog.domain.pojo.Resource">
-        <id property="id" column="_id"/>
-        <result property="content" column="content"/>
-        <result property="type" column="mime_type"/>
-        <result property="md5" column="md5"/>
-    </resultMap>
-    <select id="findByMd5" resultMap="imageMap" useCache="true">
-        SELECT *
-        FROM resource
-        WHERE md5 = #{md5}
+<mapper
+    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IResourceMapper">
+    <cache />
+    <select id="findOneByMd5"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Resource"
+        useCache="true">
+        <![CDATA[
+            select * from resource where md5 = #{md5}
+        ]]>
     </select>
-    <select id="findById" resultMap="imageMap" useCache="true">
-        SELECT *
-        FROM resource
-        WHERE _id = #{id}
+    <select id="findOneById"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Resource"
+        useCache="true">
+        <![CDATA[
+            select * from resource where id = #{id}
+        ]]>
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO resource (_id, content, md5, mime_type)
-        VALUES (#{id}, #{content}, #{md5}, #{type})
+        <![CDATA[
+            insert into resource (id, content, md5, mime_type) 
+            values (#{id}, #{content}, #{md5}, #{mimeType})
+        ]]>
     </insert>
+    <update id="update" flushCache="true" keyProperty="id">
+        <![CDATA[
+            update resource set 
+            content = #{content},
+            md5 = #{md5},
+            mime_type= #{mimeType} 
+            wherer id = #{id} 
+        ]]>
+    </update>
 </mapper>

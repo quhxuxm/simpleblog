@@ -1,100 +1,56 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorPojoMapper">
-    <cache/>
-    <resultMap type="author" id="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author">
-        <id property="id" column="_id"/>
-        <result property="description" column="description"/>
-        <result property="iconImageId" column="icon_image_id"/>
-        <result property="nickName" column="nick_name"/>
-        <result property="defaultAnthologyId" column="default_anthology_id"/>
-        <result property="additionalInfoId" column="additional_info_id"/>
-    </resultMap>
-    <resultMap type="authorAdditionalInfo" id="com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorAdditionalInfo">
-        <id property="id" column="_id"/>
-        <result property="publishArticlesNumber"
-                column="publish_articles_number"/>
-        <result property="publishCommentsNumber"
-                column="publish_comments_number"/>
-        <result property="publishAnthologiesNumber"
-                column="publish_anthologies_number"/>
-        <result property="followedByNumber" column="followedby_number"/>
-    </resultMap>
-    <select id="findAuthorByAuthenticationId" resultMap="authorMapping"
-            useCache="true">
-        SELECT
-            a._id                  AS _id,
-            a.description          AS description,
-            a.icon_image_id        AS icon_image_id,
-            a.default_anthology_id AS default_anthology_id,
-            a.additional_info_id   AS additional_info_id,
-            a.nick_name            AS nick_name
-        FROM
-            author a INNER JOIN authentication_author aa ON a._id = aa.author_id
-        WHERE aa.authentication_id = #{authenticationId}
+<mapper
+    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorPojoMapper">
+    <cache />
+    <select id="findOneById"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author"
+        useCache="true">
+        <![CDATA[
+            select * from author where id=#{id}
+        ]]>
     </select>
-    <select id="getAuthorById" resultMap="authorMapping" useCache="true">
-        SELECT
-            a._id                  AS _id,
-            a.description          AS description,
-            a.icon_image_id        AS icon_image_id,
-            a.default_anthology_id AS default_anthology_id,
-            a.additional_info_id   AS additional_info_id,
-            a.nick_name            AS nick_name
-        FROM
-            author a INNER JOIN authentication_author aa ON a._id = aa.author_id
-        WHERE a._id = #{id}
+    <select id="findOneByUserName"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author"
+        useCache="true">
+        <![CDATA[
+            select * from author where user_name=#{userName}
+        ]]>
+    </select>
+    <select id="findOneByNickName"
+        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.Author"
+        useCache="true">
+        <![CDATA[
+            select * from author where nick_name=#{nickName}
+        ]]>
+    </select>
+    <select id="isNickNameExist" resultType="boolean"
+        useCache="true">
+        <![CDATA[
+            select count(id) >0 from author where nick_name=#{nickName}
+        ]]>
+    </select>
+    <select id="isUserNameExist" resultType="boolean"
+        useCache="true">
+        <![CDATA[
+            select count(id) >0 from author where user_name=#{userName}
+        ]]>
     </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO author (icon_image_id, description, default_anthology_id, additional_info_id, nick_name)
-        VALUES (#{iconImageId}, #{description}, #{defaultAnthologyId},
-                #{additionalInfoId}, #{nickName})
+        <![CDATA[
+            insert into author (id, icon_image_id, description, additional_info_id, nick_name)
+            values (#{id}, #{iconImageId}, #{description}, #{additionalInfoId}, #{nickName})
+        ]]>
     </insert>
-    <insert id="assignAuthentication">
-        INSERT INTO authentication_author (authentication_id, author_id)
-        VALUES (#{authentication.id}, #{author.id})
-    </insert>
-    <update id="assignDefaultAnthology">
-        UPDATE author
-        SET default_anthology_id = #{anthology.id}
-        WHERE _id = #{author.id}
+    <update id="update" keyProperty="id" flushCache="true">
+        <![CDATA[
+            update author set
+            icon_image_id = #{iconImageId},
+            description = #{description},
+            additional_info_id = #{additionalInfoId},
+            nicke_name = #{nickName}
+            where id=#{id}
+        ]]>
     </update>
-    <select id="isExist" resultType="_boolean">
-        SELECT EXISTS(SELECT 1
-                      FROM author
-                      WHERE _id = #{id})
-    </select>
-    <insert id="createAdditionalInfo" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO author_additional_info (publish_articles_number, publish_comments_number, publish_anthologies_number, followedby_number)
-        VALUES (
-            #{publishArticlesNumber}, #{publishCommentsNumber},
-            #{publishAnthologiesNumber}, #{followedByNumber}
-        );
-    </insert>
-    <update id="updateAdditionalInfo">
-        UPDATE author_additional_info
-        SET publish_articles_number    = #{publishArticlesNumber},
-            publish_comments_number    = #{publishCommentsNumber},
-            publish_anthologies_number = #{publishAnthologiesNumber},
-            followedby_number          = #{followedByNumber}
-        WHERE _id = #{id}
-    </update>
-    <select id="getAdditionalInfo" resultMap="authorAdditionalInfoMapping">
-        SELECT
-            addInfo._id                        AS _id,
-            addInfo.publish_articles_number    AS publish_articles_number,
-            addInfo.publish_comments_number    AS publish_comments_number,
-            addInfo.publish_anthologies_number AS publish_anthologies_number,
-            addInfo.followedby_number          AS followedby_number
-        FROM author author INNER JOIN author_additional_info addInfo
-                ON author.additional_info_id = addInfo._id
-        WHERE author._id = #{authorId};
-    </select>
-
-    <select id="isNickNameExist" resultType="_boolean">
-        SELECT EXISTS(SELECT 1
-                      FROM author
-                      WHERE nick_name = #{nickName})
-    </select>
 </mapper>

@@ -1,27 +1,27 @@
 package com.quhxuxm.quh.project.simpleblog.repository.pojo;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
+
+import java.util.Date;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 
 @Repository
 public interface IAuthenticationPojoMapper {
-    Authentication findByTokenAndType(
-            @Param("token")
-                    String token,
-            @Param("type")
-                    Authentication.Type type);
 
-    Authentication findOneById(
-            @Param("id")
-                    long id);
+    Authentication findOneByTokenAndType(@Param("token") String token, @Param("type") Authentication.Type type);
+
+    Authentication findOneById(@Param("id") long id);
 
     void create(Authentication authentication);
 
-    void update(Authentication authentication);
+    void updatePassword(@Param("id") Long id, @Param("password") String password);
 
-    Set<Authentication> findAllByAuthorId(
-            @Param("authorId")
-                    long authorId);
+    void updateLastLoginDate(@Param("id") Long id, @Param("lastLoginDate") Date lastLoginDate);
+
+    void updateEnable(@Param("id") Long id, @Param("enable") boolean enable);
+
+    Set<Authentication> findAllByAuthorId(@Param("authorId") long authorId);
 }

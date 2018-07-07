@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorRolePojoMapper">
+    <cache />
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            insert into author_role (
+                author_id, role_id
+            )
+            values (#{id}, #{iconImageId}, #{description}, #{additionalInfoId}, #{nickName})
+        ]]>
+    </insert>
+    <update id="update" keyProperty="id" flushCache="true">
+        <![CDATA[
+            update author set
+            icon_image_id = #{iconImageId},
+            description = #{description},
+            additional_info_id = #{additionalInfoId},
+            nicke_name = #{nickName}
+            where id=#{id}
+        ]]>
+    </update>
+</mapper>
