@@ -8,6 +8,12 @@ public class AnthologyParticipant implements Serializable {
     private Long authorId;
     private Long anthologyId;
     private Date participateDate;
+    private Boolean deleted;
+
+    public AnthologyParticipant() {
+        this.deleted = false;
+        this.participateDate = new Date();
+    }
 
     public Long getAuthorId() {
         return authorId;
@@ -31,5 +37,13 @@ public class AnthologyParticipant implements Serializable {
 
     public void setParticipateDate(Date participateDate) {
         this.participateDate = participateDate;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }

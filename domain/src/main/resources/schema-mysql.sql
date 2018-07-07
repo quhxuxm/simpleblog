@@ -194,6 +194,7 @@ CREATE TABLE  anthology_participant(
     author_id BIGINT NOT NULL,
     anthology_id BIGINT NOT NULL,
     participate_date DATETIME          NOT NULL,
+    deleted BOOL NOT NULL,
     PRIMARY KEY  (author_id, anthology_id),
     FOREIGN KEY (author_id) REFERENCES author (id),
     FOREIGN KEY (anthology_id) REFERENCES anthology (id)
