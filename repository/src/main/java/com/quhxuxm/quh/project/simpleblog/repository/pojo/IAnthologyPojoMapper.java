@@ -1,15 +1,13 @@
 package com.quhxuxm.quh.project.simpleblog.repository.pojo;
-
-import org.apache.ibatis.annotations.Mapper;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology;
-
 @Repository
-@Mapper
 public interface IAnthologyPojoMapper {
-    Anthology findOneById(@Param("id") long id);
+    Anthology findOneById(
+            @Param("id")
+                    long id);
 
     void update(Anthology anthology);
 

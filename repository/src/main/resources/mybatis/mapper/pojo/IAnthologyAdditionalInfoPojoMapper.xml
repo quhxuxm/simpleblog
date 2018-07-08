@@ -1,11 +1,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyAdditionalInfoPojoMapper">
-    <cache />
-    <select id="findOneById"
-        resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo">
+<mapper namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyAdditionalInfoPojoMapper">
+    <select id="findOneById" resultType="com.quhxuxm.quh.project.simpleblog.domain.pojo.AnthologyAdditionalInfo">
         <![CDATA[
             select * from anthology_additional_info where id = #{id}
         ]]>

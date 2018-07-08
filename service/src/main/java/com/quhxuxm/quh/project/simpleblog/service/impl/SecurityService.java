@@ -1,53 +1,47 @@
 package com.quhxuxm.quh.project.simpleblog.service.impl;
-
-import java.util.Date;
-
+import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
+import com.quhxuxm.quh.project.simpleblog.domain.pojo.*;
+import com.quhxuxm.quh.project.simpleblog.repository.pojo.*;
+import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
+import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Anthology;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Author;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorAdditionalInfo;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorDefaultAnthology;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.AuthorRole;
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Role;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyPojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthenticationPojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorAdditionalInfoPojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorDefaultAnthologyPojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorPojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IAuthorRolePojoMapper;
-import com.quhxuxm.quh.project.simpleblog.repository.pojo.IRolePojoMapper;
-import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
-import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
+import java.util.Date;
 
 @Service
 class SecurityService implements ISecurityService {
     private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
+    private final IAuthorPojoMapper authorPojoMapper;
+    private final IAuthenticationPojoMapper authenticationPojoMapper;
+    private final IAnthologyPojoMapper anthologyPojoMapper;
+    private final IAuthorAdditionalInfoPojoMapper authorAdditionalInfoPojoMapper;
+    private final IAuthorDefaultAnthologyPojoMapper authorDefaultAnthologyPojoMapper;
+    private final IRolePojoMapper rolePojoMapper;
+    private final IAuthorRolePojoMapper authorRolePojoMapper;
+
     @Autowired
-    private IAuthorPojoMapper authorPojoMapper;
-    @Autowired
-    private IAuthenticationPojoMapper authenticationPojoMapper;
-    @Autowired
-    private IAnthologyPojoMapper anthologyPojoMapper;
-    @Autowired
-    private IAuthorAdditionalInfoPojoMapper authorAdditionalInfoPojoMapper;
-    @Autowired
-    private IAuthorDefaultAnthologyPojoMapper authorDefaultAnthologyPojoMapper;
-    @Autowired
-    private IRolePojoMapper rolePojoMapper;
-    @Autowired
-    private IAuthorRolePojoMapper authorRolePojoMapper;
+    public SecurityService(IAuthorPojoMapper authorPojoMapper, IAuthenticationPojoMapper authenticationPojoMapper,
+                           IAnthologyPojoMapper anthologyPojoMapper,
+                           IAuthorAdditionalInfoPojoMapper authorAdditionalInfoPojoMapper,
+                           IAuthorDefaultAnthologyPojoMapper authorDefaultAnthologyPojoMapper,
+                           IRolePojoMapper rolePojoMapper, IAuthorRolePojoMapper authorRolePojoMapper) {
+        this.authorPojoMapper = authorPojoMapper;
+        this.authenticationPojoMapper = authenticationPojoMapper;
+        this.anthologyPojoMapper = anthologyPojoMapper;
+        this.authorAdditionalInfoPojoMapper = authorAdditionalInfoPojoMapper;
+        this.authorDefaultAnthologyPojoMapper = authorDefaultAnthologyPojoMapper;
+        this.rolePojoMapper = rolePojoMapper;
+        this.authorRolePojoMapper = authorRolePojoMapper;
+    }
 
     @Transactional(rollbackFor = ServiceException.class)
     @Override
-    public void register(String token, String password, String nickName, Authentication.Type type)
-            throws ServiceException {
+    public void register(String token, String password, String nickName,
+                         Authentication.Type type) throws ServiceException {
         logger.debug("Begin to register author with token = {}, password = {}, nicke name = {}", token, password,
                 nickName);
         try {
