@@ -1,11 +1,7 @@
 package com.quhxuxm.quh.project.simpleblog.domain.view;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
-
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 
 public class AuthorDetail implements Serializable {
     private static final long serialVersionUID = -2593721411811893664L;
@@ -18,12 +14,6 @@ public class AuthorDetail implements Serializable {
     private Long publishCommentsNumber;
     private Long publishAnthologiesNumber;
     private Long followedByNumber;
-    private Set<String> tags;
-    private Set<String> roles;
-    private Long authenticationId;
-    private Authentication.Type authenticationType;
-    private Date registerDate;
-    private Date lastLoginDate;
 
     public AuthorDetail() {
         this.tags = new HashSet<>();
@@ -100,54 +90,6 @@ public class AuthorDetail implements Serializable {
 
     public void setFollowedByNumber(Long followedByNumber) {
         this.followedByNumber = followedByNumber;
-    }
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<String> tags) {
-        this.tags = tags;
-    }
-
-    public Set<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
-    }
-
-    public Long getAuthenticationId() {
-        return authenticationId;
-    }
-
-    public void setAuthenticationId(Long authenticationId) {
-        this.authenticationId = authenticationId;
-    }
-
-    public Authentication.Type getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(Authentication.Type authenticationType) {
-        this.authenticationType = authenticationType;
-    }
-
-    public Date getRegisterDate() {
-        return registerDate;
-    }
-
-    public void setRegisterDate(Date registerDate) {
-        this.registerDate = registerDate;
-    }
-
-    public Date getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Date lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
     }
 
 }
