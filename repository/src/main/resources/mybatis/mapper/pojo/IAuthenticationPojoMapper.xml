@@ -21,6 +21,11 @@
             select * from authentication where author_id=#{authorId}
         ]]>
     </select>
+    <select id="isTokenExist" resultType="boolean">
+        <![CDATA[
+            select count(id) > 0 from authentication where toekn=#{token} and type=#{type}
+        ]]>
+    </select>
     <insert id="create" useGeneratedKeys="true" keyProperty="id">
         <![CDATA[
             insert into authentication (

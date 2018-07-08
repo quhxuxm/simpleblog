@@ -15,6 +15,8 @@ public interface IAuthenticationPojoMapper {
 
     Authentication findOneById(@Param("id") long id);
 
+    boolean isTokenExist(@Param("token") String token, @Param("type") Authentication.Type type);
+
     void create(Authentication authentication);
 
     void updatePassword(@Param("id") Long id, @Param("password") String password);
