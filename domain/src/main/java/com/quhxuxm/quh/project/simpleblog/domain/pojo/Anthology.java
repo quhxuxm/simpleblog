@@ -3,7 +3,6 @@ package com.quhxuxm.quh.project.simpleblog.domain.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity
 public class Anthology implements Serializable {
     private static final long serialVersionUID = -190322673132950827L;
     private Long id;
