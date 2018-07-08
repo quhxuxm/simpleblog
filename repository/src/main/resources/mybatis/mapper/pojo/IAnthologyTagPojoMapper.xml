@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="com.quhxuxm.quh.project.simpleblog.repository.pojo.IAnthologyTagPojoMapper">
+    <cache />
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            insert into anthology_tag (
+                anthology_id, tag_id, selected, weight
+            )
+            values (
+                #{anthologyId}, #{tagId}, #{selected}, #{weight}
+            )
+        ]]>
+    </insert>
+    <update id="delete">
+        <![CDATA[
+            delete from
+                anthology_tag 
+            where 
+                anthology_id=#{anthologyId} 
+            and 
+                tag_id = #{tagId}
+        ]]>
+    </update>
+</mapper>
