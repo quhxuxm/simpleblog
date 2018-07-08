@@ -1,11 +1,13 @@
 package com.quhxuxm.quh.project.simpleblog.repository.pojo;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quhxuxm.quh.project.simpleblog.domain.pojo.Author;
 
 @Repository
+@Mapper
 public interface IAuthorPojoMapper {
     Author findOneById(@Param("id") long authorId);
 

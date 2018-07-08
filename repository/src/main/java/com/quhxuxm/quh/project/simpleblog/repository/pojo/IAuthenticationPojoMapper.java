@@ -3,12 +3,14 @@ package com.quhxuxm.quh.project.simpleblog.repository.pojo;
 import java.util.Date;
 import java.util.Set;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
 
 @Repository
+@Mapper
 public interface IAuthenticationPojoMapper {
 
     Authentication findOneByTokenAndType(@Param("token") String token, @Param("type") Authentication.Type type);
