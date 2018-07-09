@@ -19,6 +19,7 @@ public class Authentication implements Serializable {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue
     private Long id;
     @Column(name = "token", nullable = false, updatable = false)
     private String token;

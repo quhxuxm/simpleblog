@@ -1,14 +1,56 @@
 package com.quhxuxm.quh.project.simpleblog.service.impl;
-
-import com.quhxuxm.quh.project.simpleblog.repository.domain.Authentication;
+import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
+import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
+import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
+import com.quhxuxm.quh.project.simpleblog.domain.Author;
+import com.quhxuxm.quh.project.simpleblog.domain.Role;
+import com.quhxuxm.quh.project.simpleblog.repository.IAnthologyRepository;
+import com.quhxuxm.quh.project.simpleblog.repository.IAuthenticationRepository;
+import com.quhxuxm.quh.project.simpleblog.repository.IAuthorRepository;
+import com.quhxuxm.quh.project.simpleblog.repository.IRoleRepository;
 import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 class SecurityService implements ISecurityService {
+    private IAuthenticationRepository authenticationRepository;
+    private IAuthorRepository authorRepository;
+    private IRoleRepository roleRepository;
+    private IAnthologyRepository anthologyRepository;
+
+    SecurityService(IAuthenticationRepository authenticationRepository, IAuthorRepository authorRepository,
+                    IRoleRepository roleRepository, IAnthologyRepository anthologyRepository) {
+        this.authenticationRepository = authenticationRepository;
+        this.authorRepository = authorRepository;
+        this.roleRepository = roleRepository;
+        this.anthologyRepository = anthologyRepository;
+    }
+
+    @Transactional
     @Override
-    public void register(String token, String password, String nickName, Authentication.Type type) throws ServiceException {
+    public void register(String token, String password, String nickName,
+                         Authentication.Type type) throws ServiceException {
+        Authentication authentication = new Authentication();
+        authentication.setToken(token);
+        authentication.setType(type);
+        authentication.setPassword(password);
+        Author author = new Author();
+        authentication.setAuthor(author);
+        author.setNickName(nickName);
+        Role authorRole = this.roleRepository.findByName(ICommonConstant.RoleName.AUTHOR);
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(authorRole);
+        author.setRoles(roleSet);
+        Anthology defaultAnthology=new Anthology();
+        defaultAnthology.setAuthorId();
+        author.setDefaultAnthologyId(defaultAnthology.getId());
+        this.authorRepository.save(author);
+        this.authenticationRepository.save(authentication);
     }
     //    private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
     //    private final IAuthorPojoMapper authorPojoMapper;
@@ -67,7 +109,8 @@ class SecurityService implements ISecurityService {
     //            authorRolePojo.setAuthorId(author.getId());
     //            authorRolePojo.setRoleId(rolePojo.getId());
     //            this.authorRolePojoMapper.create(authorRolePojo);
-    //            logger.debug("Success to prepare author role pojo, author id={}, role id ={}", authorRolePojo.getAuthorId(),
+    //            logger.debug("Success to prepare author role pojo, author id={}, role id ={}", authorRolePojo
+    // .getAuthorId(),
     //                    authorRolePojo.getRoleId());
     //            Anthology anthologyPojo = new Anthology();
     //            anthologyPojo.setAuthorId(author.getId());
@@ -77,7 +120,8 @@ class SecurityService implements ISecurityService {
     //            authorDefaultAnthology.setAnthologyId(anthologyPojo.getId());
     //            authorDefaultAnthology.setAuthorId(author.getId());
     //            this.authorDefaultAnthologyPojoMapper.create(authorDefaultAnthology);
-    //            logger.debug("Success to prepare author default anthology pojo, author id ={}, default anthology id = {}",
+    //            logger.debug("Success to prepare author default anthology pojo, author id ={}, default anthology id
+    // = {}",
     //                    authorDefaultAnthology.getAuthorId(), authorDefaultAnthology.getAnthologyId());
     //            Authentication authentication = new Authentication();
     //            authentication.setToken(token);
@@ -87,7 +131,8 @@ class SecurityService implements ISecurityService {
     //            authentication.setType(type);
     //            authentication.setAuthorId(author.getId());
     //            this.authenticationPojoMapper.create(authentication);
-    //            logger.debug("Success to prepare authenticate pojo, author id ={}, id = {}", authentication.getAuthorId(),
+    //            logger.debug("Success to prepare authenticate pojo, author id ={}, id = {}", authentication
+    // .getAuthorId(),
     //                    authentication.getId());
     //        } catch (Exception e) {
     //            logger.error("Fail to register author because of exception.", e);

@@ -1,7 +1,5 @@
-package com.quhxuxm.quh.project.simpleblog.repository;
-
-import com.quhxuxm.quh.project.simpleblog.Main;
-import com.quhxuxm.quh.project.simpleblog.repository.domain.Authentication;
+package com.quhxuxm.quh.project.simpleblog;
+import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import org.junit.Test;
@@ -19,7 +17,8 @@ public class TestRepository {
     @Test
     public void testRegisterAuthor() throws ServiceException {
         for (int i = 0; i < 100; i++) {
-            this.securityService.register("toeken" + i, "password" + i, "nickName" + i, Authentication.Type.values()[i % Authentication.Type.values().length]);
+            this.securityService.register("toeken" + i, "password" + i, "nickName" + i,
+                    Authentication.Type.values()[i % Authentication.Type.values().length]);
         }
     }
 }
