@@ -1,26 +1,47 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "authentication", uniqueConstraints = {@UniqueConstraint(columnNames = {"token", "type"})})
 public class Authentication implements Serializable {
     private static final long serialVersionUID = 3930090769307969321L;
 
     public enum Type {
-        EMAIL, WECHAT, QQ, NETEASE, XIAOMI, USERNAME
+        EMAIL,
+        WECHAT,
+        QQ,
+        NETEASE,
+        XIAOMI,
+        USERNAME
     }
 
+    @Id
+    @Column(name = "id")
     private Long id;
+    @Column(name = "token", nullable = false, updatable = false)
     private String token;
+    @Column(name = "password", nullable = false)
     private String password;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "register_date", nullable = false, updatable = false)
     private Date registerDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "last_login_date")
     private Date lastLoginDate;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false, updatable = false)
     private Type type;
-    private Long authorId;
-    private Boolean enable;
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id", updatable = false)
+    private Author author;
+    @Column(name = "is_enabled", nullable = false)
+    private Boolean isEnabled;
 
     public Authentication() {
-        this.enable = true;
+        this.isEnabled = true;
+        this.registerDate = new Date();
     }
 
     public Long getId() {
@@ -71,19 +92,19 @@ public class Authentication implements Serializable {
         this.type = type;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public Boolean getEnable() {
-        return enable;
+    public Boolean getEnabled() {
+        return isEnabled;
     }
 
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
+    public void setEnabled(Boolean enable) {
+        this.isEnabled = enable;
     }
 }

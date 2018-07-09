@@ -1,17 +1,28 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "anthology_participant")
 public class AnthologyParticipant implements Serializable {
     private static final long serialVersionUID = -7732733544433259761L;
+    @Id
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "author_id", nullable = false, updatable = false)
     private Long authorId;
+    @Id
+    @ManyToOne(targetEntity = Anthology.class)
+    @JoinColumn(name = "anthology_id", nullable = false, updatable = false)
     private Long anthologyId;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "participate_date", nullable = false, updatable = false)
     private Date participateDate;
-    private Boolean deleted;
+    @Column(name = "is_deleted", nullable = false)
+    private Boolean isDeleted;
 
     public AnthologyParticipant() {
-        this.deleted = false;
+        this.isDeleted = false;
         this.participateDate = new Date();
     }
 
@@ -40,10 +51,10 @@ public class AnthologyParticipant implements Serializable {
     }
 
     public Boolean getDeleted() {
-        return deleted;
+        return isDeleted;
     }
 
     public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+        this.isDeleted = deleted;
     }
 }

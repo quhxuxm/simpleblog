@@ -1,13 +1,27 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "author_follower")
 public class AuthorFollower implements Serializable {
     private static final long serialVersionUID = -772343683934230934L;
+    @Id
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Long authorId;
+    @Id
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Long followerId;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "follow_date", nullable = false, updatable = false)
     private Date followDate;
+
+    public AuthorFollower() {
+        this.followDate = new Date();
+    }
 
     public Long getAuthorId() {
         return authorId;

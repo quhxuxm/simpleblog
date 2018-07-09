@@ -1,16 +1,32 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "anthology_comment")
 public class AnthologyComment implements Serializable {
     private static final long serialVersionUID = 883134394638579144L;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
-    private Long authorId;
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false, updatable = false)
+    private Author author;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", updatable = false, nullable = false)
     private Date createDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date")
     private Date updateDate;
+    @Column(name = "content", length = 2000, nullable = false)
     private String content;
+    @ManyToOne(targetEntity = AnthologyComment.class)
+    @JoinColumn(name = "parent_id", referencedColumnName = "id", updatable = false)
     private Long parentId;
+    @ManyToOne(targetEntity = Anthology.class)
+    @JoinColumn(name = "anthology_id", referencedColumnName = "id", updatable = false)
     private Long anthologyId;
 
     public Long getId() {
@@ -21,12 +37,12 @@ public class AnthologyComment implements Serializable {
         this.id = id;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public Date getCreateDate() {

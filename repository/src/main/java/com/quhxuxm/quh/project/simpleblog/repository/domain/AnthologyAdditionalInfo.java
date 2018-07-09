@@ -1,15 +1,26 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "anthology_additional_info")
 public class AnthologyAdditionalInfo implements Serializable {
     private static final long serialVersionUID = 3118971567859072683L;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
+    @Column(name = "followup_number", nullable = false)
     private Long followupNumber;
+    @Column(name = "comment_number", nullable = false)
     private Long commentNumber;
+    @Column(name = "view_number", nullable = false)
     private Long viewNumber;
+    @Column(name = "bookmark_number", nullable = false)
     private Long bookmarkNumber;
+    @Column(name = "praise_number", nullable = false)
     private Long praiseNumber;
+    @Column(name = "article_number", nullable = false)
     private Long articleNumber;
 
     public AnthologyAdditionalInfo() {

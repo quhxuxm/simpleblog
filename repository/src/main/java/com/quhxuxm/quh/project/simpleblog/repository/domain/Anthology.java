@@ -1,26 +1,48 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
+@Table(name = "anthology")
 public class Anthology implements Serializable {
     private static final long serialVersionUID = -190322673132950827L;
+    @Id
+    @GeneratedValue
+    @Column(name = "id")
     private Long id;
+    @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "summary", nullable = false)
     private String summary;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", nullable = false, updatable = false)
     private Date createDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date", nullable = false)
     private Date updateDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "publish_date", nullable = false)
     private Date publishDate;
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Long authorId;
+    @ManyToOne(targetEntity = Resource.class)
+    @JoinColumn(name = "cover_image_id", referencedColumnName = "id")
     private Long coverImageId;
-    private Long additionalInfoId;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "id", nullable = false, updatable = false)
+    private AnthologyAdditionalInfo additionalInfo;
+    @Column(name = "is_published", nullable = false)
     private Boolean isPublished;
+    @Column(name = "is_shared", nullable = false)
     private Boolean isShared;
 
     public Anthology() {
         this.createDate = new Date();
         this.updateDate = this.createDate;
         this.isPublished = false;
+        this.isShared = false;
     }
 
     public Long getId() {
@@ -85,14 +107,6 @@ public class Anthology implements Serializable {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    public Long getAdditionalInfoId() {
-        return additionalInfoId;
-    }
-
-    public void setAdditionalInfoId(Long additionalInfoId) {
-        this.additionalInfoId = additionalInfoId;
     }
 
     public Boolean getPublished() {

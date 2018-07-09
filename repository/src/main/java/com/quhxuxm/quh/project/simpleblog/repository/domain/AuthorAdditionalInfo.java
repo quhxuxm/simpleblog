@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,8 +18,6 @@ public class AuthorAdditionalInfo implements Serializable {
     private Long anthologyNumber;
     @Column(name = "followed_by_number")
     private Long followedByNumber;
-    @OneToOne(mappedBy = "additionalInfo", fetch = FetchType.LAZY)
-    private Author author;
 
     public AuthorAdditionalInfo() {
         this.articleNumber = 0L;
@@ -67,13 +64,5 @@ public class AuthorAdditionalInfo implements Serializable {
 
     public void setAnthologyNumber(Long anthologyNumber) {
         this.anthologyNumber = anthologyNumber;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
     }
 }

@@ -1,16 +1,26 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "author_tag")
 public class AuthorTag implements Serializable {
     private static final long serialVersionUID = -4652674514830940378L;
+    @Id
+    @ManyToOne(targetEntity = Author.class)
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Long authorId;
+    @Id
+    @ManyToOne(targetEntity = Tag.class)
+    @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false, updatable = false)
     private Long tagId;
-    private Boolean selected;
+    @Column(name = "is_selected", nullable = false, updatable = false)
+    private Boolean isSelected;
+    @Column(name = "weight", nullable = false, scale = 2)
     private Double weight;
 
     public AuthorTag() {
-        this.selected = true;
+        this.isSelected = true;
         this.weight = 0d;
     }
 
@@ -31,11 +41,11 @@ public class AuthorTag implements Serializable {
     }
 
     public Boolean getSelected() {
-        return selected;
+        return isSelected;
     }
 
     public void setSelected(Boolean selected) {
-        this.selected = selected;
+        this.isSelected = selected;
     }
 
     public Double getWeight() {

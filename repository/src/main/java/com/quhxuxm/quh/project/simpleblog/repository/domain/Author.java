@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.repository.domain;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -12,24 +11,26 @@ public class Author implements Serializable {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Resource.class)
     @JoinColumn(name = "icon_image_id")
-    private Resource iconImage;
+    private Long iconImageId;
     @Column(name = "description")
     private String description;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "additional_info_id", unique = true, updatable = false, nullable = false)
+    @JoinColumn(name = "additional_info_id", unique = true, updatable = false, nullable = false,
+            referencedColumnName = "id")
     private AuthorAdditionalInfo additionalInfo;
     @Column(name = "nick_name", nullable = false, unique = true, length = 64)
     private String nickName;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "author_role", joinColumns = { @JoinColumn(name = "author_id", referencedColumnName = "id") })
+    @JoinTable(name = "author_role", joinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "id")})
     private Set<Role> roles;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "author_tag", joinColumns = { @JoinColumn(name = "author_id", referencedColumnName = "id") })
-    private Set<Tag> tags;
+    @OneToOne(targetEntity = Anthology.class)
+    @JoinColumn(name = "default_anthology_id", nullable = false, referencedColumnName = "id")
+    private Long defaultAnthologyId;
 
     public Author() {
+        this.additionalInfo = new AuthorAdditionalInfo();
     }
 
     public AuthorAdditionalInfo getAdditionalInfo() {
@@ -64,12 +65,12 @@ public class Author implements Serializable {
         this.nickName = nickName;
     }
 
-    public Resource getIconImage() {
-        return iconImage;
+    public Long getIconImageId() {
+        return iconImageId;
     }
 
-    public void setIconImage(Resource iconImage) {
-        this.iconImage = iconImage;
+    public void setIconImageId(Long iconImageId) {
+        this.iconImageId = iconImageId;
     }
 
     public Set<Role> getRoles() {
@@ -80,11 +81,11 @@ public class Author implements Serializable {
         this.roles = roles;
     }
 
-    public Set<Tag> getTags() {
-        return tags;
+    public Long getDefaultAnthologyId() {
+        return defaultAnthologyId;
     }
 
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
+    public void setDefaultAnthologyId(Long defaultAnthologyId) {
+        this.defaultAnthologyId = defaultAnthologyId;
     }
 }
