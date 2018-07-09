@@ -1,12 +1,12 @@
-package com.quhxuxm.quh.project.simpleblog.repository.domain;
+package com.quhxuxm.quh.project.simpleblog.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "article_comment")
-public class ArticleComment implements Serializable {
-    private static final long serialVersionUID = -8397645527218208099L;
+@Table(name = "anthology_comment")
+public class AnthologyComment implements Serializable {
+    private static final long serialVersionUID = 883134394638579144L;
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -15,19 +15,19 @@ public class ArticleComment implements Serializable {
     @JoinColumn(name = "author_id", nullable = false, updatable = false)
     private Author author;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date", nullable = false, updatable = false)
+    @Column(name = "create_date", updatable = false, nullable = false)
     private Date createDate;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_date", nullable = false, updatable = false)
+    @Column(name = "update_date")
     private Date updateDate;
     @Column(name = "content", length = 2000, nullable = false)
     private String content;
-    @ManyToOne(targetEntity = ArticleComment.class)
-    @JoinColumn(name = "parent_id", nullable = false, updatable = false)
+    @ManyToOne(targetEntity = AnthologyComment.class)
+    @JoinColumn(name = "parent_id", referencedColumnName = "id", updatable = false)
     private Long parentId;
-    @ManyToOne(targetEntity = Article.class)
-    @JoinColumn(name = "article_id", nullable = false, updatable = false)
-    private Long articleId;
+    @ManyToOne(targetEntity = Anthology.class)
+    @JoinColumn(name = "anthology_id", referencedColumnName = "id", updatable = false)
+    private Long anthologyId;
 
     public Long getId() {
         return id;
@@ -77,11 +77,11 @@ public class ArticleComment implements Serializable {
         this.parentId = parentId;
     }
 
-    public Long getArticleId() {
-        return articleId;
+    public Long getAnthologyId() {
+        return anthologyId;
     }
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
+    public void setAnthologyId(Long anthologyId) {
+        this.anthologyId = anthologyId;
     }
 }

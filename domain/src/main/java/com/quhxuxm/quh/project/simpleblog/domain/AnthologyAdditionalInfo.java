@@ -1,4 +1,4 @@
-package com.quhxuxm.quh.project.simpleblog.repository.domain;
+package com.quhxuxm.quh.project.simpleblog.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
