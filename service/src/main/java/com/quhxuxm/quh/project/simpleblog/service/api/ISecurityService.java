@@ -1,6 +1,6 @@
 package com.quhxuxm.quh.project.simpleblog.service.api;
 
-import com.quhxuxm.quh.project.simpleblog.domain.pojo.Authentication;
+import com.quhxuxm.quh.project.simpleblog.repository.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 
 public interface ISecurityService {

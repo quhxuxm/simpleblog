@@ -3317,3 +3317,1211 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:724) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
 	... 42 common frames omitted
 
+2018-07-09 16:52:19.127  INFO 14252 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 14252 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 16:52:19.138  INFO 14252 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 16:52:19.276  INFO 14252 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 16:52:19 CST 2018]; root of context hierarchy
+2018-07-09 16:52:21.230  INFO 14252 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1c798f2d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 16:52:21.645  INFO 14252 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 16:52:21.654  WARN 14252 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 16:52:22.319  INFO 14252 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 16:52:22.416  INFO 14252 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 16:52:22.461  INFO 14252 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 16:52:22.587  INFO 14252 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 16:52:22.589  INFO 14252 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 16:52:22.610  WARN 14252 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+2018-07-09 16:52:22.611  INFO 14252 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 16:52:22.622  INFO 14252 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 16:52:22.631  INFO 14252 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 16:52:22.658 ERROR 14252 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 16:52:22.662 ERROR 14252 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4bf48f6] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@17229821]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:01:21.583  INFO 15384 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 15384 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:01:21.584  INFO 15384 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:01:21.623  INFO 15384 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4d18aa28: startup date [Mon Jul 09 17:01:21 CST 2018]; root of context hierarchy
+2018-07-09 17:01:22.998  INFO 15384 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$1c798f2d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:01:23.265  INFO 15384 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:01:23.272  WARN 15384 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:01:23.789  INFO 15384 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:01:23.857  INFO 15384 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:01:23.883  INFO 15384 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:01:24.022  INFO 15384 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:01:24.024  INFO 15384 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:01:24.044  WARN 15384 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+2018-07-09 17:01:24.046  INFO 15384 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:01:24.051  INFO 15384 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:01:24.061  INFO 15384 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:01:24.068 ERROR 15384 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:01:24.072 ERROR 15384 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4bf48f6] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@17229821]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:14:49.515  INFO 11372 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 11372 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:14:49.517  INFO 11372 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:14:49.559  INFO 11372 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4d18aa28: startup date [Mon Jul 09 17:14:49 CST 2018]; root of context hierarchy
+2018-07-09 17:14:50.969  INFO 11372 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$50d943ae] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:14:51.254  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:14:51.261  WARN 11372 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:14:51.718  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:14:51.778  INFO 11372 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:14:51.797  INFO 11372 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:14:51.923  INFO 11372 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:14:51.925  INFO 11372 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:14:51.950  WARN 11372 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+2018-07-09 17:14:51.951  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:14:51.967  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:14:51.976  INFO 11372 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:14:51.983 ERROR 11372 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:14:51.987 ERROR 11372 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4bf48f6] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@7e7e962d]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:17:01.790  INFO 11976 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 11976 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:17:01.791  INFO 11976 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:17:01.834  INFO 11976 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@4d18aa28: startup date [Mon Jul 09 17:17:01 CST 2018]; root of context hierarchy
+2018-07-09 17:17:03.202  INFO 11976 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$80390b2e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:17:03.482  INFO 11976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:17:03.489  WARN 11976 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:17:03.961  INFO 11976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:17:04.024  INFO 11976 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:17:04.044  INFO 11976 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:17:04.161  INFO 11976 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:17:04.164  INFO 11976 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:17:04.183  WARN 11976 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+2018-07-09 17:17:04.184  INFO 11976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:17:04.191  INFO 11976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:17:04.203  INFO 11976 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:17:04.210 ERROR 11976 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:17:04.215 ERROR 11976 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@4bf48f6] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@750a04ec]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/JAXBException
+	at org.hibernate.boot.spi.XmlMappingBinderAccess.<init>(XmlMappingBinderAccess.java:43) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.MetadataSources.<init>(MetadataSources.java:87) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:209) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.<init>(EntityManagerFactoryBuilderImpl.java:164) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:51) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: java.lang.ClassNotFoundException: javax.xml.bind.JAXBException
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:582) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:185) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:496) ~[na:na]
+	... 50 common frames omitted
+
+2018-07-09 17:17:59.123  INFO 9364 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 9364 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:17:59.124  INFO 9364 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:17:59.195  INFO 9364 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:17:59 CST 2018]; root of context hierarchy
+2018-07-09 17:18:00.575  INFO 9364 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4e17880f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:18:00.846  INFO 9364 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:18:00.853  WARN 9364 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:18:01.435  INFO 9364 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:18:01.506  INFO 9364 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:18:01.536  INFO 9364 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:18:01.691  INFO 9364 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:18:01.693  INFO 9364 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:18:01.788  INFO 9364 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:18:01.942  INFO 9364 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:18:02.220  WARN 9364 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+2018-07-09 17:18:02.222  INFO 9364 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:18:02.228  INFO 9364 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:18:02.236  INFO 9364 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:18:02.242 ERROR 9364 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.hibernate.cfg.AnnotationBinder.processElementAnnotations(AnnotationBinder.java:1801) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.processIdPropertiesIfNotAlready(AnnotationBinder.java:925) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:752) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:249) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:222) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+
+2018-07-09 17:18:02.248 ERROR 9364 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@1c39680d] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@284990de]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.hibernate.cfg.AnnotationBinder.processElementAnnotations(AnnotationBinder.java:1801) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.processIdPropertiesIfNotAlready(AnnotationBinder.java:925) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:752) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:249) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:222) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+
+2018-07-09 17:19:14.375  INFO 15992 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 15992 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:19:14.377  INFO 15992 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:19:14.418  INFO 15992 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:19:14 CST 2018]; root of context hierarchy
+2018-07-09 17:19:15.777  INFO 15992 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7a871cbb] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:19:16.070  INFO 15992 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:19:16.076  WARN 15992 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:19:16.525  INFO 15992 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:19:16.591  INFO 15992 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:19:16.610  INFO 15992 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:19:16.739  INFO 15992 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:19:16.742  INFO 15992 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:19:16.814  INFO 15992 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:19:17.023  INFO 15992 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:19:17.280  WARN 15992 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+2018-07-09 17:19:17.282  INFO 15992 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:19:17.292  INFO 15992 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:19:17.301  INFO 15992 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:19:17.308 ERROR 15992 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.hibernate.cfg.AnnotationBinder.processElementAnnotations(AnnotationBinder.java:1801) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.processIdPropertiesIfNotAlready(AnnotationBinder.java:925) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:752) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:249) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:222) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+
+2018-07-09 17:19:17.314 ERROR 15992 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@1c39680d] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@545d2560]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: org.hibernate.AnnotationException: @Column(s) not allowed on a @OneToOne property: com.quhxuxm.quh.project.simpleblog.repository.domain.Author.additionalInfo
+	at org.hibernate.cfg.AnnotationBinder.processElementAnnotations(AnnotationBinder.java:1801) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.processIdPropertiesIfNotAlready(AnnotationBinder.java:925) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.cfg.AnnotationBinder.bindClass(AnnotationBinder.java:752) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:249) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:222) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:861) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:888) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+
+2018-07-09 17:20:39.521  INFO 11256 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 11256 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:20:39.523  INFO 11256 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:20:39.563  INFO 11256 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:20:39 CST 2018]; root of context hierarchy
+2018-07-09 17:20:40.889  INFO 11256 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$9fa21eff] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:20:41.149  INFO 11256 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:20:41.155  WARN 11256 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:20:41.659  INFO 11256 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:20:41.737  INFO 11256 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:20:41.756  INFO 11256 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:20:41.871  INFO 11256 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:20:41.873  INFO 11256 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:20:41.958  INFO 11256 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:20:42.235  INFO 11256 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:20:47.901  INFO 11256 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:20:48.238  WARN 11256 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:20:48.341  INFO 11256 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:20:48.343  INFO 11256 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:20:48.679  INFO 11256 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:20:39 CST 2018]; root of context hierarchy
+2018-07-09 17:20:50.862  INFO 11256 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 82c6015d-347e-46f4-9d2b-3938903f7c13
+
+2018-07-09 17:20:51.210  INFO 11256 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@62f37bfd, org.springframework.security.web.context.SecurityContextPersistenceFilter@bd28c86, org.springframework.security.web.header.HeaderWriterFilter@53432aef, org.springframework.security.web.csrf.CsrfFilter@31204303, org.springframework.security.web.authentication.logout.LogoutFilter@2bf4fa1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@649009d6, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@ec3944, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@28295554, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@14499b52, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b7cf475, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1818d00b, org.springframework.security.web.session.SessionManagementFilter@14d1032a, org.springframework.security.web.access.ExceptionTranslationFilter@6df31abf, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@30b1c5d5]
+2018-07-09 17:20:51.328  INFO 11256 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 12.222 seconds (JVM running for 13.363)
+2018-07-09 17:20:51.622  INFO 11256 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:20:39 CST 2018]; root of context hierarchy
+2018-07-09 17:20:51.627  INFO 11256 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:20:51.630  INFO 11256 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:20:51.638  INFO 11256 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:24:15.775  INFO 11552 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 11552 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:24:15.777  INFO 11552 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:24:15.816  INFO 11552 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:24:15 CST 2018]; root of context hierarchy
+2018-07-09 17:24:17.195  INFO 11552 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$75af4684] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:24:17.474  INFO 11552 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:24:17.481  WARN 11552 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:24:17.990  INFO 11552 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:24:18.049  INFO 11552 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:24:18.068  INFO 11552 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:24:18.199  INFO 11552 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:24:18.202  INFO 11552 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:24:18.282  INFO 11552 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:24:18.436  INFO 11552 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:24:18.750  WARN 11552 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+2018-07-09 17:24:18.751  INFO 11552 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:24:18.759  INFO 11552 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:24:18.769  INFO 11552 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2018-07-09 17:24:18.775 ERROR 11552 --- [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) [spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:402) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:835) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.checkPropertyColumnDuplication(PersistentClass.java:853) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:881) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:607) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.MetadataImpl.validate(MetadataImpl.java:329) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:461) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 43 common frames omitted
+
+2018-07-09 17:24:18.783 ERROR 11552 --- [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@1c39680d] to prepare test instance [com.quhxuxm.quh.project.simpleblog.repository.TestRepository@634e1b39]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:125) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:108) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:246) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58) [junit-4.12.jar:4.12]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363) [junit-4.12.jar:4.12]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190) [spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137) [junit-4.12.jar:4.12]
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242) [junit-rt.jar:na]
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70) [junit-rt.jar:na]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1708) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:581) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:503) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:317) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:315) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1089) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:859) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:550) ~[spring-context-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:759) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:395) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:327) ~[spring-boot-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:139) ~[spring-boot-test-2.0.3.RELEASE.jar:2.0.3.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:99) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:117) ~[spring-test-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 24 common frames omitted
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:402) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:377) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1767) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1704) ~[spring-beans-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 39 common frames omitted
+Caused by: org.hibernate.MappingException: Repeated column in mapping for entity: com.quhxuxm.quh.project.simpleblog.repository.domain.Author column: additional_info_id (should be mapped with insert="false" update="false")
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:835) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.checkPropertyColumnDuplication(PersistentClass.java:853) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.checkColumnDuplication(PersistentClass.java:881) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.PersistentClass.validate(PersistentClass.java:607) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.mapping.RootClass.validate(RootClass.java:265) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.MetadataImpl.validate(MetadataImpl.java:329) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:461) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:892) ~[hibernate-core-5.2.17.Final.jar:5.2.17.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:57) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:390) ~[spring-orm-5.0.7.RELEASE.jar:5.0.7.RELEASE]
+	... 43 common frames omitted
+
+2018-07-09 17:25:00.199  INFO 9000 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 9000 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:25:00.201  INFO 9000 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:25:00.242  INFO 9000 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@2bd2b28e: startup date [Mon Jul 09 17:25:00 CST 2018]; root of context hierarchy
+2018-07-09 17:25:01.592  INFO 9000 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$91dabcd9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:25:01.865  INFO 9000 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:25:01.871  WARN 9000 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:25:02.341  INFO 9000 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:25:02.417  INFO 9000 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:25:02.441  INFO 9000 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:25:02.569  INFO 9000 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:25:02.571  INFO 9000 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:25:02.636  INFO 9000 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:25:02.831  INFO 9000 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:25:04.269  INFO 9000 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:25:04.562  WARN 9000 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:25:04.642  INFO 9000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:25:04.643  INFO 9000 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:25:04.898  INFO 9000 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@2bd2b28e: startup date [Mon Jul 09 17:25:00 CST 2018]; root of context hierarchy
+2018-07-09 17:25:05.654  INFO 9000 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ed2bf413-1b69-4573-9c94-afb2db554b57
+
+2018-07-09 17:25:05.956  INFO 9000 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@77f7352a, org.springframework.security.web.context.SecurityContextPersistenceFilter@6d6712b7, org.springframework.security.web.header.HeaderWriterFilter@de0c402, org.springframework.security.web.csrf.CsrfFilter@6cb662e8, org.springframework.security.web.authentication.logout.LogoutFilter@408f70ab, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2db3675a, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@121dce2, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3f2ae973, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4acc27fd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@75f65d54, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4ede8888, org.springframework.security.web.session.SessionManagementFilter@9d2af36, org.springframework.security.web.access.ExceptionTranslationFilter@751bb780, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@28db2afb]
+2018-07-09 17:25:06.102  INFO 9000 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 6.308 seconds (JVM running for 7.418)
+2018-07-09 17:25:06.246  INFO 9000 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@2bd2b28e: startup date [Mon Jul 09 17:25:00 CST 2018]; root of context hierarchy
+2018-07-09 17:25:06.251  INFO 9000 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:25:06.254  INFO 9000 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:25:06.261  INFO 9000 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:25:54.345  INFO 4612 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 4612 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:25:54.347  INFO 4612 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:25:54.385  INFO 4612 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:25:54 CST 2018]; root of context hierarchy
+2018-07-09 17:25:55.745  INFO 4612 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2483a3a2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:25:56.005  INFO 4612 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:25:56.012  WARN 4612 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:25:56.500  INFO 4612 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:25:56.567  INFO 4612 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:25:56.592  INFO 4612 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:25:56.718  INFO 4612 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:25:56.720  INFO 4612 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:25:56.809  INFO 4612 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:25:57.005  INFO 4612 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:25:58.521  INFO 4612 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:25:58.844  WARN 4612 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:25:58.943  INFO 4612 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:25:58.945  INFO 4612 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:25:59.199  INFO 4612 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:25:54 CST 2018]; root of context hierarchy
+2018-07-09 17:25:59.972  INFO 4612 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 3edbf61e-e69c-4c36-901a-035136cfb5c9
+
+2018-07-09 17:26:00.249  INFO 4612 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1a8b22b5, org.springframework.security.web.context.SecurityContextPersistenceFilter@24955144, org.springframework.security.web.header.HeaderWriterFilter@751bb780, org.springframework.security.web.csrf.CsrfFilter@44c27b8b, org.springframework.security.web.authentication.logout.LogoutFilter@4e3ffd0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@e18d2a2, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@7535f28, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@287317df, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7f41d979, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@464d5365, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f781173, org.springframework.security.web.session.SessionManagementFilter@639948a2, org.springframework.security.web.access.ExceptionTranslationFilter@31204303, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67396475]
+2018-07-09 17:26:00.389  INFO 4612 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 6.427 seconds (JVM running for 7.594)
+2018-07-09 17:26:00.530  INFO 4612 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:25:54 CST 2018]; root of context hierarchy
+2018-07-09 17:26:00.535  INFO 4612 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:26:00.538  INFO 4612 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:26:00.545  INFO 4612 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:30:55.170  INFO 13976 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 13976 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:30:55.172  INFO 13976 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:30:55.209  INFO 13976 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:30:55 CST 2018]; root of context hierarchy
+2018-07-09 17:30:56.617  INFO 13976 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bc98d190] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:30:56.874  INFO 13976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:30:56.880  WARN 13976 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:30:57.374  INFO 13976 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:30:57.431  INFO 13976 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:30:57.449  INFO 13976 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:30:57.569  INFO 13976 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:30:57.573  INFO 13976 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:30:57.640  INFO 13976 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:30:57.826  INFO 13976 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:30:59.833  INFO 13976 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:31:00.129  WARN 13976 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:31:00.208  INFO 13976 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:31:00.210  INFO 13976 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:31:00.437  INFO 13976 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:30:55 CST 2018]; root of context hierarchy
+2018-07-09 17:31:01.185  INFO 13976 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 150e2671-5fb3-4ad2-b7d8-b6c50b6935dd
+
+2018-07-09 17:31:01.483  INFO 13976 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c972ae6, org.springframework.security.web.context.SecurityContextPersistenceFilter@5ebf776c, org.springframework.security.web.header.HeaderWriterFilter@35d0749, org.springframework.security.web.csrf.CsrfFilter@2cacd55e, org.springframework.security.web.authentication.logout.LogoutFilter@5ad50b02, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7b80af04, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@70700b8a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3e12c5de, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1c2b65cc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2bf4fa1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@62a41279, org.springframework.security.web.session.SessionManagementFilter@552088cc, org.springframework.security.web.access.ExceptionTranslationFilter@ef85567, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@484a5ddd]
+2018-07-09 17:31:01.634  INFO 13976 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 6.875 seconds (JVM running for 8.043)
+2018-07-09 17:31:01.756  INFO 13976 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:30:55 CST 2018]; root of context hierarchy
+2018-07-09 17:31:01.761  INFO 13976 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:31:01.764  INFO 13976 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:31:01.771  INFO 13976 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:32:54.997  INFO 13020 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 13020 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:32:54.999  INFO 13020 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:32:55.048  INFO 13020 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:32:55 CST 2018]; root of context hierarchy
+2018-07-09 17:32:56.451  INFO 13020 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4e17880f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:32:56.707  INFO 13020 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:32:56.713  WARN 13020 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:32:57.237  INFO 13020 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:32:57.293  INFO 13020 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:32:57.318  INFO 13020 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:32:57.441  INFO 13020 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:32:57.444  INFO 13020 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:32:57.507  INFO 13020 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:32:57.713  INFO 13020 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:33:03.840  INFO 13020 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:33:04.132  WARN 13020 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:33:04.226  INFO 13020 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:33:04.228  INFO 13020 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:33:04.488  INFO 13020 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:32:55 CST 2018]; root of context hierarchy
+2018-07-09 17:33:05.234  INFO 13020 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 416f021a-5a7d-4825-87eb-163b12b27b81
+
+2018-07-09 17:33:05.515  INFO 13020 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a5d2041, org.springframework.security.web.context.SecurityContextPersistenceFilter@84a9f65, org.springframework.security.web.header.HeaderWriterFilter@520ee6b3, org.springframework.security.web.csrf.CsrfFilter@b90c5a5, org.springframework.security.web.authentication.logout.LogoutFilter@47f0e078, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3e55d844, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5bc14211, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@74e2cfc5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@720ffab4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@b529d7e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3cacc87, org.springframework.security.web.session.SessionManagementFilter@16a499d1, org.springframework.security.web.access.ExceptionTranslationFilter@7d49a1a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@74a1d60e]
+2018-07-09 17:33:05.641  INFO 13020 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 11.041 seconds (JVM running for 12.192)
+2018-07-09 17:33:05.772  INFO 13020 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:32:55 CST 2018]; root of context hierarchy
+2018-07-09 17:33:05.776  INFO 13020 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:33:05.779  INFO 13020 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:33:05.787  INFO 13020 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
+2018-07-09 17:49:15.120  INFO 2568 --- [main] c.q.q.p.s.repository.TestRepository      : Starting TestRepository on CPEKW-Q1100753 with PID 2568 (started by quh in D:\Git\simpleblog\web)
+2018-07-09 17:49:15.121  INFO 2568 --- [main] c.q.q.p.s.repository.TestRepository      : No active profile set, falling back to default profiles: default
+2018-07-09 17:49:15.164  INFO 2568 --- [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:49:15 CST 2018]; root of context hierarchy
+2018-07-09 17:49:16.610  INFO 2568 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$75af4684] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-07-09 17:49:16.883  INFO 2568 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Starting...
+2018-07-09 17:49:16.889  WARN 2568 --- [main] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2018-07-09 17:49:17.339  INFO 2568 --- [main] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Start completed.
+2018-07-09 17:49:17.421  INFO 2568 --- [main] j.LocalContainerEntityManagerFactoryBean : Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:49:17.442  INFO 2568 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-07-09 17:49:17.601  INFO 2568 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.2.17.Final}
+2018-07-09 17:49:17.603  INFO 2568 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2018-07-09 17:49:17.689  INFO 2568 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-07-09 17:49:17.852  INFO 2568 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2018-07-09 17:49:24.560  INFO 2568 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:49:24.880  WARN 2568 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-07-09 17:49:24.962  INFO 2568 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-09 17:49:24.964  INFO 2568 --- [main] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-09 17:49:25.244  INFO 2568 --- [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : Looking for @ControllerAdvice: org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:49:15 CST 2018]; root of context hierarchy
+2018-07-09 17:49:26.007  INFO 2568 --- [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 1d85503a-2548-4383-b2f5-2ceb00c69238
+
+2018-07-09 17:49:26.230  INFO 2568 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6c9e74f3, org.springframework.security.web.context.SecurityContextPersistenceFilter@4cded2cd, org.springframework.security.web.header.HeaderWriterFilter@490d9c41, org.springframework.security.web.csrf.CsrfFilter@60f3239f, org.springframework.security.web.authentication.logout.LogoutFilter@71687d8f, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@af04f09, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@391b01c5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@9cb927e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67c2b55d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4d8522ff, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@813ab53, org.springframework.security.web.session.SessionManagementFilter@3c5e4aac, org.springframework.security.web.access.ExceptionTranslationFilter@39685204, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@49639118]
+2018-07-09 17:49:26.382  INFO 2568 --- [main] c.q.q.p.s.repository.TestRepository      : Started TestRepository in 11.7 seconds (JVM running for 12.796)
+2018-07-09 17:49:26.507  INFO 2568 --- [Thread-2] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@7756c3cd: startup date [Mon Jul 09 17:49:15 CST 2018]; root of context hierarchy
+2018-07-09 17:49:26.512  INFO 2568 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2018-07-09 17:49:26.516  INFO 2568 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown initiated...
+2018-07-09 17:49:26.524  INFO 2568 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : SimpleBlog-DataSource - Shutdown completed.
