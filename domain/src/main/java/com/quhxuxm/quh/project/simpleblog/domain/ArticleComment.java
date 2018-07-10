@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -22,12 +23,12 @@ public class ArticleComment implements Serializable {
     private Date updateDate;
     @Column(name = "content", length = 2000, nullable = false)
     private String content;
-    @ManyToOne(targetEntity = ArticleComment.class)
+    @ManyToOne
     @JoinColumn(name = "parent_id", nullable = false, updatable = false)
-    private Long parentId;
+    private ArticleComment parent;
     @ManyToOne(targetEntity = Article.class)
     @JoinColumn(name = "article_id", nullable = false, updatable = false)
-    private Long articleId;
+    private Article article;
 
     public Long getId() {
         return id;
@@ -69,19 +70,19 @@ public class ArticleComment implements Serializable {
         this.content = content;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Article getArticle() {
+        return article;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
-    public Long getArticleId() {
-        return articleId;
+    public ArticleComment getParent() {
+        return parent;
     }
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
+    public void setParent(ArticleComment parent) {
+        this.parent = parent;
     }
 }

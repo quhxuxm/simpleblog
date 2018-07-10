@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -22,12 +23,12 @@ public class AnthologyComment implements Serializable {
     private Date updateDate;
     @Column(name = "content", length = 2000, nullable = false)
     private String content;
-    @ManyToOne(targetEntity = AnthologyComment.class)
+    @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id", updatable = false)
-    private Long parentId;
-    @ManyToOne(targetEntity = Anthology.class)
+    private AnthologyComment parent;
+    @ManyToOne
     @JoinColumn(name = "anthology_id", referencedColumnName = "id", updatable = false)
-    private Long anthologyId;
+    private Anthology anthology;
 
     public Long getId() {
         return id;
@@ -69,19 +70,19 @@ public class AnthologyComment implements Serializable {
         this.content = content;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public AnthologyComment getParent() {
+        return parent;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setParent(AnthologyComment parent) {
+        this.parent = parent;
     }
 
-    public Long getAnthologyId() {
-        return anthologyId;
+    public Anthology getAnthology() {
+        return anthology;
     }
 
-    public void setAnthologyId(Long anthologyId) {
-        this.anthologyId = anthologyId;
+    public void setAnthology(Anthology anthology) {
+        this.anthology = anthology;
     }
 }

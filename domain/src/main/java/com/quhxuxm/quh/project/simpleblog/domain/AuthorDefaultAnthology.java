@@ -10,6 +10,7 @@ public class AuthorDefaultAnthology implements Serializable {
     private static final long serialVersionUID = -5512420538467327316L;
 
     public static class PK implements Serializable {
+        private static final long serialVersionUID = -5512420538467327317L;
         @OneToOne
         @JoinColumn(name = "author_id", referencedColumnName = "id", updatable = false)
         private Author author;

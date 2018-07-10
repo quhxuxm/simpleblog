@@ -29,15 +29,15 @@ public class Article implements Serializable {
     private String content;
     @Column(name = "summary", nullable = false, length = 2000)
     private String summary;
-    @ManyToOne(targetEntity = Anthology.class)
+    @ManyToOne
     @JoinColumn(name = "anthology_id", referencedColumnName = "id", nullable = false, updatable = false)
-    private Long anthologyId;
+    private Anthology anthology;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "additional_info_id", referencedColumnName = "id", nullable = false, updatable = false)
     private ArticleAdditionalInfo additionalInfo;
-    @ManyToOne(targetEntity = Resource.class)
+    @ManyToOne
     @JoinColumn(name = "cover_image_id", referencedColumnName = "id")
-    private Long coverImageId;
+    private Resource coverImage;
     @Column(name = "is_published", nullable = false)
     private Boolean isPublished;
 
@@ -96,12 +96,12 @@ public class Article implements Serializable {
         this.content = content;
     }
 
-    public Long getAnthologyId() {
-        return anthologyId;
+    public Anthology getAnthology() {
+        return anthology;
     }
 
-    public void setAnthologyId(Long anthologyId) {
-        this.anthologyId = anthologyId;
+    public void setAnthology(Anthology anthology) {
+        this.anthology = anthology;
     }
 
     public String getSummary() {
@@ -116,12 +116,12 @@ public class Article implements Serializable {
         return additionalInfo;
     }
 
-    public Long getCoverImageId() {
-        return coverImageId;
+    public Resource getCoverImage() {
+        return coverImage;
     }
 
-    public void setCoverImageId(Long coverImageId) {
-        this.coverImageId = coverImageId;
+    public void setCoverImage(Resource coverImage) {
+        this.coverImage = coverImage;
     }
 
     public Boolean getPublished() {

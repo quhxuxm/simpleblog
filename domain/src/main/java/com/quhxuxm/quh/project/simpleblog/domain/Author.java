@@ -22,8 +22,9 @@ public class Author implements Serializable {
     private AuthorAdditionalInfo additionalInfo;
     @Column(name = "nick_name", nullable = false, unique = true, length = 64)
     private String nickName;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "author_role", joinColumns = { @JoinColumn(name = "author_id", referencedColumnName = "id") })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(name = "author_role", joinColumns = { @JoinColumn(name = "author_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
     private Set<Role> roles;
 
     public Author() {

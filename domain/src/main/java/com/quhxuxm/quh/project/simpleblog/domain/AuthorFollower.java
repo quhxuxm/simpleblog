@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,14 +8,35 @@ import java.util.Date;
 @Table(name = "author_follower")
 public class AuthorFollower implements Serializable {
     private static final long serialVersionUID = -772343683934230934L;
-    @Id
-    @ManyToOne(targetEntity = Author.class)
-    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
-    private Long authorId;
-    @Id
-    @ManyToOne(targetEntity = Author.class)
-    @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false, updatable = false)
-    private Long followerId;
+
+    public static class PK implements Serializable {
+        private static final long serialVersionUID = -772343683934230935L;
+        @ManyToOne
+        @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
+        private Author author;
+        @ManyToOne
+        @JoinColumn(name = "follower_id", referencedColumnName = "id", nullable = false, updatable = false)
+        private Author follower;
+
+        public Author getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(Author author) {
+            this.author = author;
+        }
+
+        public Author getFollower() {
+            return follower;
+        }
+
+        public void setFollower(Author follower) {
+            this.follower = follower;
+        }
+    }
+
+    @EmbeddedId
+    private PK pk;
     @Temporal(TemporalType.DATE)
     @Column(name = "follow_date", nullable = false, updatable = false)
     private Date followDate;
@@ -23,20 +45,12 @@ public class AuthorFollower implements Serializable {
         this.followDate = new Date();
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public PK getPk() {
+        return pk;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public Long getFollowerId() {
-        return followerId;
-    }
-
-    public void setFollowerId(Long followerId) {
-        this.followerId = followerId;
+    public void setPk(PK pk) {
+        this.pk = pk;
     }
 
     public Date getFollowDate() {

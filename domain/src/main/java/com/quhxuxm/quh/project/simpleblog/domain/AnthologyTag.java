@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -6,14 +7,35 @@ import java.io.Serializable;
 @Table(name = "anthology_tag")
 public class AnthologyTag implements Serializable {
     private static final long serialVersionUID = 8705523091082159065L;
-    @Id
-    @ManyToOne(targetEntity = Anthology.class)
-    @JoinColumn(name = "anthology_id", nullable = false, referencedColumnName = "id", updatable = false)
-    private Long anthologyId;
-    @Id
-    @ManyToOne(targetEntity = Tag.class)
-    @JoinColumn(name = "tag_id", nullable = false, referencedColumnName = "id", updatable = false)
-    private Long tagId;
+
+    public static class PK implements Serializable {
+        private static final long serialVersionUID = 8705523091082159066L;
+        @ManyToOne
+        @JoinColumn(name = "anthology_id", nullable = false, referencedColumnName = "id", updatable = false)
+        private Anthology anthology;
+        @ManyToOne
+        @JoinColumn(name = "tag_id", nullable = false, referencedColumnName = "id", updatable = false)
+        private Tag tag;
+
+        public Anthology getAnthology() {
+            return anthology;
+        }
+
+        public void setAnthology(Anthology anthology) {
+            this.anthology = anthology;
+        }
+
+        public Tag getTag() {
+            return tag;
+        }
+
+        public void setTag(Tag tag) {
+            this.tag = tag;
+        }
+    }
+
+    @EmbeddedId
+    private PK pk;
     @Column(name = "is_selected", nullable = false, updatable = false)
     private Boolean isSelected;
     @Column(name = "weight", scale = 2, nullable = false)
@@ -24,20 +46,12 @@ public class AnthologyTag implements Serializable {
         this.weight = 0d;
     }
 
-    public Long getAnthologyId() {
-        return anthologyId;
+    public PK getPk() {
+        return pk;
     }
 
-    public void setAnthologyId(Long anthologyId) {
-        this.anthologyId = anthologyId;
-    }
-
-    public Long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Long tagId) {
-        this.tagId = tagId;
+    public void setPk(PK pk) {
+        this.pk = pk;
     }
 
     public Boolean getSelected() {

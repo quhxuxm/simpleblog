@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -6,14 +7,19 @@ import java.io.Serializable;
 @Table(name = "article_tag")
 public class ArticleTag implements Serializable {
     private static final long serialVersionUID = 5077971124151612394L;
-    @Id
-    @ManyToOne(targetEntity = Article.class)
-    @JoinColumn(name = "article_id", updatable = false, nullable = false)
-    private Long articleId;
-    @Id
-    @ManyToOne(targetEntity = Article.class)
-    @JoinColumn(name = "tag_id", updatable = false, nullable = false)
-    private Long tagId;
+
+    public static class PK implements Serializable {
+        private static final long serialVersionUID = 5077971124151612395L;
+        @ManyToOne(targetEntity = Article.class)
+        @JoinColumn(name = "article_id", updatable = false, nullable = false)
+        private Long articleId;
+        @ManyToOne(targetEntity = Article.class)
+        @JoinColumn(name = "tag_id", updatable = false, nullable = false)
+        private Long tagId;
+    }
+
+    @EmbeddedId
+    private PK pk;
     @Column(name = "is_selected", nullable = false, updatable = false)
     private Boolean isSelected;
     @Column(name = "weight", nullable = false, scale = 2)
@@ -24,20 +30,12 @@ public class ArticleTag implements Serializable {
         this.weight = 0d;
     }
 
-    public Long getArticleId() {
-        return articleId;
+    public PK getPk() {
+        return pk;
     }
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
-
-    public Long getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Long tagId) {
-        this.tagId = tagId;
+    public void setPk(PK pk) {
+        this.pk = pk;
     }
 
     public Boolean getSelected() {

@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -7,14 +8,35 @@ import java.util.Date;
 @Table(name = "anthology_participant")
 public class AnthologyParticipant implements Serializable {
     private static final long serialVersionUID = -7732733544433259761L;
-    @Id
-    @ManyToOne(targetEntity = Author.class)
-    @JoinColumn(name = "author_id", nullable = false, updatable = false)
-    private Long authorId;
-    @Id
-    @ManyToOne(targetEntity = Anthology.class)
-    @JoinColumn(name = "anthology_id", nullable = false, updatable = false)
-    private Long anthologyId;
+
+    public static class PK implements Serializable {
+        private static final long serialVersionUID = -7732733544433259762L;
+        @ManyToOne(targetEntity = Author.class)
+        @JoinColumn(name = "author_id", nullable = false, updatable = false)
+        private Author author;
+        @ManyToOne(targetEntity = Anthology.class)
+        @JoinColumn(name = "anthology_id", nullable = false, updatable = false)
+        private Anthology anthology;
+
+        public Anthology getAnthology() {
+            return anthology;
+        }
+
+        public void setAnthology(Anthology anthology) {
+            this.anthology = anthology;
+        }
+
+        public Author getAuthor() {
+            return author;
+        }
+
+        public void setAuthor(Author author) {
+            this.author = author;
+        }
+    }
+
+    @EmbeddedId
+    private PK pk;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "participate_date", nullable = false, updatable = false)
     private Date participateDate;
@@ -26,20 +48,12 @@ public class AnthologyParticipant implements Serializable {
         this.participateDate = new Date();
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public PK getPk() {
+        return pk;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
-    }
-
-    public Long getAnthologyId() {
-        return anthologyId;
-    }
-
-    public void setAnthologyId(Long anthologyId) {
-        this.anthologyId = anthologyId;
+    public void setPk(PK pk) {
+        this.pk = pk;
     }
 
     public Date getParticipateDate() {

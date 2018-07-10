@@ -5,6 +5,8 @@ import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import java.util.Set;
 
 @Service
 class SecurityService implements ISecurityService {
+    private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
     private IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository;
     private IAuthenticationRepository authenticationRepository;
     private IAuthorRepository authorRepository;
@@ -28,9 +31,20 @@ class SecurityService implements ISecurityService {
         this.anthologyRepository = anthologyRepository;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = ServiceException.class)
     @Override
     public void register(String token, String password, String nickName, Authentication.Type type) throws ServiceException {
+        Authentication authenticationInDb = null;
+        try {
+            authenticationInDb = this.authenticationRepository.findByTokenAndType(token, type);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception happen when check token and type with db.", e);
+            throw new ServiceException("Fail to register because of exception happen when check token and type with db.", e);
+        }
+        if (authenticationInDb != null) {
+            logger.error("Can not register because of token exist already, token = {}, type = {}.", token, type.name());
+            throw new ServiceException(String.format("Can not register because of token exist already, token = %s, type = %s.", token, type.name()));
+        }
         Authentication authentication = new Authentication();
         authentication.setToken(token);
         authentication.setType(type);
@@ -38,107 +52,50 @@ class SecurityService implements ISecurityService {
         Author author = new Author();
         authentication.setAuthor(author);
         author.setNickName(nickName);
-        Role authorRole = this.roleRepository.findByName(ICommonConstant.RoleName.AUTHOR);
+        Role authorRole = null;
+        try {
+            authorRole = this.roleRepository.findByName(ICommonConstant.RoleName.AUTHOR);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception happen when get author role from db.", e);
+            throw new ServiceException("Fail to register because of exception happen when get author role from db.", e);
+        }
+        if (authorRole == null) {
+            logger.error("Can not register because of author role not exist.");
+            throw new ServiceException("Can not register because of author role not exist.");
+        }
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(authorRole);
         author.setRoles(roleSet);
-        this.authorRepository.save(author);
-        this.authenticationRepository.save(authentication);
+        try {
+            this.authorRepository.save(author);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception when save author.", e);
+            throw new ServiceException("Fail to register because of exception when save author.");
+        }
+        try {
+            this.authenticationRepository.save(authentication);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception when save authentication.", e);
+            throw new ServiceException("Fail to register because of exception when save authentication.");
+        }
         Anthology anthology = new Anthology();
         anthology.setAuthor(author);
-        this.anthologyRepository.save(anthology);
+        try {
+            this.anthologyRepository.save(anthology);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception when save anthology.", e);
+            throw new ServiceException("Fail to register because of exception when save anthology.");
+        }
         AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
         AuthorDefaultAnthology.PK authorDefaultAnthologyPK = new AuthorDefaultAnthology.PK();
         authorDefaultAnthologyPK.setAnthology(anthology);
         authorDefaultAnthologyPK.setAuthor(author);
         authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
-        this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
+        try {
+            this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
+        } catch (Exception e) {
+            logger.error("Fail to register because of exception when save author default anthology.", e);
+            throw new ServiceException("Fail to register because of exception when save author default anthology.");
+        }
     }
-    //    private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
-    //    private final IAuthorPojoMapper authorPojoMapper;
-    //    private final IAuthenticationPojoMapper authenticationPojoMapper;
-    //    private final IAnthologyPojoMapper anthologyPojoMapper;
-    //    private final IAuthorAdditionalInfoPojoMapper authorAdditionalInfoPojoMapper;
-    //    private final IAuthorDefaultAnthologyPojoMapper authorDefaultAnthologyPojoMapper;
-    //    private final IRolePojoMapper rolePojoMapper;
-    //    private final IAuthorRolePojoMapper authorRolePojoMapper;
-    //
-    //    @Autowired
-    //    public SecurityService(IAuthorPojoMapper authorPojoMapper, IAuthenticationPojoMapper authenticationPojoMapper,
-    //                           IAnthologyPojoMapper anthologyPojoMapper,
-    //                           IAuthorAdditionalInfoPojoMapper authorAdditionalInfoPojoMapper,
-    //                           IAuthorDefaultAnthologyPojoMapper authorDefaultAnthologyPojoMapper,
-    //                           IRolePojoMapper rolePojoMapper, IAuthorRolePojoMapper authorRolePojoMapper) {
-    //        this.authorPojoMapper = authorPojoMapper;
-    //        this.authenticationPojoMapper = authenticationPojoMapper;
-    //        this.anthologyPojoMapper = anthologyPojoMapper;
-    //        this.authorAdditionalInfoPojoMapper = authorAdditionalInfoPojoMapper;
-    //        this.authorDefaultAnthologyPojoMapper = authorDefaultAnthologyPojoMapper;
-    //        this.rolePojoMapper = rolePojoMapper;
-    //        this.authorRolePojoMapper = authorRolePojoMapper;
-    //    }
-    //
-    //    @Transactional(rollbackFor = ServiceException.class)
-    //    @Override
-    //    public void register(String token, String password, String nickName,
-    //                         Authentication.Type type) throws ServiceException {
-    //        logger.debug("Begin to register author with token = {}, password = {}, nicke name = {}", token, password,
-    //                nickName);
-    //        try {
-    //            if (this.authenticationPojoMapper.isTokenExist(token, type)) {
-    //                logger.error("Toekn [{}] exist for type [{}].", token, type.name());
-    //                throw new ServiceException("Toekn [" + token + "] exist for type [" + type.name() + "].");
-    //            }
-    //            if (this.authorPojoMapper.isNickNameExist(nickName)) {
-    //                logger.error("Nick name [{}] exist.", nickName);
-    //                throw new ServiceException("Nick name [" + nickName + "] exist.");
-    //            }
-    //            AuthorAdditionalInfo authorAdditionalInfo = new AuthorAdditionalInfo();
-    //            this.authorAdditionalInfoPojoMapper.create(authorAdditionalInfo);
-    //            logger.debug("Success to prepare author additional infor pojo, id={}", authorAdditionalInfo.getId());
-    //            Author author = new Author();
-    //            author.setNickName(nickName);
-    //            author.setAdditionalInfoId(authorAdditionalInfo.getId());
-    //            this.authorPojoMapper.create(author);
-    //            logger.debug("Success to prepare author pojo, id={}", author.getId());
-    //            Role rolePojo = this.rolePojoMapper.findOneByName(ICommonConstant.RoleName.AUTHOR);
-    //            if (rolePojo == null) {
-    //                logger.error("The author role not exist in the database");
-    //                throw new ServiceException("The author role not exist in the database");
-    //            }
-    //            logger.debug("Success to find role {}, id={}", ICommonConstant.RoleName.AUTHOR, rolePojo.getId());
-    //            AuthorRole authorRolePojo = new AuthorRole();
-    //            authorRolePojo.setAuthorId(author.getId());
-    //            authorRolePojo.setRoleId(rolePojo.getId());
-    //            this.authorRolePojoMapper.create(authorRolePojo);
-    //            logger.debug("Success to prepare author role pojo, author id={}, role id ={}", authorRolePojo
-    // .getAuthorId(),
-    //                    authorRolePojo.getRoleId());
-    //            Anthology anthologyPojo = new Anthology();
-    //            anthologyPojo.setAuthorId(author.getId());
-    //            this.anthologyPojoMapper.create(anthologyPojo);
-    //            logger.debug("Success to prepare anthology pojo, id ={}", anthologyPojo.getId());
-    //            AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
-    //            authorDefaultAnthology.setAnthologyId(anthologyPojo.getId());
-    //            authorDefaultAnthology.setAuthorId(author.getId());
-    //            this.authorDefaultAnthologyPojoMapper.create(authorDefaultAnthology);
-    //            logger.debug("Success to prepare author default anthology pojo, author id ={}, default anthology id
-    // = {}",
-    //                    authorDefaultAnthology.getAuthorId(), authorDefaultAnthology.getAnthologyId());
-    //            Authentication authentication = new Authentication();
-    //            authentication.setToken(token);
-    //            authentication.setPassword(password);
-    //            authentication.setRegisterDate(new Date());
-    //            authentication.setEnable(true);
-    //            authentication.setType(type);
-    //            authentication.setAuthorId(author.getId());
-    //            this.authenticationPojoMapper.create(authentication);
-    //            logger.debug("Success to prepare authenticate pojo, author id ={}, id = {}", authentication
-    // .getAuthorId(),
-    //                    authentication.getId());
-    //        } catch (Exception e) {
-    //            logger.error("Fail to register author because of exception.", e);
-    //            throw new ServiceException(e);
-    //        }
-    //    }
 }
