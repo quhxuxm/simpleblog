@@ -25,9 +25,6 @@ public class Author implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "author_role", joinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "id")})
     private Set<Role> roles;
-    @OneToOne(targetEntity = Anthology.class)
-    @JoinColumn(name = "default_anthology_id", nullable = false, referencedColumnName = "id")
-    private Long defaultAnthologyId;
 
     public Author() {
         this.additionalInfo = new AuthorAdditionalInfo();
@@ -79,13 +76,5 @@ public class Author implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
-    }
-
-    public Long getDefaultAnthologyId() {
-        return defaultAnthologyId;
-    }
-
-    public void setDefaultAnthologyId(Long defaultAnthologyId) {
-        this.defaultAnthologyId = defaultAnthologyId;
     }
 }

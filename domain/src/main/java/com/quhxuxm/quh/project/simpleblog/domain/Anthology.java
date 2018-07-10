@@ -11,7 +11,7 @@ public class Anthology implements Serializable {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @Column(name = "title", nullable = false)
+    @Column(name = "title")
     private String title;
     @Column(name = "summary", nullable = false)
     private String summary;

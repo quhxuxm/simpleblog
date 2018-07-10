@@ -1,13 +1,7 @@
 package com.quhxuxm.quh.project.simpleblog.service.impl;
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
-import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
-import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
-import com.quhxuxm.quh.project.simpleblog.domain.Author;
-import com.quhxuxm.quh.project.simpleblog.domain.Role;
-import com.quhxuxm.quh.project.simpleblog.repository.IAnthologyRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.IAuthenticationRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.IAuthorRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.IRoleRepository;
+import com.quhxuxm.quh.project.simpleblog.domain.*;
+import com.quhxuxm.quh.project.simpleblog.repository.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import org.springframework.stereotype.Service;
@@ -18,13 +12,16 @@ import java.util.Set;
 
 @Service
 class SecurityService implements ISecurityService {
+    private IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository;
     private IAuthenticationRepository authenticationRepository;
     private IAuthorRepository authorRepository;
     private IRoleRepository roleRepository;
     private IAnthologyRepository anthologyRepository;
 
-    SecurityService(IAuthenticationRepository authenticationRepository, IAuthorRepository authorRepository,
+    SecurityService(IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
+                    IAuthenticationRepository authenticationRepository, IAuthorRepository authorRepository,
                     IRoleRepository roleRepository, IAnthologyRepository anthologyRepository) {
+        this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
         this.authenticationRepository = authenticationRepository;
         this.authorRepository = authorRepository;
         this.roleRepository = roleRepository;
@@ -46,11 +43,17 @@ class SecurityService implements ISecurityService {
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(authorRole);
         author.setRoles(roleSet);
-        Anthology defaultAnthology=new Anthology();
-        defaultAnthology.setAuthorId();
-        author.setDefaultAnthologyId(defaultAnthology.getId());
         this.authorRepository.save(author);
         this.authenticationRepository.save(authentication);
+        Anthology anthology = new Anthology();
+        anthology.setAuthorId(author.getId());
+        this.anthologyRepository.save(anthology);
+        AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
+        AuthorDefaultAnthology.PK authorDefaultAnthologyPK = new AuthorDefaultAnthology.PK();
+        authorDefaultAnthologyPK.setAnthologyId(anthology.getId());
+        authorDefaultAnthologyPK.setAuthorId(author.getId());
+        authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
+        this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
     }
     //    private static final Logger logger = LoggerFactory.getLogger(SecurityService.class);
     //    private final IAuthorPojoMapper authorPojoMapper;
