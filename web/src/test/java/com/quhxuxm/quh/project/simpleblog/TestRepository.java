@@ -1,11 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog;
 
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
-import com.quhxuxm.quh.project.simpleblog.service.api.ISecurityService;
+import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
-import org.junit.After;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = Main.class)
 public class TestRepository {
     @Autowired
-    private ISecurityService securityService;
+    private IAuthorService securityService;
 
     @Test
     @Before
