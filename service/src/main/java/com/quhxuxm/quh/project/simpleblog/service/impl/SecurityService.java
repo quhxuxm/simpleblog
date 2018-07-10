@@ -98,4 +98,16 @@ class SecurityService implements ISecurityService {
             throw new ServiceException("Fail to register because of exception when save author default anthology.");
         }
     }
+
+    @Override
+    public Authentication login(String token, String password, Authentication.Type type) throws ServiceException {
+        Authentication authentication = null;
+        try {
+            authentication = this.authenticationRepository.findByTokenAndTypeAndPassword(token, type, password);
+        } catch (Exception e) {
+            logger.error("Can not login because of the exception.", e);
+            throw new ServiceException("Can not login because of the exception.");
+        }
+        return authentication;
+    }
 }

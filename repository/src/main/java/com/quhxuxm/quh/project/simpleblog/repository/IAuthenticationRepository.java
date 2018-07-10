@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IAuthenticationRepository extends JpaRepository<Authentication, Long> {
     Authentication findByTokenAndType(String token, Authentication.Type type);
+
+    Authentication findByTokenAndTypeAndPassword(String token, Authentication.Type type, String password);
 }
