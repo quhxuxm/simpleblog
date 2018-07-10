@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class Article implements Serializable {
     @Column(name = "publish_date")
     private Date publishDate;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "update_date")
+    @Column(name = "update_date", nullable = false)
     private Date updateDate;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", nullable = false, updatable = false)
@@ -42,6 +43,7 @@ public class Article implements Serializable {
 
     public Article() {
         this.createDate = new Date();
+        this.updateDate = this.createDate;
         this.isPublished = false;
         this.additionalInfo = new ArticleAdditionalInfo();
     }
@@ -112,10 +114,6 @@ public class Article implements Serializable {
 
     public ArticleAdditionalInfo getAdditionalInfo() {
         return additionalInfo;
-    }
-
-    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
-        this.additionalInfo = additionalInfo;
     }
 
     public Long getCoverImageId() {

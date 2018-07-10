@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,27 +10,27 @@ public class AuthorDefaultAnthology implements Serializable {
     private static final long serialVersionUID = -5512420538467327316L;
 
     public static class PK implements Serializable {
-        @OneToOne(targetEntity = Author.class)
+        @OneToOne
         @JoinColumn(name = "author_id", referencedColumnName = "id", updatable = false)
-        private Long authorId;
-        @OneToOne(targetEntity = Anthology.class)
+        private Author author;
+        @OneToOne
         @JoinColumn(name = "anthology_id", referencedColumnName = "id")
-        private Long anthologyId;
+        private Anthology anthology;
 
-        public Long getAuthorId() {
-            return authorId;
+        public Author getAuthor() {
+            return author;
         }
 
-        public void setAuthorId(Long authorId) {
-            this.authorId = authorId;
+        public void setAuthor(Author author) {
+            this.author = author;
         }
 
-        public Long getAnthologyId() {
-            return anthologyId;
+        public Anthology getAnthology() {
+            return anthology;
         }
 
-        public void setAnthologyId(Long anthologyId) {
-            this.anthologyId = anthologyId;
+        public void setAnthology(Anthology anthology) {
+            this.anthology = anthology;
         }
     }
 

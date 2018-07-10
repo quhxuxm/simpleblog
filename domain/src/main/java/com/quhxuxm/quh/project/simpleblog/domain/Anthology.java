@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +14,7 @@ public class Anthology implements Serializable {
     private Long id;
     @Column(name = "title")
     private String title;
-    @Column(name = "summary", nullable = false)
+    @Column(name = "summary")
     private String summary;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date", nullable = false, updatable = false)
@@ -22,14 +23,14 @@ public class Anthology implements Serializable {
     @Column(name = "update_date", nullable = false)
     private Date updateDate;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "publish_date", nullable = false)
+    @Column(name = "publish_date")
     private Date publishDate;
-    @ManyToOne(targetEntity = Author.class)
+    @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
-    private Long authorId;
-    @ManyToOne(targetEntity = Resource.class)
+    private Author author;
+    @ManyToOne
     @JoinColumn(name = "cover_image_id", referencedColumnName = "id")
-    private Long coverImageId;
+    private Resource coverImage;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "additional_info_id", referencedColumnName = "id", nullable = false, updatable = false)
     private AnthologyAdditionalInfo additionalInfo;
@@ -43,6 +44,7 @@ public class Anthology implements Serializable {
         this.updateDate = this.createDate;
         this.isPublished = false;
         this.isShared = false;
+        this.additionalInfo = new AnthologyAdditionalInfo();
     }
 
     public Long getId() {
@@ -85,20 +87,20 @@ public class Anthology implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public Long getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public Long getCoverImageId() {
-        return coverImageId;
+    public Resource getCoverImage() {
+        return coverImage;
     }
 
-    public void setCoverImageId(Long coverImageId) {
-        this.coverImageId = coverImageId;
+    public void setCoverImage(Resource coverImage) {
+        this.coverImage = coverImage;
     }
 
     public Date getCreateDate() {
@@ -123,5 +125,9 @@ public class Anthology implements Serializable {
 
     public void setShared(Boolean shared) {
         isShared = shared;
+    }
+
+    public AnthologyAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
     }
 }

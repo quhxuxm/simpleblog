@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.service.impl;
+
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
@@ -18,9 +19,8 @@ class SecurityService implements ISecurityService {
     private IRoleRepository roleRepository;
     private IAnthologyRepository anthologyRepository;
 
-    SecurityService(IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
-                    IAuthenticationRepository authenticationRepository, IAuthorRepository authorRepository,
-                    IRoleRepository roleRepository, IAnthologyRepository anthologyRepository) {
+    SecurityService(IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository, IAuthenticationRepository authenticationRepository, IAuthorRepository authorRepository,
+            IRoleRepository roleRepository, IAnthologyRepository anthologyRepository) {
         this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
         this.authenticationRepository = authenticationRepository;
         this.authorRepository = authorRepository;
@@ -30,8 +30,7 @@ class SecurityService implements ISecurityService {
 
     @Transactional
     @Override
-    public void register(String token, String password, String nickName,
-                         Authentication.Type type) throws ServiceException {
+    public void register(String token, String password, String nickName, Authentication.Type type) throws ServiceException {
         Authentication authentication = new Authentication();
         authentication.setToken(token);
         authentication.setType(type);
@@ -46,12 +45,12 @@ class SecurityService implements ISecurityService {
         this.authorRepository.save(author);
         this.authenticationRepository.save(authentication);
         Anthology anthology = new Anthology();
-        anthology.setAuthorId(author.getId());
+        anthology.setAuthor(author);
         this.anthologyRepository.save(anthology);
         AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
         AuthorDefaultAnthology.PK authorDefaultAnthologyPK = new AuthorDefaultAnthology.PK();
-        authorDefaultAnthologyPK.setAnthologyId(anthology.getId());
-        authorDefaultAnthologyPK.setAuthorId(author.getId());
+        authorDefaultAnthologyPK.setAnthology(anthology);
+        authorDefaultAnthologyPK.setAuthor(author);
         authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
         this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
     }

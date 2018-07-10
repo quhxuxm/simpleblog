@@ -17,7 +17,7 @@ public class TestRepository {
     @Test
     public void testRegisterAuthor() throws ServiceException {
         for (int i = 0; i < 100; i++) {
-            this.securityService.register("toeken" + i, "password" + i, "nickName" + i,
+            this.securityService.register("token" + i, "password" + i, "nickName" + i,
                     Authentication.Type.values()[i % Authentication.Type.values().length]);
         }
     }
