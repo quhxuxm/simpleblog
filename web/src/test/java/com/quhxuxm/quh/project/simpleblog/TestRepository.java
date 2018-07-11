@@ -1,9 +1,12 @@
 package com.quhxuxm.quh.project.simpleblog;
-
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
-import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
-import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetail;
+import com.quhxuxm.quh.project.simpleblog.service.api.exception
+        .ServiceException;
+import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorAssignTagsDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetailDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorLoginDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorRegisterDTO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,19 +37,29 @@ public class TestRepository {
                 return;
             }
             for (int i = 0; i < 100; i++) {
-                OptionalLong authorIdOptional = this.authorService
-                        .register("token" + i, "password" + i, "nickName" + i,
-                                Authentication.Type.USERNAME);
+                AuthorRegisterDTO authorRegisterDTO = new AuthorRegisterDTO();
+                authorRegisterDTO.setToken("token" + i);
+                authorRegisterDTO.setPassword("password" + i);
+                authorRegisterDTO.setNickName("nickname" + i);
+                authorRegisterDTO.setType(Authentication.Type.USERNAME);
+                OptionalLong authorIdOptional = this.authorService.register(
+                        authorRegisterDTO);
                 authorIdOptional.ifPresent(id -> {
                     Set<String> tags = new HashSet<>();
                     tags.add("tag1");
                     tags.add("tag2");
                     tags.add("tag3");
                     try {
-                        this.authorService.assignTagToAuthor(id, tags);
+                        AuthorAssignTagsDTO authorAssignTagsDTO = new
+                                AuthorAssignTagsDTO();
+                        authorAssignTagsDTO.setAuthorId(id);
+                        authorAssignTagsDTO.setTags(tags);
+                        this.authorService.assignTagsToAuthor(
+                                authorAssignTagsDTO);
                     } catch (ServiceException e) {
                         Assert.fail(
-                                "Can not assign tags to author because of exception.");
+                                "Can not assign tags to author because of " +
+                                        "exception.");
                     }
                 });
             }
@@ -58,30 +71,42 @@ public class TestRepository {
     public void testLogin() throws ServiceException {
         for (int i = 0; i < 100; i++) {
             int index = i;
-            Optional<AuthorDetail> authorDetailOptional = this.authorService
-                    .login("token" + i, "password" + i,
-                            Authentication.Type.USERNAME);
+            AuthorLoginDTO authorLoginDTO = new AuthorLoginDTO();
+            authorLoginDTO.setToken("token" + i);
+            authorLoginDTO.setPassword("password" + i);
+            authorLoginDTO.setType(Authentication.Type.USERNAME);
+            Optional<AuthorDetailDTO> authorDetailOptional = this
+                    .authorService.login(
+                    authorLoginDTO);
             authorDetailOptional.ifPresentOrElse(author -> {
                 System.out.println(author.getNickName());
             }, () -> {
-                Assert.fail("Can not login author: token" + index
-                        + " because of not exist");
+                Assert.fail(
+                        "Can not login author: token" + index + " because of " +
+                                "" + "" + "" + "" + "" + "" + "" + "not exist");
             });
         }
     }
 
     @Test
     public void testAssignTag() throws ServiceException {
-        Optional<AuthorDetail> authorDetailOptional = this.authorService
-                .login("token10", "password10", Authentication.Type.USERNAME);
+        AuthorLoginDTO authorLoginDTO = new AuthorLoginDTO();
+        authorLoginDTO.setToken("token10");
+        authorLoginDTO.setPassword("password10");
+        authorLoginDTO.setType(Authentication.Type.USERNAME);
+        Optional<AuthorDetailDTO> authorDetailOptional = this.authorService
+                .login(
+                authorLoginDTO);
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
         tags.add("tag5");
         tags.add("tag7");
         authorDetailOptional.ifPresentOrElse(author -> {
+            AuthorAssignTagsDTO authorAssignTagsDTO = new AuthorAssignTagsDTO();
+            authorAssignTagsDTO.setAuthorId(author.getAuthorId());
+            authorAssignTagsDTO.setTags(tags);
             try {
-                this.authorService
-                        .assignTagToAuthor(author.getAuthorId(), tags);
+                this.authorService.assignTagsToAuthor(authorAssignTagsDTO);
             } catch (ServiceException e) {
                 Assert.fail(
                         "Can not assign tags to author because of exception.");
@@ -93,16 +118,23 @@ public class TestRepository {
 
     @Test
     public void testGetAuthorTags() throws ServiceException {
-        Optional<AuthorDetail> authorDetailOptional1 = this.authorService
-                .login("token27", "password27", Authentication.Type.USERNAME);
+        AuthorLoginDTO authorLoginDTO = new AuthorLoginDTO();
+        authorLoginDTO.setToken("token27");
+        authorLoginDTO.setPassword("password27");
+        authorLoginDTO.setType(Authentication.Type.USERNAME);
+        Optional<AuthorDetailDTO> authorDetailOptional1 = this.authorService
+                .login(
+                authorLoginDTO);
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
         tags.add("tag5");
         tags.add("tag7");
         authorDetailOptional1.ifPresentOrElse(author -> {
+            AuthorAssignTagsDTO authorAssignTagsDTO = new AuthorAssignTagsDTO();
+            authorAssignTagsDTO.setAuthorId(author.getAuthorId());
+            authorAssignTagsDTO.setTags(tags);
             try {
-                this.authorService
-                        .assignTagToAuthor(author.getAuthorId(), tags);
+                this.authorService.assignTagsToAuthor(authorAssignTagsDTO);
             } catch (ServiceException e) {
                 Assert.fail(
                         "Can not assign tags to author because of exception.");
@@ -110,8 +142,9 @@ public class TestRepository {
         }, () -> {
             Assert.fail("Can not login author: token27 because of not exist");
         });
-        Optional<AuthorDetail> authorDetailOptional1FromDb = this.authorService
-                .login("token27", "password27", Authentication.Type.USERNAME);
+        Optional<AuthorDetailDTO> authorDetailOptional1FromDb = this
+                .authorService.login(
+                authorLoginDTO);
         authorDetailOptional1FromDb.ifPresentOrElse(authorDetail -> {
             Assert.assertTrue(authorDetail.getTags().contains("tag1"));
             Assert.assertTrue(authorDetail.getTags().contains("tag5"));

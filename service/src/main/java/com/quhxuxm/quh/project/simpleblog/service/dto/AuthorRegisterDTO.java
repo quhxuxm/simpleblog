@@ -2,7 +2,7 @@ package com.quhxuxm.quh.project.simpleblog.service.dto;
 
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 
-public class RegisterAuthorDTO {
+public class AuthorRegisterDTO {
     private String token;
     private String password;
     private String nickName;

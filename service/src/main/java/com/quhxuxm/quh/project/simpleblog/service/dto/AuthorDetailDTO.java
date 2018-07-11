@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AuthorDetail {
+public class AuthorDetailDTO {
     private Long authorId;
     private String nickName;
     private String authenticationToken;
@@ -20,7 +20,7 @@ public class AuthorDetail {
     private Long followedByNumber;
     private Set<String> tags;
 
-    public AuthorDetail() {
+    public AuthorDetailDTO() {
         this.roles = new HashSet<>();
         this.tags = new HashSet<>();
     }
