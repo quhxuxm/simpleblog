@@ -182,7 +182,9 @@ class AuthorService implements IAuthorService {
                             AuthorTag authorTag = new AuthorTag();
                             authorTag.setPk(authorTagPk);
                             authorTag.setSelected(true);
-                            authorTag.setWeight(1d);
+                            authorTag.setWeight(
+                                    ICommonConstant.DefaultValue
+                                            .AUTHOR_SELECTED_TAG_INIT_WEIGHT);
                             this.authorTagRepository.save(authorTag);
                         });
             });

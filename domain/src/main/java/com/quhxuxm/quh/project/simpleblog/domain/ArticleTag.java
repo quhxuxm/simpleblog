@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -22,12 +21,12 @@ public class ArticleTag implements Serializable {
     private PK pk;
     @Column(name = "is_selected", nullable = false, updatable = false)
     private Boolean isSelected;
-    @Column(name = "weight", nullable = false, scale = 2)
-    private Double weight;
+    @Column(name = "weight", nullable = false)
+    private Long weight;
 
     public ArticleTag() {
         this.isSelected = false;
-        this.weight = 0d;
+        this.weight = 0L;
     }
 
     public PK getPk() {
@@ -46,11 +45,11 @@ public class ArticleTag implements Serializable {
         this.isSelected = selected;
     }
 
-    public Double getWeight() {
+    public Long getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(Long weight) {
         this.weight = weight;
     }
 }

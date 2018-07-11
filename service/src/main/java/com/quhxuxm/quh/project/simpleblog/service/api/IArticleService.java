@@ -1,11 +1,13 @@
 package com.quhxuxm.quh.project.simpleblog.service.api;
+import com.quhxuxm.quh.project.simpleblog.service.api.exception
+        .ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 
 import java.util.Optional;
 import java.util.OptionalLong;
 
 public interface IArticleService {
-    OptionalLong createArticle(CreateArticleDTO createArticleDTO);
+    OptionalLong saveArticle(CreateArticleDTO createArticleDTO) throws ServiceException;
 
     void assignTagsToArticle(ArticleAssignTagsDTO articleAssignTagsDTO);
 

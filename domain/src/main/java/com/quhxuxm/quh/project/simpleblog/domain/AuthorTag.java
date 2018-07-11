@@ -1,5 +1,4 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,10 +10,12 @@ public class AuthorTag implements Serializable {
     public static class PK implements Serializable {
         private static final long serialVersionUID = -4652674514830940379L;
         @ManyToOne(targetEntity = Author.class)
-        @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false, updatable = false)
+        @JoinColumn(name = "author_id", referencedColumnName = "id",
+                nullable = false, updatable = false)
         private Author author;
         @ManyToOne(targetEntity = Tag.class)
-        @JoinColumn(name = "tag_id", referencedColumnName = "id", nullable = false, updatable = false)
+        @JoinColumn(name = "tag_id", referencedColumnName = "id",
+                nullable = false, updatable = false)
         private Tag tag;
 
         public Author getAuthor() {
@@ -38,12 +39,12 @@ public class AuthorTag implements Serializable {
     private PK pk;
     @Column(name = "is_selected", nullable = false, updatable = false)
     private Boolean isSelected;
-    @Column(name = "weight", nullable = false, scale = 2)
-    private Double weight;
+    @Column(name = "weight", nullable = false)
+    private Long weight;
 
     public AuthorTag() {
         this.isSelected = true;
-        this.weight = 0d;
+        this.weight = 0L;
     }
 
     public PK getPk() {
@@ -62,11 +63,11 @@ public class AuthorTag implements Serializable {
         this.isSelected = selected;
     }
 
-    public Double getWeight() {
+    public Long getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(Long weight) {
         this.weight = weight;
     }
 }
