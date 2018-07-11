@@ -21,7 +21,7 @@ import java.util.Set;
 @SpringBootTest(classes = Main.class)
 public class TestRepository {
     @Autowired
-    private IAuthorService securityService;
+    private IAuthorService authorService;
     private static Boolean DATA_CREATED = false;
 
     @Before
@@ -34,7 +34,7 @@ public class TestRepository {
                 return;
             }
             for (int i = 0; i < 100; i++) {
-                OptionalLong authorIdOptional = this.securityService
+                OptionalLong authorIdOptional = this.authorService
                         .register("token" + i, "password" + i, "nickName" + i,
                                 Authentication.Type.USERNAME);
                 authorIdOptional.ifPresent(id -> {
@@ -43,7 +43,7 @@ public class TestRepository {
                     tags.add("tag2");
                     tags.add("tag3");
                     try {
-                        this.securityService.assignTagToAuthor(id, tags);
+                        this.authorService.assignTagToAuthor(id, tags);
                     } catch (ServiceException e) {
                         Assert.fail(
                                 "Can not assign tags to author because of exception.");
@@ -58,7 +58,7 @@ public class TestRepository {
     public void testLogin() throws ServiceException {
         for (int i = 0; i < 100; i++) {
             int index = i;
-            Optional<AuthorDetail> authorDetailOptional = this.securityService
+            Optional<AuthorDetail> authorDetailOptional = this.authorService
                     .login("token" + i, "password" + i,
                             Authentication.Type.USERNAME);
             authorDetailOptional.ifPresentOrElse(author -> {
@@ -72,7 +72,7 @@ public class TestRepository {
 
     @Test
     public void testAssignTag() throws ServiceException {
-        Optional<AuthorDetail> authorDetailOptional = this.securityService
+        Optional<AuthorDetail> authorDetailOptional = this.authorService
                 .login("token10", "password10", Authentication.Type.USERNAME);
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
@@ -80,7 +80,7 @@ public class TestRepository {
         tags.add("tag7");
         authorDetailOptional.ifPresentOrElse(author -> {
             try {
-                this.securityService
+                this.authorService
                         .assignTagToAuthor(author.getAuthorId(), tags);
             } catch (ServiceException e) {
                 Assert.fail(
@@ -93,7 +93,7 @@ public class TestRepository {
 
     @Test
     public void testGetAuthorTags() throws ServiceException {
-        Optional<AuthorDetail> authorDetailOptional1 = this.securityService
+        Optional<AuthorDetail> authorDetailOptional1 = this.authorService
                 .login("token27", "password27", Authentication.Type.USERNAME);
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
@@ -101,7 +101,7 @@ public class TestRepository {
         tags.add("tag7");
         authorDetailOptional1.ifPresentOrElse(author -> {
             try {
-                this.securityService
+                this.authorService
                         .assignTagToAuthor(author.getAuthorId(), tags);
             } catch (ServiceException e) {
                 Assert.fail(
@@ -110,7 +110,7 @@ public class TestRepository {
         }, () -> {
             Assert.fail("Can not login author: token27 because of not exist");
         });
-        Optional<AuthorDetail> authorDetailOptional1FromDb = this.securityService
+        Optional<AuthorDetail> authorDetailOptional1FromDb = this.authorService
                 .login("token27", "password27", Authentication.Type.USERNAME);
         authorDetailOptional1FromDb.ifPresentOrElse(authorDetail -> {
             Assert.assertTrue(authorDetail.getTags().contains("tag1"));

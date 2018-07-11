@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 @Service
@@ -25,6 +24,7 @@ class AuthorService implements IAuthorService {
     private IAnthologyRepository anthologyRepository;
     private IAuthorTagRepository authorTagRepository;
     private ITagRepository tagRepository;
+    private IAuthorFollowerRepository authorFollowerRepository;
 
     AuthorService(
             IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
@@ -32,7 +32,8 @@ class AuthorService implements IAuthorService {
             IAuthorRepository authorRepository, IRoleRepository roleRepository,
             IAnthologyRepository anthologyRepository,
             IAuthorTagRepository authorTagRepository,
-            ITagRepository tagRepository) {
+            ITagRepository tagRepository,
+            IAuthorFollowerRepository authorFollowerRepository) {
         this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
         this.authenticationRepository = authenticationRepository;
         this.authorRepository = authorRepository;
@@ -40,6 +41,7 @@ class AuthorService implements IAuthorService {
         this.anthologyRepository = anthologyRepository;
         this.authorTagRepository = authorTagRepository;
         this.tagRepository = tagRepository;
+        this.authorFollowerRepository = authorFollowerRepository;
     }
 
     @Transactional(rollbackFor = ServiceException.class)
@@ -173,13 +175,38 @@ class AuthorService implements IAuthorService {
                             this.authorTagRepository.save(authorTag);
                         });
             });
-        } catch (EntityNotFoundException e) {
-            logger.error(
-                    "Can not assign tog to author because author not exist.",
+        } catch (Exception e) {
+            logger.error("Can not assign tog to author because of exception.",
                     e);
             throw new ServiceException(
-                    "Can not assign tog to author because author not exist.",
+                    "Can not assign tog to author because of exception.", e);
+        }
+    }
+
+    @Override
+    public void assignFollowerToAuthor(Long authorId, Long followerId)
+            throws ServiceException {
+        try {
+            Author author = this.authorRepository.getOne(authorId);
+            Author follower = this.authorRepository.getOne(followerId);
+            AuthorFollower.PK authorFollowerPk = new AuthorFollower.PK();
+            authorFollowerPk.setAuthor(author);
+            authorFollowerPk.setFollower(follower);
+            this.authorFollowerRepository.findById(authorFollowerPk)
+                    .ifPresentOrElse(authorFollower -> {
+                        logger.debug(
+                                "Will not create new author follower because it exist already.");
+                    }, () -> {
+                        AuthorFollower authorFollower = new AuthorFollower();
+                        authorFollower.setPk(authorFollowerPk);
+                        authorFollower.setFollowDate(new Date());
+                        this.authorFollowerRepository.save(authorFollower);
+                    });
+        } catch (Exception e) {
+            logger.error("Can not assign tog to author because of exception.",
                     e);
+            throw new ServiceException(
+                    "Can not assign tog to author because of exception.", e);
         }
     }
 }
