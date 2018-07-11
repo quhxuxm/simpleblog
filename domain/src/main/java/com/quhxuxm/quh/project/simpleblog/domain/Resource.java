@@ -1,9 +1,11 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "resource")
+@Cacheable
 public class Resource implements Serializable {
     private static final long serialVersionUID = -7001454343688484844L;
     @Id

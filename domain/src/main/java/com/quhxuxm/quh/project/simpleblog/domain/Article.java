@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "article")
+@Cacheable
 public class Article implements Serializable {
     private static final long serialVersionUID = 8070388670184979679L;
     @Id
@@ -30,10 +31,12 @@ public class Article implements Serializable {
     @Column(name = "summary", nullable = false, length = 2000)
     private String summary;
     @ManyToOne
-    @JoinColumn(name = "anthology_id", referencedColumnName = "id", nullable = false, updatable = false)
+    @JoinColumn(name = "anthology_id", referencedColumnName = "id",
+            nullable = false, updatable = false)
     private Anthology anthology;
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "additional_info_id", referencedColumnName = "id", nullable = false, updatable = false)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "id",
+            nullable = false, updatable = false)
     private ArticleAdditionalInfo additionalInfo;
     @ManyToOne
     @JoinColumn(name = "cover_image_id", referencedColumnName = "id")

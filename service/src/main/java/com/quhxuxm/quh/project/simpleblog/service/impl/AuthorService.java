@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.OptionalLong;
-import java.util.Set;
+import java.util.*;
 
 @Service
 class AuthorService implements IAuthorService {
@@ -53,85 +50,41 @@ class AuthorService implements IAuthorService {
         try {
             authenticationInDb = this.authenticationRepository
                     .findByTokenAndType(token, type);
-        } catch (Exception e) {
-            logger.error(
-                    "Fail to register because of exception happen when check "
-                            + "token and type with db.", e);
-            throw new ServiceException(
-                    "Fail to register because of exception happen when check token and type with db.",
-                    e);
-        }
-        if (authenticationInDb != null) {
-            logger.error(
-                    "Can not register because of token exist already, token "
-                            + "=" + " {}, type = {}.", token, type.name());
-            throw new ServiceException(String.format(
-                    "Can not register because of token exist already, token "
-                            + "=" + " %s, type = %s.", token, type.name()));
-        }
-        Authentication authentication = new Authentication();
-        authentication.setToken(token);
-        authentication.setType(type);
-        authentication.setPassword(password);
-        Author author = new Author();
-        authentication.setAuthor(author);
-        author.setNickName(nickName);
-        Role authorRole = null;
-        try {
-            authorRole = this.roleRepository
+            if (authenticationInDb != null) {
+                logger.error(
+                        "Can not register because of token exist already, token "
+                                + "=" + " {}, type = {}.", token, type.name());
+                return OptionalLong.empty();
+            }
+            Authentication authentication = new Authentication();
+            authentication.setToken(token);
+            authentication.setType(type);
+            authentication.setPassword(password);
+            Author author = new Author();
+            authentication.setAuthor(author);
+            author.setNickName(nickName);
+            Role authorRole = this.roleRepository
                     .findByName(ICommonConstant.RoleName.AUTHOR);
-        } catch (Exception e) {
-            logger.error(
-                    "Fail to register because of exception happen when get "
-                            + "author role from db.", e);
-            throw new ServiceException(
-                    "Fail to register because of exception happen when get "
-                            + "author role from db.", e);
-        }
-        if (authorRole == null) {
-            logger.error("Can not register because of author role not exist.");
-            throw new ServiceException(
-                    "Can not register because of author role not exist.");
-        }
-        Set<Role> roleSet = new HashSet<>();
-        roleSet.add(authorRole);
-        author.setRoles(roleSet);
-        try {
+            if (authorRole == null) {
+                logger.error(
+                        "Can not register because of author role not exist.");
+                return OptionalLong.empty();
+            }
+            Set<Role> roleSet = new HashSet<>();
+            roleSet.add(authorRole);
+            author.setRoles(roleSet);
             this.authorRepository.save(author);
-        } catch (Exception e) {
-            logger.error(
-                    "Fail to register because of exception when save author.",
-                    e);
-            throw new ServiceException(
-                    "Fail to register because of exception when save author.");
-        }
-        try {
             this.authenticationRepository.save(authentication);
-        } catch (Exception e) {
-            logger.error("Fail to register because of exception when save "
-                    + "authentication.", e);
-            throw new ServiceException(
-                    "Fail to register because of exception when save "
-                            + "authentication.");
-        }
-        Anthology anthology = new Anthology();
-        anthology.setAuthor(author);
-        try {
+            Anthology anthology = new Anthology();
+            anthology.setAuthor(author);
             this.anthologyRepository.save(anthology);
-        } catch (Exception e) {
-            logger.error("Fail to register because of exception when save "
-                    + "anthology.", e);
-            throw new ServiceException(
-                    "Fail to register because of exception when save "
-                            + "anthology.");
-        }
-        AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
-        AuthorDefaultAnthology.PK authorDefaultAnthologyPK = new AuthorDefaultAnthology.PK();
-        authorDefaultAnthologyPK.setAnthology(anthology);
-        authorDefaultAnthologyPK.setAuthor(author);
-        authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
-        try {
+            AuthorDefaultAnthology authorDefaultAnthology = new AuthorDefaultAnthology();
+            AuthorDefaultAnthology.PK authorDefaultAnthologyPK = new AuthorDefaultAnthology.PK();
+            authorDefaultAnthologyPK.setAnthology(anthology);
+            authorDefaultAnthologyPK.setAuthor(author);
+            authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
             this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
+            return OptionalLong.of(author.getId());
         } catch (Exception e) {
             logger.error(
                     "Fail to register because of exception when save author "
@@ -140,52 +93,55 @@ class AuthorService implements IAuthorService {
                     "Fail to register because of exception when save author "
                             + "default anthology.");
         }
-        return OptionalLong.of(author.getId());
     }
 
     @Override
     public Optional<AuthorDetail> login(String token, String password,
             Authentication.Type type) throws ServiceException {
-        Authentication authentication = null;
         try {
-            authentication = this.authenticationRepository
+            Authentication authentication = this.authenticationRepository
                     .findByTokenAndPasswordAndType(token, password, type);
+            if (authentication == null) {
+                logger.error(
+                        "Can not login because of authentication not exit.");
+                return Optional.empty();
+            }
+            AuthorDetail result = new AuthorDetail();
+            result.setAuthorId(authentication.getAuthor().getId());
+            result.setNickName(authentication.getAuthor().getNickName());
+            result.setLastLoginDate(authentication.getLastLoginDate());
+            result.setRegisterDate(authentication.getRegisterDate());
+            result.setAuthenticationToken(authentication.getToken());
+            result.setAuthenticationType(authentication.getType());
+            authentication.getAuthor().getRoles().forEach(role -> {
+                result.getRoles().add(role.getName());
+            });
+            Set<AuthorTag> authorTags = this.authorTagRepository
+                    .findAllByPkAuthorAndIsSelectedIsTrue(
+                            authentication.getAuthor());
+            authorTags.forEach(authorTag -> {
+                result.getTags().add(authorTag.getPk().getTag().getText());
+            });
+            result.setAnthologyNumber(
+                    authentication.getAuthor().getAdditionalInfo()
+                            .getAnthologyNumber());
+            result.setArticleNumber(
+                    authentication.getAuthor().getAdditionalInfo()
+                            .getArticleNumber());
+            result.setCommentNumber(
+                    authentication.getAuthor().getAdditionalInfo()
+                            .getCommentNumber());
+            result.setFollowedByNumber(
+                    authentication.getAuthor().getAdditionalInfo()
+                            .getFollowedByNumber());
+            authentication.setLastLoginDate(new Date());
+            this.authenticationRepository.save(authentication);
+            return Optional.of(result);
         } catch (Exception e) {
             logger.error("Can not login because of the exception.", e);
             throw new ServiceException(
                     "Can not login because of the exception.");
         }
-        if (authentication == null) {
-            logger.error("Can not login because of authentication not exit.");
-            throw new ServiceException(
-                    "Can not login because of authentication not exit.");
-        }
-        AuthorDetail result = new AuthorDetail();
-        result.setAuthorId(authentication.getAuthor().getId());
-        result.setNickName(authentication.getAuthor().getNickName());
-        result.setLastLoginDate(authentication.getLastLoginDate());
-        result.setRegisterDate(authentication.getRegisterDate());
-        result.setAuthenticationToken(authentication.getToken());
-        result.setAuthenticationType(authentication.getType());
-        authentication.getAuthor().getRoles().forEach(role -> {
-            result.getRoles().add(role.getName());
-        });
-        Set<AuthorTag> authorTags = this.authorTagRepository
-                .findAllByPkAuthorAndIsSelectedIsTrue(
-                        authentication.getAuthor());
-        authorTags.forEach(authorTag -> {
-            result.getTags().add(authorTag.getPk().getTag().getText());
-        });
-        result.setAnthologyNumber(authentication.getAuthor().getAdditionalInfo()
-                .getAnthologyNumber());
-        result.setArticleNumber(authentication.getAuthor().getAdditionalInfo()
-                .getArticleNumber());
-        result.setCommentNumber(authentication.getAuthor().getAdditionalInfo()
-                .getCommentNumber());
-        result.setFollowedByNumber(
-                authentication.getAuthor().getAdditionalInfo()
-                        .getFollowedByNumber());
-        return Optional.of(result);
     }
 
     @Transactional
@@ -202,14 +158,20 @@ class AuthorService implements IAuthorService {
                     this.tagRepository.save(newTag);
                     tag = newTag;
                 }
-                AuthorTag authorTag = new AuthorTag();
                 AuthorTag.PK authorTagPk = new AuthorTag.PK();
                 authorTagPk.setAuthor(authorFromDb);
                 authorTagPk.setTag(tag);
-                authorTag.setPk(authorTagPk);
-                authorTag.setSelected(true);
-                authorTag.setWeight(1d);
-                this.authorTagRepository.save(authorTag);
+                this.authorTagRepository.findById(authorTagPk)
+                        .ifPresentOrElse(authorTag -> {
+                            logger.debug(
+                                    "Will not create new author tag because it exist already.");
+                        }, () -> {
+                            AuthorTag authorTag = new AuthorTag();
+                            authorTag.setPk(authorTagPk);
+                            authorTag.setSelected(true);
+                            authorTag.setWeight(1d);
+                            this.authorTagRepository.save(authorTag);
+                        });
             });
         } catch (EntityNotFoundException e) {
             logger.error(
