@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,13 +25,15 @@ class AuthorService implements IAuthorService {
     private IRoleRepository roleRepository;
     private IAnthologyRepository anthologyRepository;
     private IAuthorTagRepository authorTagRepository;
+    private ITagRepository tagRepository;
 
     AuthorService(
             IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
             IAuthenticationRepository authenticationRepository,
             IAuthorRepository authorRepository, IRoleRepository roleRepository,
             IAnthologyRepository anthologyRepository,
-            IAuthorTagRepository authorTagRepository) {
+            IAuthorTagRepository authorTagRepository,
+            ITagRepository tagRepository) {
         this.authorDefaultAnthologyRepository =
                 authorDefaultAnthologyRepository;
         this.authenticationRepository = authenticationRepository;
@@ -38,6 +41,7 @@ class AuthorService implements IAuthorService {
         this.roleRepository = roleRepository;
         this.anthologyRepository = anthologyRepository;
         this.authorTagRepository = authorTagRepository;
+        this.tagRepository = tagRepository;
     }
 
     @Transactional(rollbackFor = ServiceException.class)
@@ -52,11 +56,10 @@ class AuthorService implements IAuthorService {
         } catch (Exception e) {
             logger.error(
                     "Fail to register because of exception happen when check " +
-                            "" + "" + "" + "" + "token and type with db.",
+                            "token and type with db.",
                     e);
             throw new ServiceException(
-                    "Fail to register because of exception happen when check " +
-                            "" + "" + "" + "" + "token and type with db.",
+                    "Fail to register because of exception happen when check token and type with db.",
                     e);
         }
         if (authenticationInDb != null) {
@@ -165,6 +168,11 @@ class AuthorService implements IAuthorService {
             throw new ServiceException(
                     "Can not login because of the exception.");
         }
+        if (authentication == null) {
+            logger.error("Can not login because of authentication not exit.");
+            throw new ServiceException(
+                    "Can not login because of authentication not exit.");
+        }
         AuthorDetail result = new AuthorDetail();
         result.setAuthorId(authentication.getAuthor().getId());
         result.setNickName(authentication.getAuthor().getNickName());
@@ -196,7 +204,37 @@ class AuthorService implements IAuthorService {
         return result;
     }
 
+    @Transactional
     @Override
-    public void assignTagToAuthor(Long authorId, Set<String> tags) {
+    public void assignTagToAuthor(Long authorId,
+                                  Set<String> tagTexts) throws
+            ServiceException {
+        try {
+            Author authorFromDb = this.authorRepository.getOne(authorId);
+            tagTexts.forEach(tagText -> {
+                Tag tag = this.tagRepository.findByText(tagText);
+                if (tag == null) {
+                    Tag newTag = new Tag();
+                    newTag.setText(tagText);
+                    this.tagRepository.save(newTag);
+                    tag = newTag;
+                }
+                AuthorTag authorTag = new AuthorTag();
+                AuthorTag.PK authorTagPk = new AuthorTag.PK();
+                authorTagPk.setAuthor(authorFromDb);
+                authorTagPk.setTag(tag);
+                authorTag.setPk(authorTagPk);
+                authorTag.setSelected(true);
+                authorTag.setWeight(1d);
+                this.authorTagRepository.save(authorTag);
+            });
+        } catch (EntityNotFoundException e) {
+            logger.error(
+                    "Can not assign tog to author because author not exist.",
+                    e);
+            throw new ServiceException(
+                    "Can not assign tog to author because author not exist.",
+                    e);
+        }
     }
 }

@@ -13,5 +13,6 @@ public interface IAuthorService {
     AuthorDetail login(String token, String password,
                        Authentication.Type type) throws ServiceException;
 
-    void assignTagToAuthor(Long authorId, Set<String> tags);
+    void assignTagToAuthor(Long authorId,
+                           Set<String> tags) throws ServiceException;
 }
