@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog;
+
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
-import com.quhxuxm.quh.project.simpleblog.service.api.exception
-        .ServiceException;
+import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetail;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.OptionalLong;
 import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,39 +22,96 @@ import java.util.Set;
 public class TestRepository {
     @Autowired
     private IAuthorService securityService;
-    private static boolean dataCreated;
+    private static Boolean DATA_CREATED = false;
 
     @Before
-    public void createDate() throws ServiceException {
-        if (!this.dataCreated) {
-            for (int i = 0; i < 100; i++) {
-                this.securityService.register("token" + i, "password" + i,
-                        "nickName" + i,
-                        Authentication.Type.values()[i % Authentication.Type
-                                .values().length]);
-            }
+    public void initialize() throws ServiceException {
+        if (TestRepository.DATA_CREATED) {
+            return;
         }
-        this.dataCreated = true;
+        synchronized (TestRepository.class) {
+            if (TestRepository.DATA_CREATED) {
+                return;
+            }
+            for (int i = 0; i < 100; i++) {
+                OptionalLong authorIdOptional = this.securityService
+                        .register("token" + i, "password" + i, "nickName" + i,
+                                Authentication.Type.USERNAME);
+                authorIdOptional.ifPresent(id -> {
+                    Set<String> tags = new HashSet<>();
+                    tags.add("tag1");
+                    tags.add("tag2");
+                    tags.add("tag3");
+                    try {
+                        this.securityService.assignTagToAuthor(id, tags);
+                    } catch (ServiceException e) {
+                        Assert.fail(
+                                "Can not assign tags to author because of exception.");
+                    }
+                });
+            }
+            TestRepository.DATA_CREATED = true;
+        }
     }
 
     @Test
     public void testLogin() throws ServiceException {
         for (int i = 0; i < 100; i++) {
-            AuthorDetail authorDetail = this.securityService.login("token" + i,
-                    "password" + i, Authentication.Type.USERNAME);
-            System.out.println(authorDetail.getNickName());
+            int index = i;
+            Optional<AuthorDetail> authorDetailOptional = this.securityService
+                    .login("token" + i, "password" + i,
+                            Authentication.Type.USERNAME);
+            authorDetailOptional.ifPresentOrElse(author -> {
+                System.out.println(author.getNickName());
+            }, () -> {
+                Assert.fail("Can not login author: token" + index
+                        + " because of not exist");
+            });
         }
     }
 
     @Test
     public void testAssignTag() throws ServiceException {
-        AuthorDetail authorDetail = this.securityService.login("token10",
-                "password10", Authentication.Type.USERNAME);
+        Optional<AuthorDetail> authorDetailOptional = this.securityService
+                .login("token10", "password10", Authentication.Type.USERNAME);
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
-        tags.add("tag2");
-        tags.add("tag3");
-        this.securityService.assignTagToAuthor(authorDetail.getAuthorId(),
-                tags);
+        tags.add("tag5");
+        tags.add("tag7");
+        authorDetailOptional.ifPresentOrElse(author -> {
+            try {
+                this.securityService
+                        .assignTagToAuthor(author.getAuthorId(), tags);
+            } catch (ServiceException e) {
+                Assert.fail(
+                        "Can not assign tags to author because of exception.");
+            }
+        }, () -> {
+            Assert.fail("Can not login author: token10 because of not exist");
+        });
+    }
+
+    @Test
+    public void testGetAuthorTags() throws ServiceException {
+        Optional<AuthorDetail> authorDetailOptional1 = this.securityService
+                .login("token10", "password10", Authentication.Type.USERNAME);
+        authorDetailOptional1.ifPresentOrElse(authorDetail -> {
+            Assert.assertTrue(authorDetail.getTags().contains("tag1"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag5"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag7"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag2"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag3"));
+        }, () -> {
+            Assert.fail("Can not login author: token10 because of not exist");
+        });
+        Optional<AuthorDetail> authorDetailOptional2 = this.securityService
+                .login("token11", "password11", Authentication.Type.USERNAME);
+        authorDetailOptional2.ifPresentOrElse(authorDetail -> {
+            Assert.assertTrue(authorDetail.getTags().contains("tag1"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag2"));
+            Assert.assertTrue(authorDetail.getTags().contains("tag3"));
+        }, () -> {
+            Assert.fail("Can not login author: token11 because of not exist");
+        });
     }
 }
