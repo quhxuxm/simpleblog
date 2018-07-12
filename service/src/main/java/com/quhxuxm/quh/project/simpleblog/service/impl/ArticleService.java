@@ -4,6 +4,7 @@ import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
+import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 class ArticleService implements IArticleService {
@@ -26,6 +28,8 @@ class ArticleService implements IArticleService {
     private IArticleRepository articleRepository;
     private IAnthologyRepository anthologyRepository;
     private IAuthorArticleBookmarkRepository authorArticleBookmarkRepository;
+    private IAuthorTagRepository authorTagRepository;
+    private IAuthorService authorService;
 
     ArticleService(ITagRepository tagRepository,
                    IArticleTagRepository articleTagRepository,
@@ -34,7 +38,7 @@ class ArticleService implements IArticleService {
                    IAuthorRepository authorRepository,
                    IArticleRepository articleRepository,
                    IAnthologyRepository anthologyRepository,
-                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository) {
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository, IAuthorTagRepository authorTagRepository, IAuthorService authorService) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -43,6 +47,8 @@ class ArticleService implements IArticleService {
         this.articleRepository = articleRepository;
         this.anthologyRepository = anthologyRepository;
         this.authorArticleBookmarkRepository = authorArticleBookmarkRepository;
+        this.authorTagRepository = authorTagRepository;
+        this.authorService = authorService;
     }
 
     @Transactional
@@ -174,6 +180,22 @@ class ArticleService implements IArticleService {
             authorArticleBookmark.setMarkDate(new Date());
             authorArticleBookmark.setPk(authorArticleBookmarkPk);
             this.authorArticleBookmarkRepository.save(authorArticleBookmark);
+
+            Set<ArticleTag> articleTags = this.articleTagRepository.findAllByPkArticle(article);
+            Set<Tag> tagsFromArticle = articleTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            Set<AuthorTag> authorTags = this.authorTagRepository.findAllByPkAuthor(author);
+            Set<Tag> tagsFromAuthor = authorTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            tagsFromAuthor.addAll(tagsFromArticle);
+            AuthorAssignTagsDTO authorAssignTagsDTO=new AuthorAssignTagsDTO();
+            authorAssignTagsDTO.setAuthorId(author.getId());
+
+            authorAssignTagsDTO.setTags();
+            this.authorService.assignTagsToAuthor();
+
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark article because of exception.", e);
             throw new ServiceException(

@@ -9,4 +9,6 @@ import java.util.Set;
 public interface IAuthorTagRepository
         extends JpaRepository<AuthorTag, AuthorTag.PK> {
     Set<AuthorTag> findAllByPkAuthorAndIsSelectedIsTrue(Author author);
+
+    Set<AuthorTag> findAllByPkAuthor(Author author);
 }
