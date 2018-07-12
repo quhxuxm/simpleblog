@@ -11,10 +11,26 @@ public class ArticleTag implements Serializable {
         private static final long serialVersionUID = 5077971124151612395L;
         @ManyToOne(targetEntity = Article.class)
         @JoinColumn(name = "article_id", updatable = false, nullable = false)
-        private Long articleId;
+        private Article article;
         @ManyToOne(targetEntity = Article.class)
         @JoinColumn(name = "tag_id", updatable = false, nullable = false)
-        private Long tagId;
+        private Tag tag;
+
+        public Article getArticle() {
+            return article;
+        }
+
+        public void setArticle(Article article) {
+            this.article = article;
+        }
+
+        public Tag getTag() {
+            return tag;
+        }
+
+        public void setTag(Tag tag) {
+            this.tag = tag;
+        }
     }
 
     @EmbeddedId
