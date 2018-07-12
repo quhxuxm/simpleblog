@@ -33,10 +33,6 @@ public class Anthology implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cover_image_id", referencedColumnName = "id")
     private Resource coverImage;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "additional_info_id", referencedColumnName = "id",
-            nullable = false, updatable = false)
-    private AnthologyAdditionalInfo additionalInfo;
     @Column(name = "is_published", nullable = false)
     private Boolean isPublished;
     @Column(name = "is_shared", nullable = false)
@@ -47,7 +43,6 @@ public class Anthology implements Serializable {
         this.updateDate = this.createDate;
         this.isPublished = false;
         this.isShared = false;
-        this.additionalInfo = new AnthologyAdditionalInfo();
     }
 
     public Long getId() {
@@ -128,9 +123,5 @@ public class Anthology implements Serializable {
 
     public void setShared(Boolean shared) {
         isShared = shared;
-    }
-
-    public AnthologyAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
     }
 }

@@ -9,11 +9,14 @@ import java.util.OptionalLong;
 public interface IArticleService {
     OptionalLong saveArticle(CreateArticleDTO createArticleDTO) throws ServiceException;
 
-    void assignTagsToArticle(ArticleAssignTagsDTO articleAssignTagsDTO);
+    void assignTagsToArticle(ArticleAssignTagsDTO articleAssignTagsDTO)
+            throws ServiceException;
 
-    void bookmarkArticle(ArticleBookmarkDTO articleBookmarkDTO);
+    void bookmarkArticle(ArticleBookmarkDTO articleBookmarkDTO)
+            throws ServiceException;
 
-    void praiseArticle(ArticlePraiseDTO articlePraiseDTO);
+    void praiseArticle(ArticlePraiseDTO articlePraiseDTO)
+            throws ServiceException;
 
     Optional<ArticleDetailDTO> viewArticle(ArticleViewDTO articleViewDTO);
 }

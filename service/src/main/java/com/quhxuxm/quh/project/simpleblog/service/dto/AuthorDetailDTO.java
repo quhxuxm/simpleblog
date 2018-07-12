@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
+
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class AuthorDetailDTO {
     private Long anthologyNumber;
     private Long followedByNumber;
     private Set<String> tags;
+    private Long defaultAnthologyId;
 
     public AuthorDetailDTO() {
         this.roles = new HashSet<>();
@@ -127,5 +129,13 @@ public class AuthorDetailDTO {
 
     public void setTags(Set<String> tags) {
         this.tags = tags;
+    }
+
+    public Long getDefaultAnthologyId() {
+        return defaultAnthologyId;
+    }
+
+    public void setDefaultAnthologyId(Long defaultAnthologyId) {
+        this.defaultAnthologyId = defaultAnthologyId;
     }
 }

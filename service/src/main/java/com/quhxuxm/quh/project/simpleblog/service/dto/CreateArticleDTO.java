@@ -1,4 +1,6 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class CreateArticleDTO {
@@ -8,6 +10,10 @@ public class CreateArticleDTO {
     private String content;
     private String summary;
     private Set<String> tags;
+
+    public CreateArticleDTO() {
+        this.tags = new HashSet<>();
+    }
 
     public Long getAuthorId() {
         return authorId;

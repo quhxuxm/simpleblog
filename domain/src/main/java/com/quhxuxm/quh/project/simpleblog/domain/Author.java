@@ -17,22 +17,16 @@ public class Author implements Serializable {
     private Long iconImageId;
     @Column(name = "description")
     private String description;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "additional_info_id", unique = true, updatable = false, nullable = false, referencedColumnName = "id")
-    private AuthorAdditionalInfo additionalInfo;
     @Column(name = "nick_name", nullable = false, unique = true, length = 64)
     private String nickName;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "author_role", joinColumns = { @JoinColumn(name = "author_id", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
+    @JoinTable(name = "author_role", joinColumns = {
+            @JoinColumn(name = "author_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id",
+                    referencedColumnName = "id") })
     private Set<Role> roles;
 
     public Author() {
-        this.additionalInfo = new AuthorAdditionalInfo();
-    }
-
-    public AuthorAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
     }
 
     public String getDescription() {

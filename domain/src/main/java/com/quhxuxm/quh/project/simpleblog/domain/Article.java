@@ -34,10 +34,6 @@ public class Article implements Serializable {
     @JoinColumn(name = "anthology_id", referencedColumnName = "id",
             nullable = false, updatable = false)
     private Anthology anthology;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "additional_info_id", referencedColumnName = "id",
-            nullable = false, updatable = false)
-    private ArticleAdditionalInfo additionalInfo;
     @ManyToOne
     @JoinColumn(name = "cover_image_id", referencedColumnName = "id")
     private Resource coverImage;
@@ -48,7 +44,6 @@ public class Article implements Serializable {
         this.createDate = new Date();
         this.updateDate = this.createDate;
         this.isPublished = false;
-        this.additionalInfo = new ArticleAdditionalInfo();
     }
 
     public Long getId() {
@@ -113,10 +108,6 @@ public class Article implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
-    }
-
-    public ArticleAdditionalInfo getAdditionalInfo() {
-        return additionalInfo;
     }
 
     public Resource getCoverImage() {
