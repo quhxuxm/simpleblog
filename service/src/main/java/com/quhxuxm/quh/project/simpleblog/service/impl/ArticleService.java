@@ -28,13 +28,13 @@ class ArticleService implements IArticleService {
     private IAuthorArticleBookmarkRepository authorArticleBookmarkRepository;
 
     ArticleService(ITagRepository tagRepository,
-            IArticleTagRepository articleTagRepository,
-            IAnthologyParticipantRepository anthologyParticipantRepository,
-            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-            IAuthorRepository authorRepository,
-            IArticleRepository articleRepository,
-            IAnthologyRepository anthologyRepository,
-            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository) {
+                   IArticleTagRepository articleTagRepository,
+                   IAnthologyParticipantRepository anthologyParticipantRepository,
+                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+                   IAuthorRepository authorRepository,
+                   IArticleRepository articleRepository,
+                   IAnthologyRepository anthologyRepository,
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -81,8 +81,8 @@ class ArticleService implements IArticleService {
             this.articleRepository.save(article);
             Set<String> articleTags = createArticleDTO.getTags();
             articleTags.forEach(tagText -> {
-                Tag tag = tagRepository.findByText(tagText);
-                if (tag == null) {
+                Tag tag = null;
+                if (!tagRepository.existsByText(tagText)) {
                     tag = new Tag();
                     tag.setText(tagText);
                     tagRepository.save(tag);

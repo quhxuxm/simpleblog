@@ -1,4 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.domain;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -9,11 +10,11 @@ public class AuthorTag implements Serializable {
 
     public static class PK implements Serializable {
         private static final long serialVersionUID = -4652674514830940379L;
-        @ManyToOne(targetEntity = Author.class)
+        @ManyToOne
         @JoinColumn(name = "author_id", referencedColumnName = "id",
                 nullable = false, updatable = false)
         private Author author;
-        @ManyToOne(targetEntity = Tag.class)
+        @ManyToOne
         @JoinColumn(name = "tag_id", referencedColumnName = "id",
                 nullable = false, updatable = false)
         private Tag tag;

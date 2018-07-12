@@ -12,9 +12,10 @@ public class AuthorArticlePraise implements Serializable {
     public static class PK implements Serializable {
         private static final long serialVersionUID = 3118871567859072684L;
         @ManyToOne
-        @JoinColumn(name = "author_id", referencedColumnName = "id")
+        @JoinColumn(name = "author_id", referencedColumnName = "id", updatable = false)
         private Author author;
-        @JoinColumn(name = "article_id", referencedColumnName = "id")
+        @ManyToOne
+        @JoinColumn(name = "article_id", referencedColumnName = "id", updatable = false)
         private Article article;
 
         public Author getAuthor() {
