@@ -32,13 +32,15 @@ class ArticleService implements IArticleService {
     private IAuthorService authorService;
 
     ArticleService(ITagRepository tagRepository,
-                   IArticleTagRepository articleTagRepository,
-                   IAnthologyParticipantRepository anthologyParticipantRepository,
-                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-                   IAuthorRepository authorRepository,
-                   IArticleRepository articleRepository,
-                   IAnthologyRepository anthologyRepository,
-                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository, IAuthorTagRepository authorTagRepository, IAuthorService authorService) {
+            IArticleTagRepository articleTagRepository,
+            IAnthologyParticipantRepository anthologyParticipantRepository,
+            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+            IAuthorRepository authorRepository,
+            IArticleRepository articleRepository,
+            IAnthologyRepository anthologyRepository,
+            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+            IAuthorTagRepository authorTagRepository,
+            IAuthorService authorService) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -87,8 +89,8 @@ class ArticleService implements IArticleService {
             this.articleRepository.save(article);
             Set<String> articleTags = createArticleDTO.getTags();
             articleTags.forEach(tagText -> {
-                Tag tag = null;
-                if (!tagRepository.existsByText(tagText)) {
+                Tag tag = tagRepository.findByText(tagText);
+                if (tag == null) {
                     tag = new Tag();
                     tag.setText(tagText);
                     tagRepository.save(tag);
@@ -180,22 +182,7 @@ class ArticleService implements IArticleService {
             authorArticleBookmark.setMarkDate(new Date());
             authorArticleBookmark.setPk(authorArticleBookmarkPk);
             this.authorArticleBookmarkRepository.save(authorArticleBookmark);
-
-            Set<ArticleTag> articleTags = this.articleTagRepository.findAllByPkArticle(article);
-            Set<Tag> tagsFromArticle = articleTags.stream().map(tag -> {
-                return tag.getPk().getTag();
-            }).collect(Collectors.toSet());
-            Set<AuthorTag> authorTags = this.authorTagRepository.findAllByPkAuthor(author);
-            Set<Tag> tagsFromAuthor = authorTags.stream().map(tag -> {
-                return tag.getPk().getTag();
-            }).collect(Collectors.toSet());
-            tagsFromAuthor.addAll(tagsFromArticle);
-            AuthorAssignTagsDTO authorAssignTagsDTO=new AuthorAssignTagsDTO();
-            authorAssignTagsDTO.setAuthorId(author.getId());
-
-            authorAssignTagsDTO.setTags();
-            this.authorService.assignTagsToAuthor();
-
+            this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark article because of exception.", e);
             throw new ServiceException(
@@ -225,6 +212,7 @@ class ArticleService implements IArticleService {
             authorArticlePraise.setPraiseDate(new Date());
             authorArticlePraise.setPk(authorArticlePraisePk);
             this.authorArticlePraiseRepository.save(authorArticlePraise);
+            this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
             logger.error("Fail to praise article because of exception.", e);
             throw new ServiceException(
@@ -234,8 +222,70 @@ class ArticleService implements IArticleService {
 
     @Transactional
     @Override
-    public Optional<ArticleDetailDTO> viewArticle(
-            ArticleViewDTO articleViewDTO) {
-        return Optional.empty();
+    public Optional<ArticleDetailDTO> viewArticle(ArticleViewDTO articleViewDTO)
+            throws ServiceException {
+        try {
+            Article article = this.articleRepository
+                    .getOne(articleViewDTO.getArticleId());
+            ArticleDetailDTO result = new ArticleDetailDTO();
+            result.setArticleId(article.getId());
+            result.setContent(article.getContent());
+            result.setSummary(article.getSummary());
+            if (article.getAnthology().getAuthor().getIconImage() != null) {
+                result.setAuthorIconImageId(
+                        article.getAnthology().getAuthor().getIconImage()
+                                .getId());
+            }
+            if (article.getAnthology().getCoverImage() != null) {
+                result.setAnthologyCoverImageId(
+                        article.getAnthology().getCoverImage().getId());
+            }
+            result.setAnthologyTitle(article.getAnthology().getTitle());
+            result.setAuthorNickName(
+                    article.getAnthology().getAuthor().getNickName());
+            result.setTitle(article.getTitle());
+            result.setAuthorId(article.getAnthology().getAuthor().getId());
+            result.setAnthologyId(article.getAnthology().getId());
+            Author author = this.authorRepository
+                    .getOne(articleViewDTO.getAuthorId());
+            this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
+            return Optional.of(result);
+        } catch (PersistenceException e) {
+            throw new ServiceException(
+                    "Can not view article because of exception.");
+        }
+    }
+
+    @Transactional
+    @Override
+    public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
+            Article article) throws ServiceException {
+        try {
+            Set<ArticleTag> articleTags = this.articleTagRepository
+                    .findAllByPkArticle(article);
+            Set<Tag> tagsFromArticle = articleTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            Set<AuthorTag> authorTags = this.authorTagRepository
+                    .findAllByPkAuthor(author);
+            Set<Tag> tagsFromAuthor = authorTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            tagsFromAuthor.addAll(tagsFromArticle);
+            AuthorAssignTagsDTO authorAssignTagsDTO = new AuthorAssignTagsDTO();
+            authorAssignTagsDTO.setAuthorId(author.getId());
+            authorAssignTagsDTO.setSelect(false);
+            tagsFromAuthor.forEach(tag -> {
+                authorAssignTagsDTO.getTags().add(tag.getText());
+            });
+            this.authorService.assignTagsToAuthor(authorAssignTagsDTO);
+        } catch (PersistenceException e) {
+            logger.error(
+                    "Can not increase author tag weight according to article because of exception.",
+                    e);
+            throw new ServiceException(
+                    "Can not increase author tag weight according to article because of exception.",
+                    e);
+        }
     }
 }

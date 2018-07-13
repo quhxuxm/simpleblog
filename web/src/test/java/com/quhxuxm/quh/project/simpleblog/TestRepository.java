@@ -199,25 +199,126 @@ public class TestRepository {
                 tags.add("T2");
                 tags.add("T3");
                 createArticleDTO.setTags(tags);
-                OptionalLong articleIdOption = this.articleService.saveArticle(createArticleDTO);
+                OptionalLong articleIdOption = this.articleService
+                        .saveArticle(createArticleDTO);
                 articleIdOption.ifPresentOrElse(id -> {
                     ArticleBookmarkDTO articleBookmarkDTO = new ArticleBookmarkDTO();
                     articleBookmarkDTO.setArticleId(id);
-                    articleBookmarkDTO.setAuthorId(authorDetailDTO.getAuthorId());
+                    articleBookmarkDTO
+                            .setAuthorId(authorDetailDTO.getAuthorId());
                     try {
                         this.articleService.bookmarkArticle(articleBookmarkDTO);
                     } catch (ServiceException e) {
-                        Assert.fail("Fail to bookmark article because of exception.");
+                        Assert.fail(
+                                "Fail to bookmark article because of exception.");
                     }
                 }, () -> {
                     Assert.fail("Fail to create article.");
                 });
-
             } catch (ServiceException e) {
                 Assert.fail("Can not save article because of exception.");
             }
         }, () -> {
             Assert.fail("Can not login author: token25 because of not exist");
+        });
+    }
+
+    @Test
+    public void testPraiseArticle() throws ServiceException {
+        CreateArticleDTO createArticleDTO = new CreateArticleDTO();
+        AuthorLoginDTO authorLoginDTO = new AuthorLoginDTO();
+        authorLoginDTO.setToken("token30");
+        authorLoginDTO.setPassword("password30");
+        authorLoginDTO.setType(Authentication.Type.USERNAME);
+        Optional<AuthorDetailDTO> authorDetailOptional = this.authorService
+                .login(authorLoginDTO);
+        authorDetailOptional.ifPresentOrElse(authorDetailDTO -> {
+            try {
+                createArticleDTO.setTitle("title-token30");
+                createArticleDTO.setAnthologyId(
+                        authorDetailDTO.getDefaultAnthologyId());
+                createArticleDTO.setAuthorId(authorDetailDTO.getAuthorId());
+                createArticleDTO.setContent("content-token30");
+                createArticleDTO.setSummary("summary-token30");
+                Set<String> tags = new HashSet<>();
+                tags.add("tag3");
+                tags.add("tag2");
+                tags.add("T3");
+                createArticleDTO.setTags(tags);
+                OptionalLong articleIdOption = this.articleService
+                        .saveArticle(createArticleDTO);
+                articleIdOption.ifPresentOrElse(id -> {
+                    ArticlePraiseDTO articlePraiseDTO = new ArticlePraiseDTO();
+                    articlePraiseDTO.setArticleId(id);
+                    articlePraiseDTO.setAuthorId(authorDetailDTO.getAuthorId());
+                    try {
+                        this.articleService.praiseArticle(articlePraiseDTO);
+                    } catch (ServiceException e) {
+                        Assert.fail(
+                                "Fail to praise article because of exception.");
+                    }
+                }, () -> {
+                    Assert.fail("Fail to create article.");
+                });
+            } catch (ServiceException e) {
+                Assert.fail("Can not save article because of exception.");
+            }
+        }, () -> {
+            Assert.fail("Can not login author: token30 because of not exist");
+        });
+    }
+
+    @Test
+    public void testViewArticle() throws ServiceException {
+        CreateArticleDTO createArticleDTO = new CreateArticleDTO();
+        AuthorLoginDTO authorLoginDTO = new AuthorLoginDTO();
+        authorLoginDTO.setToken("token31");
+        authorLoginDTO.setPassword("password31");
+        authorLoginDTO.setType(Authentication.Type.USERNAME);
+        Optional<AuthorDetailDTO> authorDetailOptional = this.authorService
+                .login(authorLoginDTO);
+        authorDetailOptional.ifPresentOrElse(authorDetailDTO -> {
+            try {
+                createArticleDTO.setTitle("title-token31");
+                createArticleDTO.setAnthologyId(
+                        authorDetailDTO.getDefaultAnthologyId());
+                createArticleDTO.setAuthorId(authorDetailDTO.getAuthorId());
+                createArticleDTO.setContent("content-token31");
+                createArticleDTO.setSummary("summary-token31");
+                Set<String> tags = new HashSet<>();
+                tags.add("tag3");
+                tags.add("tag2");
+                tags.add("T3");
+                createArticleDTO.setTags(tags);
+                OptionalLong articleIdOption = this.articleService
+                        .saveArticle(createArticleDTO);
+                articleIdOption.ifPresentOrElse(id -> {
+                    ArticleViewDTO articleViewDTO = new ArticleViewDTO();
+                    articleViewDTO.setArticleId(id);
+                    articleViewDTO.setAuthorId(authorDetailDTO.getAuthorId());
+                    try {
+                        Optional<ArticleDetailDTO> articleDetailDTOOptional = this.articleService
+                                .viewArticle(articleViewDTO);
+                        articleDetailDTOOptional
+                                .ifPresentOrElse(articleDetailDTO -> {
+                                    System.out.println(
+                                            articleDetailDTO.getTitle());
+                                }, () -> {
+                                    Assert.fail(
+                                            "Fail to view article because of exception.");
+                                });
+                    } catch (ServiceException e) {
+                        Assert.fail(
+                                "Fail to view article because of exception.");
+                    }
+                }, () -> {
+                    Assert.fail("Fail to create article.");
+                });
+            } catch (ServiceException e) {
+                Assert.fail("Can not save article because of exception.");
+            }
+        }, () -> {
+            Assert.fail("Can not login author: token31 because of not exist");
         });
     }
 }

@@ -182,6 +182,13 @@ class AuthorService implements IAuthorService {
                 authorTagPk.setTag(tag);
                 this.authorTagRepository.findById(authorTagPk)
                         .ifPresentOrElse(authorTag -> {
+                            if (!authorAssignTagsDTO.isSelect()) {
+                                logger.debug(
+                                        "Add weight to the author tag when it is not selected directly.");
+                                authorTag.setWeight(authorTag.getWeight() + 1);
+                                this.authorTagRepository.save(authorTag);
+                                return;
+                            }
                             logger.debug(
                                     "Will not create new author tag because "
                                             + "it exist already.");

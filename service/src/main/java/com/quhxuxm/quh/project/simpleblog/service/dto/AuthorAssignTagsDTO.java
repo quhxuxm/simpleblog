@@ -1,9 +1,16 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class AuthorAssignTagsDTO {
     private Long authorId;
     private Set<String> tags;
+    private boolean isSelect;
+
+    public AuthorAssignTagsDTO() {
+        this.tags = new HashSet<>();
+    }
 
     public Long getAuthorId() {
         return authorId;
@@ -19,5 +26,13 @@ public class AuthorAssignTagsDTO {
 
     public void setTags(Set<String> tags) {
         this.tags = tags;
+    }
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
     }
 }

@@ -12,9 +12,9 @@ public class Author implements Serializable {
     @GeneratedValue
     @Column(name = "id")
     private Long id;
-    @ManyToOne(targetEntity = Resource.class)
-    @JoinColumn(name = "icon_image_id")
-    private Long iconImageId;
+    @ManyToOne
+    @JoinColumn(name = "icon_image_id", referencedColumnName = "id")
+    private Resource iconImage;
     @Column(name = "description")
     private String description;
     @Column(name = "nick_name", nullable = false, unique = true, length = 64)
@@ -53,12 +53,12 @@ public class Author implements Serializable {
         this.nickName = nickName;
     }
 
-    public Long getIconImageId() {
-        return iconImageId;
+    public Resource getIconImage() {
+        return iconImage;
     }
 
-    public void setIconImageId(Long iconImageId) {
-        this.iconImageId = iconImageId;
+    public void setIconImage(Resource iconImage) {
+        this.iconImage = iconImage;
     }
 
     public Set<Role> getRoles() {
