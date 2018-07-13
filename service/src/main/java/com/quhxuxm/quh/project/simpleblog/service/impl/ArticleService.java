@@ -30,6 +30,7 @@ class ArticleService implements IArticleService {
     private IAuthorArticleBookmarkRepository authorArticleBookmarkRepository;
     private IAuthorTagRepository authorTagRepository;
     private IAuthorService authorService;
+    private IArticleCommentRepository articleCommentRepository;
 
     ArticleService(ITagRepository tagRepository,
             IArticleTagRepository articleTagRepository,
@@ -40,7 +41,8 @@ class ArticleService implements IArticleService {
             IAnthologyRepository anthologyRepository,
             IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
             IAuthorTagRepository authorTagRepository,
-            IAuthorService authorService) {
+            IAuthorService authorService,
+            IArticleCommentRepository articleCommentRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -51,6 +53,7 @@ class ArticleService implements IArticleService {
         this.authorArticleBookmarkRepository = authorArticleBookmarkRepository;
         this.authorTagRepository = authorTagRepository;
         this.authorService = authorService;
+        this.articleCommentRepository = articleCommentRepository;
     }
 
     @Transactional
@@ -246,6 +249,12 @@ class ArticleService implements IArticleService {
             result.setTitle(article.getTitle());
             result.setAuthorId(article.getAnthology().getAuthor().getId());
             result.setAnthologyId(article.getAnthology().getId());
+            result.setBookmarkNumber(this.authorArticleBookmarkRepository
+                    .countByPkArticle(article));
+            result.setCommentNumber(
+                    this.articleCommentRepository.countByArticle(article));
+            result.setPraiseNumber(this.authorArticlePraiseRepository
+                    .countByPkArticle(article));
             Author author = this.authorRepository
                     .getOne(articleViewDTO.getAuthorId());
             this.increaseAuthorTagWeightAccordingToArticleTags(author, article);

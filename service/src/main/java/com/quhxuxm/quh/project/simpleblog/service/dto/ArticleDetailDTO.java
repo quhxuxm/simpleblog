@@ -17,6 +17,9 @@ public class ArticleDetailDTO {
     private Long anthologyId;
     private String anthologyTitle;
     private Long anthologyCoverImageId;
+    private Long praiseNumber;
+    private Long bookmarkNumber;
+    private Long commentNumber;
 
     public Long getArticleId() {
         return articleId;
@@ -120,5 +123,29 @@ public class ArticleDetailDTO {
 
     public void setAnthologyCoverImageId(Long anthologyCoverImageId) {
         this.anthologyCoverImageId = anthologyCoverImageId;
+    }
+
+    public Long getBookmarkNumber() {
+        return bookmarkNumber;
+    }
+
+    public void setBookmarkNumber(Long bookmarkNumber) {
+        this.bookmarkNumber = bookmarkNumber;
+    }
+
+    public Long getPraiseNumber() {
+        return praiseNumber;
+    }
+
+    public void setPraiseNumber(Long praiseNumber) {
+        this.praiseNumber = praiseNumber;
+    }
+
+    public Long getCommentNumber() {
+        return commentNumber;
+    }
+
+    public void setCommentNumber(Long commentNumber) {
+        this.commentNumber = commentNumber;
     }
 }
