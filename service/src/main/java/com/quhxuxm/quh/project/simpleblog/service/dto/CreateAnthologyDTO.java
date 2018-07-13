@@ -14,6 +14,8 @@ public class CreateAnthologyDTO {
 
     public CreateAnthologyDTO() {
         this.tags = new HashSet<>();
+        this.isPublished=false;
+        this.isShared=false;
     }
 
     public String getTitle() {

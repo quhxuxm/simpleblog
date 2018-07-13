@@ -26,6 +26,8 @@ public class Anthology implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "publish_date")
     private Date publishDate;
+    @Column(name = "shared_date")
+    private Date sharedDate;
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id",
             nullable = false, updatable = false)
@@ -123,5 +125,13 @@ public class Anthology implements Serializable {
 
     public void setShared(Boolean shared) {
         isShared = shared;
+    }
+
+    public Date getSharedDate() {
+        return sharedDate;
+    }
+
+    public void setSharedDate(Date sharedDate) {
+        this.sharedDate = sharedDate;
     }
 }

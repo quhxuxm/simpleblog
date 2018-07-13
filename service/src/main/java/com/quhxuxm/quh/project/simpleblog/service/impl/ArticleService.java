@@ -3,6 +3,7 @@ package com.quhxuxm.quh.project.simpleblog.service.impl;
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
+import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyTagRepository;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
@@ -31,6 +32,7 @@ class ArticleService implements IArticleService {
     private IAuthorTagRepository authorTagRepository;
     private IAuthorService authorService;
     private IArticleCommentRepository articleCommentRepository;
+    private IAnthologyTagRepository anthologyTagRepository;
 
     ArticleService(ITagRepository tagRepository,
             IArticleTagRepository articleTagRepository,
@@ -42,7 +44,8 @@ class ArticleService implements IArticleService {
             IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
             IAuthorTagRepository authorTagRepository,
             IAuthorService authorService,
-            IArticleCommentRepository articleCommentRepository) {
+            IArticleCommentRepository articleCommentRepository,
+            IAnthologyTagRepository anthologyTagRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -54,6 +57,7 @@ class ArticleService implements IArticleService {
         this.authorTagRepository = authorTagRepository;
         this.authorService = authorService;
         this.articleCommentRepository = articleCommentRepository;
+        this.anthologyTagRepository = anthologyTagRepository;
     }
 
     @Transactional
@@ -90,12 +94,20 @@ class ArticleService implements IArticleService {
             article.setSummary(createArticleDTO.getSummary());
             article.setAnthology(anthology);
             this.articleRepository.save(article);
-            Set<String> articleTags = createArticleDTO.getTags();
-            articleTags.forEach(tagText -> {
-                Tag tag = tagRepository.findByText(tagText);
+            Map<String, Boolean> articleTags = new HashMap<>();
+            createArticleDTO.getTags().forEach(tagText -> {
+                articleTags.put(tagText, true);
+            });
+            Set<AnthologyTag> anthologyTags = this.anthologyTagRepository
+                    .findAllByPkAnthology(anthology);
+            anthologyTags.forEach(anthologyTag -> {
+                articleTags.put(anthologyTag.getPk().getTag().getText(), false);
+            });
+            articleTags.forEach((key, value) -> {
+                Tag tag = tagRepository.findByText(key);
                 if (tag == null) {
                     tag = new Tag();
-                    tag.setText(tagText);
+                    tag.setText(key);
                     tagRepository.save(tag);
                 }
                 ArticleTag articleTag = new ArticleTag();
@@ -103,7 +115,7 @@ class ArticleService implements IArticleService {
                 articleTagPk.setArticle(article);
                 articleTagPk.setTag(tag);
                 articleTag.setPk(articleTagPk);
-                articleTag.setSelected(true);
+                articleTag.setSelected(value);
                 articleTag.setWeight(
                         ICommonConstant.DefaultValue.ARTICLE_SELECTED_TAG_INIT_WEIGHT);
                 this.articleTagRepository.save(articleTag);
