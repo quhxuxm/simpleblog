@@ -2,20 +2,19 @@ package com.quhxuxm.quh.project.simpleblog.service.impl;
 
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
-import com.quhxuxm.quh.project.simpleblog.repository.IAnthologyRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.IAuthorRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.IResourceRepository;
-import com.quhxuxm.quh.project.simpleblog.repository.ITagRepository;
+import com.quhxuxm.quh.project.simpleblog.repository.*;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyService;
-import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyTagRepository;
+import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 class AnthologyService implements IAnthologyService {
@@ -26,19 +25,30 @@ class AnthologyService implements IAnthologyService {
     private IAuthorRepository authorRepository;
     private IResourceRepository resourceRepository;
     private ITagRepository tagRepository;
+    private IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository;
+    private IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository;
+    private IAnthologyCommentRepository anthologyCommentRepository;
+    private IAuthorService authorService;
+    private IAuthorTagRepository authorTagRepository;
 
     AnthologyService(IAnthologyRepository anthologyRepository,
-            IAnthologyTagRepository anthologyTagRepository,
-            IAuthorRepository authorRepository,
-            IResourceRepository resourceRepository,
-            ITagRepository tagRepository) {
+                     IAnthologyTagRepository anthologyTagRepository,
+                     IAuthorRepository authorRepository,
+                     IResourceRepository resourceRepository,
+                     ITagRepository tagRepository, IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository, IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository, IAnthologyCommentRepository anthologyCommentRepository, IAuthorService authorService, IAuthorTagRepository authorTagRepository) {
         this.anthologyRepository = anthologyRepository;
         this.anthologyTagRepository = anthologyTagRepository;
         this.authorRepository = authorRepository;
         this.resourceRepository = resourceRepository;
         this.tagRepository = tagRepository;
+        this.authorAnthologyBookmarkRepository = authorAnthologyBookmarkRepository;
+        this.authorAnthologyPraiseRepository = authorAnthologyPraiseRepository;
+        this.anthologyCommentRepository = anthologyCommentRepository;
+        this.authorService = authorService;
+        this.authorTagRepository = authorTagRepository;
     }
 
+    @Transactional
     @Override
     public OptionalLong saveAnthology(CreateAnthologyDTO createAnthologyDTO)
             throws ServiceException {
@@ -85,6 +95,7 @@ class AnthologyService implements IAnthologyService {
         }
     }
 
+    @Transactional
     @Override
     public void assignTagsToAnthology(
             AnthologyAssignTagsDTO anthologyAssignTagsDTO)
@@ -132,19 +143,131 @@ class AnthologyService implements IAnthologyService {
         }
     }
 
+    @Transactional
     @Override
     public void bookmarkAnthology(AnthologyBookmarkDTO anthologyBookmarkDTO)
             throws ServiceException {
+        try {
+            Author author = this.authorRepository
+                    .getOne(anthologyBookmarkDTO.getAuthorId());
+            Anthology anthology = this.anthologyRepository
+                    .getOne(anthologyBookmarkDTO.getAnthologyId());
+            AuthorAnthologyBookmark.PK authorAnthologyBookmarkPk = new AuthorAnthologyBookmark.PK();
+            authorAnthologyBookmarkPk.setAnthology(anthology);
+            authorAnthologyBookmarkPk.setAuthor(author);
+            if (this.authorAnthologyBookmarkRepository
+                    .existsById(authorAnthologyBookmarkPk)) {
+                logger.debug(
+                        "Same author will not able bookmark the same article again.");
+                return;
+            }
+            AuthorAnthologyBookmark authorAnthologyBookmark = new AuthorAnthologyBookmark();
+            authorAnthologyBookmark.setMarkDate(new Date());
+            authorAnthologyBookmark.setPk(authorAnthologyBookmarkPk);
+            this.authorAnthologyBookmarkRepository.save(authorAnthologyBookmark);
+            this.increaseAuthorTagWeightAccordingToAnthologyTags(author, anthology);
+        } catch (PersistenceException e) {
+            logger.error("Fail to bookmark anthology because of exception.", e);
+            throw new ServiceException(
+                    "Fail to bookmark anthology because of exception.", e);
+        }
     }
 
+    @Transactional
     @Override
     public void praiseAnthology(AnthologyPraiseDTO anthologyPraiseDTO)
             throws ServiceException {
+        try {
+            Author author = this.authorRepository
+                    .getOne(anthologyPraiseDTO.getAuthorId());
+            Anthology anthology = this.anthologyRepository
+                    .getOne(anthologyPraiseDTO.getAnthologyId());
+            AuthorAnthologyPraise.PK authorAnthologyPraisePk = new AuthorAnthologyPraise.PK();
+            authorAnthologyPraisePk.setAnthology(anthology);
+            authorAnthologyPraisePk.setAuthor(author);
+            if (this.authorAnthologyPraiseRepository
+                    .existsById(authorAnthologyPraisePk)) {
+                logger.debug(
+                        "Same author will not able praise the same article again.");
+                return;
+            }
+            AuthorAnthologyPraise authorAnthologyPraise = new AuthorAnthologyPraise();
+            authorAnthologyPraise.setPraiseDate(new Date());
+            authorAnthologyPraise.setPk(authorAnthologyPraisePk);
+            this.authorAnthologyPraiseRepository.save(authorAnthologyPraise);
+            this.increaseAuthorTagWeightAccordingToAnthologyTags(author, anthology);
+        } catch (PersistenceException e) {
+            logger.error("Fail to praise anthology because of exception.", e);
+            throw new ServiceException(
+                    "Fail to praise anthology because of exception.", e);
+        }
     }
 
+    @Transactional
     @Override
     public Optional<AnthologyDetailDTO> viewAnthology(
             AnthologyViewDTO anthologyViewDTO) throws ServiceException {
-        return Optional.empty();
+        try {
+            Anthology anthology = this.anthologyRepository
+                    .getOne(anthologyViewDTO.getAnthologyId());
+            AnthologyDetailDTO result = new AnthologyDetailDTO();
+            result.setAnthologyId(anthology.getId());
+            result.setSummary(anthology.getSummary());
+            if (anthology.getAuthor().getIconImage() != null) {
+                result.setAuthorIconImageId(
+                        anthology.getAuthor().getIconImage()
+                                .getId());
+            }
+            if (anthology.getCoverImage() != null) {
+                result.setCoverImageId(
+                        anthology.getCoverImage().getId());
+            }
+            result.setTitle(anthology.getTitle());
+            result.setAuthorNickName(
+                    anthology.getAuthor().getNickName());
+            result.setAuthorId(anthology.getAuthor().getId());
+            result.setBookmarkNumber(this.authorAnthologyBookmarkRepository
+                    .countByPkAnthology(anthology));
+            result.setCommentNumber(
+                    this.anthologyCommentRepository.countByAnthology(anthology));
+            result.setPraiseNumber(this.authorAnthologyPraiseRepository
+                    .countByPkAnthology(anthology));
+            return Optional.of(result);
+        } catch (PersistenceException e) {
+            throw new ServiceException(
+                    "Can not view article because of exception.");
+        }
+    }
+
+    @Transactional
+    @Override
+    public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author, Anthology anthology) throws ServiceException {
+        try {
+            Set<AnthologyTag> anthologyTags = this.anthologyTagRepository
+                    .findAllByPkAnthology(anthology);
+            Set<Tag> tagsFromAnthology = anthologyTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            Set<AuthorTag> authorTags = this.authorTagRepository
+                    .findAllByPkAuthor(author);
+            Set<Tag> tagsFromAuthor = authorTags.stream().map(tag -> {
+                return tag.getPk().getTag();
+            }).collect(Collectors.toSet());
+            tagsFromAuthor.addAll(tagsFromAnthology);
+            AuthorAssignTagsDTO authorAssignTagsDTO = new AuthorAssignTagsDTO();
+            authorAssignTagsDTO.setAuthorId(author.getId());
+            authorAssignTagsDTO.setSelect(false);
+            tagsFromAuthor.forEach(tag -> {
+                authorAssignTagsDTO.getTags().add(tag.getText());
+            });
+            this.authorService.assignTagsToAuthor(authorAssignTagsDTO);
+        } catch (PersistenceException e) {
+            logger.error(
+                    "Can not increase author tag weight according to anthology because of exception.",
+                    e);
+            throw new ServiceException(
+                    "Can not increase author tag weight according to anthology because of exception.",
+                    e);
+        }
     }
 }

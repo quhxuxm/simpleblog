@@ -1,5 +1,7 @@
 package com.quhxuxm.quh.project.simpleblog.service.api;
 
+import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
+import com.quhxuxm.quh.project.simpleblog.domain.Author;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 
@@ -21,4 +23,7 @@ public interface IAnthologyService {
 
     Optional<AnthologyDetailDTO> viewAnthology(
             AnthologyViewDTO anthologyViewDTO) throws ServiceException;
+
+    public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author,
+                                                                Anthology anthology) throws ServiceException;
 }

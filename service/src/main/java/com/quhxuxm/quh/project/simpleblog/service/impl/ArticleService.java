@@ -3,7 +3,7 @@ package com.quhxuxm.quh.project.simpleblog.service.impl;
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
-import com.quhxuxm.quh.project.simpleblog.service.api.IAnthologyTagRepository;
+import com.quhxuxm.quh.project.simpleblog.repository.IAnthologyTagRepository;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
@@ -35,17 +35,17 @@ class ArticleService implements IArticleService {
     private IAnthologyTagRepository anthologyTagRepository;
 
     ArticleService(ITagRepository tagRepository,
-            IArticleTagRepository articleTagRepository,
-            IAnthologyParticipantRepository anthologyParticipantRepository,
-            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-            IAuthorRepository authorRepository,
-            IArticleRepository articleRepository,
-            IAnthologyRepository anthologyRepository,
-            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-            IAuthorTagRepository authorTagRepository,
-            IAuthorService authorService,
-            IArticleCommentRepository articleCommentRepository,
-            IAnthologyTagRepository anthologyTagRepository) {
+                   IArticleTagRepository articleTagRepository,
+                   IAnthologyParticipantRepository anthologyParticipantRepository,
+                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+                   IAuthorRepository authorRepository,
+                   IArticleRepository articleRepository,
+                   IAnthologyRepository anthologyRepository,
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+                   IAuthorTagRepository authorTagRepository,
+                   IAuthorService authorService,
+                   IArticleCommentRepository articleCommentRepository,
+                   IAnthologyTagRepository anthologyTagRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -267,9 +267,11 @@ class ArticleService implements IArticleService {
                     this.articleCommentRepository.countByArticle(article));
             result.setPraiseNumber(this.authorArticlePraiseRepository
                     .countByPkArticle(article));
-            Author author = this.authorRepository
-                    .getOne(articleViewDTO.getAuthorId());
-            this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
+            if (articleViewDTO.getAuthorId() != null) {
+                Author author = this.authorRepository
+                        .getOne(articleViewDTO.getAuthorId());
+                this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
+            }
             return Optional.of(result);
         } catch (PersistenceException e) {
             throw new ServiceException(
@@ -280,7 +282,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-            Article article) throws ServiceException {
+                                                              Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
