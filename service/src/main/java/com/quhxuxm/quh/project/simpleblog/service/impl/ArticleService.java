@@ -34,6 +34,7 @@ class ArticleService implements IArticleService {
     private IAuthorService authorService;
     private IArticleCommentRepository articleCommentRepository;
     private IAnthologyTagRepository anthologyTagRepository;
+    private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
                    IArticleTagRepository articleTagRepository,
@@ -46,7 +47,7 @@ class ArticleService implements IArticleService {
                    IAuthorTagRepository authorTagRepository,
                    IAuthorService authorService,
                    IArticleCommentRepository articleCommentRepository,
-                   IAnthologyTagRepository anthologyTagRepository) {
+                   IAnthologyTagRepository anthologyTagRepository, IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -59,6 +60,7 @@ class ArticleService implements IArticleService {
         this.authorService = authorService;
         this.articleCommentRepository = articleCommentRepository;
         this.anthologyTagRepository = anthologyTagRepository;
+        this.articleAdditionalInfoRepository = articleAdditionalInfoRepository;
     }
 
     @Transactional
@@ -200,6 +202,9 @@ class ArticleService implements IArticleService {
             authorArticleBookmark.setMarkDate(new Date());
             authorArticleBookmark.setPk(authorArticleBookmarkPk);
             this.authorArticleBookmarkRepository.save(authorArticleBookmark);
+            article.getAdditionalInfo().setBookmarkNumber(this.authorArticleBookmarkRepository
+                    .countByPkArticle(article));
+            this.articleAdditionalInfoRepository.save(article.getAdditionalInfo());
             this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark article because of exception.", e);
@@ -230,6 +235,9 @@ class ArticleService implements IArticleService {
             authorArticlePraise.setPraiseDate(new Date());
             authorArticlePraise.setPk(authorArticlePraisePk);
             this.authorArticlePraiseRepository.save(authorArticlePraise);
+            article.getAdditionalInfo().setPraiseNumber(this.authorArticlePraiseRepository
+                    .countByPkArticle(article));
+            this.articleRepository.save(article);
             this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
             logger.error("Fail to praise article because of exception.", e);
@@ -268,6 +276,9 @@ class ArticleService implements IArticleService {
                     .countByPkArticle(article));
             result.setCommentNumber(
                     this.articleCommentRepository.countByArticle(article));
+
+            article.getAdditionalInfo().setViewNumber();
+            this.articleAdditionalInfoRepository.save(article.getAdditionalInfo());
             result.setPraiseNumber(this.authorArticlePraiseRepository
                     .countByPkArticle(article));
             if (articleViewDTO.getAuthorId() != null) {
