@@ -3,13 +3,14 @@ package com.quhxuxm.quh.project.simpleblog.service.impl;
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.domain.*;
 import com.quhxuxm.quh.project.simpleblog.repository.*;
-import com.quhxuxm.quh.project.simpleblog.repository.IAnthologyTagRepository;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -310,5 +311,40 @@ class ArticleService implements IArticleService {
                     "Can not increase author tag weight according to article because of exception.",
                     e);
         }
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesInAnthology(Pageable pageable, Long anthologyId) {
+        return null;
+    }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(Pageable pageable, Long authorId) {
+        return null;
     }
 }

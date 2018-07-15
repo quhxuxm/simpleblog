@@ -39,12 +39,16 @@ public class Anthology implements Serializable {
     private Boolean isPublished;
     @Column(name = "is_shared", nullable = false)
     private Boolean isShared;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "id")
+    private AnthologyAdditionalInfo additionalInfo;
 
     public Anthology() {
         this.createDate = new Date();
         this.updateDate = this.createDate;
         this.isPublished = false;
         this.isShared = false;
+        this.additionalInfo = new AnthologyAdditionalInfo();
     }
 
     public Long getId() {
@@ -133,5 +137,13 @@ public class Anthology implements Serializable {
 
     public void setSharedDate(Date sharedDate) {
         this.sharedDate = sharedDate;
+    }
+
+    public AnthologyAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(AnthologyAdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

@@ -21,12 +21,16 @@ public class Author implements Serializable {
     private String nickName;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "author_role", joinColumns = {
-            @JoinColumn(name = "author_id", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "role_id",
-                    referencedColumnName = "id") })
+            @JoinColumn(name = "author_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",
+                    referencedColumnName = "id")})
     private Set<Role> roles;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "id")
+    private AuthorAdditionalInfo additionalInfo;
 
     public Author() {
+        this.additionalInfo = new AuthorAdditionalInfo();
     }
 
     public String getDescription() {
@@ -67,5 +71,13 @@ public class Author implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public AuthorAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(AuthorAdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

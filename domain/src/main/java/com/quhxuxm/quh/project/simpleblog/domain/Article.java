@@ -39,11 +39,15 @@ public class Article implements Serializable {
     private Resource coverImage;
     @Column(name = "is_published", nullable = false)
     private Boolean isPublished;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "additional_info_id", referencedColumnName = "id")
+    private ArticleAdditionalInfo additionalInfo;
 
     public Article() {
         this.createDate = new Date();
         this.updateDate = this.createDate;
         this.isPublished = false;
+        this.additionalInfo = new ArticleAdditionalInfo();
     }
 
     public Long getId() {
@@ -124,5 +128,13 @@ public class Article implements Serializable {
 
     public void setPublished(Boolean published) {
         isPublished = published;
+    }
+
+    public ArticleAdditionalInfo getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(ArticleAdditionalInfo additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }
