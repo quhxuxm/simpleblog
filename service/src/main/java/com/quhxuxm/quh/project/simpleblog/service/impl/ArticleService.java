@@ -96,6 +96,7 @@ class ArticleService implements IArticleService {
             article.setAnthology(anthology);
             this.articleRepository.save(article);
             author.getAdditionalInfo().setArticleNumber(author.getAdditionalInfo().getArticleNumber() + 1);
+            this.authorRepository.save(author);
             Map<String, Boolean> articleTags = new HashMap<>();
             createArticleDTO.getTags().forEach(tagText -> {
                 articleTags.put(tagText, true);
