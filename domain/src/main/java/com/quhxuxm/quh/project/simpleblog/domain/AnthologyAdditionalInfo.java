@@ -17,6 +17,12 @@ public class AnthologyAdditionalInfo {
     @Column(name = "bookmark_number")
     private Long bookmarkNumber;
 
+    AnthologyAdditionalInfo() {
+        this.praiseNumber = 0L;
+        this.commentNumber = 0L;
+        this.bookmarkNumber = 0L;
+    }
+
     public Long getId() {
         return id;
     }

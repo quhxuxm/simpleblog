@@ -19,6 +19,13 @@ public class AuthorAdditionalInfo {
     @Column(name = "anthology_number")
     private Long anthologyNumber;
 
+    AuthorAdditionalInfo() {
+        this.anthologyNumber = 0L;
+        this.commentNumber = 0L;
+        this.followerNumber = 0L;
+        this.anthologyNumber = 0L;
+    }
+
     public Long getId() {
         return id;
     }
