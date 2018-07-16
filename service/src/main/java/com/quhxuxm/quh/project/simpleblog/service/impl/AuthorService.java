@@ -231,6 +231,9 @@ class AuthorService implements IAuthorService {
                         authorFollower.setPk(authorFollowerPk);
                         authorFollower.setFollowDate(new Date());
                         this.authorFollowerRepository.save(authorFollower);
+                        author.getAdditionalInfo().setFollowerNumber(
+                                this.authorFollowerRepository
+                                        .countByPkAuthor(author));
                     });
         } catch (PersistenceException e) {
             logger.error("Can not assign tog to author because of exception.",

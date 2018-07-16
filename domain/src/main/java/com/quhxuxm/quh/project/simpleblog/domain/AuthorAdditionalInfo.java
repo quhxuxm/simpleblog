@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "author_additional_info")
+@Cacheable
 public class AuthorAdditionalInfo {
     private static final long serialVersionUID = 8070388640184979679L;
     @Id
@@ -23,7 +24,7 @@ public class AuthorAdditionalInfo {
         this.anthologyNumber = 0L;
         this.commentNumber = 0L;
         this.followerNumber = 0L;
-        this.anthologyNumber = 0L;
+        this.articleNumber = 0L;
     }
 
     public Long getId() {

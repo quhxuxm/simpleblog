@@ -20,6 +20,7 @@ public class ArticleDetailDTO {
     private Long praiseNumber;
     private Long bookmarkNumber;
     private Long commentNumber;
+    private Long viewNumber;
 
     public Long getArticleId() {
         return articleId;
@@ -147,5 +148,13 @@ public class ArticleDetailDTO {
 
     public void setCommentNumber(Long commentNumber) {
         this.commentNumber = commentNumber;
+    }
+
+    public Long getViewNumber() {
+        return viewNumber;
+    }
+
+    public void setViewNumber(Long viewNumber) {
+        this.viewNumber = viewNumber;
     }
 }

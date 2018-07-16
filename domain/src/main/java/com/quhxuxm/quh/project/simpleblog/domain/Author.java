@@ -6,6 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "author")
+@Cacheable
 public class Author implements Serializable {
     private static final long serialVersionUID = -2652995801468036436L;
     @Id
@@ -21,9 +22,9 @@ public class Author implements Serializable {
     private String nickName;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "author_role", joinColumns = {
-            @JoinColumn(name = "author_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",
-                    referencedColumnName = "id")})
+            @JoinColumn(name = "author_id", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id",
+                    referencedColumnName = "id") })
     private Set<Role> roles;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "additional_info_id", referencedColumnName = "id")

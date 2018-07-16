@@ -37,17 +37,18 @@ class ArticleService implements IArticleService {
     private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
-                   IArticleTagRepository articleTagRepository,
-                   IAnthologyParticipantRepository anthologyParticipantRepository,
-                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-                   IAuthorRepository authorRepository,
-                   IArticleRepository articleRepository,
-                   IAnthologyRepository anthologyRepository,
-                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-                   IAuthorTagRepository authorTagRepository,
-                   IAuthorService authorService,
-                   IArticleCommentRepository articleCommentRepository,
-                   IAnthologyTagRepository anthologyTagRepository, IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
+            IArticleTagRepository articleTagRepository,
+            IAnthologyParticipantRepository anthologyParticipantRepository,
+            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+            IAuthorRepository authorRepository,
+            IArticleRepository articleRepository,
+            IAnthologyRepository anthologyRepository,
+            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+            IAuthorTagRepository authorTagRepository,
+            IAuthorService authorService,
+            IArticleCommentRepository articleCommentRepository,
+            IAnthologyTagRepository anthologyTagRepository,
+            IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -97,7 +98,8 @@ class ArticleService implements IArticleService {
             article.setSummary(createArticleDTO.getSummary());
             article.setAnthology(anthology);
             this.articleRepository.save(article);
-            author.getAdditionalInfo().setArticleNumber(author.getAdditionalInfo().getArticleNumber() + 1);
+            author.getAdditionalInfo().setArticleNumber(
+                    author.getAdditionalInfo().getArticleNumber() + 1);
             this.authorRepository.save(author);
             Map<String, Boolean> articleTags = new HashMap<>();
             createArticleDTO.getTags().forEach(tagText -> {
@@ -202,9 +204,11 @@ class ArticleService implements IArticleService {
             authorArticleBookmark.setMarkDate(new Date());
             authorArticleBookmark.setPk(authorArticleBookmarkPk);
             this.authorArticleBookmarkRepository.save(authorArticleBookmark);
-            article.getAdditionalInfo().setBookmarkNumber(this.authorArticleBookmarkRepository
-                    .countByPkArticle(article));
-            this.articleAdditionalInfoRepository.save(article.getAdditionalInfo());
+            article.getAdditionalInfo().setBookmarkNumber(
+                    this.authorArticleBookmarkRepository
+                            .countByPkArticle(article));
+            this.articleAdditionalInfoRepository
+                    .save(article.getAdditionalInfo());
             this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark article because of exception.", e);
@@ -235,8 +239,9 @@ class ArticleService implements IArticleService {
             authorArticlePraise.setPraiseDate(new Date());
             authorArticlePraise.setPk(authorArticlePraisePk);
             this.authorArticlePraiseRepository.save(authorArticlePraise);
-            article.getAdditionalInfo().setPraiseNumber(this.authorArticlePraiseRepository
-                    .countByPkArticle(article));
+            article.getAdditionalInfo().setPraiseNumber(
+                    this.authorArticlePraiseRepository
+                            .countByPkArticle(article));
             this.articleRepository.save(article);
             this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
         } catch (PersistenceException e) {
@@ -272,19 +277,22 @@ class ArticleService implements IArticleService {
             result.setTitle(article.getTitle());
             result.setAuthorId(article.getAnthology().getAuthor().getId());
             result.setAnthologyId(article.getAnthology().getId());
-            result.setBookmarkNumber(this.authorArticleBookmarkRepository
-                    .countByPkArticle(article));
+            result.setBookmarkNumber(
+                    article.getAdditionalInfo().getBookmarkNumber());
             result.setCommentNumber(
-                    this.articleCommentRepository.countByArticle(article));
-
-            article.getAdditionalInfo().setViewNumber();
-            this.articleAdditionalInfoRepository.save(article.getAdditionalInfo());
-            result.setPraiseNumber(this.authorArticlePraiseRepository
-                    .countByPkArticle(article));
+                    article.getAdditionalInfo().getCommentNumber());
+            result.setPraiseNumber(
+                    article.getAdditionalInfo().getPraiseNumber());
+            article.getAdditionalInfo().setViewNumber(
+                    article.getAdditionalInfo().getViewNumber() + 1);
+            this.articleAdditionalInfoRepository
+                    .save(article.getAdditionalInfo());
+            result.setViewNumber(article.getAdditionalInfo().getViewNumber());
             if (articleViewDTO.getAuthorId() != null) {
                 Author author = this.authorRepository
                         .getOne(articleViewDTO.getAuthorId());
-                this.increaseAuthorTagWeightAccordingToArticleTags(author, article);
+                this.increaseAuthorTagWeightAccordingToArticleTags(author,
+                        article);
             }
             return Optional.of(result);
         } catch (PersistenceException e) {
@@ -296,7 +304,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-                                                              Article article) throws ServiceException {
+            Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
@@ -327,37 +335,44 @@ class ArticleService implements IArticleService {
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable) {
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(
+            Pageable pageable) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable) {
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(
+            Pageable pageable) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable) {
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(
+            Pageable pageable) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable) {
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(
+            Pageable pageable) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId) {
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(
+            Pageable pageable, Long authorId) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesInAnthology(Pageable pageable, Long anthologyId) {
+    public Page<ArticleSummaryDTO> listArticleSummariesInAnthology(
+            Pageable pageable, Long anthologyId) {
         return null;
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(Pageable pageable, Long authorId) {
+    public Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(
+            Pageable pageable, Long authorId) {
         return null;
     }
 }
