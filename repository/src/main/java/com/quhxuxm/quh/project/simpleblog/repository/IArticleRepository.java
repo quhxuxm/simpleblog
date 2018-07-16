@@ -1,5 +1,6 @@
 package com.quhxuxm.quh.project.simpleblog.repository;
 
+import com.quhxuxm.quh.project.simpleblog.domain.Anthology;
 import com.quhxuxm.quh.project.simpleblog.domain.Article;
 import com.quhxuxm.quh.project.simpleblog.domain.Author;
 import org.springframework.data.domain.Page;
@@ -24,4 +25,12 @@ public interface IArticleRepository extends JpaRepository<Article, Long> {
     Page<Article> findAllByOrderByAdditionalInfoPraiseNumberDesc(Pageable pageable);
 
     Page<Article> findAllByOrderByAdditionalInfoPraiseNumberAsc(Pageable pageable);
+
+    Page<Article> findAllByAnthologyEqualsOrderByCreateDateAsc(Pageable pageable, Anthology anthology);
+
+    Page<Article> findAllByAnthologyEqualsOrderByCreateDateDesc(Pageable pageable, Anthology anthology);
+
+    Page<Article> findAllByAnthologyAuthorEqualsOrderByCreateDateAsc(Pageable pageable, Author author);
+
+    Page<Article> findAllByAnthologyAuthorEqualsOrderByCreateDateDesc(Pageable pageable, Author author);
 }

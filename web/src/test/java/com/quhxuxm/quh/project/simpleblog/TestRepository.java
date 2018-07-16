@@ -325,7 +325,7 @@ public class TestRepository {
     }
 
     @Test
-    public void testListArticleSummariesOrderByBookmarkNumber() {
+    public void testListArticleSummariesOrderByBookmarkNumber() throws ServiceException {
         Pageable pageable = Pageable.unpaged();
         Page<ArticleSummaryDTO> page = this.articleService.listArticleSummariesOrderByBookmarkNumber(pageable, false);
         page.forEach(dto -> {

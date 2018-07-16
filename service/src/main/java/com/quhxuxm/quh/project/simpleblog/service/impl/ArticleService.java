@@ -362,50 +362,66 @@ class ArticleService implements IArticleService {
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(
-            Pageable pageable, boolean isAsc) {
-        Page<Article> domainObjPage = null;
-        if (isAsc) {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberAsc(pageable);
-        } else {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberDesc(pageable);
+            Pageable pageable, boolean isAsc) throws ServiceException {
+        try {
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberAsc(pageable);
+            } else {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberDesc(pageable);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not find articles order by bookmark number.", e);
         }
-        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(
-            Pageable pageable, boolean isAsc) {
-        Page<Article> domainObjPage = null;
-        if (isAsc) {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberAsc(pageable);
-        } else {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberDesc(pageable);
+            Pageable pageable, boolean isAsc) throws ServiceException {
+        try {
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberAsc(pageable);
+            } else {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberDesc(pageable);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list articles order by praise number.", e);
         }
-        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(
-            Pageable pageable, boolean isAsc) {
-        Page<Article> domainObjPage = null;
-        if (isAsc) {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberAsc(pageable);
-        } else {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberDesc(pageable);
+            Pageable pageable, boolean isAsc) throws ServiceException {
+        try {
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberAsc(pageable);
+            } else {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberDesc(pageable);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list articles order by view number.", e);
         }
-        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(
-            Pageable pageable, boolean isAsc) {
-        Page<Article> domainObjPage = null;
-        if (isAsc) {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberAsc(pageable);
-        } else {
-            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberDesc(pageable);
+            Pageable pageable, boolean isAsc) throws ServiceException {
+        try {
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberAsc(pageable);
+            } else {
+                domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberDesc(pageable);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list articles order by comment number.");
         }
-        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
@@ -415,14 +431,36 @@ class ArticleService implements IArticleService {
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesInAnthology(
-            Pageable pageable, Long anthologyId, boolean isAsc) {
-        return null;
+    public Page<ArticleSummaryDTO> listArticleSummariesInAnthologyOrderByCreateDate(
+            Pageable pageable, Long anthologyId, boolean isAsc) throws ServiceException {
+        try {
+            Anthology anthology = this.anthologyRepository.getOne(anthologyId);
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByAnthologyEqualsOrderByCreateDateAsc(pageable, anthology);
+            } else {
+                domainObjPage = this.articleRepository.findAllByAnthologyEqualsOrderByCreateDateDesc(pageable, anthology);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list the articles in the anthology because of exception.", e);
+        }
     }
 
     @Override
-    public Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(
-            Pageable pageable, Long authorId, boolean isAsc) {
-        return null;
+    public Page<ArticleSummaryDTO> listArticleSummariesFromAuthorOrderByCreateDate(
+            Pageable pageable, Long authorId, boolean isAsc) throws ServiceException {
+        try {
+            Author author = this.authorRepository.getOne(authorId);
+            Page<Article> domainObjPage = null;
+            if (isAsc) {
+                domainObjPage = this.articleRepository.findAllByAnthologyAuthorEqualsOrderByCreateDateAsc(pageable, author);
+            } else {
+                domainObjPage = this.articleRepository.findAllByAnthologyAuthorEqualsOrderByCreateDateDesc(pageable, author);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list the articles in the author because of exception.", e);
+        }
     }
 }

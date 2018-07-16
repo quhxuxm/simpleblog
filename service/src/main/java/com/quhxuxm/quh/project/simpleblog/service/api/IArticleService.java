@@ -29,17 +29,17 @@ public interface IArticleService {
     void increaseAuthorTagWeightAccordingToArticleTags(Author author,
                                                        Article article) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesInAnthology(Pageable pageable, Long anthologyId, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesInAnthologyOrderByCreateDate(Pageable pageable, Long anthologyId, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(Pageable pageable, Long authorId, boolean isAsc);
+    Page<ArticleSummaryDTO> listArticleSummariesFromAuthorOrderByCreateDate(Pageable pageable, Long authorId, boolean isAsc) throws ServiceException;
 }
