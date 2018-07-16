@@ -1,5 +1,8 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
-public class AuthorAssignFollowerDTO {
+
+import java.io.Serializable;
+
+public class AuthorAssignFollowerDTO implements Serializable {
     private Long authorId;
     private Long followerId;
 

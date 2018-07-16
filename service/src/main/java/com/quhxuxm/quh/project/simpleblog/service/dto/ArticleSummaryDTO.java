@@ -1,8 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ArticleSummaryDTO {
+public class ArticleSummaryDTO implements Serializable {
     private Long articleId;
     private String title;
     private String summary;

@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AuthorAssignTagsDTO {
+public class AuthorAssignTagsDTO implements Serializable {
     private Long authorId;
     private Set<String> tags;
     private boolean isSelect;

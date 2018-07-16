@@ -2,11 +2,12 @@ package com.quhxuxm.quh.project.simpleblog.service.dto;
 
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AuthorDetailDTO {
+public class AuthorDetailDTO implements Serializable {
     private Long authorId;
     private String nickName;
     private String authenticationToken;

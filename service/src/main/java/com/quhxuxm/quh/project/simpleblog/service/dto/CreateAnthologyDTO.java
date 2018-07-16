@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CreateAnthologyDTO {
+public class CreateAnthologyDTO implements Serializable {
     private String title;
     private String summary;
     private Long coverImageId;
@@ -14,8 +15,8 @@ public class CreateAnthologyDTO {
 
     public CreateAnthologyDTO() {
         this.tags = new HashSet<>();
-        this.isPublished=false;
-        this.isShared=false;
+        this.isPublished = false;
+        this.isShared = false;
     }
 
     public String getTitle() {

@@ -1,8 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class ArticleAssignTagsDTO {
+public class ArticleAssignTagsDTO implements Serializable {
     private Long authorId;
     private Long articleId;
     private Set<String> tags;

@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class AnthologyAssignTagsDTO {
+public class AnthologyAssignTagsDTO implements Serializable {
     private Long anthologyId;
     private Long authorId;
     private Set<String> tags;

@@ -1,8 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AnthologyDetailDTO {
+public class AnthologyDetailDTO implements Serializable {
     private Long anthologyId;
     private String title;
     private String summary;

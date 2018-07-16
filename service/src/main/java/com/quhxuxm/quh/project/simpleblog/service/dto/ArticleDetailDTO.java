@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class ArticleDetailDTO {
+public class ArticleDetailDTO implements Serializable {
     private Long articleId;
     private String title;
     private String content;

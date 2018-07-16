@@ -1,9 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CreateArticleDTO {
+public class CreateArticleDTO implements Serializable {
     private Long authorId;
     private Long anthologyId;
     private String title;

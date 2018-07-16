@@ -1,7 +1,10 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
+
 import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 
-public class AuthorLoginDTO {
+import java.io.Serializable;
+
+public class AuthorLoginDTO implements Serializable {
     private String token;
     private String password;
     private Authentication.Type type;
