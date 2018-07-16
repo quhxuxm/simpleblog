@@ -29,17 +29,17 @@ public interface IArticleService {
     void increaseAuthorTagWeightAccordingToArticleTags(Author author,
                                                        Article article) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(Pageable pageable, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(Pageable pageable, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(Pageable pageable, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId);
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesInAnthology(Pageable pageable, Long anthologyId);
+    Page<ArticleSummaryDTO> listArticleSummariesInAnthology(Pageable pageable, Long anthologyId, boolean isAsc);
 
-    Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(Pageable pageable, Long authorId);
+    Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(Pageable pageable, Long authorId, boolean isAsc);
 }

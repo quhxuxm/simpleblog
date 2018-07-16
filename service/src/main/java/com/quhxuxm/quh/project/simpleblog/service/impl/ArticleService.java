@@ -37,18 +37,18 @@ class ArticleService implements IArticleService {
     private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
-            IArticleTagRepository articleTagRepository,
-            IAnthologyParticipantRepository anthologyParticipantRepository,
-            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-            IAuthorRepository authorRepository,
-            IArticleRepository articleRepository,
-            IAnthologyRepository anthologyRepository,
-            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-            IAuthorTagRepository authorTagRepository,
-            IAuthorService authorService,
-            IArticleCommentRepository articleCommentRepository,
-            IAnthologyTagRepository anthologyTagRepository,
-            IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
+                   IArticleTagRepository articleTagRepository,
+                   IAnthologyParticipantRepository anthologyParticipantRepository,
+                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+                   IAuthorRepository authorRepository,
+                   IArticleRepository articleRepository,
+                   IAnthologyRepository anthologyRepository,
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+                   IAuthorTagRepository authorTagRepository,
+                   IAuthorService authorService,
+                   IArticleCommentRepository articleCommentRepository,
+                   IAnthologyTagRepository anthologyTagRepository,
+                   IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -304,7 +304,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-            Article article) throws ServiceException {
+                                                              Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
@@ -334,45 +334,95 @@ class ArticleService implements IArticleService {
         }
     }
 
+    private ArticleSummaryDTO convertPojoToDto(Article pojo) {
+        ArticleSummaryDTO dto = new ArticleSummaryDTO();
+        dto.setArticleId(pojo.getId());
+        dto.setUpdateDate(pojo.getUpdateDate());
+        dto.setCreateDate(pojo.getCreateDate());
+        dto.setAuthorNickName(pojo.getAnthology().getAuthor().getNickName());
+        dto.setTitle(pojo.getTitle());
+        dto.setAuthorId(pojo.getAnthology().getAuthor().getId());
+        if (pojo.getAnthology().getCoverImage() != null) {
+            dto.setAnthologyCoverImageId(pojo.getAnthology().getCoverImage().getId());
+        }
+        dto.setAnthologyId(pojo.getAnthology().getId());
+        dto.setAnthologyTitle(pojo.getAnthology().getTitle());
+        if (pojo.getAnthology().getAuthor().getIconImage() != null) {
+            dto.setAuthorIconImageId(pojo.getAnthology().getAuthor().getIconImage().getId());
+        }
+        dto.setCommentNumber(pojo.getAdditionalInfo().getCommentNumber());
+        dto.setBookmarkNumber(pojo.getAdditionalInfo().getBookmarkNumber());
+        dto.setPraiseNumber(pojo.getAdditionalInfo().getPraiseNumber());
+        dto.setSummary(pojo.getSummary());
+        if (pojo.getCoverImage() != null) {
+            dto.setCoverImageId(pojo.getCoverImage().getId());
+        }
+        return dto;
+    }
+
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(
-            Pageable pageable) {
-        return null;
+            Pageable pageable, boolean isAsc) {
+        Page<Article> domainObjPage = null;
+        if (isAsc) {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberAsc(pageable);
+        } else {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoBookmarkNumberDesc(pageable);
+        }
+        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(
-            Pageable pageable) {
-        return null;
+            Pageable pageable, boolean isAsc) {
+        Page<Article> domainObjPage = null;
+        if (isAsc) {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberAsc(pageable);
+        } else {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoPraiseNumberDesc(pageable);
+        }
+        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(
-            Pageable pageable) {
-        return null;
+            Pageable pageable, boolean isAsc) {
+        Page<Article> domainObjPage = null;
+        if (isAsc) {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberAsc(pageable);
+        } else {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoViewNumberDesc(pageable);
+        }
+        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(
-            Pageable pageable) {
-        return null;
+            Pageable pageable, boolean isAsc) {
+        Page<Article> domainObjPage = null;
+        if (isAsc) {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberAsc(pageable);
+        } else {
+            domainObjPage = this.articleRepository.findAllByOrderByAdditionalInfoCommentNumberDesc(pageable);
+        }
+        return domainObjPage.map(this::convertPojoToDto);
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(
-            Pageable pageable, Long authorId) {
+            Pageable pageable, Long authorId, boolean isAsc) {
         return null;
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesInAnthology(
-            Pageable pageable, Long anthologyId) {
+            Pageable pageable, Long anthologyId, boolean isAsc) {
         return null;
     }
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesFromAuthor(
-            Pageable pageable, Long authorId) {
+            Pageable pageable, Long authorId, boolean isAsc) {
         return null;
     }
 }

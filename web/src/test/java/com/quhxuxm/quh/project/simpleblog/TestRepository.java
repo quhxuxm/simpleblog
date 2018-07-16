@@ -11,6 +11,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashSet;
@@ -319,6 +321,15 @@ public class TestRepository {
             }
         }, () -> {
             Assert.fail("Can not login author: token31 because of not exist");
+        });
+    }
+
+    @Test
+    public void testListArticleSummariesOrderByBookmarkNumber() {
+        Pageable pageable = Pageable.unpaged();
+        Page<ArticleSummaryDTO> page = this.articleService.listArticleSummariesOrderByBookmarkNumber(pageable, false);
+        page.forEach(dto -> {
+            System.out.println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
         });
     }
 }

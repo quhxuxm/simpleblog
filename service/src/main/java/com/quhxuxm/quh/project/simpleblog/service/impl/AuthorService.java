@@ -137,7 +137,7 @@ class AuthorService implements IAuthorService {
             result.setAnthologyNumber(this.anthologyRepository
                     .countByAuthor(authentication.getAuthor()));
             result.setArticleNumber(this.articleRepository
-                    .countByAnthology_Author(authentication.getAuthor()));
+                    .countByAnthologyAuthor(authentication.getAuthor()));
             result.setCommentNumber(this.articleCommentRepository
                     .countByAuthor(authentication.getAuthor()));
             result.setFollowedByNumber(this.authorFollowerRepository

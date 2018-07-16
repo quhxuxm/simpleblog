@@ -1,7 +1,6 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
 import java.util.Date;
-import java.util.Set;
 
 public class ArticleSummaryDTO {
     private Long articleId;
@@ -9,7 +8,6 @@ public class ArticleSummaryDTO {
     private String summary;
     private Date createDate;
     private Date updateDate;
-    private Set<String> tags;
     private Long authorId;
     private String authorNickName;
     private Long authorIconImageId;
@@ -19,7 +17,15 @@ public class ArticleSummaryDTO {
     private Long praiseNumber;
     private Long bookmarkNumber;
     private Long commentNumber;
+    private Long viewNumber;
     private Long coverImageId;
+
+    public ArticleSummaryDTO() {
+        this.praiseNumber = 0L;
+        this.commentNumber = 0L;
+        this.viewNumber = 0L;
+        this.bookmarkNumber = 0L;
+    }
 
     public Long getArticleId() {
         return articleId;
@@ -51,14 +57,6 @@ public class ArticleSummaryDTO {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<String> tags) {
-        this.tags = tags;
     }
 
     public Long getAuthorId() {
@@ -147,5 +145,13 @@ public class ArticleSummaryDTO {
 
     public void setCoverImageId(Long coverImageId) {
         this.coverImageId = coverImageId;
+    }
+
+    public Long getViewNumber() {
+        return viewNumber;
+    }
+
+    public void setViewNumber(Long viewNumber) {
+        this.viewNumber = viewNumber;
     }
 }
