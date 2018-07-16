@@ -37,7 +37,7 @@ public interface IArticleService {
 
     Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(Pageable pageable, boolean isAsc) throws ServiceException;
 
-    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId, boolean isAsc) throws ServiceException;
+    Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(Pageable pageable, Long authorId, int topTagsNumber, boolean isAsc) throws ServiceException;
 
     Page<ArticleSummaryDTO> listArticleSummariesInAnthologyOrderByCreateDate(Pageable pageable, Long anthologyId, boolean isAsc) throws ServiceException;
 

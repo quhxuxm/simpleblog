@@ -426,8 +426,27 @@ class ArticleService implements IArticleService {
 
     @Override
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByAuthorInterests(
-            Pageable pageable, Long authorId, boolean isAsc) {
-        return null;
+            Pageable pageable, Long authorId, int topTagsNumber, boolean isAsc) throws ServiceException {
+        try {
+            Author author = this.authorRepository.getOne(authorId);
+            Set<AuthorTag> authorTags = this.authorTagRepository.findAllByPkAuthor(author);
+            List<AuthorTag> orderedAuthorTags = new ArrayList<>(authorTags);
+            orderedAuthorTags.sort((o1, o2) -> (o1.getWeight().compareTo(o2.getWeight())) * (-1));
+            List<AuthorTag> topNumberOfAuthorTags = null;
+            if (orderedAuthorTags.size() > topTagsNumber) {
+                topNumberOfAuthorTags = orderedAuthorTags.subList(0, topTagsNumber - 1);
+            } else {
+                topNumberOfAuthorTags = orderedAuthorTags.subList(0, orderedAuthorTags.size() - 1);
+            }
+            List<Tag> authorInterestTagsOrderedByWeight = new ArrayList<>();
+            topNumberOfAuthorTags.forEach(authorTag -> {
+                authorInterestTagsOrderedByWeight.add(authorTag.getPk().getTag());
+            });
+            Set<ArticleTag> articleTags = this.articleTagRepository.findAllByPkTagIn(authorInterestTagsOrderedByWeight);
+            return null;
+        } catch (PersistenceException e) {
+            throw new ServiceException("Can not list articles by author interests.", e);
+        }
     }
 
     @Override
