@@ -325,11 +325,27 @@ public class TestRepository {
     }
 
     @Test
-    public void testListArticleSummariesOrderByBookmarkNumber() throws ServiceException {
+    public void testListArticleSummariesOrderByBookmarkNumber()
+            throws ServiceException {
         Pageable pageable = Pageable.unpaged();
-        Page<ArticleSummaryDTO> page = this.articleService.listArticleSummariesOrderByBookmarkNumber(pageable, false);
+        Page<ArticleSummaryDTO> page = this.articleService
+                .listArticleSummariesOrderByBookmarkNumber(pageable, false);
         page.forEach(dto -> {
-            System.out.println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
+            System.out
+                    .println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
+        });
+    }
+
+    @Test
+    public void testListArticleSummariesOrderByAuthorInterests()
+            throws ServiceException {
+        Pageable pageable = Pageable.unpaged();
+        Page<ArticleSummaryDTO> page = this.articleService
+                .listArticleSummariesOrderByAuthorInterests(pageable, 30L, 10,
+                        false);
+        page.forEach(dto -> {
+            System.out
+                    .println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
         });
     }
 }

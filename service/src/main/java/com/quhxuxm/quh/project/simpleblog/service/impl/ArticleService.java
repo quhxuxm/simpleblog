@@ -459,8 +459,12 @@ class ArticleService implements IArticleService {
                 topNumberOfAuthorTags = orderedAuthorTags
                         .subList(0, topTagsNumber - 1);
             } else {
-                topNumberOfAuthorTags = orderedAuthorTags
-                        .subList(0, orderedAuthorTags.size() - 1);
+                if (orderedAuthorTags.size() == 0) {
+                    topNumberOfAuthorTags = new ArrayList<>();
+                } else {
+                    topNumberOfAuthorTags = orderedAuthorTags
+                            .subList(0, orderedAuthorTags.size() - 1);
+                }
             }
             List<Tag> authorInterestTagsOrderedByWeight = new ArrayList<>();
             topNumberOfAuthorTags.forEach(
