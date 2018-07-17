@@ -539,7 +539,7 @@ class ArticleService implements IArticleService {
                         .findAllByOrderByCreateDateAsc(pageable);
             } else {
                 domainObjPage = this.articleRepository
-                        .findAllByOrderByCreateDateDesc(pageable);
+                        .findAllByOrderByCreateDateAsc(pageable);
             }
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
