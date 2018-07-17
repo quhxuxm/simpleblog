@@ -24,6 +24,6 @@ public interface IAnthologyService {
     Optional<AnthologyDetailDTO> viewAnthology(
             AnthologyViewDTO anthologyViewDTO) throws ServiceException;
 
-    public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author,
-                                                                Anthology anthology) throws ServiceException;
+    void increaseAuthorTagWeightAccordingToAnthologyTags(Author author,
+            Anthology anthology) throws ServiceException;
 }
