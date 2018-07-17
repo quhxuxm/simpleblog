@@ -348,4 +348,16 @@ public class TestRepository {
                     .println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
         });
     }
+
+    @Test
+    public void testListArticleSummariesOrderByCreateDate()
+            throws ServiceException {
+        Pageable pageable = Pageable.unpaged();
+        Page<ArticleSummaryDTO> page = this.articleService
+                .listArticleSummariesOrderByCreateDate(pageable, false);
+        page.forEach(dto -> {
+            System.out
+                    .println(dto.getTitle() + " ,  " + dto.getBookmarkNumber());
+        });
+    }
 }

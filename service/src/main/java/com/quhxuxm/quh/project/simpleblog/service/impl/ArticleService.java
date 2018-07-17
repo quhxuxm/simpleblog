@@ -528,4 +528,23 @@ class ArticleService implements IArticleService {
                     e);
         }
     }
+
+    @Override
+    public Page<ArticleSummaryDTO> listArticleSummariesOrderByCreateDate(
+            Pageable pageable, boolean isAsc) throws ServiceException {
+        try {
+            Page<Article> domainObjPage;
+            if (isAsc) {
+                domainObjPage = this.articleRepository
+                        .findAllByOrderByCreateDateAsc(pageable);
+            } else {
+                domainObjPage = this.articleRepository
+                        .findAllByOrderByCreateDateDesc(pageable);
+            }
+            return domainObjPage.map(this::convertPojoToDto);
+        } catch (PersistenceException e) {
+            throw new ServiceException(
+                    "Can not list articles order by view number.", e);
+        }
+    }
 }
