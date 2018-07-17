@@ -107,9 +107,8 @@ class ArticleService implements IArticleService {
             });
             Set<AnthologyTag> anthologyTags = this.anthologyTagRepository
                     .findAllByPkAnthology(anthology);
-            anthologyTags.forEach(anthologyTag -> {
-                articleTags.put(anthologyTag.getPk().getTag().getText(), false);
-            });
+            anthologyTags.forEach(anthologyTag -> articleTags
+                    .put(anthologyTag.getPk().getTag().getText(), false));
             articleTags.forEach((key, value) -> {
                 Tag tag = tagRepository.findByText(key);
                 if (tag == null) {
@@ -308,21 +307,20 @@ class ArticleService implements IArticleService {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
-            Set<Tag> tagsFromArticle = articleTags.stream().map(tag -> {
-                return tag.getPk().getTag();
-            }).collect(Collectors.toSet());
+            Set<Tag> tagsFromArticle = articleTags.stream()
+                    .map(tag -> tag.getPk().getTag())
+                    .collect(Collectors.toSet());
             Set<AuthorTag> authorTags = this.authorTagRepository
                     .findAllByPkAuthor(author);
-            Set<Tag> tagsFromAuthor = authorTags.stream().map(tag -> {
-                return tag.getPk().getTag();
-            }).collect(Collectors.toSet());
+            Set<Tag> tagsFromAuthor = authorTags.stream()
+                    .map(tag -> tag.getPk().getTag())
+                    .collect(Collectors.toSet());
             tagsFromAuthor.addAll(tagsFromArticle);
             AuthorAssignTagsDTO authorAssignTagsDTO = new AuthorAssignTagsDTO();
             authorAssignTagsDTO.setAuthorId(author.getId());
             authorAssignTagsDTO.setSelect(false);
-            tagsFromAuthor.forEach(tag -> {
-                authorAssignTagsDTO.getTags().add(tag.getText());
-            });
+            tagsFromAuthor.forEach(
+                    tag -> authorAssignTagsDTO.getTags().add(tag.getText()));
             this.authorService.assignTagsToAuthor(authorAssignTagsDTO);
         } catch (PersistenceException e) {
             logger.error(
@@ -366,7 +364,7 @@ class ArticleService implements IArticleService {
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByBookmarkNumber(
             Pageable pageable, boolean isAsc) throws ServiceException {
         try {
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByOrderByAdditionalInfoBookmarkNumberAsc(
@@ -387,7 +385,7 @@ class ArticleService implements IArticleService {
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByPraiseNumber(
             Pageable pageable, boolean isAsc) throws ServiceException {
         try {
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByOrderByAdditionalInfoPraiseNumberAsc(
@@ -408,7 +406,7 @@ class ArticleService implements IArticleService {
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByViewNumber(
             Pageable pageable, boolean isAsc) throws ServiceException {
         try {
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByOrderByAdditionalInfoViewNumberAsc(pageable);
@@ -427,7 +425,7 @@ class ArticleService implements IArticleService {
     public Page<ArticleSummaryDTO> listArticleSummariesOrderByCommentNumber(
             Pageable pageable, boolean isAsc) throws ServiceException {
         try {
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByOrderByAdditionalInfoCommentNumberAsc(
@@ -456,7 +454,7 @@ class ArticleService implements IArticleService {
             orderedAuthorTags
                     .sort((o1, o2) -> (o1.getWeight().compareTo(o2.getWeight()))
                             * (-1));
-            List<AuthorTag> topNumberOfAuthorTags = null;
+            List<AuthorTag> topNumberOfAuthorTags;
             if (orderedAuthorTags.size() > topTagsNumber) {
                 topNumberOfAuthorTags = orderedAuthorTags
                         .subList(0, topTagsNumber - 1);
@@ -465,10 +463,9 @@ class ArticleService implements IArticleService {
                         .subList(0, orderedAuthorTags.size() - 1);
             }
             List<Tag> authorInterestTagsOrderedByWeight = new ArrayList<>();
-            topNumberOfAuthorTags.forEach(authorTag -> {
-                authorInterestTagsOrderedByWeight
-                        .add(authorTag.getPk().getTag());
-            });
+            topNumberOfAuthorTags.forEach(
+                    authorTag -> authorInterestTagsOrderedByWeight
+                            .add(authorTag.getPk().getTag()));
             Page<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkTagIn(pageable,
                             authorInterestTagsOrderedByWeight);
@@ -486,7 +483,7 @@ class ArticleService implements IArticleService {
             throws ServiceException {
         try {
             Anthology anthology = this.anthologyRepository.getOne(anthologyId);
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByAnthologyEqualsOrderByCreateDateAsc(pageable,
@@ -510,7 +507,7 @@ class ArticleService implements IArticleService {
             throws ServiceException {
         try {
             Author author = this.authorRepository.getOne(authorId);
-            Page<Article> domainObjPage = null;
+            Page<Article> domainObjPage;
             if (isAsc) {
                 domainObjPage = this.articleRepository
                         .findAllByAnthologyAuthorEqualsOrderByCreateDateAsc(
