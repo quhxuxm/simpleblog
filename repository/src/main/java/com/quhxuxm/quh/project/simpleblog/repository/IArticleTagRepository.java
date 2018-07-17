@@ -3,6 +3,8 @@ package com.quhxuxm.quh.project.simpleblog.repository;
 import com.quhxuxm.quh.project.simpleblog.domain.Article;
 import com.quhxuxm.quh.project.simpleblog.domain.ArticleTag;
 import com.quhxuxm.quh.project.simpleblog.domain.Tag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
@@ -16,5 +18,5 @@ public interface IArticleTagRepository
 
     Set<ArticleTag> findAllByPkTag(Tag tag);
 
-    Set<ArticleTag> findAllByPkTagIn(Collection<Tag> tags);
+    Page<ArticleTag> findAllByPkTagIn(Pageable pageable, Collection<Tag> tags);
 }

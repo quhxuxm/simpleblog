@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "author_tag")
+@Cacheable
 public class AuthorTag implements Serializable {
     private static final long serialVersionUID = -4652674514830940378L;
 
