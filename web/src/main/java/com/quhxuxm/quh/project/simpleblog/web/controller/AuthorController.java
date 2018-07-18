@@ -59,4 +59,11 @@ public class AuthorController {
             throw new WebApiException();
         }
     }
+
+    @GetMapping(value = "/detail",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public WebApiResult detail(@RequestParam(name = "authorid") Long authorId) {
+        return null;
+    }
 }

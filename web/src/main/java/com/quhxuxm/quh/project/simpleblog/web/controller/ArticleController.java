@@ -3,7 +3,9 @@ package com.quhxuxm.quh.project.simpleblog.web.controller;
 import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
+import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleSummaryDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleViewDTO;
 import com.quhxuxm.quh.project.simpleblog.web.exception.WebApiException;
 import com.quhxuxm.quh.project.simpleblog.web.result.WebApiResult;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/article")
@@ -35,7 +39,7 @@ public class ArticleController {
     @GetMapping(value = "/list",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public WebApiResult list(
+    public WebApiResult<Page<ArticleSummaryDTO>> list(
             @RequestParam(required = false, name = "cindex")
                     Integer categoryIndex,
             @RequestParam(
@@ -90,9 +94,28 @@ public class ArticleController {
                     page = this.articleService
                             .listArticleSummariesOrderByCreateDate(pageable, isAsc);
             }
-            WebApiResult result = new WebApiResult();
+            WebApiResult<Page<ArticleSummaryDTO>> result = new WebApiResult<>();
             result.setPayload(page);
             return result;
+        } catch (ServiceException e) {
+            throw new WebApiException();
+        }
+    }
+
+    @GetMapping(value = "/detail",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public WebApiResult<ArticleDetailDTO> detail(
+            @RequestParam(name = "articleid") Long articleId) {
+        try {
+            ArticleViewDTO articleViewDTO = new ArticleViewDTO();
+            articleViewDTO.setArticleId(articleId);
+            Optional<ArticleDetailDTO> articleDetailDTO = this.articleService.viewArticle(articleViewDTO);
+            if (articleDetailDTO.isPresent()) {
+                WebApiResult<ArticleDetailDTO> result = new WebApiResult<>();
+                result.setPayload(articleDetailDTO.get());
+                return result;
+            }
+            throw new WebApiException();
         } catch (ServiceException e) {
             throw new WebApiException();
         }

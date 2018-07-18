@@ -1,23 +1,23 @@
 package com.quhxuxm.quh.project.simpleblog.web.result;
 
-public class WebApiResult {
+public class WebApiResult<PayloadType> {
     public enum Status {
         SUCCESS,
         SYSTEM_ERROR
     }
 
     private Status status;
-    private Object payload;
+    private PayloadType payload;
 
     public WebApiResult() {
         this.status = Status.SUCCESS;
     }
 
-    public Object getPayload() {
+    public PayloadType getPayload() {
         return payload;
     }
 
-    public void setPayload(Object payload) {
+    public void setPayload(PayloadType payload) {
         this.payload = payload;
     }
 

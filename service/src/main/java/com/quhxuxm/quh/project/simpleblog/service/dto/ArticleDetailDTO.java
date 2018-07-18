@@ -2,6 +2,7 @@ package com.quhxuxm.quh.project.simpleblog.service.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ArticleDetailDTO implements Serializable {
@@ -22,6 +23,10 @@ public class ArticleDetailDTO implements Serializable {
     private Long bookmarkNumber;
     private Long commentNumber;
     private Long viewNumber;
+
+    public ArticleDetailDTO() {
+        this.tags = new HashSet<>();
+    }
 
     public Long getArticleId() {
         return articleId;

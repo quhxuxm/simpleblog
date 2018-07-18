@@ -37,18 +37,18 @@ class ArticleService implements IArticleService {
     private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
-            IArticleTagRepository articleTagRepository,
-            IAnthologyParticipantRepository anthologyParticipantRepository,
-            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-            IAuthorRepository authorRepository,
-            IArticleRepository articleRepository,
-            IAnthologyRepository anthologyRepository,
-            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-            IAuthorTagRepository authorTagRepository,
-            IAuthorService authorService,
-            IArticleCommentRepository articleCommentRepository,
-            IAnthologyTagRepository anthologyTagRepository,
-            IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
+                   IArticleTagRepository articleTagRepository,
+                   IAnthologyParticipantRepository anthologyParticipantRepository,
+                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+                   IAuthorRepository authorRepository,
+                   IArticleRepository articleRepository,
+                   IAnthologyRepository anthologyRepository,
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+                   IAuthorTagRepository authorTagRepository,
+                   IAuthorService authorService,
+                   IArticleCommentRepository articleCommentRepository,
+                   IAnthologyTagRepository anthologyTagRepository,
+                   IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -280,6 +280,8 @@ class ArticleService implements IArticleService {
                     article.getAdditionalInfo().getBookmarkNumber());
             result.setCommentNumber(
                     article.getAdditionalInfo().getCommentNumber());
+            result.setUpdateDate(article.getUpdateDate());
+            result.setCreateDate(article.getCreateDate());
             result.setPraiseNumber(
                     article.getAdditionalInfo().getPraiseNumber());
             article.getAdditionalInfo().setViewNumber(
@@ -293,6 +295,10 @@ class ArticleService implements IArticleService {
                 this.increaseAuthorTagWeightAccordingToArticleTags(author,
                         article);
             }
+            Set<ArticleTag> articleTags = this.articleTagRepository.findAllByPkArticle(article);
+            articleTags.forEach(articleTag -> {
+                result.getTags().add(articleTag.getPk().getTag().getText());
+            });
             return Optional.of(result);
         } catch (PersistenceException e) {
             throw new ServiceException(
@@ -303,7 +309,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-            Article article) throws ServiceException {
+                                                              Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
