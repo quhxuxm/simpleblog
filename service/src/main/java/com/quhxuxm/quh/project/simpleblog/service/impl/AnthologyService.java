@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,10 +34,15 @@ class AnthologyService implements IAnthologyService {
     private IAuthorTagRepository authorTagRepository;
 
     AnthologyService(IAnthologyRepository anthologyRepository,
-                     IAnthologyTagRepository anthologyTagRepository,
-                     IAuthorRepository authorRepository,
-                     IResourceRepository resourceRepository,
-                     ITagRepository tagRepository, IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository, IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository, IAnthologyCommentRepository anthologyCommentRepository, IAuthorService authorService, IAuthorTagRepository authorTagRepository) {
+            IAnthologyTagRepository anthologyTagRepository,
+            IAuthorRepository authorRepository,
+            IResourceRepository resourceRepository,
+            ITagRepository tagRepository,
+            IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository,
+            IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository,
+            IAnthologyCommentRepository anthologyCommentRepository,
+            IAuthorService authorService,
+            IAuthorTagRepository authorTagRepository) {
         this.anthologyRepository = anthologyRepository;
         this.anthologyTagRepository = anthologyTagRepository;
         this.authorRepository = authorRepository;
@@ -50,7 +57,7 @@ class AnthologyService implements IAnthologyService {
 
     @Transactional
     @Override
-    public OptionalLong saveAnthology(CreateAnthologyDTO createAnthologyDTO)
+    public Long saveAnthology(CreateAnthologyDTO createAnthologyDTO)
             throws ServiceException {
         try {
             Author author = this.authorRepository
@@ -87,7 +94,7 @@ class AnthologyService implements IAnthologyService {
                 anthologyTag.setPk(anthologyTagPk);
                 this.anthologyTagRepository.save(anthologyTag);
             });
-            return OptionalLong.of(anthology.getId());
+            return anthology.getId();
         } catch (PersistenceException e) {
             logger.error("Fail to save anthology because of exception.", e);
             throw new ServiceException(
@@ -164,8 +171,10 @@ class AnthologyService implements IAnthologyService {
             AuthorAnthologyBookmark authorAnthologyBookmark = new AuthorAnthologyBookmark();
             authorAnthologyBookmark.setMarkDate(new Date());
             authorAnthologyBookmark.setPk(authorAnthologyBookmarkPk);
-            this.authorAnthologyBookmarkRepository.save(authorAnthologyBookmark);
-            this.increaseAuthorTagWeightAccordingToAnthologyTags(author, anthology);
+            this.authorAnthologyBookmarkRepository
+                    .save(authorAnthologyBookmark);
+            this.increaseAuthorTagWeightAccordingToAnthologyTags(author,
+                    anthology);
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark anthology because of exception.", e);
             throw new ServiceException(
@@ -195,7 +204,8 @@ class AnthologyService implements IAnthologyService {
             authorAnthologyPraise.setPraiseDate(new Date());
             authorAnthologyPraise.setPk(authorAnthologyPraisePk);
             this.authorAnthologyPraiseRepository.save(authorAnthologyPraise);
-            this.increaseAuthorTagWeightAccordingToAnthologyTags(author, anthology);
+            this.increaseAuthorTagWeightAccordingToAnthologyTags(author,
+                    anthology);
         } catch (PersistenceException e) {
             logger.error("Fail to praise anthology because of exception.", e);
             throw new ServiceException(
@@ -205,8 +215,8 @@ class AnthologyService implements IAnthologyService {
 
     @Transactional
     @Override
-    public Optional<AnthologyDetailDTO> viewAnthology(
-            AnthologyViewDTO anthologyViewDTO) throws ServiceException {
+    public AnthologyDetailDTO viewAnthology(AnthologyViewDTO anthologyViewDTO)
+            throws ServiceException {
         try {
             Anthology anthology = this.anthologyRepository
                     .getOne(anthologyViewDTO.getAnthologyId());
@@ -215,24 +225,21 @@ class AnthologyService implements IAnthologyService {
             result.setSummary(anthology.getSummary());
             if (anthology.getAuthor().getIconImage() != null) {
                 result.setAuthorIconImageId(
-                        anthology.getAuthor().getIconImage()
-                                .getId());
+                        anthology.getAuthor().getIconImage().getId());
             }
             if (anthology.getCoverImage() != null) {
-                result.setCoverImageId(
-                        anthology.getCoverImage().getId());
+                result.setCoverImageId(anthology.getCoverImage().getId());
             }
             result.setTitle(anthology.getTitle());
-            result.setAuthorNickName(
-                    anthology.getAuthor().getNickName());
+            result.setAuthorNickName(anthology.getAuthor().getNickName());
             result.setAuthorId(anthology.getAuthor().getId());
             result.setBookmarkNumber(this.authorAnthologyBookmarkRepository
                     .countByPkAnthology(anthology));
-            result.setCommentNumber(
-                    this.anthologyCommentRepository.countByAnthology(anthology));
+            result.setCommentNumber(this.anthologyCommentRepository
+                    .countByAnthology(anthology));
             result.setPraiseNumber(this.authorAnthologyPraiseRepository
                     .countByPkAnthology(anthology));
-            return Optional.of(result);
+            return result;
         } catch (PersistenceException e) {
             throw new ServiceException(
                     "Can not view article because of exception.");
@@ -241,7 +248,8 @@ class AnthologyService implements IAnthologyService {
 
     @Transactional
     @Override
-    public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author, Anthology anthology) throws ServiceException {
+    public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author,
+            Anthology anthology) throws ServiceException {
         try {
             Set<AnthologyTag> anthologyTags = this.anthologyTagRepository
                     .findAllByPkAnthology(anthology);

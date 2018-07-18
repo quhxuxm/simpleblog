@@ -1,21 +1,19 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
-import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleSummaryDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleViewDTO;
-import com.quhxuxm.quh.project.simpleblog.web.exception.WebApiException;
-import com.quhxuxm.quh.project.simpleblog.web.result.WebApiResult;
+import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
+import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
+import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/article")
@@ -39,85 +37,84 @@ public class ArticleController {
     @GetMapping(value = "/list",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public WebApiResult<Page<ArticleSummaryDTO>> list(
-            @RequestParam(required = false, name = "cindex")
+    public ApiResponse<Page<ArticleSummaryDTO>> list(
+            @RequestParam(required = false, name = "category")
                     Integer categoryIndex,
-            @RequestParam(
-                    name = ICommonConstant.RequestParameterName.PAGE_INDEX_REQUEST_PARAM_NAME,
-                    required = false)
+            @RequestParam(name = "pageindex", required = false)
                     Integer pageIndex,
-            @RequestParam(
-                    name = ICommonConstant.RequestParameterName.PAGE_SIZE_REQUEST_PARAM_NAME,
-                    required = false)
+            @RequestParam(name = "pagesize", required = false)
                     Integer pageSize,
-            @RequestParam(
-                    name = ICommonConstant.RequestParameterName.PAGE_IS_ASC,
-                    required = false)
-                    boolean isAsc) {
-        try {
-            if (pageIndex == null) {
-                pageIndex = 0;
-            }
-            if (pageSize == null) {
-                pageSize = this.defaultArticleListPageSize;
-            }
-            ArticleListCategory category;
-            if (categoryIndex == null) {
-                category = ArticleListCategory.ORDER_BY_LAST_UPDATE;
-            } else {
-                if (categoryIndex >= ArticleListCategory.values().length || categoryIndex < 0) {
-                    throw new WebApiException();
-                }
-                category = ArticleListCategory.values()[categoryIndex];
-            }
-            Pageable pageable = PageRequest.of(pageIndex, pageSize);
-            Page<ArticleSummaryDTO> page;
-            switch (category) {
-                case ORDER_BY_LAST_UPDATE:
-                    page = this.articleService
-                            .listArticleSummariesOrderByCreateDate(pageable, isAsc);
-                    break;
-                case ORDER_BY_VIEW_NUMBER:
-                    page = this.articleService
-                            .listArticleSummariesOrderByViewNumber(pageable, isAsc);
-                    break;
-                case ORDER_BY_BOOKMARK_NUMBER:
-                    page = this.articleService.listArticleSummariesOrderByBookmarkNumber(pageable, isAsc);
-                    break;
-                case ORDER_BY_PRAISE_NUMBER:
-                    page = this.articleService.listArticleSummariesOrderByPraiseNumber(pageable, isAsc);
-                    break;
-                case ORDER_BY_COMMENT_NUMBER:
-                    page = this.articleService.listArticleSummariesOrderByCommentNumber(pageable, isAsc);
-                    break;
-                default:
-                    page = this.articleService
-                            .listArticleSummariesOrderByCreateDate(pageable, isAsc);
-            }
-            WebApiResult<Page<ArticleSummaryDTO>> result = new WebApiResult<>();
-            result.setPayload(page);
-            return result;
-        } catch (ServiceException e) {
-            throw new WebApiException();
+            @RequestParam(name = "asc", required = false)
+                    boolean isAsc) throws ServiceException {
+        if (pageIndex == null) {
+            pageIndex = 0;
         }
+        if (pageSize == null) {
+            pageSize = this.defaultArticleListPageSize;
+        }
+        ArticleListCategory category;
+        if (categoryIndex == null) {
+            category = ArticleListCategory.ORDER_BY_LAST_UPDATE;
+        } else {
+            if (categoryIndex >= ArticleListCategory.values().length
+                    || categoryIndex < 0) {
+                FailPayload failPayload = new FailPayload(
+                        FailPayload.Type.INPUT_ERROR_WRONG_ARTICLE_LIST_CATEGORY);
+                throw new ApiException(failPayload);
+            }
+            category = ArticleListCategory.values()[categoryIndex];
+        }
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        Page<ArticleSummaryDTO> page;
+        switch (category) {
+            case ORDER_BY_LAST_UPDATE:
+                page = this.articleService
+                        .listArticleSummariesOrderByCreateDate(pageable, isAsc);
+                break;
+            case ORDER_BY_VIEW_NUMBER:
+                page = this.articleService
+                        .listArticleSummariesOrderByViewNumber(pageable, isAsc);
+                break;
+            case ORDER_BY_BOOKMARK_NUMBER:
+                page = this.articleService
+                        .listArticleSummariesOrderByBookmarkNumber(pageable,
+                                isAsc);
+                break;
+            case ORDER_BY_PRAISE_NUMBER:
+                page = this.articleService
+                        .listArticleSummariesOrderByPraiseNumber(pageable,
+                                isAsc);
+                break;
+            case ORDER_BY_COMMENT_NUMBER:
+                page = this.articleService
+                        .listArticleSummariesOrderByCommentNumber(pageable,
+                                isAsc);
+                break;
+            default:
+                page = this.articleService
+                        .listArticleSummariesOrderByCreateDate(pageable, isAsc);
+        }
+        ApiResponse<Page<ArticleSummaryDTO>> result = new ApiResponse<>();
+        result.setPayload(page);
+        return result;
     }
 
-    @GetMapping(value = "/detail",
+    @GetMapping(value = "/detail/{id}",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public WebApiResult<ArticleDetailDTO> detail(
-            @RequestParam(name = "articleid") Long articleId) {
-        try {
-            ArticleViewDTO articleViewDTO = new ArticleViewDTO();
-            articleViewDTO.setArticleId(articleId);
-            Optional<ArticleDetailDTO> articleDetailDTO = this.articleService.viewArticle(articleViewDTO);
-            if (articleDetailDTO.isPresent()) {
-                WebApiResult<ArticleDetailDTO> result = new WebApiResult<>();
-                result.setPayload(articleDetailDTO.get());
-                return result;
-            }
-            throw new WebApiException();
-        } catch (ServiceException e) {
-            throw new WebApiException();
+    public ApiResponse<ArticleDetailDTO> detail(
+            @PathVariable(name = "id")
+                    Long id) throws ServiceException {
+        ArticleViewDTO articleViewDTO = new ArticleViewDTO();
+        articleViewDTO.setArticleId(id);
+        ArticleDetailDTO articleDetailDTO = this.articleService
+                .viewArticle(articleViewDTO);
+        if (articleDetailDTO == null) {
+            FailPayload articleDetailFailPayload = new FailPayload(
+                    FailPayload.Type.ARTICLE_NOT_EXIST_ERROR);
+            throw new ApiException(articleDetailFailPayload);
         }
+        ApiResponse<ArticleDetailDTO> result = new ApiResponse<>();
+        result.setPayload(articleDetailDTO);
+        return result;
     }
 }

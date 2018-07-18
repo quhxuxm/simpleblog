@@ -1,16 +1,21 @@
-package com.quhxuxm.quh.project.simpleblog.web.result;
+package com.quhxuxm.quh.project.simpleblog.web.response;
 
-public class WebApiResult<PayloadType> {
+import java.util.HashMap;
+import java.util.Map;
+
+public class ApiResponse<PayloadType> {
     public enum Status {
         SUCCESS,
-        SYSTEM_ERROR
+        FAIL
     }
 
     private Status status;
+    private Map<String, String> header;
     private PayloadType payload;
 
-    public WebApiResult() {
+    public ApiResponse() {
         this.status = Status.SUCCESS;
+        this.header = new HashMap<>();
     }
 
     public PayloadType getPayload() {
@@ -27,5 +32,13 @@ public class WebApiResult<PayloadType> {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Map<String, String> getHeader() {
+        return header;
+    }
+
+    public void setHeader(Map<String, String> header) {
+        this.header = header;
     }
 }

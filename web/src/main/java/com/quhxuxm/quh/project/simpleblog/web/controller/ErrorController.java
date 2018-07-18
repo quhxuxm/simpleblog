@@ -1,22 +1,36 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
-import com.quhxuxm.quh.project.simpleblog.web.exception.WebApiException;
-import com.quhxuxm.quh.project.simpleblog.web.result.WebApiResult;
+import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
+import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
+import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
+import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ErrorController {
-    @ExceptionHandler(value = {WebApiException.class})
+    @ExceptionHandler(value = { ApiException.class })
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    @RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public WebApiResult handleError(WebApiException e) {
-        WebApiResult result = new WebApiResult();
-        result.setStatus(WebApiResult.Status.SYSTEM_ERROR);
-        result.setPayload(e.getMessage());
+    public ApiResponse<FailPayload> handleApiError(ApiException e) {
+        ApiResponse<FailPayload> result = new ApiResponse<>();
+        result.setStatus(ApiResponse.Status.FAIL);
+        result.setPayload(e.getPayload());
+        return result;
+    }
+
+    @ExceptionHandler(value = { ServiceException.class })
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ApiResponse<FailPayload> handleServiceError(ServiceException e) {
+        FailPayload systemErrorPayload = new FailPayload(
+                FailPayload.Type.SYSTEM_ERROR_UNKNOWN);
+        systemErrorPayload.setMessage(e.getMessage());
+        ApiResponse<FailPayload> result = new ApiResponse<>();
+        result.setStatus(ApiResponse.Status.FAIL);
+        result.setPayload(systemErrorPayload);
         return result;
     }
 }

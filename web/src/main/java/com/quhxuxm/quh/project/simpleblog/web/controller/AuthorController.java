@@ -5,13 +5,12 @@ import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorLoginDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorRegisterDTO;
-import com.quhxuxm.quh.project.simpleblog.web.exception.WebApiException;
-import com.quhxuxm.quh.project.simpleblog.web.result.WebApiResult;
+import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
+import com.quhxuxm.quh.project.simpleblog.web.request.ApiRequest;
+import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
+import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-import java.util.OptionalLong;
 
 @RestController
 @RequestMapping("/author")
@@ -26,44 +25,36 @@ public class AuthorController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public WebApiResult register(@RequestBody AuthorRegisterDTO registerDTO) {
-        try {
-            OptionalLong authorIdOptional = this.authorService
-                    .register(registerDTO);
-            if (authorIdOptional.isPresent()) {
-                WebApiResult result = new WebApiResult();
-                result.setPayload(authorIdOptional.getAsLong());
-                return result;
-            }
-            throw new WebApiException();
-        } catch (ServiceException e) {
-            throw new WebApiException();
+    public ApiResponse<Long> register(
+            @RequestBody
+                    ApiRequest<AuthorRegisterDTO> request)
+            throws ServiceException {
+        Long authorId = this.authorService.register(request.getPayload());
+        if (authorId == null) {
+            FailPayload registerFailPayload = new FailPayload(
+                    FailPayload.Type.REGISTER_ERROR_BECAUSE_OF_CREATE_AUTHOR_FAIL);
+            throw new ApiException(registerFailPayload);
         }
+        ApiResponse<Long> result = new ApiResponse<>();
+        result.setPayload(authorId);
+        return result;
     }
 
     @PostMapping(value = "/login",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    public WebApiResult login(AuthorLoginDTO loginDTO) {
-        try {
-            Optional<AuthorDetailDTO> authorDetailDTOOptional = this.authorService
-                    .login(loginDTO);
-            if (authorDetailDTOOptional.isPresent()) {
-                WebApiResult result = new WebApiResult();
-                result.setPayload(authorDetailDTOOptional.get());
-                return result;
-            }
-            throw new WebApiException();
-        } catch (ServiceException e) {
-            throw new WebApiException();
+    public ApiResponse<AuthorDetailDTO> login(
+            ApiRequest<AuthorLoginDTO> request) throws ServiceException {
+        AuthorDetailDTO authorDetailDTO = this.authorService
+                .login(request.getPayload());
+        if (authorDetailDTO == null) {
+            FailPayload loginFailPayload = new FailPayload(
+                    FailPayload.Type.LOGIN_ERROR);
+            throw new ApiException(loginFailPayload);
         }
-    }
-
-    @GetMapping(value = "/detail",
-            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    @ResponseBody
-    public WebApiResult detail(@RequestParam(name = "authorid") Long authorId) {
-        return null;
+        ApiResponse<AuthorDetailDTO> result = new ApiResponse<>();
+        result.setPayload(authorDetailDTO);
+        return result;
     }
 }

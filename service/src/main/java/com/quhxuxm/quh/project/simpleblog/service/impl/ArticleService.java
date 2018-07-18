@@ -37,18 +37,18 @@ class ArticleService implements IArticleService {
     private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
-                   IArticleTagRepository articleTagRepository,
-                   IAnthologyParticipantRepository anthologyParticipantRepository,
-                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-                   IAuthorRepository authorRepository,
-                   IArticleRepository articleRepository,
-                   IAnthologyRepository anthologyRepository,
-                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-                   IAuthorTagRepository authorTagRepository,
-                   IAuthorService authorService,
-                   IArticleCommentRepository articleCommentRepository,
-                   IAnthologyTagRepository anthologyTagRepository,
-                   IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
+            IArticleTagRepository articleTagRepository,
+            IAnthologyParticipantRepository anthologyParticipantRepository,
+            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+            IAuthorRepository authorRepository,
+            IArticleRepository articleRepository,
+            IAnthologyRepository anthologyRepository,
+            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+            IAuthorTagRepository authorTagRepository,
+            IAuthorService authorService,
+            IArticleCommentRepository articleCommentRepository,
+            IAnthologyTagRepository anthologyTagRepository,
+            IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -66,7 +66,7 @@ class ArticleService implements IArticleService {
 
     @Transactional
     @Override
-    public OptionalLong saveArticle(CreateArticleDTO createArticleDTO)
+    public Long saveArticle(CreateArticleDTO createArticleDTO)
             throws ServiceException {
         try {
             Anthology anthology = this.anthologyRepository
@@ -126,7 +126,7 @@ class ArticleService implements IArticleService {
                         ICommonConstant.DefaultValue.ARTICLE_SELECTED_TAG_INIT_WEIGHT);
                 this.articleTagRepository.save(articleTag);
             });
-            return OptionalLong.of(article.getId());
+            return article.getId();
         } catch (PersistenceException e) {
             logger.error("Fail to save article because of exception.", e);
             throw new ServiceException(
@@ -252,7 +252,7 @@ class ArticleService implements IArticleService {
 
     @Transactional
     @Override
-    public Optional<ArticleDetailDTO> viewArticle(ArticleViewDTO articleViewDTO)
+    public ArticleDetailDTO viewArticle(ArticleViewDTO articleViewDTO)
             throws ServiceException {
         try {
             Article article = this.articleRepository
@@ -295,11 +295,12 @@ class ArticleService implements IArticleService {
                 this.increaseAuthorTagWeightAccordingToArticleTags(author,
                         article);
             }
-            Set<ArticleTag> articleTags = this.articleTagRepository.findAllByPkArticle(article);
+            Set<ArticleTag> articleTags = this.articleTagRepository
+                    .findAllByPkArticle(article);
             articleTags.forEach(articleTag -> {
                 result.getTags().add(articleTag.getPk().getTag().getText());
             });
-            return Optional.of(result);
+            return result;
         } catch (PersistenceException e) {
             throw new ServiceException(
                     "Can not view article because of exception.");
@@ -309,7 +310,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-                                                              Article article) throws ServiceException {
+            Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);

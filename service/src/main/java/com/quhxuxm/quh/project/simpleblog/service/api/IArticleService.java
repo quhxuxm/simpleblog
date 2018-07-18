@@ -7,12 +7,8 @@ import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
-import java.util.OptionalLong;
-
 public interface IArticleService {
-    OptionalLong saveArticle(CreateArticleDTO createArticleDTO)
-            throws ServiceException;
+    Long saveArticle(CreateArticleDTO createArticleDTO) throws ServiceException;
 
     void assignTagsToArticle(ArticleAssignTagsDTO articleAssignTagsDTO)
             throws ServiceException;
@@ -23,7 +19,7 @@ public interface IArticleService {
     void praiseArticle(ArticlePraiseDTO articlePraiseDTO)
             throws ServiceException;
 
-    Optional<ArticleDetailDTO> viewArticle(ArticleViewDTO articleViewDTO)
+    ArticleDetailDTO viewArticle(ArticleViewDTO articleViewDTO)
             throws ServiceException;
 
     void increaseAuthorTagWeightAccordingToArticleTags(Author author,

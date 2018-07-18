@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 class AuthorService implements IAuthorService {
@@ -52,7 +54,7 @@ class AuthorService implements IAuthorService {
 
     @Transactional(rollbackFor = ServiceException.class)
     @Override
-    public OptionalLong register(AuthorRegisterDTO authorRegisterDTO)
+    public Long register(AuthorRegisterDTO authorRegisterDTO)
             throws ServiceException {
         Authentication authenticationInDb = null;
         try {
@@ -64,7 +66,7 @@ class AuthorService implements IAuthorService {
                                 + "token = {}, type = {}.",
                         authorRegisterDTO.getToken(),
                         authorRegisterDTO.getType().name());
-                return OptionalLong.empty();
+                return null;
             }
             Authentication authentication = new Authentication();
             authentication.setToken(authorRegisterDTO.getToken());
@@ -78,7 +80,7 @@ class AuthorService implements IAuthorService {
             if (authorRole == null) {
                 logger.error(
                         "Can not register because of author role not exist.");
-                return OptionalLong.empty();
+                return null;
             }
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(authorRole);
@@ -94,7 +96,7 @@ class AuthorService implements IAuthorService {
             authorDefaultAnthologyPK.setAuthor(author);
             authorDefaultAnthology.setPk(authorDefaultAnthologyPK);
             this.authorDefaultAnthologyRepository.save(authorDefaultAnthology);
-            return OptionalLong.of(author.getId());
+            return author.getId();
         } catch (PersistenceException e) {
             logger.error(
                     "Fail to register because of exception when save author "
@@ -106,7 +108,7 @@ class AuthorService implements IAuthorService {
     }
 
     @Override
-    public Optional<AuthorDetailDTO> login(AuthorLoginDTO authorLoginDTO)
+    public AuthorDetailDTO login(AuthorLoginDTO authorLoginDTO)
             throws ServiceException {
         try {
             Authentication authentication = this.authenticationRepository
@@ -116,7 +118,7 @@ class AuthorService implements IAuthorService {
             if (authentication == null) {
                 logger.error(
                         "Can not login because of authentication not exit.");
-                return Optional.empty();
+                return null;
             }
             AuthorDetailDTO result = new AuthorDetailDTO();
             result.setAuthorId(authentication.getAuthor().getId());
@@ -154,7 +156,7 @@ class AuthorService implements IAuthorService {
                     authorDefaultAnthology.getPk().getAnthology().getId());
             authentication.setLastLoginDate(new Date());
             this.authenticationRepository.save(authentication);
-            return Optional.of(result);
+            return result;
         } catch (PersistenceException e) {
             logger.error("Can not login because of the exception.", e);
             throw new ServiceException(
