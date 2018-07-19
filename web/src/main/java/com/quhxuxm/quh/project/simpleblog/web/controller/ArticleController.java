@@ -1,10 +1,12 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
+import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleSummaryDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleViewDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
 import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
 import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.WebSession;
 
 @RestController
 @RequestMapping("/article")
@@ -45,7 +48,7 @@ public class ArticleController {
             @RequestParam(name = "pagesize", required = false)
                     Integer pageSize,
             @RequestParam(name = "asc", required = false)
-                    boolean isAsc) throws ServiceException {
+                    boolean isAsc, WebSession session) throws ServiceException {
         if (pageIndex == null) {
             pageIndex = 0;
         }
@@ -103,9 +106,13 @@ public class ArticleController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ApiResponse<ArticleDetailDTO> detail(
             @PathVariable(name = "id")
-                    Long id) throws ServiceException {
+                    Long id, WebSession session) throws ServiceException {
+        AuthorDetailDTO authorDetailDTO=session.getAttribute(ICommonConstant.SessionAttrName.AUTHOR_DETAIL);
         ArticleViewDTO articleViewDTO = new ArticleViewDTO();
         articleViewDTO.setArticleId(id);
+        if(authorDetailDTO!=null) {
+            articleViewDTO.setAuthorId(authorDetailDTO.getAuthorId());
+        }
         ArticleDetailDTO articleDetailDTO = this.articleService
                 .viewArticle(articleViewDTO);
         if (articleDetailDTO == null) {

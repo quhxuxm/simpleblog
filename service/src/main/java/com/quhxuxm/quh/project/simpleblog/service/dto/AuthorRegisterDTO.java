@@ -1,14 +1,11 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
-
 import java.io.Serializable;
 
 public class AuthorRegisterDTO implements Serializable {
     private String token;
     private String password;
     private String nickName;
-    private Authentication.Type type;
 
     public String getToken() {
         return token;
@@ -32,13 +29,5 @@ public class AuthorRegisterDTO implements Serializable {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-
-    public Authentication.Type getType() {
-        return type;
-    }
-
-    public void setType(Authentication.Type type) {
-        this.type = type;
     }
 }

@@ -2,8 +2,8 @@ package com.quhxuxm.quh.project.simpleblog.common;
 
 public interface ICommonConstant {
     interface RoleName {
-        String AUTHOR = "AUTHOR";
-        String ADMIN = "ADMIN";
+        String AUTHOR = "ROLE_AUTHOR";
+        String ADMIN = "ROLE_ADMIN";
     }
 
     interface DefaultValue {
@@ -11,8 +11,7 @@ public interface ICommonConstant {
         long ARTICLE_SELECTED_TAG_INIT_WEIGHT = 10L;
         long ANTHOLOGY_SELECTED_TAG_INIT_WEIGHT = 10L;
     }
-
     interface SessionAttrName{
-        String AUTHENTICATED_AUTHOR_DETAIL_DTO="AUTHENTICATED_AUTHOR_DETAIL_DTO";
+        String AUTHOR_DETAIL="AUTHOR_DETAIL";
     }
 }

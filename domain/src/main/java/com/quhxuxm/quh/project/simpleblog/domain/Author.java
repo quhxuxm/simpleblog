@@ -2,6 +2,7 @@ package com.quhxuxm.quh.project.simpleblog.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -29,6 +30,16 @@ public class Author implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "additional_info_id", referencedColumnName = "id")
     private AuthorAdditionalInfo additionalInfo;
+    @Column(name = "token", nullable = false, updatable = false, unique = true)
+    private String token;
+    @Column(name = "password", nullable = false)
+    private String password;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "register_date", nullable = false, updatable = false)
+    private Date registerDate;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "last_login_date")
+    private Date lastLoginDate;
 
     public Author() {
         this.additionalInfo = new AuthorAdditionalInfo();
@@ -80,5 +91,37 @@ public class Author implements Serializable {
 
     public void setAdditionalInfo(AuthorAdditionalInfo additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
     }
 }

@@ -6,12 +6,14 @@ import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 public interface IAuthorService {
     Long register(AuthorRegisterDTO registerAuthorDTO) throws ServiceException;
 
-    AuthorDetailDTO login(AuthorLoginDTO authorLoginDTO)
-            throws ServiceException;
+    AuthorDetailDTO findForDetail(Long id) throws ServiceException;
 
     void assignTagsToAuthor(AuthorAssignTagsDTO authorAssignTagsDTO)
             throws ServiceException;
 
     void assignFollowerToAuthor(AuthorAssignFollowerDTO authorAssignFollowerDTO)
+            throws ServiceException;
+
+    AuthorAuthenticateDTO findForAuthenticate(String token)
             throws ServiceException;
 }

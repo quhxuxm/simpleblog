@@ -15,13 +15,13 @@ import javax.persistence.PersistenceException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 class AuthorService implements IAuthorService {
     private static final Logger logger = LoggerFactory
             .getLogger(AuthorService.class);
     private IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository;
-    private IAuthenticationRepository authenticationRepository;
     private IAuthorRepository authorRepository;
     private IRoleRepository roleRepository;
     private IAnthologyRepository anthologyRepository;
@@ -33,7 +33,6 @@ class AuthorService implements IAuthorService {
 
     AuthorService(
             IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
-            IAuthenticationRepository authenticationRepository,
             IAuthorRepository authorRepository, IRoleRepository roleRepository,
             IAnthologyRepository anthologyRepository,
             IAuthorTagRepository authorTagRepository,
@@ -41,7 +40,6 @@ class AuthorService implements IAuthorService {
             IAuthorFollowerRepository authorFollowerRepository,
             IArticleCommentRepository articleCommentRepository) {
         this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
-        this.authenticationRepository = authenticationRepository;
         this.authorRepository = authorRepository;
         this.roleRepository = roleRepository;
         this.anthologyRepository = anthologyRepository;
@@ -56,24 +54,16 @@ class AuthorService implements IAuthorService {
     @Override
     public Long register(AuthorRegisterDTO authorRegisterDTO)
             throws ServiceException {
-        Authentication authenticationInDb = null;
         try {
-            authenticationInDb = this.authenticationRepository
-                    .findByTokenAndType(authorRegisterDTO.getToken(),
-                            authorRegisterDTO.getType());
-            if (authenticationInDb != null) {
+            if (this.authorRepository
+                    .existsByToken(authorRegisterDTO.getToken())) {
                 logger.error("Can not register because of token exist already, "
-                                + "token = {}, type = {}.",
-                        authorRegisterDTO.getToken(),
-                        authorRegisterDTO.getType().name());
+                        + "token = {}.", authorRegisterDTO.getToken());
                 return null;
             }
-            Authentication authentication = new Authentication();
-            authentication.setToken(authorRegisterDTO.getToken());
-            authentication.setType(authorRegisterDTO.getType());
-            authentication.setPassword(authorRegisterDTO.getPassword());
             Author author = new Author();
-            authentication.setAuthor(author);
+            author.setToken(authorRegisterDTO.getToken());
+            author.setPassword(authorRegisterDTO.getPassword());
             author.setNickName(authorRegisterDTO.getNickName());
             Role authorRole = this.roleRepository
                     .findByName(ICommonConstant.RoleName.AUTHOR);
@@ -86,7 +76,6 @@ class AuthorService implements IAuthorService {
             roleSet.add(authorRole);
             author.setRoles(roleSet);
             this.authorRepository.save(author);
-            this.authenticationRepository.save(authentication);
             Anthology anthology = new Anthology();
             anthology.setAuthor(author);
             this.anthologyRepository.save(anthology);
@@ -108,44 +97,33 @@ class AuthorService implements IAuthorService {
     }
 
     @Override
-    public AuthorDetailDTO login(AuthorLoginDTO authorLoginDTO)
-            throws ServiceException {
+    public AuthorDetailDTO findForDetail(Long id) throws ServiceException {
         try {
-            Authentication authentication = this.authenticationRepository
-                    .findByTokenAndPasswordAndType(authorLoginDTO.getToken(),
-                            authorLoginDTO.getPassword(),
-                            authorLoginDTO.getType());
-            if (authentication == null) {
-                logger.error(
-                        "Can not login because of authentication not exit.");
-                return null;
-            }
+            Author author = this.authorRepository.getOne(id);
             AuthorDetailDTO result = new AuthorDetailDTO();
-            result.setAuthorId(authentication.getAuthor().getId());
-            result.setNickName(authentication.getAuthor().getNickName());
-            result.setLastLoginDate(authentication.getLastLoginDate());
-            result.setRegisterDate(authentication.getRegisterDate());
-            result.setAuthenticationToken(authentication.getToken());
-            result.setAuthenticationType(authentication.getType());
-            authentication.getAuthor().getRoles().forEach(role -> {
+            result.setAuthorId(author.getId());
+            result.setNickName(author.getNickName());
+            result.setLastLoginDate(author.getLastLoginDate());
+            result.setRegisterDate(author.getRegisterDate());
+            result.setToken(author.getToken());
+            author.getRoles().forEach(role -> {
                 result.getRoles().add(role.getName());
             });
             Set<AuthorTag> authorTags = this.authorTagRepository
-                    .findAllByPkAuthorAndIsSelectedIsTrue(
-                            authentication.getAuthor());
+                    .findAllByPkAuthorAndIsSelectedIsTrue(author);
             authorTags.forEach(authorTag -> {
                 result.getTags().add(authorTag.getPk().getTag().getText());
             });
-            result.setAnthologyNumber(this.anthologyRepository
-                    .countByAuthor(authentication.getAuthor()));
-            result.setArticleNumber(this.articleRepository
-                    .countByAnthologyAuthor(authentication.getAuthor()));
-            result.setCommentNumber(this.articleCommentRepository
-                    .countByAuthor(authentication.getAuthor()));
-            result.setFollowedByNumber(this.authorFollowerRepository
-                    .countByPkAuthor(authentication.getAuthor()));
+            result.setAnthologyNumber(
+                    this.anthologyRepository.countByAuthor(author));
+            result.setArticleNumber(
+                    this.articleRepository.countByAnthologyAuthor(author));
+            result.setCommentNumber(
+                    this.articleCommentRepository.countByAuthor(author));
+            result.setFollowedByNumber(
+                    this.authorFollowerRepository.countByPkAuthor(author));
             AuthorDefaultAnthology authorDefaultAnthology = this.authorDefaultAnthologyRepository
-                    .findByPkAuthor(authentication.getAuthor());
+                    .findByPkAuthor(author);
             if (authorDefaultAnthology == null) {
                 logger.error(
                         "Can not login because author do not have default anthology.");
@@ -154,8 +132,8 @@ class AuthorService implements IAuthorService {
             }
             result.setDefaultAnthologyId(
                     authorDefaultAnthology.getPk().getAnthology().getId());
-            authentication.setLastLoginDate(new Date());
-            this.authenticationRepository.save(authentication);
+            author.setLastLoginDate(new Date());
+            this.authorRepository.save(author);
             return result;
         } catch (PersistenceException e) {
             logger.error("Can not login because of the exception.", e);
@@ -242,6 +220,26 @@ class AuthorService implements IAuthorService {
                     e);
             throw new ServiceException(
                     "Can not assign tog to author because of exception.", e);
+        }
+    }
+
+    @Override
+    public AuthorAuthenticateDTO findForAuthenticate(String token)
+            throws ServiceException {
+        try {
+            Author author = this.authorRepository.findByToken(token);
+            if (author == null) {
+                return null;
+            }
+            AuthorAuthenticateDTO result = new AuthorAuthenticateDTO();
+            result.setId(author.getId());
+            result.setToken(author.getToken());
+            result.setPassword(author.getPassword());
+            result.setRoles(author.getRoles().stream().map(Role::getName)
+                    .collect(Collectors.toSet()));
+            return result;
+        } catch (PersistenceException e) {
+            throw new ServiceException(e);
         }
     }
 }

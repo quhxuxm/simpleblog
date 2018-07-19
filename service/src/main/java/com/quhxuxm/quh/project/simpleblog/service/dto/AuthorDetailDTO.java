@@ -1,7 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog.service.dto;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
@@ -10,8 +8,7 @@ import java.util.Set;
 public class AuthorDetailDTO implements Serializable {
     private Long authorId;
     private String nickName;
-    private String authenticationToken;
-    private Authentication.Type authenticationType;
+    private String token;
     private Date lastLoginDate;
     private Date registerDate;
     private Set<String> roles;
@@ -44,20 +41,12 @@ public class AuthorDetailDTO implements Serializable {
         this.nickName = nickName;
     }
 
-    public String getAuthenticationToken() {
-        return authenticationToken;
+    public String getToken() {
+        return token;
     }
 
-    public void setAuthenticationToken(String authenticationToken) {
-        this.authenticationToken = authenticationToken;
-    }
-
-    public Authentication.Type getAuthenticationType() {
-        return authenticationType;
-    }
-
-    public void setAuthenticationType(Authentication.Type authenticationType) {
-        this.authenticationType = authenticationType;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Date getLastLoginDate() {
