@@ -1,6 +1,5 @@
 package com.quhxuxm.quh.project.simpleblog;
 
-import com.quhxuxm.quh.project.simpleblog.domain.Authentication;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
@@ -41,7 +40,6 @@ public class TestRepository {
                 authorRegisterDTO.setToken("token" + i);
                 authorRegisterDTO.setPassword("password" + i);
                 authorRegisterDTO.setNickName("nickname" + i);
-                authorRegisterDTO.setType(Authentication.Type.USERNAME);
                 Long authorId = this.authorService.register(authorRegisterDTO);
                 if (authorId == null) {
                     continue;
@@ -68,7 +66,7 @@ public class TestRepository {
     public void testLogin() throws ServiceException {
         for (int i = 0; i < 100; i++) {
             AuthorDetailDTO authorDetail = this.authorService
-                    .login("token" + i);
+                    .loginByToken("token" + i);
             if (authorDetail == null) {
                 Assert.fail("Can not login author: token" + i
                         + " because of not exist");
@@ -80,7 +78,7 @@ public class TestRepository {
 
     @Test
     public void testAssignTag() throws ServiceException {
-        AuthorDetailDTO authorDetail = this.authorService.login("token10");
+        AuthorDetailDTO authorDetail = this.authorService.loginByToken("token10");
         Set<String> tags = new HashSet<>();
         tags.add("tag1");
         tags.add("tag5");
@@ -101,7 +99,7 @@ public class TestRepository {
 
     @Test
     public void testGetAuthorTags() throws ServiceException {
-        AuthorDetailDTO authorDetail1 = this.authorService.login("token27");
+        AuthorDetailDTO authorDetail1 = this.authorService.loginByToken("token27");
         if (authorDetail1 == null) {
             Assert.fail("Can not login author: token27 because of not exist");
             return;
@@ -119,7 +117,7 @@ public class TestRepository {
             Assert.fail("Can not assign tags to author because of exception.");
         }
         AuthorDetailDTO authorDetailFromDb = this.authorService
-                .login("token27");
+                .loginByToken("token27");
         if (authorDetailFromDb == null) {
             Assert.fail("Can not login author: token27 because of not exist");
             return;
@@ -134,7 +132,7 @@ public class TestRepository {
     @Test
     public void testSaveArticle() throws ServiceException {
         CreateArticleDTO createArticleDTO = new CreateArticleDTO();
-        AuthorDetailDTO authorDetail = this.authorService.login("token25");
+        AuthorDetailDTO authorDetail = this.authorService.loginByToken("token25");
         if (authorDetail == null) {
             Assert.fail("Can not login author: token25 because of not exist");
             return;
@@ -155,7 +153,7 @@ public class TestRepository {
     @Test
     public void testBookmarkArticle() throws ServiceException {
         CreateArticleDTO createArticleDTO = new CreateArticleDTO();
-        AuthorDetailDTO authorDetail = this.authorService.login("token27");
+        AuthorDetailDTO authorDetail = this.authorService.loginByToken("token27");
         if (authorDetail == null) {
             Assert.fail("Can not login author: token25 because of not exist");
             return;
@@ -193,7 +191,7 @@ public class TestRepository {
     @Test
     public void testPraiseArticle() throws ServiceException {
         CreateArticleDTO createArticleDTO = new CreateArticleDTO();
-        AuthorDetailDTO authorDetail = this.authorService.login("token30");
+        AuthorDetailDTO authorDetail = this.authorService.loginByToken("token30");
         if (authorDetail == null) {
             Assert.fail("Can not login author: token30 because of not exist");
             return;
@@ -231,7 +229,7 @@ public class TestRepository {
     @Test
     public void testViewArticle() throws ServiceException {
         CreateArticleDTO createArticleDTO = new CreateArticleDTO();
-        AuthorDetailDTO authorDetail = this.authorService.login("token31");
+        AuthorDetailDTO authorDetail = this.authorService.loginByToken("token31");
         if (authorDetail == null) {
             Assert.fail("Can not login author: token31 because of not exist");
             return;

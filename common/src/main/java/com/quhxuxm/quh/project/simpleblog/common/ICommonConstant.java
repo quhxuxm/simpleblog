@@ -12,6 +12,6 @@ public interface ICommonConstant {
         long ANTHOLOGY_SELECTED_TAG_INIT_WEIGHT = 10L;
     }
     interface SessionAttrName{
-        String AUTHOR_DETAIL="AUTHOR_DETAIL";
+        String AUTHENTICATED_AUTHOR_DETAIL ="AUTHENTICATED_AUTHOR_DETAIL";
     }
 }

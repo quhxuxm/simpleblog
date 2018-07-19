@@ -8,6 +8,7 @@ import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,7 @@ class AuthorService implements IAuthorService {
     private ITagRepository tagRepository;
     private IAuthorFollowerRepository authorFollowerRepository;
     private IArticleCommentRepository articleCommentRepository;
+    private PasswordEncoder passwordEncoder;
 
     AuthorService(
             IAuthorDefaultAnthologyRepository authorDefaultAnthologyRepository,
@@ -38,7 +40,7 @@ class AuthorService implements IAuthorService {
             IAuthorTagRepository authorTagRepository,
             IArticleRepository articleRepository, ITagRepository tagRepository,
             IAuthorFollowerRepository authorFollowerRepository,
-            IArticleCommentRepository articleCommentRepository) {
+            IArticleCommentRepository articleCommentRepository, PasswordEncoder passwordEncoder) {
         this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
         this.authorRepository = authorRepository;
         this.roleRepository = roleRepository;
@@ -48,6 +50,7 @@ class AuthorService implements IAuthorService {
         this.tagRepository = tagRepository;
         this.authorFollowerRepository = authorFollowerRepository;
         this.articleCommentRepository = articleCommentRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(rollbackFor = ServiceException.class)
@@ -63,7 +66,7 @@ class AuthorService implements IAuthorService {
             }
             Author author = new Author();
             author.setToken(authorRegisterDTO.getToken());
-            author.setPassword(authorRegisterDTO.getPassword());
+            author.setPassword(this.passwordEncoder.encode(authorRegisterDTO.getPassword()));
             author.setNickName(authorRegisterDTO.getNickName());
             Role authorRole = this.roleRepository
                     .findByName(ICommonConstant.RoleName.AUTHOR);
@@ -75,6 +78,7 @@ class AuthorService implements IAuthorService {
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(authorRole);
             author.setRoles(roleSet);
+            author.setRegisterDate(new Date());
             this.authorRepository.save(author);
             Anthology anthology = new Anthology();
             anthology.setAuthor(author);
@@ -97,41 +101,22 @@ class AuthorService implements IAuthorService {
     }
 
     @Override
-    public AuthorDetailDTO findForDetail(Long id) throws ServiceException {
+    public AuthorDetailDTO findDetailById(Long id) throws ServiceException {
         try {
             Author author = this.authorRepository.getOne(id);
-            AuthorDetailDTO result = new AuthorDetailDTO();
-            result.setAuthorId(author.getId());
-            result.setNickName(author.getNickName());
-            result.setLastLoginDate(author.getLastLoginDate());
-            result.setRegisterDate(author.getRegisterDate());
-            result.setToken(author.getToken());
-            author.getRoles().forEach(role -> {
-                result.getRoles().add(role.getName());
-            });
-            Set<AuthorTag> authorTags = this.authorTagRepository
-                    .findAllByPkAuthorAndIsSelectedIsTrue(author);
-            authorTags.forEach(authorTag -> {
-                result.getTags().add(authorTag.getPk().getTag().getText());
-            });
-            result.setAnthologyNumber(
-                    this.anthologyRepository.countByAuthor(author));
-            result.setArticleNumber(
-                    this.articleRepository.countByAnthologyAuthor(author));
-            result.setCommentNumber(
-                    this.articleCommentRepository.countByAuthor(author));
-            result.setFollowedByNumber(
-                    this.authorFollowerRepository.countByPkAuthor(author));
-            AuthorDefaultAnthology authorDefaultAnthology = this.authorDefaultAnthologyRepository
-                    .findByPkAuthor(author);
-            if (authorDefaultAnthology == null) {
-                logger.error(
-                        "Can not login because author do not have default anthology.");
-                throw new ServiceException(
-                        "Can not login because author do not have default anthology.");
-            }
-            result.setDefaultAnthologyId(
-                    authorDefaultAnthology.getPk().getAnthology().getId());
+            return this.convert(author);
+        } catch (PersistenceException e) {
+            logger.error("Can not login because of the exception.", e);
+            throw new ServiceException(
+                    "Can not login because of the exception.");
+        }
+    }
+
+    @Override
+    public AuthorDetailDTO loginByToken(String token) throws ServiceException {
+        try {
+            Author author = this.authorRepository.findByToken(token);
+            AuthorDetailDTO result = this.convert(author);
             author.setLastLoginDate(new Date());
             this.authorRepository.save(author);
             return result;
@@ -140,6 +125,36 @@ class AuthorService implements IAuthorService {
             throw new ServiceException(
                     "Can not login because of the exception.");
         }
+    }
+
+    private AuthorDetailDTO convert(Author author) {
+        AuthorDetailDTO result = new AuthorDetailDTO();
+        result.setAuthorId(author.getId());
+        result.setNickName(author.getNickName());
+        result.setLastLoginDate(author.getLastLoginDate());
+        result.setRegisterDate(author.getRegisterDate());
+        result.setToken(author.getToken());
+        author.getRoles().forEach(role -> {
+            result.getRoles().add(role.getName());
+        });
+        Set<AuthorTag> authorTags = this.authorTagRepository
+                .findAllByPkAuthorAndIsSelectedIsTrue(author);
+        authorTags.forEach(authorTag -> {
+            result.getTags().add(authorTag.getPk().getTag().getText());
+        });
+        result.setAnthologyNumber(
+                this.anthologyRepository.countByAuthor(author));
+        result.setArticleNumber(
+                this.articleRepository.countByAnthologyAuthor(author));
+        result.setCommentNumber(
+                this.articleCommentRepository.countByAuthor(author));
+        result.setFollowedByNumber(
+                this.authorFollowerRepository.countByPkAuthor(author));
+        AuthorDefaultAnthology authorDefaultAnthology = this.authorDefaultAnthologyRepository
+                .findByPkAuthor(author);
+        result.setDefaultAnthologyId(
+                authorDefaultAnthology.getPk().getAnthology().getId());
+        return result;
     }
 
     @Transactional

@@ -107,7 +107,7 @@ public class ArticleController {
     public ApiResponse<ArticleDetailDTO> detail(
             @PathVariable(name = "id")
                     Long id, WebSession session) throws ServiceException {
-        AuthorDetailDTO authorDetailDTO=session.getAttribute(ICommonConstant.SessionAttrName.AUTHOR_DETAIL);
+        AuthorDetailDTO authorDetailDTO=session.getAttribute(ICommonConstant.SessionAttrName.AUTHENTICATED_AUTHOR_DETAIL);
         ArticleViewDTO articleViewDTO = new ArticleViewDTO();
         articleViewDTO.setArticleId(id);
         if(authorDetailDTO!=null) {
