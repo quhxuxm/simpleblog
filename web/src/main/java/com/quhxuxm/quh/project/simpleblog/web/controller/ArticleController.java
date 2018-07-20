@@ -1,22 +1,19 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
-import com.quhxuxm.quh.project.simpleblog.common.ICommonConstant;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
-import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleDetailDTO;
-import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleSummaryDTO;
-import com.quhxuxm.quh.project.simpleblog.service.dto.ArticleViewDTO;
-import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetailDTO;
+import com.quhxuxm.quh.project.simpleblog.service.dto.*;
 import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
+import com.quhxuxm.quh.project.simpleblog.web.request.ApiRequest;
 import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
 import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
+import com.quhxuxm.quh.project.simpleblog.web.security.AuthenticatedAuthorDetailHolder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.WebSession;
 
 @RestController
 @RequestMapping("/article")
@@ -48,7 +45,7 @@ public class ArticleController {
             @RequestParam(name = "pagesize", required = false)
                     Integer pageSize,
             @RequestParam(name = "asc", required = false)
-                    boolean isAsc, WebSession session) throws ServiceException {
+                    boolean isAsc) throws ServiceException {
         if (pageIndex == null) {
             pageIndex = 0;
         }
@@ -102,16 +99,44 @@ public class ArticleController {
         return result;
     }
 
+    @GetMapping(value = "/listinterest",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
+    public ApiResponse<Page<ArticleSummaryDTO>> listInterest(
+            @RequestParam(name = "pageindex", required = false)
+                    Integer pageIndex,
+            @RequestParam(name = "pagesize", required = false)
+                    Integer pageSize,
+            @RequestParam(name = "asc", required = false)
+                    boolean isAsc) throws ServiceException {
+        if (pageIndex == null) {
+            pageIndex = 0;
+        }
+        if (pageSize == null) {
+            pageSize = this.defaultArticleListPageSize;
+        }
+        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        AuthorDetailDTO authenticatedAuthorDetail = AuthenticatedAuthorDetailHolder.INSTANCE
+                .get();
+        Page<ArticleSummaryDTO> page = this.articleService
+                .listArticleSummariesOrderByAuthorInterests(pageable,
+                        authenticatedAuthorDetail.getAuthorId(), 5, isAsc);
+        ApiResponse<Page<ArticleSummaryDTO>> result = new ApiResponse<>();
+        result.setPayload(page);
+        return result;
+    }
+
     @GetMapping(value = "/detail/{id}",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ApiResponse<ArticleDetailDTO> detail(
             @PathVariable(name = "id")
-                    Long id, WebSession session) throws ServiceException {
-        AuthorDetailDTO authorDetailDTO=session.getAttribute(ICommonConstant.SessionAttrName.AUTHENTICATED_AUTHOR_DETAIL);
+                    Long id) throws ServiceException {
+        AuthorDetailDTO authenticatedAuthorDetail = AuthenticatedAuthorDetailHolder.INSTANCE
+                .get();
         ArticleViewDTO articleViewDTO = new ArticleViewDTO();
         articleViewDTO.setArticleId(id);
-        if(authorDetailDTO!=null) {
-            articleViewDTO.setAuthorId(authorDetailDTO.getAuthorId());
+        if (authenticatedAuthorDetail != null) {
+            articleViewDTO.setAuthorId(authenticatedAuthorDetail.getAuthorId());
         }
         ArticleDetailDTO articleDetailDTO = this.articleService
                 .viewArticle(articleViewDTO);
@@ -122,6 +147,18 @@ public class ArticleController {
         }
         ApiResponse<ArticleDetailDTO> result = new ApiResponse<>();
         result.setPayload(articleDetailDTO);
+        return result;
+    }
+
+    @PostMapping(value = "/create",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ApiResponse<Long> create(
+            ApiRequest<CreateArticleDTO> request) throws ServiceException {
+        Long articleId = this.articleService.saveArticle(request.getPayload());
+        ApiResponse<Long> result = new ApiResponse<>();
+        result.setPayload(articleId);
         return result;
     }
 }
