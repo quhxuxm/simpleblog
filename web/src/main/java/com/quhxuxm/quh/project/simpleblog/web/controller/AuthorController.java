@@ -10,10 +10,12 @@ import com.quhxuxm.quh.project.simpleblog.web.request.ApiRequest;
 import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
 import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
 import com.quhxuxm.quh.project.simpleblog.web.security.AuthenticatedAuthorDetailHolder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.WebSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -68,6 +70,33 @@ public class AuthorController {
         AuthenticatedAuthorDetailHolder.INSTANCE.set(authorDetailDTO);
         ApiResponse<AuthorDetailDTO> result = new ApiResponse<>();
         result.setPayload(authorDetailDTO);
+        return result;
+    }
+
+    /**
+     * Return require authenticate error.
+     *
+     * @return The require authenticate error.
+     */
+    @GetMapping(value = "/authenticate")
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    public ApiResponse<FailPayload> authenticate() {
+        ApiResponse<FailPayload> result = new ApiResponse<>();
+        result.setStatus(ApiResponse.Status.FAIL);
+        FailPayload authenticationRequiredPayload = new FailPayload(
+                FailPayload.Type.AUTHENTICATION_REQUIRED);
+        result.setPayload(authenticationRequiredPayload);
+        return result;
+    }
+
+    @RequestMapping(value = "/clear")
+    @ResponseBody
+    public ApiResponse<Void> clear(HttpSession session) {
+        session.removeAttribute(
+                ICommonConstant.SessionAttrName.AUTHENTICATED_AUTHOR_DETAIL);
+        ApiResponse<Void> result = new ApiResponse<>();
+        result.setPayload(null);
         return result;
     }
 }

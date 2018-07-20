@@ -35,9 +35,10 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
                         "/author/initialize")
                 .authenticated()
                 .anyRequest().permitAll();
-        http.formLogin().loginPage("/authenticate")
+        http.formLogin().loginPage("/author/authenticate")
                 .successForwardUrl("/author/initialize");
-        http.logout().logoutUrl("/logout");
+        http.logout().logoutUrl("/author/logout")
+                .logoutSuccessUrl("/author/clear");
         http.csrf().disable();
     }
 

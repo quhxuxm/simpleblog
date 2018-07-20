@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * The interceptor used to fill the thread local that contains the authenticated author detail
+ */
 @Component
 public class InitializeAuthenticatedAuthorDetailHolderInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,

@@ -2,6 +2,7 @@ package com.quhxuxm.quh.project.simpleblog.web.response;
 
 public class FailPayload {
     public enum Type {
+        AUTHENTICATION_REQUIRED,
         LOGIN_ERROR,
         REGISTER_ERROR_BECAUSE_OF_CREATE_AUTHOR_FAIL,
         SYSTEM_ERROR_UNKNOWN,

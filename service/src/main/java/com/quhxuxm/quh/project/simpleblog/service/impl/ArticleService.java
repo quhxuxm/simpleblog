@@ -37,18 +37,18 @@ class ArticleService implements IArticleService {
     private IArticleAdditionalInfoRepository articleAdditionalInfoRepository;
 
     ArticleService(ITagRepository tagRepository,
-            IArticleTagRepository articleTagRepository,
-            IAnthologyParticipantRepository anthologyParticipantRepository,
-            IAuthorArticlePraiseRepository authorArticlePraiseRepository,
-            IAuthorRepository authorRepository,
-            IArticleRepository articleRepository,
-            IAnthologyRepository anthologyRepository,
-            IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
-            IAuthorTagRepository authorTagRepository,
-            IAuthorService authorService,
-            IArticleCommentRepository articleCommentRepository,
-            IAnthologyTagRepository anthologyTagRepository,
-            IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
+                   IArticleTagRepository articleTagRepository,
+                   IAnthologyParticipantRepository anthologyParticipantRepository,
+                   IAuthorArticlePraiseRepository authorArticlePraiseRepository,
+                   IAuthorRepository authorRepository,
+                   IArticleRepository articleRepository,
+                   IAnthologyRepository anthologyRepository,
+                   IAuthorArticleBookmarkRepository authorArticleBookmarkRepository,
+                   IAuthorTagRepository authorTagRepository,
+                   IAuthorService authorService,
+                   IArticleCommentRepository articleCommentRepository,
+                   IAnthologyTagRepository anthologyTagRepository,
+                   IArticleAdditionalInfoRepository articleAdditionalInfoRepository) {
         this.tagRepository = tagRepository;
         this.articleTagRepository = articleTagRepository;
         this.anthologyParticipantRepository = anthologyParticipantRepository;
@@ -284,16 +284,16 @@ class ArticleService implements IArticleService {
             result.setCreateDate(article.getCreateDate());
             result.setPraiseNumber(
                     article.getAdditionalInfo().getPraiseNumber());
-            article.getAdditionalInfo().setViewNumber(
-                    article.getAdditionalInfo().getViewNumber() + 1);
-            this.articleAdditionalInfoRepository
-                    .save(article.getAdditionalInfo());
             result.setViewNumber(article.getAdditionalInfo().getViewNumber());
             if (articleViewDTO.getAuthorId() != null) {
                 Author author = this.authorRepository
                         .getOne(articleViewDTO.getAuthorId());
                 this.increaseAuthorTagWeightAccordingToArticleTags(author,
                         article);
+                article.getAdditionalInfo().setViewNumber(
+                        article.getAdditionalInfo().getViewNumber() + 1);
+                this.articleAdditionalInfoRepository
+                        .save(article.getAdditionalInfo());
             }
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
@@ -310,7 +310,7 @@ class ArticleService implements IArticleService {
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-            Article article) throws ServiceException {
+                                                              Article article) throws ServiceException {
         try {
             Set<ArticleTag> articleTags = this.articleTagRepository
                     .findAllByPkArticle(article);
@@ -360,6 +360,7 @@ class ArticleService implements IArticleService {
         dto.setCommentNumber(pojo.getAdditionalInfo().getCommentNumber());
         dto.setBookmarkNumber(pojo.getAdditionalInfo().getBookmarkNumber());
         dto.setPraiseNumber(pojo.getAdditionalInfo().getPraiseNumber());
+        dto.setViewNumber(pojo.getAdditionalInfo().getViewNumber());
         dto.setSummary(pojo.getSummary());
         if (pojo.getCoverImage() != null) {
             dto.setCoverImageId(pojo.getCoverImage().getId());
@@ -546,7 +547,7 @@ class ArticleService implements IArticleService {
                         .findAllByOrderByCreateDateAsc(pageable);
             } else {
                 domainObjPage = this.articleRepository
-                        .findAllByOrderByCreateDateAsc(pageable);
+                        .findAllByOrderByCreateDateDesc(pageable);
             }
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
