@@ -66,6 +66,20 @@ class ArticleService implements IArticleService {
 
     @Transactional
     @Override
+    public Long updateArticle(
+            UpdateArticleDTO updateArticleDTO) {
+        Article article = this.articleRepository
+                .getOne(updateArticleDTO.getArticleId());
+        article.setTitle(updateArticleDTO.getTitle());
+        article.setSummary(updateArticleDTO.getSummary());
+        article.setContent(updateArticleDTO.getContent());
+        article.setUpdateDate(new Date());
+        article.setPublished(updateArticleDTO.isPublished());
+        return null;
+    }
+
+    @Transactional
+    @Override
     public Long saveArticle(CreateArticleDTO createArticleDTO)
             throws ServiceException {
         try {

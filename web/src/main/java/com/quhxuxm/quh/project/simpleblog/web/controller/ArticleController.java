@@ -181,4 +181,16 @@ public class ArticleController {
         result.setPayload(articleId);
         return result;
     }
+
+    @PostMapping(value = "/update",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ApiResponse<Long> update(@RequestBody
+                                            ApiRequest<UpdateArticleDTO> request) throws ServiceException {
+        Long articleId = this.articleService.saveArticle(request.getPayload());
+        ApiResponse<Long> result = new ApiResponse<>();
+        result.setPayload(articleId);
+        return result;
+    }
 }
