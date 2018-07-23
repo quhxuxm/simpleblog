@@ -1,5 +1,4 @@
 import {ApiResponseStatus} from "./ApiResponseStatus";
-import {ApiRequest} from "../request/ApiRequest";
 
 export class ApiResponse<PayloadType> {
 
