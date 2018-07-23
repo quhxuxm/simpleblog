@@ -1,4 +1,5 @@
 import {ApiResponseStatus} from "./ApiResponseStatus";
+import {ApiRequest} from "../request/ApiRequest";
 
 export class ApiResponse<PayloadType> {
 
@@ -35,5 +36,13 @@ export class ApiResponse<PayloadType> {
 
   set status(value: ApiResponseStatus) {
     this._status = value;
+  }
+
+  public toJson(): string {
+    return JSON.stringify(this);
+  }
+
+  public static fromJson<PT>(json: string): ApiResponse<PT> {
+    return JSON.parse(json);
   }
 }

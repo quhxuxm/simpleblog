@@ -23,4 +23,12 @@ export class ApiRequest<PayloadType> {
   set payload(value: PayloadType) {
     this._payload = value;
   }
+
+  public toJson(): string {
+    return JSON.stringify(this);
+  }
+
+  public static fromJson<PT>(json: string): ApiRequest<PT> {
+    return JSON.parse(json);
+  }
 }
