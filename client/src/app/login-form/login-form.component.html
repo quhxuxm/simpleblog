@@ -1,3 +1,9 @@
-<p>
-  login-form works!
-</p>
+<form>
+  <label>
+    <input name="username" type="text" [value]="userName"/>
+  </label>
+  <label>
+    <input name="password" type="password" [value]="password"/>
+  </label>
+  <button (submit)="onSubmit()"></button>
+</form>
