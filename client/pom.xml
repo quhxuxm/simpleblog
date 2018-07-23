@@ -43,7 +43,8 @@
                                 <argument>build</argument>
                                 <argument>--prod</argument>
                                 <argument>--base-href</argument>
-                                <argument>/ng/</argument>
+                                <!--This is the base context path for the client side-->
+                                <argument>/client/</argument>
                             </arguments>
                         </configuration>
                     </execution>

@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/api/article")
 public class ArticleController {
     private IArticleService articleService;
 

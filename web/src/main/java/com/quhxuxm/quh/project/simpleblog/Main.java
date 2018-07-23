@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
 @EnableSpringDataWebSupport
-@EnableWebMvc
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 

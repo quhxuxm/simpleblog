@@ -20,7 +20,7 @@ import org.springframework.web.server.WebSession;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/author")
+@RequestMapping("/api/author")
 public class AuthorController {
     private IAuthorService authorService;
 

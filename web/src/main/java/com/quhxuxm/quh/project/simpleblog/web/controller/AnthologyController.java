@@ -1,7 +1,9 @@
 package com.quhxuxm.quh.project.simpleblog.web.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/anthology")
 public class AnthologyController {
 }
