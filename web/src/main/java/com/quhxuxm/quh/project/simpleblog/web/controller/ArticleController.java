@@ -174,8 +174,10 @@ public class ArticleController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ApiResponse<Long> create(@RequestBody
-                                            ApiRequest<CreateArticleDTO> request) throws ServiceException {
+    public ApiResponse<Long> create(
+            @RequestBody
+                    ApiRequest<CreateArticleDTO> request)
+            throws ServiceException {
         Long articleId = this.articleService.saveArticle(request.getPayload());
         ApiResponse<Long> result = new ApiResponse<>();
         result.setPayload(articleId);
@@ -186,9 +188,12 @@ public class ArticleController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ApiResponse<Long> update(@RequestBody
-                                            ApiRequest<UpdateArticleDTO> request) throws ServiceException {
-        Long articleId = this.articleService.saveArticle(request.getPayload());
+    public ApiResponse<Long> update(
+            @RequestBody
+                    ApiRequest<UpdateArticleDTO> request)
+            throws ServiceException {
+        Long articleId = this.articleService
+                .updateArticle(request.getPayload());
         ApiResponse<Long> result = new ApiResponse<>();
         result.setPayload(articleId);
         return result;

@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 public interface IArticleService {
     Long saveArticle(CreateArticleDTO createArticleDTO) throws ServiceException;
 
-    Long updateArticle(
-            UpdateArticleDTO updateArticleDTO) throws ServiceException;
+    Long updateArticle(UpdateArticleDTO updateArticleDTO)
+            throws ServiceException;
 
     void assignTagsToArticle(ArticleAssignTagsDTO articleAssignTagsDTO)
             throws ServiceException;
@@ -26,7 +26,7 @@ public interface IArticleService {
             throws ServiceException;
 
     void increaseAuthorTagWeightAccordingToArticleTags(Author author,
-                                                       Article article) throws ServiceException;
+            Article article) throws ServiceException;
 
     Page<ArticleSummaryDTO> listArticleSummariesOrderByCreateDate(
             Pageable pageable, boolean isAsc) throws ServiceException;
