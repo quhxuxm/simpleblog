@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ApiRequest} from "../vo/api/request/ApiRequest";
+import {LoginForm} from "../vo/LoginForm";
 
 @Component({
   selector: 'app-login-form',
@@ -7,7 +9,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
   public userName: string;
-
   public password: string;
 
   constructor() {
@@ -17,7 +18,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-
+    let apiRequest: ApiRequest<LoginForm> = new ApiRequest<LoginForm>();
+    apiRequest.payload = new LoginForm(this.userName, this.password);
+    console.log(apiRequest.toJson());
   }
-
 }
