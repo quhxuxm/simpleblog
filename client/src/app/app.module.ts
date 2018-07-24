@@ -10,6 +10,7 @@ import {RegisterFormComponent} from './component/register-form/register-form.com
 import {Routes, RouterModule, ActivatedRoute} from "@angular/router";
 import {ArticleDetailComponent} from './component/article-detail/article-detail.component';
 import {HttpClientModule} from "@angular/common/http";
+import {ConnectionService} from "./common/ConnectionService";
 
 export const ROUTES: Routes = [
   {path: 'register', component: RegisterFormComponent},
@@ -31,7 +32,7 @@ export const ROUTES: Routes = [
     RouterModule.forRoot(ROUTES),
     HttpClientModule
   ],
-  providers: [],
+  providers: [ConnectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
