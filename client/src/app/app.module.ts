@@ -3,12 +3,13 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {FormsModule} from "@angular/forms";
-import {ArticleSummaryComponent} from './article-summary/article-summary.component';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {RegisterFormComponent} from './register-form/register-form.component';
+import {ArticleSummaryComponent} from './component/article-summary/article-summary.component';
+import {LoginFormComponent} from './component/login-form/login-form.component';
+import {RegisterFormComponent} from './component/register-form/register-form.component';
 
 import {Routes, RouterModule, ActivatedRoute} from "@angular/router";
-import {ArticleDetailComponent} from './article-detail/article-detail.component';
+import {ArticleDetailComponent} from './component/article-detail/article-detail.component';
+import {HttpClientModule} from "@angular/common/http";
 
 export const ROUTES: Routes = [
   {path: 'register', component: RegisterFormComponent},
@@ -27,7 +28,8 @@ export const ROUTES: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

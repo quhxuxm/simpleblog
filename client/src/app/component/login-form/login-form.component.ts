@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiRequest} from "../vo/api/ApiRequestModule";
-import {LoginForm} from "../vo/FormVoModule";
+import {ApiRequest} from "../../vo/api/ApiRequestModule";
+import {LoginForm} from "../../vo/FormVoModule";
 
 @Component({
   selector: 'app-login-form',
@@ -8,7 +8,7 @@ import {LoginForm} from "../vo/FormVoModule";
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  public userName: string;
+  public token: string;
   public password: string;
 
   constructor() {
@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
 
   public onSubmit(): void {
     let apiRequest: ApiRequest<LoginForm> = new ApiRequest<LoginForm>();
-    apiRequest.payload = new LoginForm(this.userName, this.password);
+    apiRequest.payload = new LoginForm(this.token, this.password);
     console.log(apiRequest.toJson());
   }
 }
