@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 
 import {ApiRequest} from "../../vo/api/ApiRequestModule";
 import {RegisterForm} from "../../vo/FormVoModule";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
+import {HttpHeaders} from "@angular/common/http";
+import {ConnectionService} from "../../common/ConnectionService";
+import {ApiResponse} from "../../vo/api/ApiResponseModule";
 
 @Component({
   selector: 'app-register-form',
@@ -15,7 +16,7 @@ export class RegisterFormComponent implements OnInit {
   public password: string;
   public nickName: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private connectionService: ConnectionService) {
   }
 
   ngOnInit() {
@@ -31,7 +32,8 @@ export class RegisterFormComponent implements OnInit {
       })
     };
     console.log(apiRequest.toJson());
-    this.httpClient.post<ApiRequest<RegisterForm>>("/api/author/register", apiRequest, httpOptions).subscribe(response => console.log(response));;
+    let response: ApiResponse<number> = this.connectionService.post<number>("/api/author/register", apiRequest);
+    console.log(response.payload)
   }
 
 
