@@ -1,6 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
-  <app-register-form></app-register-form>
+  <h1>{{title}}</h1>
+  <ul>
+    <li>
+      <a routerLink="/register">Register Form</a>
+    </li>
+    <li>
+      <a routerLink="/login">Login Form</a>
+    </li>
+    <li>
+      <a routerLink="/article/detail/1">Article Detail</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
 </div>
 
 
