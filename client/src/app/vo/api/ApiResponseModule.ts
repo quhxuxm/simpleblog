@@ -1,3 +1,5 @@
+import {StringKeyMap} from "../../common/Util";
+
 export enum ApiResponseStatus {
   SUCCESS,
   FAIL
@@ -13,7 +15,7 @@ export enum FailPayloadType {
 }
 
 export class ApiResponse<PayloadType> {
-  public header: { [name: string]: string };
+  public header: StringKeyMap<string>;
   public payload: PayloadType;
   public status: ApiResponseStatus;
 

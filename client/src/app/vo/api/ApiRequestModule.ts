@@ -1,5 +1,7 @@
+import {StringKeyMap} from "../../common/Util";
+
 export class ApiRequest<PayloadType> {
-  public header: { [name: string]: string };
+  public header: StringKeyMap<string>;
   public payload: PayloadType;
 
   public constructor() {
