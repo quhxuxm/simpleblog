@@ -1,4 +1,16 @@
-import {ApiResponseStatus} from "./ApiResponseStatus";
+export enum ApiResponseStatus {
+  SUCCESS,
+  FAIL
+}
+
+export class FailPayload {
+  constructor(public message: string, public type: FailPayloadType) {
+  }
+}
+
+export enum FailPayloadType {
+  AUTHENTICATE_REQUIRED
+}
 
 export class ApiResponse<PayloadType> {
   public header: { [name: string]: string };

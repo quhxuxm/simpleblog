@@ -1,3 +1,8 @@
+export class LoginForm {
+  constructor(public userName: string, public password: string) {
+  }
+}
+
 export class RegisterForm {
 
   constructor(public userName: string, public password: string, public nickName: string) {
@@ -7,3 +12,4 @@ export class RegisterForm {
     return JSON.stringify(this);
   }
 }
+

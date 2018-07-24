@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ApiRequest} from "../vo/api/request/ApiRequest";
-import {LoginForm} from "../vo/LoginForm";
+import {ApiRequest} from "../vo/api/ApiRequestModule";
+import {LoginForm} from "../vo/FormVoModule";
 
 @Component({
   selector: 'app-login-form',

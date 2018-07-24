@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RegisterForm} from "../vo/RegisterForm";
-import {ApiRequest} from "../vo/api/request/ApiRequest";
+
+import {ApiRequest} from "../vo/api/ApiRequestModule";
+import {RegisterForm} from "../vo/FormVoModule";
 
 @Component({
   selector: 'app-register-form',
