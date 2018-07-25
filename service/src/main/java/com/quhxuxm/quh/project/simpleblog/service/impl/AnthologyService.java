@@ -34,15 +34,15 @@ class AnthologyService implements IAnthologyService {
     private IAuthorTagRepository authorTagRepository;
 
     AnthologyService(IAnthologyRepository anthologyRepository,
-            IAnthologyTagRepository anthologyTagRepository,
-            IAuthorRepository authorRepository,
-            IResourceRepository resourceRepository,
-            ITagRepository tagRepository,
-            IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository,
-            IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository,
-            IAnthologyCommentRepository anthologyCommentRepository,
-            IAuthorService authorService,
-            IAuthorTagRepository authorTagRepository) {
+                     IAnthologyTagRepository anthologyTagRepository,
+                     IAuthorRepository authorRepository,
+                     IResourceRepository resourceRepository,
+                     ITagRepository tagRepository,
+                     IAuthorAnthologyBookmarkRepository authorAnthologyBookmarkRepository,
+                     IAuthorAnthologyPraiseRepository authorAnthologyPraiseRepository,
+                     IAnthologyCommentRepository anthologyCommentRepository,
+                     IAuthorService authorService,
+                     IAuthorTagRepository authorTagRepository) {
         this.anthologyRepository = anthologyRepository;
         this.anthologyTagRepository = anthologyTagRepository;
         this.authorRepository = authorRepository;
@@ -98,7 +98,8 @@ class AnthologyService implements IAnthologyService {
         } catch (PersistenceException e) {
             logger.error("Fail to save anthology because of exception.", e);
             throw new ServiceException(
-                    "Fail to save anthology because of exception.", e);
+                    "Fail to save anthology because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -115,7 +116,8 @@ class AnthologyService implements IAnthologyService {
                 logger.error(
                         "Can not assign tags to anthology because the author id not the owner of the anthology.");
                 throw new ServiceException(
-                        "Can not assign tags to anthology because the author id not the owner of the anthology.");
+                        "Can not assign tags to anthology because the author id not the owner of the anthology.",
+                        ServiceException.Code.AUTHOR_NOT_OWNER_OF_ANTHOLOGY);
             }
             anthology.setUpdateDate(new Date());
             this.anthologyRepository.save(anthology);
@@ -146,7 +148,8 @@ class AnthologyService implements IAnthologyService {
             logger.error("Fail to assign article tags because of exception.",
                     e);
             throw new ServiceException(
-                    "Fail to assign article tags because of exception.", e);
+                    "Fail to assign article tags because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -178,7 +181,8 @@ class AnthologyService implements IAnthologyService {
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark anthology because of exception.", e);
             throw new ServiceException(
-                    "Fail to bookmark anthology because of exception.", e);
+                    "Fail to bookmark anthology because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -209,7 +213,8 @@ class AnthologyService implements IAnthologyService {
         } catch (PersistenceException e) {
             logger.error("Fail to praise anthology because of exception.", e);
             throw new ServiceException(
-                    "Fail to praise anthology because of exception.", e);
+                    "Fail to praise anthology because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -242,14 +247,15 @@ class AnthologyService implements IAnthologyService {
             return result;
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not view article because of exception.");
+                    "Can not view article because of exception.",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
     @Transactional
     @Override
     public void increaseAuthorTagWeightAccordingToAnthologyTags(Author author,
-            Anthology anthology) throws ServiceException {
+                                                                Anthology anthology) throws ServiceException {
         try {
             Set<AnthologyTag> anthologyTags = this.anthologyTagRepository
                     .findAllByPkAnthology(anthology);
@@ -275,7 +281,7 @@ class AnthologyService implements IAnthologyService {
                     e);
             throw new ServiceException(
                     "Can not increase author tag weight according to anthology because of exception.",
-                    e);
+                    e, ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 }

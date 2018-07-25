@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
 import java.util.Date;
 import java.util.HashSet;
@@ -40,7 +41,8 @@ class AuthorService implements IAuthorService {
             IAuthorTagRepository authorTagRepository,
             IArticleRepository articleRepository, ITagRepository tagRepository,
             IAuthorFollowerRepository authorFollowerRepository,
-            IArticleCommentRepository articleCommentRepository, PasswordEncoder passwordEncoder) {
+            IArticleCommentRepository articleCommentRepository,
+            PasswordEncoder passwordEncoder) {
         this.authorDefaultAnthologyRepository = authorDefaultAnthologyRepository;
         this.authorRepository = authorRepository;
         this.roleRepository = roleRepository;
@@ -62,19 +64,27 @@ class AuthorService implements IAuthorService {
                     .existsByToken(authorRegisterDTO.getToken())) {
                 logger.error("Can not register because of token exist already, "
                         + "token = {}.", authorRegisterDTO.getToken());
-                return null;
+                throw
+                        new ServiceException(
+                                ServiceException.Code.AUTHOR_TOKEN_EXIST);
+            }
+            if (this.authorRepository
+                    .existsByNickName(authorRegisterDTO.getNickName())) {
+                logger.error(
+                        "Can not register because of nick name exist already, "
+                                + "nick name = {}.",
+                        authorRegisterDTO.getNickName());
+                throw
+                        new ServiceException(
+                                ServiceException.Code.AUTHOR_NICK_NAME_EXIST);
             }
             Author author = new Author();
             author.setToken(authorRegisterDTO.getToken());
-            author.setPassword(this.passwordEncoder.encode(authorRegisterDTO.getPassword()));
+            author.setPassword(this.passwordEncoder
+                    .encode(authorRegisterDTO.getPassword()));
             author.setNickName(authorRegisterDTO.getNickName());
             Role authorRole = this.roleRepository
                     .findByName(ICommonConstant.RoleName.AUTHOR);
-            if (authorRole == null) {
-                logger.error(
-                        "Can not register because of author role not exist.");
-                return null;
-            }
             Set<Role> roleSet = new HashSet<>();
             roleSet.add(authorRole);
             author.setRoles(roleSet);
@@ -96,7 +106,8 @@ class AuthorService implements IAuthorService {
                             + "default anthology.", e);
             throw new ServiceException(
                     "Fail to register because of exception when save author "
-                            + "default anthology.");
+                            + "default anthology.",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -105,10 +116,18 @@ class AuthorService implements IAuthorService {
         try {
             Author author = this.authorRepository.getOne(id);
             return this.convert(author);
-        } catch (PersistenceException e) {
-            logger.error("Can not login because of the exception.", e);
+        } catch (EntityNotFoundException e) {
+            logger.error("Can not find author detail because of the exception.",
+                    e);
             throw new ServiceException(
-                    "Can not login because of the exception.");
+                    "Can not find author detail because of the exception.",
+                    ServiceException.Code.AUTHOR_NOT_EXIST_BY_ID);
+        } catch (PersistenceException e) {
+            logger.error(
+                    "Can not find author detail because of the exception..", e);
+            throw new ServiceException(
+                    "Can not find author detail because of the exception..",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -116,6 +135,11 @@ class AuthorService implements IAuthorService {
     public AuthorDetailDTO loginByToken(String token) throws ServiceException {
         try {
             Author author = this.authorRepository.findByToken(token);
+            if (author == null) {
+                throw new ServiceException(
+                        "Can not find author detail because of the exception.",
+                        ServiceException.Code.AUTHOR_NOT_EXIST_BY_TOKEN);
+            }
             AuthorDetailDTO result = this.convert(author);
             author.setLastLoginDate(new Date());
             this.authorRepository.save(author);
@@ -123,7 +147,8 @@ class AuthorService implements IAuthorService {
         } catch (PersistenceException e) {
             logger.error("Can not login because of the exception.", e);
             throw new ServiceException(
-                    "Can not login because of the exception.");
+                    "Can not login because of the exception.",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -200,7 +225,8 @@ class AuthorService implements IAuthorService {
             logger.error("Can not assign tog to author because of exception.",
                     e);
             throw new ServiceException(
-                    "Can not assign tog to author because of exception.", e);
+                    "Can not assign tog to author because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -234,7 +260,8 @@ class AuthorService implements IAuthorService {
             logger.error("Can not assign tog to author because of exception.",
                     e);
             throw new ServiceException(
-                    "Can not assign tog to author because of exception.", e);
+                    "Can not assign tog to author because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -244,7 +271,8 @@ class AuthorService implements IAuthorService {
         try {
             Author author = this.authorRepository.findByToken(token);
             if (author == null) {
-                return null;
+                throw new ServiceException(
+                        ServiceException.Code.AUTHOR_NOT_EXIST_BY_TOKEN);
             }
             AuthorAuthenticateDTO result = new AuthorAuthenticateDTO();
             result.setId(author.getId());
@@ -254,7 +282,8 @@ class AuthorService implements IAuthorService {
                     .collect(Collectors.toSet()));
             return result;
         } catch (PersistenceException e) {
-            throw new ServiceException(e);
+            throw new ServiceException(e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 }

@@ -3,10 +3,8 @@ package com.quhxuxm.quh.project.simpleblog.web.controller;
 import com.quhxuxm.quh.project.simpleblog.service.api.IArticleService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.*;
-import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
 import com.quhxuxm.quh.project.simpleblog.web.request.ApiRequest;
 import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
-import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
 import com.quhxuxm.quh.project.simpleblog.web.security.AuthenticatedAuthorDetailHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -160,11 +158,6 @@ public class ArticleController {
         }
         ArticleDetailDTO articleDetailDTO = this.articleService
                 .viewArticle(articleViewDTO);
-        if (articleDetailDTO == null) {
-            FailPayload articleDetailFailPayload = new FailPayload(
-                    FailPayload.Type.ARTICLE_NOT_EXIST_ERROR);
-            throw new ApiException(articleDetailFailPayload);
-        }
         ApiResponse<ArticleDetailDTO> result = new ApiResponse<>();
         result.setPayload(articleDetailDTO);
         return result;

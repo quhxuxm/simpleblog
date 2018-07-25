@@ -5,7 +5,6 @@ import com.quhxuxm.quh.project.simpleblog.service.api.IAuthorService;
 import com.quhxuxm.quh.project.simpleblog.service.api.exception.ServiceException;
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorDetailDTO;
 import com.quhxuxm.quh.project.simpleblog.service.dto.AuthorRegisterDTO;
-import com.quhxuxm.quh.project.simpleblog.web.exception.ApiException;
 import com.quhxuxm.quh.project.simpleblog.web.request.ApiRequest;
 import com.quhxuxm.quh.project.simpleblog.web.response.ApiResponse;
 import com.quhxuxm.quh.project.simpleblog.web.response.FailPayload;
@@ -15,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.WebSession;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,11 +35,6 @@ public class AuthorController {
                     ApiRequest<AuthorRegisterDTO> request)
             throws ServiceException {
         Long authorId = this.authorService.register(request.getPayload());
-        if (authorId == null) {
-            FailPayload registerFailPayload = new FailPayload(
-                    FailPayload.Type.REGISTER_ERROR_BECAUSE_OF_CREATE_AUTHOR_FAIL);
-            throw new ApiException(registerFailPayload);
-        }
         ApiResponse<Long> result = new ApiResponse<>();
         result.setPayload(authorId);
         return result;
@@ -85,7 +78,7 @@ public class AuthorController {
         ApiResponse<FailPayload> result = new ApiResponse<>();
         result.setStatus(ApiResponse.Status.FAIL);
         FailPayload authenticationRequiredPayload = new FailPayload(
-                FailPayload.Type.AUTHENTICATION_REQUIRED);
+                FailPayload.Type.AUTHENTICATION_ERROR__AUTHENTICATION_REQUIRED);
         result.setPayload(authenticationRequiredPayload);
         return result;
     }

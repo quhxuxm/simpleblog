@@ -1,29 +1,46 @@
 package com.quhxuxm.quh.project.simpleblog.service.api.exception;
 
 public class ServiceException extends Exception {
-
-    public ServiceException() {
-        // TODO Auto-generated constructor stub
+    public enum Code {
+        AUTHOR_TOKEN_EXIST,
+        AUTHOR_NICK_NAME_EXIST,
+        AUTHOR_NOT_EXIST_BY_ID,
+        AUTHOR_NOT_EXIST_BY_TOKEN,
+        AUTHOR_NOT_PARTICIPANT_OF_ANTHOLOGY,
+        AUTHOR_NOT_OWNER_OF_ARTICLE,
+        AUTHOR_NOT_OWNER_OF_ANTHOLOGY,
+        PERSISTENCE_FAIL
     }
 
-    public ServiceException(String message) {
+    private final Code code;
+
+    public ServiceException(Code code) {
+        this.code = code;
+    }
+
+    public ServiceException(String message, Code code) {
         super(message);
-        // TODO Auto-generated constructor stub
+        this.code = code;
     }
 
-    public ServiceException(Throwable cause) {
+    public ServiceException(Throwable cause, Code code) {
         super(cause);
-        // TODO Auto-generated constructor stub
+        this.code = code;
     }
 
-    public ServiceException(String message, Throwable cause) {
+    public ServiceException(String message, Throwable cause, Code code) {
         super(message, cause);
-        // TODO Auto-generated constructor stub
+        this.code = code;
     }
 
-    public ServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public ServiceException(String message, Throwable cause,
+                            boolean enableSuppression,
+                            boolean writableStackTrace, Code code) {
         super(message, cause, enableSuppression, writableStackTrace);
-        // TODO Auto-generated constructor stub
+        this.code = code;
     }
 
+    public Code getCode() {
+        return code;
+    }
 }

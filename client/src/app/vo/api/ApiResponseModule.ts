@@ -1,6 +1,6 @@
 export enum ApiResponseStatus {
-  SUCCESS,
-  FAIL
+  SUCCESS = "SUCCESS",
+  FAIL = "FAIL"
 }
 
 export class FailPayload {
@@ -9,7 +9,14 @@ export class FailPayload {
 }
 
 export enum FailPayloadType {
-  AUTHENTICATE_REQUIRED
+  AUTHENTICATION_ERROR__AUTHENTICATION_REQUIRED = "AUTHENTICATION_ERROR__AUTHENTICATION_REQUIRED",
+  AUTHENTICATION_ERROR__TOKEN_NOT_EXIST = "AUTHENTICATION_ERROR__TOKEN_NOT_EXIST",
+  AUTHOR_ERROR__TOKEN_EXIST = "AUTHOR_ERROR__TOKEN_EXIST",
+  AUTHOR_ERROR__NICK_NAME_EXIST = "AUTHOR_ERROR__NICK_NAME_EXIST",
+  UNKNOWN_ERROR__SERVICE = "UNKNOWN_ERROR__SERVICE",
+  UNKNOWN_ERROR__SYSTEM = "UNKNOWN_ERROR__SYSTEM",
+  ARTICLE_ERROR__NOT_EXIST = "ARTICLE_ERROR__NOT_EXIST",
+  AUTHOR_ERROR__NOT_EXIST = "AUTHOR_ERROR__NOT_EXIST"
 }
 
 export class ApiResponse<PayloadType> {
@@ -21,9 +28,5 @@ export class ApiResponse<PayloadType> {
     this.header = new Map();
     this.payload = null;
     this.status = ApiResponseStatus.SUCCESS;
-  }
-
-  public static fromJson<PT>(json: string): ApiResponse<PT> {
-    return JSON.parse(json);
   }
 }

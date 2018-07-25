@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ApiRequest} from "../../vo/api/ApiRequestModule";
-import {RegisterForm} from "../../vo/FormVoModule";
-import {ConnectionService} from "../../service/ConnectionService";
+import {Component, Inject, OnInit} from '@angular/core';
+import {IAuthenticationService} from "../../service/api/IAuthenticationService";
 
 @Component({
   selector: 'app-register-form',
@@ -13,23 +11,17 @@ export class RegisterFormComponent implements OnInit {
   public password: string;
   public nickName: string;
 
-  constructor(private connectionService: ConnectionService) {
+  constructor(@Inject("authenticationService") private authenticationService: IAuthenticationService) {
   }
 
   ngOnInit() {
   }
 
   public onSubmit(): void {
-    let apiRequest: ApiRequest<RegisterForm> = new ApiRequest();
-    apiRequest.payload =
-      new RegisterForm(this.token, this.password, this.nickName);
-    console.log(apiRequest.toJson());
-    this.connectionService.post<number, RegisterForm>(
-      "/api/author/register", null, null, apiRequest, {
-        handleResponse: (response) => console.log("Register Form: " +
-          response.payload),
-        handleFailResponse: (failResponse) => console.log("Register Form(Fail): " +
-          failResponse.payload)
-      });
+    this.authenticationService.register(this.token, this.password, this.nickName, (id) => {
+      console.log("Register the author with id = " + id);
+    }, (failType) => {
+      console.log("Fail to register author because of: " + failType)
+    });
   }
 }

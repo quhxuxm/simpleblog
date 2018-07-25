@@ -102,7 +102,8 @@ class ArticleService implements IArticleService {
                     logger.error(
                             "Author is not a participant of the anthology.");
                     throw new ServiceException(
-                            "Author is not a participant of the anthology.");
+                            "Author is not a participant of the anthology.",
+                            ServiceException.Code.AUTHOR_NOT_PARTICIPANT_OF_ANTHOLOGY);
                 }
             }
             Article article = new Article();
@@ -144,7 +145,8 @@ class ArticleService implements IArticleService {
         } catch (PersistenceException e) {
             logger.error("Fail to save article because of exception.", e);
             throw new ServiceException(
-                    "Fail to save article because of exception.", e);
+                    "Fail to save article because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -160,7 +162,8 @@ class ArticleService implements IArticleService {
                 logger.error(
                         "Can not assign tags to article because the author id not the owner of the article.");
                 throw new ServiceException(
-                        "Can not assign tags to article because the author id not the owner of the article.");
+                        "Can not assign tags to article because the author id not the owner of the article.",
+                        ServiceException.Code.AUTHOR_NOT_OWNER_OF_ARTICLE);
             }
             article.setUpdateDate(new Date());
             this.articleRepository.save(article);
@@ -191,7 +194,8 @@ class ArticleService implements IArticleService {
             logger.error("Fail to assign article tags because of exception.",
                     e);
             throw new ServiceException(
-                    "Fail to assign article tags because of exception.", e);
+                    "Fail to assign article tags because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -226,7 +230,8 @@ class ArticleService implements IArticleService {
         } catch (PersistenceException e) {
             logger.error("Fail to bookmark article because of exception.", e);
             throw new ServiceException(
-                    "Fail to bookmark article because of exception.", e);
+                    "Fail to bookmark article because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -260,7 +265,8 @@ class ArticleService implements IArticleService {
         } catch (PersistenceException e) {
             logger.error("Fail to praise article because of exception.", e);
             throw new ServiceException(
-                    "Fail to praise article because of exception.", e);
+                    "Fail to praise article because of exception.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -317,7 +323,8 @@ class ArticleService implements IArticleService {
             return result;
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not view article because of exception.");
+                    "Can not view article because of exception.",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -349,7 +356,7 @@ class ArticleService implements IArticleService {
                     e);
             throw new ServiceException(
                     "Can not increase author tag weight according to article because of exception.",
-                    e);
+                    e, ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -399,7 +406,8 @@ class ArticleService implements IArticleService {
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not find articles order by bookmark number.", e);
+                    "Can not find articles order by bookmark number.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -420,7 +428,8 @@ class ArticleService implements IArticleService {
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not list articles order by praise number.", e);
+                    "Can not list articles order by praise number.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -439,7 +448,8 @@ class ArticleService implements IArticleService {
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not list articles order by view number.", e);
+                    "Can not list articles order by view number.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -460,7 +470,8 @@ class ArticleService implements IArticleService {
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not list articles order by comment number.");
+                    "Can not list articles order by comment number.",
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -499,7 +510,8 @@ class ArticleService implements IArticleService {
                     .convertPojoToDto(articleTag.getPk().getArticle()));
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not list articles by author interests.", e);
+                    "Can not list articles by author interests.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -523,7 +535,7 @@ class ArticleService implements IArticleService {
         } catch (PersistenceException e) {
             throw new ServiceException(
                     "Can not list the articles in the anthology because of exception.",
-                    e);
+                    e, ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -547,7 +559,7 @@ class ArticleService implements IArticleService {
         } catch (PersistenceException e) {
             throw new ServiceException(
                     "Can not list the articles in the author because of exception.",
-                    e);
+                    e, ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 
@@ -566,7 +578,8 @@ class ArticleService implements IArticleService {
             return domainObjPage.map(this::convertPojoToDto);
         } catch (PersistenceException e) {
             throw new ServiceException(
-                    "Can not list articles order by view number.", e);
+                    "Can not list articles order by view number.", e,
+                    ServiceException.Code.PERSISTENCE_FAIL);
         }
     }
 }

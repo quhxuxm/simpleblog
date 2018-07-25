@@ -1,11 +1,16 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {IStringKeyMap} from "../util";
-import {ApiResponse, FailPayload} from "../vo/api/ApiResponseModule";
+import {
+  ApiResponse,
+  ApiResponseStatus,
+  FailPayload
+} from "../vo/api/ApiResponseModule";
 import {ApiRequest} from "../vo/api/ApiRequestModule";
+import {IConnectionService} from "./api/IConnectionService";
 
 @Injectable()
-export class ConnectionService {
+export class ConnectionService implements IConnectionService {
   constructor(private httpClient: HttpClient) {
   }
 
@@ -31,11 +36,11 @@ export class ConnectionService {
       params: queryParams,
       headers: headers
     }).subscribe((response) => {
-      if (response.payload instanceof FailPayload) {
-        options.handleFailResponse(<ApiResponse<FailPayload>>response);
+      if (response.status === ApiResponseStatus.SUCCESS) {
+        options.handleResponse(<ApiResponse<ResponsePayloadType>>response);
         return;
       }
-      options.handleResponse(<ApiResponse<ResponsePayloadType>>response);
+      options.handleFailResponse(<ApiResponse<FailPayload>>response);
     }, (error) => {
       console.error("Fail to invoke url: " + url);
     });
@@ -68,11 +73,11 @@ export class ConnectionService {
         params: queryParams,
         headers: headers
       }).subscribe((response) => {
-      if (response.payload instanceof FailPayload) {
-        options.handleFailResponse(<ApiResponse<FailPayload>>response);
+      if (response.status === ApiResponseStatus.SUCCESS) {
+        options.handleResponse(<ApiResponse<ResponsePayloadType>>response);
         return;
       }
-      options.handleResponse(<ApiResponse<ResponsePayloadType>>response);
+      options.handleFailResponse(<ApiResponse<FailPayload>>response);
     }, (error) => {
       console.error("Fail to invoke url: " + url);
     });

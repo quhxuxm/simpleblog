@@ -2,13 +2,14 @@ package com.quhxuxm.quh.project.simpleblog.web.response;
 
 public class FailPayload {
     public enum Type {
-        AUTHENTICATION_REQUIRED,
-        LOGIN_ERROR,
-        REGISTER_ERROR_BECAUSE_OF_CREATE_AUTHOR_FAIL,
-        SERVICE_ERROR_UNKNOWN,
-        ERROR_UNKNOWN,
-        INPUT_ERROR_WRONG_ARTICLE_LIST_CATEGORY,
-        ARTICLE_NOT_EXIST_ERROR
+        AUTHENTICATION_ERROR__AUTHENTICATION_REQUIRED,
+        AUTHENTICATION_ERROR__TOKEN_NOT_EXIST,
+        AUTHOR_ERROR__TOKEN_EXIST,
+        AUTHOR_ERROR__NICK_NAME_EXIST,
+        UNKNOWN_ERROR__SERVICE,
+        UNKNOWN_ERROR__SYSTEM,
+        ARTICLE_ERROR__NOT_EXIST,
+        AUTHOR_ERROR__NOT_EXIST
     }
 
     private String message;
