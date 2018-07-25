@@ -1,9 +1,10 @@
 import {Inject, Injectable} from "@angular/core";
 import {FailPayloadType} from "../vo/api/ApiResponseModule";
-import {RegisterForm} from "../vo/FormVoModule";
+import {LoginForm, RegisterForm} from "../vo/FormVoModule";
 import {ApiRequest} from "../vo/api/ApiRequestModule";
 import {IConnectionService} from "./api/IConnectionService";
 import {IAuthenticationService} from "./api/IAuthenticationService";
+import {IStringKeyMap} from "../util";
 
 @Injectable()
 export class AuthenticationService implements IAuthenticationService {
@@ -27,5 +28,15 @@ export class AuthenticationService implements IAuthenticationService {
 
   login(token: string, password: string, loginSuccessHandler: () => void,
         loginFailHandler: (errorType: FailPayloadType) => void): void {
+    let queryParams: IStringKeyMap<string[]> = {
+      "username": [token],
+      "password": [password]
+    }
+    this.connectionService.post<number, LoginForm>(
+      "/api/author/authenticate", queryParams, null, null, {
+        handleResponse: (response) => loginSuccessHandler(),
+        handleFailResponse: (failResponse) => loginFailHandler(
+          failResponse.payload.type)
+      });
   }
 }

@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {ApiRequest} from "../../vo/api/ApiRequestModule";
-import {LoginForm} from "../../vo/FormVoModule";
+import {Component, Inject, OnInit} from '@angular/core';
+import {IAuthenticationService} from "../../service/api/IAuthenticationService";
 
 @Component({
   selector: 'app-login-form',
@@ -11,15 +10,17 @@ export class LoginFormComponent implements OnInit {
   public token: string;
   public password: string;
 
-  constructor() {
+  constructor(@Inject("authenticationService") private authenticationService: IAuthenticationService) {
   }
 
   ngOnInit() {
   }
 
   public onSubmit(): void {
-    let apiRequest: ApiRequest<LoginForm> = new ApiRequest<LoginForm>();
-    apiRequest.payload = new LoginForm(this.token, this.password);
-    console.log(apiRequest.toJson());
+    this.authenticationService.login(this.token, this.password, () => {
+      console.log("Login success");
+    }, (faileType) => {
+      console.log("Login fail because of: " + faileType);
+    })
   }
 }
