@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiRequest} from "../../vo/api/ApiRequestModule";
 import {RegisterForm} from "../../vo/FormVoModule";
-import {HttpHeaders} from "@angular/common/http";
 import {ConnectionService} from "../../service/ConnectionService";
-import {ApiResponse, FailPayload} from "../../vo/api/ApiResponseModule";
 
 @Component({
   selector: 'app-register-form',
@@ -26,8 +24,12 @@ export class RegisterFormComponent implements OnInit {
     apiRequest.payload =
       new RegisterForm(this.token, this.password, this.nickName);
     console.log(apiRequest.toJson());
-    let response: ApiResponse<number | FailPayload> = this.connectionService.post<number, RegisterForm>(
-      "/api/author/register", null, null, apiRequest);
-    console.log(response.payload)
+    this.connectionService.post<number, RegisterForm>(
+      "/api/author/register", null, null, apiRequest, {
+        handleResponse: (response) => console.log("Register Form: " +
+          response.payload),
+        handleFailResponse: (failResponse) => console.log("Register Form(Fail): " +
+          failResponse.payload)
+      });
   }
 }
