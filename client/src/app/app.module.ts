@@ -10,6 +10,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {ConnectionService} from "./service/impl/ConnectionService";
 import {AuthenticationService} from "./service/impl/AuthenticationService";
 import {RouterModule} from "@angular/router";
+import { ArticleSummaryHeaderComponent } from './component/article-summary/article-summary-header/article-summary-header.component';
+import { ArticleSummaryFooterComponent } from './component/article-summary/article-summary-footer/article-summary-footer.component';
+import { ArticleSummaryBodyComponent } from './component/article-summary/article-summary-body/article-summary-body.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import {RouterModule} from "@angular/router";
     ArticleSummaryComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    ArticleDetailComponent
+    ArticleDetailComponent,
+    ArticleSummaryHeaderComponent,
+    ArticleSummaryFooterComponent,
+    ArticleSummaryBodyComponent
   ],
   imports: [
     BrowserModule,
