@@ -1,10 +1,10 @@
 import {Inject, Injectable} from "@angular/core";
-import {FailPayloadType} from "../vo/api/ApiResponseModule";
-import {LoginForm, RegisterForm} from "../vo/FormVoModule";
-import {ApiRequest} from "../vo/api/ApiRequestModule";
-import {IConnectionService} from "./api/IConnectionService";
-import {IAuthenticationService} from "./api/IAuthenticationService";
-import {IStringKeyMap} from "../util";
+import {FailPayloadType} from "../../vo/api/ApiResponseModule";
+import {LoginForm, RegisterForm} from "../../vo/FormVoModule";
+import {ApiRequest} from "../../vo/api/ApiRequestModule";
+import {IConnectionService} from "../api/IConnectionService";
+import {IAuthenticationService} from "../api/IAuthenticationService";
+import {IStringKeyMap} from "../../util";
 
 @Injectable()
 export class AuthenticationService implements IAuthenticationService {

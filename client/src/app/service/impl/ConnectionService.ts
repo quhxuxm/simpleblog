@@ -1,13 +1,13 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {IStringKeyMap} from "../util";
+import {IStringKeyMap} from "../../util";
 import {
   ApiResponse,
   ApiResponseStatus,
   FailPayload
-} from "../vo/api/ApiResponseModule";
-import {ApiRequest} from "../vo/api/ApiRequestModule";
-import {IConnectionService} from "./api/IConnectionService";
+} from "../../vo/api/ApiResponseModule";
+import {ApiRequest} from "../../vo/api/ApiRequestModule";
+import {IConnectionService} from "../api/IConnectionService";
 
 @Injectable()
 export class ConnectionService implements IConnectionService {
@@ -50,13 +50,13 @@ export class ConnectionService implements IConnectionService {
    * The async invocation pass the response handler to handle the response.
    *
    * @param {string} url
-   * @param {IStringKeyMap<string[]>} queryParams
+   * @param {IStringKeyMap<string[]>} params
    * @param {IStringKeyMap<string[]>} headers
    * @param {ApiRequest<RequestBodyPayloadType>} requestBody
    * @param options The options response handler.
    */
   post<ResponsePayloadType, RequestBodyPayloadType>(url: string,
-                                                    queryParams: IStringKeyMap<string[]>,
+                                                    params: IStringKeyMap<string[]>,
                                                     headers: IStringKeyMap<string[]>,
                                                     requestBody: ApiRequest<RequestBodyPayloadType>,
                                                     options?: {
@@ -70,7 +70,7 @@ export class ConnectionService implements IConnectionService {
   ): void {
     this.httpClient.post<ApiResponse<ResponsePayloadType | FailPayload>>(url,
       requestBody, {
-        params: queryParams,
+        params: params,
         headers: headers
       }).subscribe((response) => {
       if (response.status === ApiResponseStatus.SUCCESS) {

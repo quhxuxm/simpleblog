@@ -15,7 +15,7 @@ export interface IConnectionService {
   ): void;
 
   post<ResponsePayloadType, RequestBodyPayloadType>(url: string,
-                                                    queryParams: IStringKeyMap<string[]>,
+                                                    params: IStringKeyMap<string[]>,
                                                     headers: IStringKeyMap<string[]>,
                                                     requestBody: ApiRequest<RequestBodyPayloadType>,
                                                     options?: {
