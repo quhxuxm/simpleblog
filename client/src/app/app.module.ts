@@ -9,6 +9,8 @@ import {ConnectionService} from "./service/impl/ConnectionService";
 import {AuthenticationService} from "./service/impl/AuthenticationService";
 import {ArticleSummaryModule} from "./component/article-summary/article-summary.module";
 import {AppRoutersModule} from "./app.routers";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatButtonModule, MatCheckboxModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,10 @@ import {AppRoutersModule} from "./app.routers";
     FormsModule,
     HttpClientModule,
     ArticleSummaryModule,
-    AppRoutersModule
+    AppRoutersModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule
   ],
   providers: [{
     provide: "connectionService",
