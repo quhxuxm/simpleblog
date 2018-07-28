@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {IAuthenticationService} from "../../service/api/IAuthenticationService";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-register-form',

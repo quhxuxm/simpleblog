@@ -31,8 +31,9 @@
         Nick name is required
       </div>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="!registerForm.form.valid">Register
+    <button type="submit" class="btn btn-success"
+            [disabled]="!registerForm.form.valid">{{"register.btn"|translate}}
     </button>
   </form>
-<a routerLink="/">Return to main</a>
+  <a routerLink="/">Return to main</a>
 </div>
