@@ -1,4 +1,4 @@
-import {FailPayloadType} from "../../vo/api/ApiResponseModule";
+import {FailPayloadType} from '../../vo/api/ApiResponseModule';
 
 export interface IAuthenticationService {
   register(token: string, password: string, nickName: string,

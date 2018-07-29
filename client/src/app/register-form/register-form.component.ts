@@ -1,6 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {IAuthenticationService} from "../../service/api/IAuthenticationService";
-import {TranslateService} from "@ngx-translate/core";
+import { Component, Inject, OnInit } from '@angular/core';
+import { IAuthenticationService } from '../service/api/IAuthenticationService';
 
 @Component({
   selector: 'app-register-form',
@@ -12,7 +11,7 @@ export class RegisterFormComponent implements OnInit {
   public password: string;
   public nickName: string;
 
-  constructor(@Inject("authenticationService") private authenticationService: IAuthenticationService) {
+  constructor(@Inject('authenticationService') private authenticationService: IAuthenticationService) {
   }
 
   ngOnInit() {
@@ -20,9 +19,9 @@ export class RegisterFormComponent implements OnInit {
 
   public onSubmit(): void {
     this.authenticationService.register(this.token, this.password, this.nickName, (id) => {
-      console.log("Register the author with id = " + id);
+      console.log('Register the author with id = ' + id);
     }, (failType) => {
-      console.log("Fail to register author because of: " + failType)
+      console.log('Fail to register author because of: ' + failType);
     });
   }
 }
