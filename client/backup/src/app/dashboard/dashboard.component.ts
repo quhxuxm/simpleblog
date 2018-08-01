@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { DataService } from '../data/data.service';
-import { Post } from '../Post';
+import { Post } from '../post';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
 
