@@ -1,0 +1,53 @@
+<mat-sidenav-container class="nav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <div class="sidenav-btn-container">
+      <a routerLink="/home">
+        <fa-icon [icon]="['fas', 'home']"></fa-icon>
+      </a>
+      <a routerLink="/login">
+        <fa-icon [icon]="['fas', 'user']"></fa-icon>
+      </a>
+      <a routerLink="/message">
+        <fa-icon [icon]="['fas', 'comment-alt']"></fa-icon>
+      </a>
+      <a routerLink="/article/create">
+        <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+      </a>
+      <a routerLink="/logout" class="sidenav-logout-btn">
+        <fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>
+      </a>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="topnav" color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+      </button>
+      <a routerLink="/home" class="topnav-logo-container">
+        <fa-icon [icon]="['fas', 'burn']"></fa-icon>
+        <span class="topnav-logo-text">Simple Blog</span>
+      </a>
+      <a routerLink="/search">
+        <fa-icon [icon]="['fas', 'search']"></fa-icon>
+      </a>
+    </mat-toolbar>
+    <main>
+      <ng-content></ng-content>
+    </main>
+    <footer>
+      <a>Email: quhxuxm_quh@163.com</a>
+      <a>Phone: 15810529295</a>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

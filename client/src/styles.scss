@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import "theme.scss";
+@import "~normalize.css/normalize.css";
+
+html, body {
+  height: 100vh;
+  margin: 0;
+}
+
+body {
+  main {
+    height: 100%;
+  }
+}
+
+.button-theme {
+  color: $simpleblog-app-dark-text-color !important;
+  font-weight: bold !important;
+}
+
+.checkbox-theme {
+  font-weight: bold !important;
+}

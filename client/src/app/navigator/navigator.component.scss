@@ -1,0 +1,81 @@
+@import "../../theme.scss";
+
+.nav-container {
+  height: 100%;
+
+  .topnav {
+    box-shadow: 0 0 5px mat-color($mat-grey, 300);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    a {
+      text-decoration: none;
+      color: $simpleblog-app-dark-text-color;
+    }
+    a.topnav-logo-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-items: center;
+      margin-left: -16px;
+      .topnav-logo-text {
+        font-size: 0.8em;
+        margin-left: 5px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .sidenav {
+    width: 72px;
+    background-color: $simpleblog-dark-bg-color;
+
+    .sidenav-btn-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-items: start;
+      height: 100%;
+
+      a {
+        margin: 16px;
+        color: $simpleblog-app-light-text-color;
+        font-size: 1.5em;
+      }
+
+      a.sidenav-logout-btn {
+        margin-bottom: 32px;
+        margin-top: auto;
+        justify-self: end;
+
+      }
+    }
+
+  }
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  main{
+    z-index: 0;
+  }
+  footer{
+    z-index: 1;
+    position: sticky;
+    height: 50px;
+    bottom: 0;
+    background-color: $simpleblog-dark-bg-color;
+    color: $simpleblog-app-light-text-color;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row;
+    justify-content: space-around;
+    a{
+      font-size: 0.5em;
+    }
+  }
+}
+
+
