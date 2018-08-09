@@ -1,36 +1,48 @@
-<form class="register-form">
-  <mat-form-field class="register-form-field-container">
-    <input matInput name="username" required maxlength="40" type="text" placeholder="User name"/>
-    <fa-icon [icon]="['fas', 'user']" matSuffix></fa-icon>
-    <mat-hint>Input your user name</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="register-form-field-container">
-    <input matInput name="password" required maxlength="40" type="password" placeholder="Password"/>
-    <fa-icon [icon]="['fas', 'lock']" matSuffix></fa-icon>
-    <mat-hint>Input your password</mat-hint>
-  </mat-form-field>
-  <mat-form-field class="register-form-field-container">
-    <input matInput name="nickName" required maxlength="40" type="text" placeholder="Nick name"/>
-    <fa-icon [icon]="['fas', 'laugh']" matSuffix></fa-icon>
-    <mat-hint>Input your nick name</mat-hint>
-  </mat-form-field>
-  <div class="register-form-field-container button-container">
-    <button mat-raised-button color="primary" class="button-theme">
-      Register
-    </button>
-  </div>
-  <div class="register-form-field-container text-divider">
+<div class="register-page-content-container">
+  <form class="register-form">
+    <mat-form-field>
+      <input matInput name="username" required maxlength="40" type="text" placeholder="User name"/>
+      <fa-icon [icon]="['fas', 'user']" matSuffix></fa-icon>
+      <mat-hint>Input your user name</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="password" required maxlength="40" type="password" placeholder="Password"/>
+      <fa-icon [icon]="['fas', 'lock']" matSuffix></fa-icon>
+      <mat-hint>Input your password</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput name="nickName" required maxlength="40" type="text" placeholder="Nick name"/>
+      <fa-icon [icon]="['fas', 'laugh']" matSuffix></fa-icon>
+      <mat-hint>Input your nick name</mat-hint>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-raised-button color="primary" class="button-theme">
+        Register
+      </button>
+    </div>
+  </form>
+  <div class=" text-divider">
     <h5>Register with social application</h5>
   </div>
-  <div class="register-form-field-container social-application-container">
+  <div class=" social-application-container">
     <button mat-mini-fab>
-      <fa-icon [icon] = "['fab','qq']"></fa-icon>
+      <fa-icon [icon]="['fab','qq']"></fa-icon>
     </button>
     <button mat-mini-fab>
-      <fa-icon [icon] = "['fab','weixin']"></fa-icon>
+      <fa-icon [icon]="['fab','weixin']"></fa-icon>
     </button>
-    <button mat-mini-fab class="others">
-      <fa-icon [icon] = "['fas','ellipsis-v']"></fa-icon>
+    <button mat-mini-fab class="others" [matMenuTriggerFor]="otherRegisterOptionsMenu">
+      <fa-icon [icon]="['fas','ellipsis-v']"></fa-icon>
     </button>
+    <mat-menu #otherRegisterOptionsMenu>
+      <button mat-menu-item class="fa-icon-button">
+        <fa-icon [icon]="['fab','google']"></fa-icon>
+        <span>Google</span>
+      </button>
+      <button mat-menu-item class="fa-icon-button">
+        <fa-icon [icon]="['fab','facebook']"></fa-icon>
+        <span>Facebook</span>
+      </button>
+    </mat-menu>
   </div>
-</form>
+</div>

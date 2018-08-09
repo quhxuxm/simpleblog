@@ -1,0 +1,37 @@
+//Customize colors
+@import "theme";
+$simpleblog-dark-bg-color: mat-color($mat-grey, 800);
+$simpleblog-app-light-text-color: mat-color($mat-grey, 50);
+$simpleblog-app-dark-text-color: mat-color($mat-grey, 800);
+$simpleblog-app-middle-text-color: mat-color($mat-grey, 500);
+
+@mixin content-flex-layout($direction: column, $align: center) {
+  display: flex;
+  justify-items: start;
+  align-items: $align;
+  flex-direction: $direction;
+
+  > * {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+}
+@mixin general-vertical-form-flex-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-items: start;
+
+  > * {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  > * + * {
+    margin-top: 0;
+  }
+}
+
+

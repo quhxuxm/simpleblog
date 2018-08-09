@@ -1,38 +1,33 @@
-@import "../../theme.scss";
+@import "../../common";
+.register-page-content-container {
+  width: 100%;
+  height: 100%;
+  @include content-flex-layout();
 
-form.register-form {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-items: start;
-  margin-left: 32px;
-  margin-right: 32px;
-  max-width: 500px;
-  color: $simpleblog-app-dark-text-color;
+  form {
+    @include general-vertical-form-flex-layout();
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    min-width: 290px;
+    width: unset;
+    color: $simpleblog-app-dark-text-color;
 
-  .register-form-field-container {
-    width: 100%;
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  .register-form-field-container + .register-form-field-container {
-    margin-top: 0;
-  }
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-items: start;
+      justify-content: space-between;
 
-  .register-form-field-container.button-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: end;
-    justify-content: space-between;
-
-    button{
-      margin-left: auto;
+      button {
+        margin-left: auto;
+      }
     }
   }
 
-  .register-form-field-container.text-divider {
-    h5{
+  .text-divider {
+    h5 {
       position: relative;
       margin-left: auto;
       margin-right: auto;
@@ -41,17 +36,21 @@ form.register-form {
     }
   }
 
-  .register-form-field-container.social-application-container {
+  .social-application-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-items: start;
+    justify-items: center;
     justify-content: space-around;
     button {
       color: $simpleblog-app-dark-text-color;
+      margin-left: auto;
+      margin-right: auto;
     }
     button.others {
       color: $simpleblog-app-light-text-color !important;
     }
   }
 }
+
+

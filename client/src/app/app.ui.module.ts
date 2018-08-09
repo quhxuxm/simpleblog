@@ -9,6 +9,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatMenuModule,
   MatSidenavModule,
   MatToolbarModule
 } from '@angular/material';
@@ -34,6 +35,7 @@ library.add(fas, far, fab);
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatMenuModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
@@ -50,6 +52,7 @@ library.add(fas, far, fab);
     MatInputModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatMenuModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,

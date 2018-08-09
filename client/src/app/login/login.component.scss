@@ -1,35 +1,28 @@
-@import "../../theme.scss";
+@import "../../common";
+.login-page-content-container {
+  width: 100%;
+  height: 100%;
+  @include content-flex-layout();
 
-form.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-items: start;
-  margin-left: 32px;
-  margin-right: 32px;
-  margin-top: 30px;
-  max-width: 500px;
-  color: $simpleblog-app-dark-text-color;
+  form {
+    @include general-vertical-form-flex-layout();
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    min-width: 290px;
+    width: unset;
+    color: $simpleblog-app-dark-text-color;
 
-
-  .login-form-field-container {
-    width: 100%;
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  .login-form-field-container + .login-form-field-container {
-    margin-top: 0;
-  }
-
-  .login-form-field-container.button-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-items: start;
-    justify-content: space-between;
+    .button-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-items: start;
+      justify-content: space-between;
+    }
   }
 
-  .login-form-field-container.text-divider {
+  .text-divider {
     h5 {
       position: relative;
       margin-left: auto;
@@ -39,20 +32,22 @@ form.login-form {
     }
   }
 
-  .login-form-field-container.social-application-container {
+  .social-application-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-items: start;
+    justify-items: center;
     justify-content: space-around;
     button {
       color: $simpleblog-app-dark-text-color;
+      margin-left: auto;
+      margin-right: auto;
     }
     button.others {
       color: $simpleblog-app-light-text-color !important;
     }
   }
-  .login-form-field-container.register-link-container {
+  .register-link-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -64,3 +59,4 @@ form.login-form {
     }
   }
 }
+

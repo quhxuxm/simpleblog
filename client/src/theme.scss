@@ -68,9 +68,5 @@ $simpleblog-app-light-theme: mat-light-theme($simpleblog-app-primary, $simpleblo
 @include mat-tree-theme($simpleblog-app-light-theme)
 @include mat-divider-theme($simpleblog-app-light-theme)
 
-//Customize colors
-$simpleblog-dark-bg-color: mat-color($mat-grey, 800);
-$simpleblog-app-light-text-color: mat-color($mat-grey, 50);
-$simpleblog-app-dark-text-color:mat-color($mat-grey, 800);
-$simpleblog-app-middle-text-color: mat-color($mat-grey, 500);
+
 
