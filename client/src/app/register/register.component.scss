@@ -2,7 +2,13 @@
 .register-page-content-container {
   width: 100%;
   height: 100%;
+  margin-left: auto;
+  margin-right: auto;
   @include content-flex-layout();
+
+  @include responsive($width-small) {
+    width: 500px;
+  }
 
   form {
     @include general-vertical-form-flex-layout();
@@ -10,7 +16,11 @@
     margin-right: auto;
     max-width: 500px;
     min-width: 290px;
-    width: unset;
+    width: 290px;
+
+    @include responsive($width-small) {
+      width: 500px;
+    }
     color: $simpleblog-app-dark-text-color;
 
     .button-container {

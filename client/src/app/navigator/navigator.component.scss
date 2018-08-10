@@ -40,6 +40,10 @@
       align-items: center;
       justify-items: center;
       margin-left: -16px;
+
+      @include responsive($width-small){
+        margin-left: 0;
+      }
       .topnav-logo-text {
         font-size: 0.8em;
         margin-left: 5px;

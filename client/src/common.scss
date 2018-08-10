@@ -13,8 +13,6 @@ $simpleblog-app-middle-text-color: mat-color($mat-grey, 500);
 
   > * {
     width: 100%;
-    margin-top: 16px;
-    margin-bottom: 16px;
   }
 
 }
@@ -33,5 +31,16 @@ $simpleblog-app-middle-text-color: mat-color($mat-grey, 500);
     margin-top: 0;
   }
 }
-
+/**
+The media query
+ */
+$width-small: 568px;
+$width-medium: 768px;
+$width-large: 996px;
+$width-extra-large: 1200px;
+@mixin responsive($width) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
 
