@@ -4,6 +4,7 @@ $simpleblog-dark-bg-color: mat-color($mat-grey, 800);
 $simpleblog-app-light-text-color: mat-color($mat-grey, 50);
 $simpleblog-app-dark-text-color: mat-color($mat-grey, 800);
 $simpleblog-app-middle-text-color: mat-color($mat-grey, 500);
+$simpleblog-app-grey-text-color: mat-color($mat-grey, 300);
 
 @mixin content-flex-layout($direction: column, $align: center) {
   display: flex;

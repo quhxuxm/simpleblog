@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatCheckboxModule,
   MatFormFieldModule,
   MatIconModule,
@@ -36,6 +36,7 @@ library.add(fas, far, fab);
     MatFormFieldModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatCardModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
@@ -53,6 +54,7 @@ library.add(fas, far, fab);
     MatFormFieldModule,
     MatCheckboxModule,
     MatMenuModule,
+    MatCardModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,

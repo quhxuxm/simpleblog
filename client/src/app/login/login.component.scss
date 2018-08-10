@@ -4,7 +4,7 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
-
+  margin-top: 10%;
   @include responsive($width-small) {
     width: 500px;
   }
