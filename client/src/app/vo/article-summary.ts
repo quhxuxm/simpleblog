@@ -15,7 +15,7 @@ export class ArticleSummary {
   private _commentNumber: number;
   private _viewNumber: number;
   private _coverImageId: number;
-
+  private _tags: string[];
 
   constructor(articleId: number,
               title: string,
@@ -49,8 +49,8 @@ export class ArticleSummary {
     this._commentNumber = commentNumber;
     this._viewNumber = viewNumber;
     this._coverImageId = coverImageId;
+    this._tags = [];
   }
-
 
   get articleId(): number {
     return this._articleId;
@@ -178,5 +178,9 @@ export class ArticleSummary {
 
   set coverImageId(value: number) {
     this._coverImageId = value;
+  }
+
+  get tags(): string[] {
+    return this._tags;
   }
 }

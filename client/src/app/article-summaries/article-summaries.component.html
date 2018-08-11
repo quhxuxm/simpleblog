@@ -1,42 +1,7 @@
 <div class="article-summaries-container">
-  <mat-card *ngFor="let summary of summaries" class="article-summary-card">
-    <mat-card-header class="article-summary-info">
-      <img mat-card-avatar class="article-summary-author-icon"
-           src="https://material.angular.io/assets/img/examples/shiba1.jpg">
-      <mat-card-title class="article-summary-author-nickname">
-        {{summary.authorNickName}}
-      </mat-card-title>
-      <mat-card-subtitle class="article-summary-anthology-title">
-        <a routerLink="/anthology/{{summary.anthologyId}}">
-          {{summary.anthologyTitle}}
-        </a>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="article-summary">
-      <h1 class="article-summary-title">
-        {{summary.title}}
-      </h1>
-      <div class="article-summary-cover-img"
-           style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"></div>
-      <p class="article-summary-content">
-        {{summary.summary}}
-      </p>
-    </mat-card-content>
-    <mat-card-actions class="article-summary-actions">
-      <img mat-card-avatar class="article-summary-current-author-icon"
-           src="https://material.angular.io/assets/img/examples/shiba1.jpg">
-      <a routerLink="#">
-        <fa-icon [icon]="['fas','comment-dots']"></fa-icon>
-        <span>{{summary.commentNumber}}</span>
-      </a>
-      <a routerLink="/article/praise/{{summary.articleId}}">
-        <fa-icon [icon]="['fas','heart']"></fa-icon>
-        <span>{{summary.praiseNumber}}</span>
-      </a>
-      <a routerLink="/article/bookmark/{{summary.articleId}}">
-        <fa-icon [icon]="['fas','bookmark']"></fa-icon>
-        <span>{{summary.bookmarkNumber}}</span>
-      </a>
-    </mat-card-actions>
-  </mat-card>
+  <div class="article-summaries-container-column" [style.width.%]="100/columnNumber"
+       *ngFor="let column of summaryColumns">
+    <app-article-summary *ngFor="let summary of column" [summary]="summary">
+    </app-article-summary>
+  </div>
 </div>

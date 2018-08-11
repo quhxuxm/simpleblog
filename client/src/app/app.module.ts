@@ -7,6 +7,7 @@ import {LoginComponent} from './login/login.component';
 import {NavigatorComponent} from './navigator/navigator.component';
 import {RegisterComponent} from './register/register.component';
 import { ArticleSummariesComponent } from './article-summaries/article-summaries.component';
+import { ArticleSummaryComponent } from './article-summary/article-summary.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ArticleSummariesComponent } from './article-summaries/article-summaries
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ArticleSummariesComponent
+    ArticleSummariesComponent,
+    ArticleSummaryComponent
   ],
   imports: [
     AppRoutingModule,

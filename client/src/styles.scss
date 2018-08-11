@@ -4,6 +4,7 @@
 html, body {
   height: 100vh;
   margin: 0;
+  background-color: mat-color($mat-brown, 50);
 }
 body {
   main {
@@ -16,7 +17,7 @@ body {
   }
 }
 .button-theme {
-  color: $simpleblog-app-dark-text-color !important;
+  color: mat-color($mat-gray, 800) !important;
   font-weight: bold !important;
 }
 .checkbox-theme {

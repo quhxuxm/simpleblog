@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./navigator.component.scss']
 })
 export class NavigatorComponent {
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  hideSideNav: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(
       map(result => result.matches)
     );

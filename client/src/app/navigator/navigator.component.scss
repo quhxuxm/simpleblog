@@ -1,9 +1,10 @@
 @import "../../common";
 .main-nav-container {
   height: 100%;
+  background-color: transparent;
   .main-sidenav {
     width: 72px;
-    background-color: $simpleblog-dark-bg-color;
+    background-color: mat-color($mat-gray, 800);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,14 +12,14 @@
     height: 100%;
     a {
       margin: 16px;
-      color: $simpleblog-app-light-text-color;
+      color: mat-color($mat-gray, 50);
       font-size: 1.5em;
     }
     a.sidenav-bottom-btn {
       justify-self: end;
       margin-top: auto;
     }
-    a.sidenav-bottom-btn+a.sidenav-bottom-btn{
+    a.sidenav-bottom-btn + a.sidenav-bottom-btn {
       margin-top: 16px;
     }
     a.sidenav-bottom-btn:last-of-type {
@@ -26,13 +27,13 @@
     }
   }
   .main-topnav {
-    box-shadow: 0 0 5px mat-color($mat-grey, 300);
+    box-shadow: 0 0 5px mat-color($mat-grey, 500);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     a {
       text-decoration: none;
-      color: $simpleblog-app-dark-text-color;
+      color: mat-color($mat-gray, 800);
     }
     a.topnav-logo-container {
       display: flex;
@@ -41,7 +42,7 @@
       justify-items: center;
       margin-left: -16px;
 
-      @include responsive($width-small){
+      @include responsive($width-small) {
         margin-left: 0;
       }
       .topnav-logo-text {
@@ -50,6 +51,9 @@
         font-weight: bold;
       }
     }
+  }
+
+  main{
   }
 
   .mat-toolbar.mat-primary {
