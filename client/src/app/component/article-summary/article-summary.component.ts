@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArticleComment} from '../vo/article-comment';
-import {ArticleSummary} from '../vo/article-summary';
+import {ArticleComment} from '../../vo/article-comment';
+import {ArticleSummary} from '../../vo/article-summary';
 
 @Component({
   selector: 'app-article-summary',

@@ -1,4 +1,4 @@
-@import "../../common";
+@import "../../../common";
 section.article-summary-card {
   overflow: hidden;
   padding: 16px;
@@ -82,8 +82,8 @@ section.article-summary-card {
       height: 200px;
       margin-left: -16px;
       margin-right: -16px;
-
       background-position: center;
+      cursor: pointer;
     }
 
     section.article-summary-content {

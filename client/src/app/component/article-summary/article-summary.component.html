@@ -17,7 +17,7 @@
     <a routerLink="/article/{{summary.articleId}}" class="article-summary-title">
       {{summary.title}}
     </a>
-    <div class="article-summary-cover-img"
+    <div class="article-summary-cover-img" routerLink="/article/{{summary.articleId}}"
          style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"></div>
     <section class="article-summary-content">
       {{summary.summary}}
