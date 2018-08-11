@@ -1,0 +1,48 @@
+<section class="article-summary-card">
+  <header>
+    <img class="article-summary-author-icon"
+         src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+    <div class="article-summaries-author-info">
+      <a routerLink="/author/{{summary.authorId}}" class="article-summary-author-nickname">
+        {{summary.authorNickName}}
+      </a>
+      <div class="article-summary-tags-container">
+        <a routerLink="/" *ngFor="let tag of summary.tags">
+          标签{{tag}}
+        </a>
+      </div>
+    </div>
+  </header>
+  <article>
+    <a routerLink="/article/{{summary.articleId}}" class="article-summary-title">
+      {{summary.title}}
+    </a>
+    <div class="article-summary-cover-img"
+         style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"></div>
+    <section class="article-summary-content">
+      {{summary.summary}}
+    </section>
+  </article>
+  <footer>
+    <button mat-stroked-button color="primary" routerLink="/anthology/{{summary.anthologyId}}">
+      {{summary.anthologyTitle}}
+    </button>
+    <a routerLink="/anthology/bookmark/{{summary.anthologyId}}">
+      <fa-icon [icon]="['fas','eye']"></fa-icon>
+      <span>10000</span>
+    </a>
+    <a routerLink="/article/detail/{{summary.articleId}}">
+      <fa-icon [icon]="['fas','comment-dots']"></fa-icon>
+      <span>{{summary.commentNumber}}</span>
+    </a>
+    <a routerLink="/article/praise/{{summary.articleId}}">
+      <fa-icon [icon]="['fas','heart']"></fa-icon>
+      <span>{{summary.praiseNumber}}</span>
+    </a>
+    <a routerLink="/article/bookmark/{{summary.articleId}}">
+      <fa-icon [icon]="['fas','bookmark']"></fa-icon>
+      <span>{{summary.bookmarkNumber}}</span>
+    </a>
+  </footer>
+</section>
+
