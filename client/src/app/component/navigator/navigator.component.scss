@@ -3,17 +3,18 @@
   height: 100%;
   background-color: transparent;
   .main-sidenav {
-    width: 72px;
-    background-color: mat-color($mat-gray, 800);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-items: start;
+    //width: 72px;
+    background-color: $global_bg_color;
+
     height: 100%;
+
     a {
       margin: 16px;
-      color: mat-color($mat-gray, 50);
+      color: $global_text_light_color;
       font-size: 1.5em;
+    }
+    a:hover{
+      color: $global_text_high_light_color;
     }
     a.sidenav-bottom-btn {
       justify-self: end;
@@ -27,24 +28,59 @@
     }
   }
   .main-topnav {
-    box-shadow: 0 0 5px mat-color($mat-grey, 500);
+    background-color: $global_bg_color;
+    height: 72px;
+    border-bottom: 1px solid $global_border_color;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    position: fixed;
+
+    .main-topnav-sidenav-trigger {
+      font-size: 1em;
+      font-weight: lighter;
+      margin-right: 16px;
+    }
     a {
       text-decoration: none;
-      color: mat-color($mat-gray, 800);
+      color: $global_text_normal_color;
+    }
+    a.search-btn{
+      margin-right: 16px;
+    }
+    button.write-article-btn {
+      height: 100%;
+      text-transform: uppercase;
+      background-color: $global_button_bg_high_light_color;
+      display: none;
+    }
+    @include responsive($width-small) {
+      button.write-article-btn {
+        display: block;
+        border-left: 1px solid $global_border_color;
+      }
+    }
+    button.register-or-login-btn {
+      height: 100%;
+      text-transform: uppercase;
+      margin-left: 16px;
+      display: none;
+    }
+    @include responsive($width-small) {
+      button.register-or-login-btn {
+        display: block;
+        border-left: 1px solid $global_border_color;
+      }
     }
     a.topnav-logo-container {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-items: center;
-      margin-left: -16px;
-
-      @include responsive($width-small) {
-        margin-left: 0;
-      }
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       .topnav-logo-text {
         font-size: 0.8em;
         margin-left: 5px;
@@ -52,8 +88,17 @@
       }
     }
   }
+  main {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 72px;
+  }
 
-  main{
+  @include responsive($width-small) {
+    main {
+      margin-left: 48px;
+      margin-right: 48px;
+    }
   }
 
   .mat-toolbar.mat-primary {

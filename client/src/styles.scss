@@ -4,7 +4,8 @@
 html, body {
   height: 100vh;
   margin: 0;
-  background-color: mat-color($mat-brown, 50);
+  background-color: $global_bg_color;
+  color: $global_text_normal_color;
 }
 body {
   main {
@@ -17,10 +18,13 @@ body {
   }
 }
 .button-theme {
-  color: mat-color($mat-gray, 800) !important;
+  color: $global_text_normal_color !important;
   font-weight: bold !important;
 }
 .checkbox-theme {
   font-weight: bold !important;
+}
+.separator {
+  flex: 1 1 auto;
 }
 

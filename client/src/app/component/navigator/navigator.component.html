@@ -3,45 +3,56 @@
     #drawer
     class="main-sidenav"
     fixedInViewport="true"
-    [attr.role]="(hideSideNav | async) ? 'dialog' : 'navigation'"
-    [mode]="(hideSideNav | async) ? 'over' : 'side'"
-    [opened]="!(hideSideNav | async)">
-    <a routerLink="/home">
-      <fa-icon [icon]="['fas', 'home']"></fa-icon>
-    </a>
-    <a routerLink="/login">
-      <fa-icon [icon]="['fas', 'user']"></fa-icon>
-    </a>
-    <a routerLink="/message">
-      <fa-icon [icon]="['fas', 'comment-alt']"></fa-icon>
-    </a>
-    <a routerLink="/article/create">
-      <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-    </a>
-    <a routerLink="/about" class="sidenav-bottom-btn">
-      <fa-icon [icon]="['fas', 'code']"></fa-icon>
-    </a>
-    <a routerLink="/logout" class="sidenav-bottom-btn">
-      <fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>
-    </a>
+    [mode]="'over'"
+    [opened]="false">
+    <mat-list>
+      <h3>Website</h3>
+      <mat-list-item>
+        <a routerLink="/home">
+          Home
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/about">
+          About us
+        </a>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3>Author</h3>
+      <mat-list-item>
+        <a routerLink="/login">
+          Login/Register
+        </a>
+      </mat-list-item>
+      <mat-list-item>
+        <a routerLink="/logout">
+          Logout
+        </a>
+      </mat-list-item>
+    </mat-list>
+
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="main-topnav" color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="hideSideNav | async">
+    <mat-toolbar class="main-topnav">
+      <button mat-icon-button
+              (click)="drawer.toggle()" class="main-topnav-sidenav-trigger">
         <fa-icon [icon]="['fas', 'bars']"></fa-icon>
       </button>
+      <button mat-button class="register-or-login-btn">
+        Login/Register
+      </button>
+      <span class="separator"></span>
       <a routerLink="/home" class="topnav-logo-container">
         <fa-icon [icon]="['fas', 'burn']"></fa-icon>
         <span class="topnav-logo-text">Simple Blog</span>
       </a>
-      <a routerLink="/search">
+      <span class="separator"></span>
+      <a routerLink="/search" class="search-btn">
         <fa-icon [icon]="['fas', 'search']"></fa-icon>
       </a>
+      <button mat-button class="write-article-btn">
+        Write Article
+      </button>
     </mat-toolbar>
     <main>
       <ng-content></ng-content>

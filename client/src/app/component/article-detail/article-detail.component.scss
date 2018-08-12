@@ -127,24 +127,22 @@ section {
 
       a {
         margin-right: 16px;
-        font-size: 1.5em;
+        font-size: 32px;
         color: mat-color($mat-gray,800);
         border-radius: 50%;
         border: 1px solid mat-color($mat-gray,800);
         width: 64px;
         height: 64px;
         text-decoration: none;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-items: center;
-
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        line-height: 64px;
         span{
-          font-size: 0.7em;
-          width: 100%;
-          height: 100%;
-          text-align: center;
-          margin-top: -1px;
+          font-size: 12px;
+          position: absolute;
+          top: -32px;
+          left: 64px;
         }
       }
 
