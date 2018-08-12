@@ -1,3 +1,45 @@
-<p>
-  article-detail works!
-</p>
+<section>
+  <header>
+    <h1>{{article.title}}</h1>
+    <div class="article-detail-additional-info-container">
+      <img class="article-detail-author-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+      <div class="article-detail-author-info-container">
+        <div class="article-detail-author-nickname-update-date-container">
+          <a routerLink="/author/{{article.authorId}}">
+            {{article.authorNickName}}
+          </a>
+        </div>
+        <span class="article-detail-update-date">
+         {{article.updateDate | date: 'shortDate':'zh-Hans'}} 更新
+        </span>
+      </div>
+    </div>
+  </header>
+  <article>
+    {{article.content}}
+  </article>
+  <div class="article-detail-tags-container">
+    <button mat-stroked-button color="primary">
+      {{article.anthologyTitle}}
+    </button>
+    <a routerLink="/" *ngFor="let tag of article.tags;let i=index" class="{{i >=2 ? 'hide-for-small':''}}">
+      {{tag}}
+    </a>
+  </div>
+  <footer>
+    <div class="article-detail-actions-big-container">
+      <a routerLink="/article/praise/{{article.id}}" class="praise">
+        <fa-icon [icon]="['fas','heart']"></fa-icon>
+        <span>{{article.praiseNumber}}</span>
+      </a>
+      <a routerLink="/article/comment/{{article.id}}">
+        <fa-icon [icon]="['fas','comment-dots']"></fa-icon>
+        <span>{{article.commentNumber}}</span>
+      </a>
+      <a routerLink="/article/bookmark/{{article.id}}">
+        <fa-icon [icon]="['fas','bookmark']"></fa-icon>
+        <span>{{article.bookmarkNumber}}</span>
+      </a>
+    </div>
+  </footer>
+</section>

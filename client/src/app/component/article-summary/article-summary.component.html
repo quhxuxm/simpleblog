@@ -3,12 +3,17 @@
     <img class="article-summary-author-icon"
          src="https://material.angular.io/assets/img/examples/shiba1.jpg">
     <div class="article-summaries-author-info">
-      <a routerLink="/author/{{summary.authorId}}" class="article-summary-author-nickname">
-        {{summary.authorNickName}}
-      </a>
+      <div class="article-summary-author-nickname-and-update-date">
+        <a routerLink="/author/{{summary.authorId}}" class="article-summary-author-nickname">
+          {{summary.authorNickName}}
+        </a>
+        <span>
+          {{summary.updateDate | date: 'shortDate':'zh-Hans'  }}
+        </span>
+      </div>
       <div class="article-summary-tags-container">
-        <a routerLink="/" *ngFor="let tag of summary.tags">
-          标签{{tag}}
+        <a routerLink="/" *ngFor="let tag of summary.tags; let i = index" class="{{i >=3 ? 'hide-on-small':''}}">
+          {{tag}}
         </a>
       </div>
     </div>
@@ -18,7 +23,8 @@
       {{summary.title}}
     </a>
     <div class="article-summary-cover-img" routerLink="/article/{{summary.articleId}}"
-         style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"></div>
+         style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"
+         *ngIf="summary.coverImageId"></div>
     <section class="article-summary-content">
       {{summary.summary}}
     </section>

@@ -25,13 +25,29 @@ section.article-summary-card {
       align-items: start;
       justify-items: center;
       margin-left: 8px;
-      max-width: 80%;
+      //max-width: 80%;
       overflow: hidden;
-      a.article-summary-author-nickname {
-        font-size: 0.9em;
-        margin-bottom: 8px;
-        color: mat-color($mat-gray, 800);
+      width: 100%;
+      .article-summary-author-nickname-and-update-date {
+        display: flex;
+        flex-direction: row;
+        justify-items: start;
+        align-items: center;
+        width: 100%;
+        a.article-summary-author-nickname {
+          font-size: 0.9em;
+          margin-bottom: 8px;
+          color: mat-color($mat-gray, 800);
+        }
+        span {
+          margin-left: auto;
+          justify-self: end;
+          font-size: 0.8em;
+          color: mat-color($mat-gray, 500);
+          margin-bottom: 8px;
+        }
       }
+
       .article-summary-tags-container {
         color: mat-color($mat-gray, 500);
         display: flex;
@@ -55,6 +71,15 @@ section.article-summary-card {
         a:hover {
           color: mat-color($mat-gray, 800);
         }
+        a.hide-on-small {
+          display: none;
+        }
+        @include responsive($width-small) {
+          a.hide-on-small {
+            display: inline-block;
+          }
+        }
+
       }
       a.article-summary-author-follower:hover {
         color: mat-color($mat-gray, 800);
@@ -96,6 +121,7 @@ section.article-summary-card {
       white-space: pre-wrap;
       line-height: 20px;
       margin-top: 16px;
+      margin-bottom: 16px;
     }
   }
   footer {
