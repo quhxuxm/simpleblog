@@ -12,7 +12,6 @@
           <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
           <span>{{anthology.praiseNumber}}</span>
         </button>
-
         <button mat-stroked-button color="primary">
           <fa-icon [icon]="['fas','bookmark']"></fa-icon>
           <span>{{anthology.bookmarkNumber}}</span>
@@ -20,10 +19,12 @@
       </div>
     </div>
   </div>
+  <section>
+    <mat-tab-group class="anghology-detail-content-container">
+      <mat-tab label="First"> Content 1 </mat-tab>
+      <mat-tab label="Second"> Content 2 </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
 
-  <ul>
-    <li *ngFor="let articleSummary of anthology.articleSummaries">
-      {{articleSummary.title}}
-    </li>
-  </ul>
+  </section>
 </div>

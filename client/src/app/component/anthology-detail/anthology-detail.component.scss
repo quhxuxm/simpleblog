@@ -124,6 +124,21 @@ div.anthology-detail-wrapper {
       height: 500px;
     }
   }
+
+  section {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    .anghology-detail-content-container{
+      width: 100%;
+    }
+  }
 }
 
 
