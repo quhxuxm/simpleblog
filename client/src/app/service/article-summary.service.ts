@@ -8,7 +8,7 @@ export class ArticleSummaryService {
   constructor() {
   }
 
-  generateMockSummaries(): ArticleSummary[] {
+  private generateMockSummaries(): ArticleSummary[] {
     const summaries: ArticleSummary[] = [];
     for (let i = 1; i <= 12; i++) {
       const s =
@@ -62,6 +62,11 @@ export class ArticleSummaryService {
 
   getSummariesOfLabels(labels: string[]): ArticleSummary[] {
     console.log('getSummariesOfLabels with labels = ' + labels.join(','));
+    return this.generateMockSummaries();
+  }
+
+  getSummariesOfAnthology(anthologyId: number): ArticleSummary[] {
+    console.log('getSummariesOfAnthology with anthology id = ' + anthologyId);
     return this.generateMockSummaries();
   }
 }

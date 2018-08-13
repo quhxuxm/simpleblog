@@ -19,10 +19,10 @@
     </div>
   </header>
   <article>
-    <a routerLink="/article/{{summary.articleId}}" class="article-summary-title">
+    <a routerLink="/article/{{summary.id}}" class="article-summary-title">
       {{summary.title}}
     </a>
-    <div class="article-summary-cover-img" routerLink="/article/{{summary.articleId}}"
+    <div class="article-summary-cover-img" routerLink="/article/{{summary.id}}"
          style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')"
          *ngIf="summary.coverImageId"></div>
     <section class="article-summary-content">
@@ -33,11 +33,11 @@
     <button mat-flat-button color="primary" routerLink="/anthology/{{summary.anthologyId}}">
       {{summary.anthologyTitle}}
     </button>
-    <a routerLink="/article/praise/{{summary.articleId}}">
+    <a routerLink="/article/praise/{{summary.id}}">
       <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
       <span>{{summary.praiseNumber}}</span>
     </a>
-    <a routerLink="/article/bookmark/{{summary.articleId}}">
+    <a routerLink="/article/bookmark/{{summary.id}}">
       <fa-icon [icon]="['fas','bookmark']"></fa-icon>
       <span>{{summary.bookmarkNumber}}</span>
     </a>

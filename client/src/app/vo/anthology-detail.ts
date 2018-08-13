@@ -16,6 +16,8 @@ export class AnthologyDetail {
   private _articleSummaries: ArticleSummary[];
 
   constructor() {
+    this._articleSummaries = [];
+    this._tags = [];
   }
 
   get id(): number {

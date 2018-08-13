@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AnthologyDetail} from '../vo/anthology-detail';
 import {ArticleSummary} from '../vo/article-summary';
+import {ArticleSummaryService} from './article-summary.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnthologyDetailService {
-  constructor() {
+  constructor(private articleSummaryService: ArticleSummaryService) {
   }
 
   get(id: number): AnthologyDetail {
@@ -24,11 +25,11 @@ export class AnthologyDetailService {
     result.bookmarkNumber = 10000;
     result.updateDate = new Date();
     result.id = 1;
+    result.articleSummaries = this.generateArticleSummaries(id);
     return result;
   }
 
-  generateArticleSummaries(): ArticleSummary[] {
-    const result: ArticleSummary[] = [];
-    return result;
+  private generateArticleSummaries(anthologyId: number): ArticleSummary[] {
+    return this.articleSummaryService.getSummariesOfAnthology(anthologyId);
   }
 }
