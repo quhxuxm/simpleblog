@@ -2,8 +2,10 @@
 @import "theme";
 $global_color_bg_normal: mat-color($mat-gray,100);
 $global_color_border: mat-color($mat-gray, 300);
+
 $global_color_text_normal: mat-color($mat-gray, 800);
 $global_color_text_light: mat-color($mat-gray, 500);
+$global_color_text_high_light_darker: mat-color($mat-yellow, 800);
 $global_color_text_high_light: mat-color($mat-yellow, 300);
 $global_color_text_high_light_hover: mat-color($mat-yellow, 500);
 $global_color_button_bg_high_light: mat-color($mat-yellow, 300);

@@ -44,11 +44,64 @@
             测试作者的表述，测试作者的表述，测试作者的表述，测试作者的表述, 测试作者的表述，
             测试作者的表述，测试作者的表述，测试作者的表述
           </div>
-          <button class="author-follow-btn" mat-stroked-button>
+          <button class="author-follow-btn" mat-button>
             关注
           </button>
         </div>
+      </div>
+      <div class="article-detail-comment-container">
+        <header>
+            {{article.commentNumber}}条评论
+        </header>
+        <section>
+          <ul class="comment-list">
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
 
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
+
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <footer>
+          <textarea></textarea>
+          <button mat-flat-button>评论</button>
+        </footer>
       </div>
     </footer>
   </section>
