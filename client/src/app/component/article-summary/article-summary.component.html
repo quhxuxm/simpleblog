@@ -30,17 +30,9 @@
     </section>
   </article>
   <footer>
-    <button mat-stroked-button color="primary" routerLink="/anthology/{{summary.anthologyId}}">
+    <button mat-flat-button color="primary" routerLink="/anthology/{{summary.anthologyId}}">
       {{summary.anthologyTitle}}
     </button>
-    <a routerLink="/anthology/bookmark/{{summary.anthologyId}}">
-      <fa-icon [icon]="['fas','eye']"></fa-icon>
-      <span>10000</span>
-    </a>
-    <a routerLink="/article/detail/{{summary.articleId}}">
-      <fa-icon [icon]="['fas','comment-dots']"></fa-icon>
-      <span>{{summary.commentNumber}}</span>
-    </a>
     <a routerLink="/article/praise/{{summary.articleId}}">
       <fa-icon [icon]="['fas','heart']"></fa-icon>
       <span>{{summary.praiseNumber}}</span>

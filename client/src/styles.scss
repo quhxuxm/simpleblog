@@ -4,8 +4,8 @@
 html, body {
   height: 100vh;
   margin: 0;
-  background-color: $global_bg_color;
-  color: $global_text_normal_color;
+  background-color: $global_color_bg_normal;
+  color: $global_color_text_normal;
 }
 body {
   main {
@@ -18,7 +18,7 @@ body {
   }
 }
 .button-theme {
-  color: $global_text_normal_color !important;
+  color: $global_color_text_normal !important;
   font-weight: bold !important;
 }
 .checkbox-theme {

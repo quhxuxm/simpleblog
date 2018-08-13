@@ -22,7 +22,7 @@
     @include responsive($width-small) {
       width: 500px;
     }
-    color: mat-color($mat-grey, 800);
+    color: $global_color_text_normal;
 
     .button-container {
       display: flex;
@@ -43,7 +43,7 @@
       margin-left: auto;
       margin-right: auto;
       text-align: center;
-      color: mat-color($mat-grey, 500);
+      color: $global_color_text_light;
     }
   }
 
@@ -54,12 +54,12 @@
     justify-items: center;
     justify-content: space-around;
     button {
-      color: mat-color($mat-grey, 800);
+      color: $global_color_text_normal;
       margin-left: auto;
       margin-right: auto;
     }
     button.others {
-      color: mat-color($mat-grey, 50) !important;
+      color: $global_color_text_normal !important;
     }
   }
 }

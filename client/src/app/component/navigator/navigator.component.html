@@ -5,31 +5,28 @@
     fixedInViewport="true"
     [mode]="'over'"
     [opened]="false">
-    <mat-list>
-      <h3>Website</h3>
-      <mat-list-item>
-        <a routerLink="/home">
-          Home
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a routerLink="/about">
-          About us
-        </a>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <h3>Author</h3>
-      <mat-list-item>
-        <a routerLink="/login">
-          Login/Register
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a routerLink="/logout">
-          Logout
-        </a>
-      </mat-list-item>
-    </mat-list>
+    <section>
+      <a routerLink="/home" class="sidenav-logo-container">
+        <fa-icon [icon]="['fas', 'burn']"></fa-icon>
+        <span class="sidenav-logo-text">Simple Blog</span>
+      </a>
+
+      <a routerLink="/login">
+        login/register
+      </a>
+      <a routerLink="/home">
+        most popular articles
+      </a>
+      <a routerLink="/home">
+        most popular anthologies
+      </a>
+      <a routerLink="/home">
+        most popular authors
+      </a>
+      <a routerLink="/about">
+        about us
+      </a>
+    </section>
 
   </mat-sidenav>
   <mat-sidenav-content>
@@ -38,7 +35,7 @@
               (click)="drawer.toggle()" class="main-topnav-sidenav-trigger">
         <fa-icon [icon]="['fas', 'bars']"></fa-icon>
       </button>
-      <button mat-button class="register-or-login-btn">
+      <button mat-button class="register-or-login-btn" routerLink="/login">
         Login/Register
       </button>
       <span class="separator"></span>

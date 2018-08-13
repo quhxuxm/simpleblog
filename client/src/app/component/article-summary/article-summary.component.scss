@@ -4,7 +4,7 @@ section.article-summary-card {
   padding: 16px;
   //border: 1px solid mat-color($mat-gray, 300);
   border-radius: 6px;
-  background-color: #FFFFFF;
+  background-color: $global_color_card_bg;
   //box-shadow: 0 0 5px mat-color($mat-grey, 600);
 
   header {
@@ -156,10 +156,9 @@ section.article-summary-card {
     a {
       font-size: 0.9em;
       cursor: pointer;
-      color: mat-color($mat-gray, 500);
+      color: $global_color_text_light;
       text-decoration: none;
       display: inline-block;
-      max-width: 50px;
       text-overflow: ellipsis;
       margin-left: 16px;
       word-wrap: break-word;
@@ -170,7 +169,6 @@ section.article-summary-card {
         display: none;
         font-size: 0.7em;
         text-align: start;
-        max-width: 30px;
         word-wrap: break-word;
         word-break: break-all;
         overflow: hidden;
@@ -190,7 +188,7 @@ section.article-summary-card {
       margin-right: 8px;
     }
     a:hover {
-      color: mat-color($mat-gray, 800);
+      color: $global_color_text_normal;
     }
   }
 }

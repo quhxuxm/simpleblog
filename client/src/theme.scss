@@ -9,8 +9,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$simpleblog-app-primary: mat-palette($mat-light-blue);
-$simpleblog-app-accent: mat-palette($mat-light-blue, A200, A100, A400);
+$simpleblog-app-primary: mat-palette($mat-yellow, 300, 200, 400);
+$simpleblog-app-accent: mat-palette($mat-yellow, 300, 200, 400);
 
 // The warn palette is optional (defaults to red).
 $simpleblog-app-warn: mat-palette($mat-red);
@@ -21,13 +21,24 @@ $simpleblog-app-light-theme: mat-light-theme($simpleblog-app-primary, $simpleblo
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($simpleblog-app-light-theme);
+//@include angular-material-theme($simpleblog-app-light-theme);
+
+// Input box theme
+
+$simpleblog-app-input-primary: mat-palette($mat-gray, 800, 500, 900);
+$simpleblog-app-input-accent: mat-palette($mat-yellow, 800, 300, 900);
+
+// The warn palette is optional (defaults to red).
+$simpleblog-app-input-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$simpleblog-app-input-light-theme: mat-light-theme($simpleblog-app-input-primary, $simpleblog-app-input-accent, $simpleblog-app-input-warn);
 
 // Make one component in a special theme
 @include mat-core-theme($simpleblog-app-light-theme);
 @include mat-button-theme($simpleblog-app-light-theme);
 @include mat-button-toggle-theme($simpleblog-app-light-theme)
-@include mat-checkbox-theme($simpleblog-app-light-theme);
+@include mat-checkbox-theme($simpleblog-app-input-light-theme);
 @include mat-ripple-theme($simpleblog-app-light-theme)
 @include mat-option-theme($simpleblog-app-light-theme)
 @include mat-optgroup-theme($simpleblog-app-light-theme)
@@ -43,13 +54,13 @@ $simpleblog-app-light-theme: mat-light-theme($simpleblog-app-primary, $simpleblo
 @include mat-expansion-panel-theme($simpleblog-app-light-theme)
 @include mat-grid-list-theme($simpleblog-app-light-theme)
 @include mat-icon-theme($simpleblog-app-light-theme)
-@include mat-input-theme($simpleblog-app-light-theme)
+@include mat-input-theme($simpleblog-app-input-light-theme)
 @include mat-list-theme($simpleblog-app-light-theme)
 @include mat-menu-theme($simpleblog-app-light-theme)
 @include mat-paginator-theme($simpleblog-app-light-theme)
 @include mat-progress-bar-theme($simpleblog-app-light-theme)
 @include mat-progress-spinner-theme($simpleblog-app-light-theme)
-@include mat-radio-theme($simpleblog-app-light-theme);
+@include mat-radio-theme($simpleblog-app-input-light-theme);
 @include mat-select-theme($simpleblog-app-light-theme);
 @include mat-sidenav-theme($simpleblog-app-light-theme)
 @include mat-slide-toggle-theme($simpleblog-app-light-theme)
@@ -60,11 +71,11 @@ $simpleblog-app-light-theme: mat-light-theme($simpleblog-app-primary, $simpleblo
 @include mat-toolbar-theme($simpleblog-app-light-theme)
 @include mat-tooltip-theme($simpleblog-app-light-theme)
 @include mat-snack-bar-theme($simpleblog-app-light-theme)
-@include mat-form-field-fill-theme($simpleblog-app-light-theme)
-@include mat-form-field-legacy-theme($simpleblog-app-light-theme)
-@include mat-form-field-outline-theme($simpleblog-app-light-theme)
-@include mat-form-field-standard-theme($simpleblog-app-light-theme)
-@include mat-form-field-theme($simpleblog-app-light-theme)
+@include mat-form-field-fill-theme($simpleblog-app-input-light-theme)
+@include mat-form-field-legacy-theme($simpleblog-app-input-light-theme)
+@include mat-form-field-outline-theme($simpleblog-app-input-light-theme)
+@include mat-form-field-standard-theme($simpleblog-app-input-light-theme)
+@include mat-form-field-theme($simpleblog-app-input-light-theme)
 @include mat-tree-theme($simpleblog-app-light-theme)
 @include mat-divider-theme($simpleblog-app-light-theme)
 
