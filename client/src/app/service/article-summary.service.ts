@@ -10,7 +10,7 @@ export class ArticleSummaryService {
 
   generateMockSummaries(): ArticleSummary[] {
     const summaries: ArticleSummary[] = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 12; i++) {
       const s =
         new ArticleSummary(i,
           `测试文章的标题ABC ${i}`,

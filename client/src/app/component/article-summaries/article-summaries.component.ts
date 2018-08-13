@@ -13,7 +13,8 @@ export class ArticleSummariesComponent implements OnInit {
   private BREAKPOINT_COLUMN_NUMBER: Map<string[], number> = new Map([
     [[Breakpoints.XSmall, Breakpoints.Small], 1],
     [[Breakpoints.Medium], 2],
-    [[Breakpoints.Large, Breakpoints.XLarge], 3]
+    [[Breakpoints.Large], 3],
+    [[Breakpoints.XLarge], 4]
   ]);
   @Input()
   maxColumnNumber: number;
@@ -33,8 +34,8 @@ export class ArticleSummariesComponent implements OnInit {
 
   ngOnInit(): void {
     this.prepareSummaries();
-    if (!this.maxColumnNumber || this.maxColumnNumber > 3 || this.maxColumnNumber <= 0) {
-      this.maxColumnNumber = 3;
+    if (!this.maxColumnNumber || this.maxColumnNumber > 4 || this.maxColumnNumber <= 0) {
+      this.maxColumnNumber = 4;
     }
     this.columnNumber = this.maxColumnNumber;
     this.BREAKPOINT_COLUMN_NUMBER.forEach((v, k, m) => {
