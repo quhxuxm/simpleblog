@@ -329,6 +329,7 @@ div.article-detail-wrapper {
           }
           button {
             width: 100%;
+            border: 1px solid $global_color_border;
           }
 
           @include responsive($width-small) {

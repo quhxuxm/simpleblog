@@ -24,6 +24,7 @@ export class ArticleDetailService {
     result.viewNumber = 10000;
     result.updateDate = new Date();
     result.anthologyTitle = '测试文集标题ABC';
+    result.anthologyId=1;
     return result;
   }
 }

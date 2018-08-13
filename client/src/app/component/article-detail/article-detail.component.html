@@ -7,7 +7,7 @@
       <span class="author-info">
         作者<a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>，更新于 {{article.updateDate|date: 'shortDate':'zh-Hans'}}
       </span>
-      <button mat-flat-button color="primary" class="anthology-title">
+      <button mat-flat-button color="primary" class="anthology-title" routerLink="/anthology/{{article.anthologyId}}">
         文集《{{article.anthologyTitle}}》
       </button>
       <div class="actions-container">
