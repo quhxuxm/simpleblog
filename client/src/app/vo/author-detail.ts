@@ -1,5 +1,5 @@
 export class AuthorDetail {
-  private _authorId: number;
+  private _id: number;
   private _nickName: string;
   private _token: string;
   private _lastLoginDate: Date;
@@ -13,30 +13,16 @@ export class AuthorDetail {
   private _tags: string[];
   private _defaultAnthologyId: number;
 
-  constructor(authorId: number, nickName: string, token: string, lastLoginDate: Date, registerDate: Date,
-              roles: string[], authorIconImageId: number, articleNumber: number, commentNumber: number,
-              anthologyNumber: number, followedByNumber: number, tags: string[], defaultAnthologyId: number) {
-    this._authorId = authorId;
-    this._nickName = nickName;
-    this._token = token;
-    this._lastLoginDate = lastLoginDate;
-    this._registerDate = registerDate;
-    this._roles = roles;
-    this._authorIconImageId = authorIconImageId;
-    this._articleNumber = articleNumber;
-    this._commentNumber = commentNumber;
-    this._anthologyNumber = anthologyNumber;
-    this._followedByNumber = followedByNumber;
-    this._tags = tags;
-    this._defaultAnthologyId = defaultAnthologyId;
+  constructor() {
+    this._tags = [];
   }
 
-  get authorId(): number {
-    return this._authorId;
+  get id(): number {
+    return this._id;
   }
 
-  set authorId(value: number) {
-    this._authorId = value;
+  set id(value: number) {
+    this._id = value;
   }
 
   get nickName(): string {

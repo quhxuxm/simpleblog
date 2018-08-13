@@ -12,9 +12,10 @@
       </button>
       <div class="actions-container">
         <button mat-stroked-button color="primary">
-          <fa-icon [icon]="['fas','heart']"></fa-icon>
+          <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
           <span>{{article.praiseNumber}}</span>
         </button>
+
         <button mat-stroked-button color="primary">
           <fa-icon [icon]="['fas','bookmark']"></fa-icon>
           <span>{{article.bookmarkNumber}}</span>
@@ -99,8 +100,13 @@
           </ul>
         </section>
         <footer>
-          <textarea></textarea>
-          <button mat-flat-button>评论</button>
+          <div class="current-commenter-input-container">
+            <img class="current-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+            <textarea></textarea>
+          </div>
+          <div class="current-commenter-action-container">
+            <button mat-flat-button>评论</button>
+          </div>
         </footer>
       </div>
     </footer>

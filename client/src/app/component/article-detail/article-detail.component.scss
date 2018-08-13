@@ -58,7 +58,7 @@ div.article-detail-wrapper {
         display: inline-block;
         color: #FFFFFF;
         text-transform: uppercase;
-        font-size: 0.5em;
+        font-size: 0.9em;
         a {
           margin: 5px;
           color: $global_color_text_high_light;
@@ -82,7 +82,7 @@ div.article-detail-wrapper {
       }
 
       .anthology-title {
-        font-size: 0.5em;
+        font-size: 0.9em;
       }
 
       .actions-container {
@@ -100,6 +100,9 @@ div.article-detail-wrapper {
             font-size: 1.2em;
             margin: 8px;
           }
+        }
+        .tooltip{
+          background: $global_color_highlight_bg_normal;
         }
       }
     }
@@ -153,14 +156,14 @@ div.article-detail-wrapper {
       margin-top: 16px;
       margin-bottom: 16px;
       span {
-        font-size: 0.7em;
+        font-size: 0.9em;
         color: $global_color_text_light;
         display: inline-block;
         word-break: keep-all;
       }
       a {
         margin-left: 8px;
-        font-size: 0.7em;
+        font-size: 0.9em;
         color: $global_color_text_light;
         display: inline-block;
         word-break: keep-all;
@@ -183,7 +186,7 @@ div.article-detail-wrapper {
         //margin-left: auto;
       }
     }
-    footer {
+    > footer {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -276,6 +279,8 @@ div.article-detail-wrapper {
               justify-items: start;
               align-items: start;
               margin-bottom: 16px;
+              border-bottom: 1px solid $global_color_border;
+              padding-bottom: 16px;
               img.article-detail-commenter-icon {
                 @include circle_icon(48px);
                 margin-right: 8px;
@@ -290,7 +295,7 @@ div.article-detail-wrapper {
                 .commenter-nick-name {
                   a {
                     color: $global_color_text_high_light_darker;
-                    font-size: 0.7em;
+                    font-size: 0.9em;
                   }
                   a:visited {
                     color: $global_color_text_high_light_darker;
@@ -299,52 +304,75 @@ div.article-detail-wrapper {
                 .comment-time {
                   color: $global_color_text_light;
                   margin-top: 8px;
-                  font-size: 0.7em;
+                  font-size: 0.9em;
                 }
                 .comment-text {
                   margin-top: 8px;
-                  font-size: 0.7em;
+                  font-size: 0.9em;
                 }
               }
+            }
+            li:last-of-type {
+              margin-bottom: 0;
+              border-bottom: none;
             }
           }
         }
 
-        footer {
-          padding: 0;
-          margin: 0;
-          margin-top: 16px;
+        > footer {
           display: flex;
           flex-direction: column;
           align-items: start;
           justify-items: start;
-          textarea {
-            outline: none;
-            width: 100%;
-            height: 100px;
-            resize: none;
-            font-size: 0.7em;
-            margin-bottom: 16px;
-            border: 1px solid $global_color_border;
-          }
-          button {
-            width: 100%;
-            border: 1px solid $global_color_border;
-          }
+          margin-top: 32px;
 
-          @include responsive($width-small) {
+          .current-commenter-input-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            justify-items: start;
+            .current-commenter-icon {
+              @include circle_icon(48px);
+            }
+            textarea {
+              outline: none;
+              height: 100px;
+              resize: none;
+              font-size: 0.8em;
+              border: 1px solid $global_color_border;
+              padding: 8px;
+              margin-left: 16px;
+              width: 100%;
+            }
+          }
+          .current-commenter-action-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-items: start;
+            width: 100%;
+            margin-top: 16px;
             button {
-              align-self: end;
-              margin-left: auto;
-              width: auto;
+              width: 100%;
+              border: 1px solid $global_color_border;
+              margin-left: 64px;
+            }
+
+            @include responsive($width-small) {
+              button {
+                align-self: end;
+                margin-left: auto;
+                width: auto;
+              }
             }
           }
 
         }
       }
 
-      @include responsive($width-small){
-        .article-detail-comment-container{
+      @include responsive($width-small) {
+        .article-detail-comment-container {
           margin-right: 16px;
           margin-left: 16px;
         }

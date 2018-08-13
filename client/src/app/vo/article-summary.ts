@@ -1,5 +1,5 @@
 export class ArticleSummary {
-  private _articleId: number;
+  private _id: number;
   private _title: string;
   private _summary: string;
   private _createDate: Date;
@@ -17,47 +17,16 @@ export class ArticleSummary {
   private _coverImageId: number;
   private _tags: string[];
 
-  constructor(articleId: number,
-              title: string,
-              summary: string,
-              createDate: Date,
-              updateDate: Date,
-              authorId: number,
-              authorNickName: string,
-              authorIconImageId: number,
-              anthologyId: number,
-              anthologyTitle: string,
-              anthologyCoverImageId: number,
-              praiseNumber: number,
-              bookmarkNumber: number,
-              commentNumber: number,
-              viewNumber: number,
-              coverImageId: number) {
-    this._articleId = articleId;
-    this._title = title;
-    this._summary = summary;
-    this._createDate = createDate;
-    this._updateDate = updateDate;
-    this._authorId = authorId;
-    this._authorNickName = authorNickName;
-    this._authorIconImageId = authorIconImageId;
-    this._anthologyId = anthologyId;
-    this._anthologyTitle = anthologyTitle;
-    this._anthologyCoverImageId = anthologyCoverImageId;
-    this._praiseNumber = praiseNumber;
-    this._bookmarkNumber = bookmarkNumber;
-    this._commentNumber = commentNumber;
-    this._viewNumber = viewNumber;
-    this._coverImageId = coverImageId;
+  constructor() {
     this._tags = [];
   }
 
-  get articleId(): number {
-    return this._articleId;
+  get id(): number {
+    return this._id;
   }
 
-  set articleId(value: number) {
-    this._articleId = value;
+  set id(value: number) {
+    this._id = value;
   }
 
   get title(): string {
@@ -182,5 +151,9 @@ export class ArticleSummary {
 
   get tags(): string[] {
     return this._tags;
+  }
+
+  set tags(value: string[]) {
+    this._tags = value;
   }
 }

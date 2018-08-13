@@ -1,3 +1,114 @@
-<p>
-  anthology-detail works!
-</p>
+<div class="article-detail-wrapper">
+  <div class="article-detail-cover"
+       style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')">
+    <div class="mask"></div>
+    <div class="content">
+      <h1>{{article.title}}</h1>
+      <span class="author-info">
+        作者<a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>，更新于 {{article.updateDate|date: 'shortDate':'zh-Hans'}}
+      </span>
+      <button mat-flat-button color="primary" class="anthology-title" routerLink="/anthology/{{article.anthologyId}}">
+        文集《{{article.anthologyTitle}}》
+      </button>
+      <div class="actions-container">
+        <button mat-stroked-button color="primary">
+          <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
+          <span>{{article.praiseNumber}}</span>
+        </button>
+
+        <button mat-stroked-button color="primary">
+          <fa-icon [icon]="['fas','bookmark']"></fa-icon>
+          <span>{{article.bookmarkNumber}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <section>
+    <article>
+      {{article.content}}
+    </article>
+    <div class="article-detail-tags-container">
+      <span>标签：</span>
+      <a routerLink="/" *ngFor="let tag of article.tags;let i=index" class="{{i >=3 ? 'hide-for-small':''}}">
+        {{tag}}
+      </a>
+    </div>
+    <footer>
+      <div class="article-detail-additional-info-container">
+        <img class="article-detail-author-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+        <div class="article-detail-author-info-container">
+          <span class="label">作者</span>
+          <a class="author-nickname" routerLink="/author/{{article.authorId}}">
+            {{article.authorNickName}}
+          </a>
+          <div class="author-description">
+            测试作者的表述，测试作者的表述，测试作者的表述，测试作者的表述, 测试作者的表述，
+            测试作者的表述，测试作者的表述，测试作者的表述
+          </div>
+          <button class="author-follow-btn" mat-button>
+            关注
+          </button>
+        </div>
+      </div>
+      <div class="article-detail-comment-container">
+        <header>
+          {{article.commentNumber}}条评论
+        </header>
+        <section>
+          <ul class="comment-list">
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
+
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
+
+            <li class="comment-item-container">
+              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <div class="comment-item-content">
+                <div class="commenter-nick-name">
+                  <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
+                </div>
+                <div class="comment-time">{{article.updateDate|date: 'shortDate':'zh-Hans'}}</div>
+                <div class="comment-text">
+                  测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论，测试的评论
+                  测试的评论测试的评论测试的评论测试的评论测试的评论
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <footer>
+          <div class="current-commenter-input-container">
+            <img class="current-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+            <textarea></textarea>
+          </div>
+          <div class="current-commenter-action-container">
+            <button mat-flat-button>评论</button>
+          </div>
+        </footer>
+      </div>
+    </footer>
+  </section>
+</div>

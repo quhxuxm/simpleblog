@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {
   MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule, MatGridListModule, MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule
+  MatInputModule, MatListModule, MatMenuModule, MatSidenavModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -31,6 +31,7 @@ library.add(fas, far, fab);
     MatMenuModule,
     MatCardModule,
     MatGridListModule,
+    MatTooltipModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
@@ -50,6 +51,7 @@ library.add(fas, far, fab);
     MatMenuModule,
     MatCardModule,
     MatGridListModule,
+    MatTooltipModule,
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,

@@ -1,6 +1,8 @@
 //Customize colors
 @import "theme";
 $global_color_bg_normal: mat-color($mat-gray,100);
+$global_color_bg_darker: mat-color($mat-gray,200);
+$global_color_highlight_bg_normal: mat-color($mat-yellow,200);
 $global_color_border: mat-color($mat-gray, 300);
 
 $global_color_text_normal: mat-color($mat-gray, 800);
@@ -42,6 +44,7 @@ $global_font_family_special: "SimSun";
 /**
 The media query
  */
+$width-extra-extra-small: 330px;
 $width-extra-small: 450px;
 $width-small: 568px;
 $width-medium: 768px;

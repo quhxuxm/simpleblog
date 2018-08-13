@@ -83,6 +83,7 @@
       display: none;
       padding-right: 32px;
       border-left: 1px solid $global_color_border;
+      width: 180px;
     }
     @include responsive($width-medium) {
       button.write-article-btn {
@@ -94,6 +95,7 @@
       text-transform: uppercase;
       margin-left: 16px;
       display: none;
+      width: 180px;
     }
     @include responsive($width-medium) {
       button.register-or-login-btn {
