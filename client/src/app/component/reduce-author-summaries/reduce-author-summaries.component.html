@@ -1,0 +1,34 @@
+<div class="reduce-author-summaries-container">
+  <mat-accordion [displayMode]="'flat'" class="reduce-author-summaries-accordion">
+    <mat-expansion-panel
+      *ngFor="let authorSummary of authorSummaries">
+      <mat-expansion-panel-header class="reduce-author-summaries-accordion-panel-header">
+        <mat-panel-title class="reduce-author-summaries-accordion-panel-header-title">
+          <a routerLink="/author/{{authorSummary.id}}">
+            <img class="author-icon"
+                 src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+            {{authorSummary.nickName}}
+          </a>
+        </mat-panel-title>
+        <mat-panel-description class="reduce-author-summaries-accordion-panel-header-desc">
+          <span>
+            上次登录：{{authorSummary.lastLoginDate | date: 'shortDate':'zh-Hans' }}
+          </span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <section>
+        <article>
+          {{authorSummary.description}}
+        </article>
+        <footer>
+          <button mat-flat-button color="primary" routerLink="/author/follow/{{authorSummary.id}}">
+            关注
+          </button>
+        </footer>
+      </section>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-paginator class="reduce-author-summaries-paginator" [pageSize]="pageSize" [hidePageSize]="true"
+                 [length]="totalNumber">
+  </mat-paginator>
+</div>
