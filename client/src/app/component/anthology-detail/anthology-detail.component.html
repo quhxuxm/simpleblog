@@ -20,15 +20,33 @@
   </app-banner>
   <section>
     <mat-tab-group class="anthology-detail-content-container">
-      <mat-tab label="所有文章">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="anthology-detail-content-tab-label-container">
+            <fa-icon [icon]="['fas','file']"></fa-icon>
+            <span>所有文章</span>
+          </div>
+        </ng-template>
         <app-reduce-article-summaries [pageSize]="10" [totalNumber]="anthology.articleSummaries.length"
                                       [articleSummaries]="anthology.articleSummaries"></app-reduce-article-summaries>
       </mat-tab>
-      <mat-tab label="热门文章">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="anthology-detail-content-tab-label-container">
+            <fa-icon [icon]="['fas','fire']"></fa-icon>
+            <span>热门文章</span>
+          </div>
+        </ng-template>
         <app-reduce-article-summaries [pageSize]="10" [totalNumber]="anthology.articleSummaries.length"
                                       [articleSummaries]="anthology.articleSummaries"></app-reduce-article-summaries>
       </mat-tab>
-      <mat-tab label="订阅的人">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <div class="anthology-detail-content-tab-label-container">
+            <fa-icon [icon]="['fas','user']"></fa-icon>
+            <span>订阅的人</span>
+          </div>
+        </ng-template>
         <app-reduce-author-summaries [pageSize]="10"></app-reduce-author-summaries>
       </mat-tab>
     </mat-tab-group>

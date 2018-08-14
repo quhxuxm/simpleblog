@@ -16,6 +16,7 @@ import {RegisterComponent} from './component/register/register.component';
 import { ReduceArticleSummariesComponent } from './component/reduce-article-summaries/reduce-article-summaries.component';
 import { BannerComponent } from './component/banner/banner.component';
 import { ReduceAuthorSummariesComponent } from './component/reduce-author-summaries/reduce-author-summaries.component';
+import { AuthorInfoCardComponent } from './component/author-info-card/author-info-card.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ReduceAuthorSummariesComponent } from './component/reduce-author-summar
     AuthorDetailComponent,
     ReduceArticleSummariesComponent,
     BannerComponent,
-    ReduceAuthorSummariesComponent
+    ReduceAuthorSummariesComponent,
+    AuthorInfoCardComponent
   ],
   imports: [
     AppRoutingModule,

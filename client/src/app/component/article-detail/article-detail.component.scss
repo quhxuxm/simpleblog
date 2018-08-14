@@ -173,65 +173,68 @@ div.article-detail-wrapper {
       margin-top: 64px;
       width: 100%;
 
-      .article-detail-additional-info-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-items: start;
+      app-author-info-card{
         width: 100%;
-        .article-detail-author-icon {
-          @include circle_icon(72px)
-        }
-        .article-detail-author-info-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-items: start;
-          width: 100%;
-          color: $global_color_text_normal;
-          margin-top: 16px;
-          span.label {
-            font-size: 0.9em;
-            font-weight: bold;
-            color: $global_color_text_light;
-          }
-          a.author-nickname {
-            color: $global_color_text_normal;
-            font-size: 1.2em;
-            margin-top: 16px;
-            font-weight: bold;
-            font-family: $global_font_family_special;
-          }
-          a.author-nickname:visited {
-            color: $global_color_text_normal;
-          }
-          div.author-description {
-            font-size: 0.9em;
-            color: $global_color_text_light;
-            margin-top: 16px;
-            margin-right: 16px;
-          }
-          button.author-follow-btn {
-            margin-top: 16px;
-            border-radius: 5px;
-            background-color: $global_color_button_bg_high_light;
-            border: 1px solid $global_color_border;
-          }
-        }
       }
-
-      @include responsive($width-small) {
-        .article-detail-additional-info-container {
-          flex-direction: row;
-          .article-detail-author-icon {
-            @include circle_icon(152px)
-          }
-          .article-detail-author-info-container {
-            align-items: start;
-            margin-left: 16px;
-          }
-        }
-      }
+      //.article-detail-additional-info-container {
+      //  display: flex;
+      //  flex-direction: column;
+      //  align-items: center;
+      //  justify-items: start;
+      //  width: 100%;
+      //  .article-detail-author-icon {
+      //    @include circle_icon(72px)
+      //  }
+      //  .article-detail-author-info-container {
+      //    display: flex;
+      //    flex-direction: column;
+      //    align-items: center;
+      //    justify-items: start;
+      //    width: 100%;
+      //    color: $global_color_text_normal;
+      //    margin-top: 16px;
+      //    span.label {
+      //      font-size: 0.9em;
+      //      font-weight: bold;
+      //      color: $global_color_text_light;
+      //    }
+      //    a.author-nickname {
+      //      color: $global_color_text_normal;
+      //      font-size: 1.2em;
+      //      margin-top: 16px;
+      //      font-weight: bold;
+      //      font-family: $global_font_family_special;
+      //    }
+      //    a.author-nickname:visited {
+      //      color: $global_color_text_normal;
+      //    }
+      //    div.author-description {
+      //      font-size: 0.9em;
+      //      color: $global_color_text_light;
+      //      margin-top: 16px;
+      //      margin-right: 16px;
+      //    }
+      //    button.author-follow-btn {
+      //      margin-top: 16px;
+      //      border-radius: 5px;
+      //      background-color: $global_color_button_bg_high_light;
+      //      border: 1px solid $global_color_border;
+      //    }
+      //  }
+      //}
+      //
+      //@include responsive($width-small) {
+      //  .article-detail-additional-info-container {
+      //    flex-direction: row;
+      //    .article-detail-author-icon {
+      //      @include circle_icon(152px)
+      //    }
+      //    .article-detail-author-info-container {
+      //      align-items: start;
+      //      margin-left: 16px;
+      //    }
+      //  }
+      //}
 
       .article-detail-comment-container {
         width: 100%;

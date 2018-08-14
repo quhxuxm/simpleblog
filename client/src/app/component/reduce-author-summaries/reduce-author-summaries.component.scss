@@ -14,6 +14,7 @@
           flex-direction: row;
           justify-items: start;
           align-items: center;
+
           a {
             display: flex;
             flex-direction: row;
@@ -21,29 +22,22 @@
             justify-items: start;
             color: $global_color_text_light;
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 1em;
             .author-icon {
               margin-right: 8px;
-              @include circle_icon(32px)
+              @include circle_icon(28px)
             }
           }
           a:hover {
             color: $global_color_text_normal;
           }
         }
-        .reduce-author-summaries-accordion-panel-header-desc {
-          display: flex;
-          flex-direction: column;
-          align-items: end;
-          justify-items: center;
-          span {
-            font-size: 0.9px;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-items: center;
-            align-items: center;
+      }
+
+      .reduce-author-summaries-accordion-panel-header.mat-expanded {
+        .reduce-author-summaries-accordion-panel-header-title {
+          a {
+            color: $global_color_text_normal;
           }
         }
       }
@@ -61,8 +55,8 @@
           flex-direction: row;
           align-items: center;
           justify-items: start;
-          font-size: 0.9em;
-          color: $global_color_text_normal;
+          font-size: 1em;
+          color: $global_color_text_light;
         }
         footer {
           width: 100%;

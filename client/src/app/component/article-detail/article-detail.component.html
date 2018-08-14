@@ -31,22 +31,23 @@
       </a>
     </div>
     <footer>
-      <div class="article-detail-additional-info-container">
-        <img class="article-detail-author-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
-        <div class="article-detail-author-info-container">
-          <span class="label">作者</span>
-          <a class="author-nickname" routerLink="/author/{{article.authorId}}">
-            {{article.authorNickName}}
-          </a>
-          <div class="author-description">
-            测试作者的表述，测试作者的表述，测试作者的表述，测试作者的表述, 测试作者的表述，
-            测试作者的表述，测试作者的表述，测试作者的表述
-          </div>
-          <button class="author-follow-btn" mat-button>
-            关注
-          </button>
-        </div>
-      </div>
+      <!--<div class="article-detail-additional-info-container">-->
+      <!--<img class="article-detail-author-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>-->
+      <!--<div class="article-detail-author-info-container">-->
+      <!--<span class="label">作者</span>-->
+      <!--<a class="author-nickname" routerLink="/author/{{article.authorId}}">-->
+      <!--{{article.authorNickName}}-->
+      <!--</a>-->
+      <!--<div class="author-description">-->
+      <!--测试作者的表述，测试作者的表述，测试作者的表述，测试作者的表述, 测试作者的表述，-->
+      <!--测试作者的表述，测试作者的表述，测试作者的表述-->
+      <!--</div>-->
+      <!--<button class="author-follow-btn" mat-button>-->
+      <!--关注-->
+      <!--</button>-->
+      <!--</div>-->
+      <!--</div>-->
+      <app-author-info-card [authorId]="1"></app-author-info-card>
       <div class="article-detail-comment-container">
         <header>
           {{article.commentNumber}}条评论

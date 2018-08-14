@@ -5,7 +5,8 @@
       <mat-expansion-panel-header class="reduce-article-summaries-accordion-panel-header">
         <mat-panel-title class="reduce-article-summaries-accordion-panel-header-title">
           <a routerLink="/article/{{articleSummary.id}}">
-            {{articleSummary.title}}
+            <fa-icon [icon]="['far','file']"></fa-icon>
+            <span>{{articleSummary.title}}</span>
           </a>
         </mat-panel-title>
       </mat-expansion-panel-header>

@@ -1,7 +1,7 @@
 @import "../../../common";
 div.anthology-detail-wrapper {
   .anthology-detail-banner {
-    .anthology-detail-banner-content{
+    .anthology-detail-banner-content {
       width: 100%;
       height: 100%;
       display: flex;
@@ -84,7 +84,6 @@ div.anthology-detail-wrapper {
       }
     }
 
-
   }
 
   section {
@@ -99,7 +98,12 @@ div.anthology-detail-wrapper {
     margin-bottom: 64px;
     .anthology-detail-content-container {
       width: 100%;
-
+      .anthology-detail-content-tab-label-container {
+        font-size: 1.2em !important;
+        span{
+          margin-left: 8px;
+        }
+      }
     }
   }
 }
