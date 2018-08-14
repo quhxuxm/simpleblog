@@ -1,0 +1,71 @@
+@import "../../../common";
+.author-info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: start;
+  width: 100%;
+  .author-icon {
+    @include circle_icon(72px)
+  }
+  .author-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: start;
+    width: 100%;
+    color: $global_color_text_normal;
+    margin-top: 16px;
+    span.label {
+      font-size: 14px;
+      font-weight: bold;
+      color: $global_color_text_light;
+    }
+    a.nickname {
+      color: $global_color_text_normal;
+      font-size: 1.2em;
+      //margin-top: 16px;
+      //font-weight: bold;
+      font-family: $global_font_family_special;
+    }
+    a.nickname:visited {
+      color: $global_color_text_normal;
+    }
+    div.description {
+      font-size: 14px;
+      line-height: 22px;
+      color: $global_color_text_light;
+      margin-top: 16px;
+      margin-right: 16px;
+    }
+    button.follow-btn {
+      margin-top: 16px;
+      background-color: $global_color_button_bg_high_light;
+      border: 1px solid $global_color_border;
+    }
+  }
+}
+
+@include responsive($width-small) {
+  .author-info-card {
+    flex-direction: row;
+    .author-icon {
+      @include circle_icon(152px)
+    }
+    .author-info-container {
+      align-items: start;
+      margin-left: 32px;
+      height: 152px;
+      max-height: 152px;
+      margin-top: 0;
+      justify-content: space-around;
+
+      .description{
+        text-overflow: ellipsis;
+        height: 80px;
+        overflow: hidden;
+
+      }
+    }
+  }
+}
