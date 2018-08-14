@@ -1,0 +1,49 @@
+@import "../../../common";
+div.banner-container {
+  width: 100%;
+  height: 280px;
+  display: flex;
+  position: relative;
+  align-items: start;
+  justify-items: start;
+  background-position: center;
+  background-size: auto;
+
+  div.mask {
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.5;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  div.content {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-items: start;
+    align-items: start;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+@include responsive($width-small) {
+  div.banner-container {
+    height: 300px;
+  }
+}
+@include responsive($width-medium) {
+  div.banner-container {
+    height: 400px;
+  }
+}
+@include responsive($width-large) {
+  div.banner-container {
+    height: 500px;
+  }
+}

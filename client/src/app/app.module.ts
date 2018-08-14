@@ -13,6 +13,8 @@ import {HomeComponent} from './component/home/home.component';
 import {LoginComponent} from './component/login/login.component';
 import {NavigatorComponent} from './component/navigator/navigator.component';
 import {RegisterComponent} from './component/register/register.component';
+import { ReduceArticleSummariesComponent } from './component/reduce-article-summaries/reduce-article-summaries.component';
+import { BannerComponent } from './component/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import {RegisterComponent} from './component/register/register.component';
     AnthologyDetailComponent,
     AnthologySummaryComponent,
     AnthologySummariesComponent,
-    AuthorDetailComponent
+    AuthorDetailComponent,
+    ReduceArticleSummariesComponent,
+    BannerComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,94 @@
+@import "../../../common";
+.reduce-article-summaries-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-items: start;
+  .reduce-article-summaries-accordion {
+    width: 100%;
+    .mat-expansion-panel {
+      .reduce-article-summaries-accordion-panel-header {
+        .reduce-article-summaries-accordion-panel-header-title {
+          display: flex;
+          flex-direction: row;
+          justify-items: start;
+          align-items: center;
+          a {
+            color: $global_color_text_light;
+            text-decoration: none;
+            font-size: 0.9em;
+          }
+          a:hover {
+            color: $global_color_text_normal;
+          }
+        }
+
+      }
+
+      section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-items: start;
+
+        header {
+          width: 100%;
+          margin-bottom: 16px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-items: start;
+          span.label {
+            font-size: 0.8em;
+            color: $global_color_text_light;
+            margin-right: 5px;
+          }
+          span.time {
+            font-size: 0.8em;
+            color: $global_color_text_light;
+          }
+        }
+        article {
+          width: 100%;
+          margin-bottom: 16px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-items: start;
+          font-size: 0.9em;
+          color: $global_color_text_normal;
+        }
+        footer {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-items: start;
+          a {
+            margin-right: 8px;
+            font-size: 0.9em;
+            color: $global_color_text_light;
+            text-decoration: none;
+            span{
+              margin-left: 5px;
+            }
+          }
+          a:hover {
+            color: $global_color_text_normal;
+          }
+        }
+      }
+    }
+    .mat-expansion-panel:hover {
+      background-color: $global_color_highlight_bg_normal;
+    }
+    .mat-expansion-panel.mat-expanded {
+      background-color: #FFFFFF;
+    }
+
+  }
+  .reduce-article-summaries-paginator {
+    width: 100%;
+  }
+}

@@ -1,36 +1,13 @@
 @import "../../../common";
 div.anthology-detail-wrapper {
-  div.anthology-detail-cover {
-    width: 100%;
-    height: 280px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-items: center;
-    background-position: center;
-    background-size: auto;
-
-    div.mask {
+  .anthology-detail-banner {
+    .anthology-detail-banner-content{
       width: 100%;
       height: 100%;
-      background-color: #000000;
-      opacity: 0.5;
-      z-index: 1;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    div.content {
-      z-index: 2;
       display: flex;
       flex-direction: column;
-      justify-items: start;
       align-items: center;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      justify-items: center;
       justify-content: space-around;
       h1 {
         color: #FFFFFF;
@@ -106,23 +83,8 @@ div.anthology-detail-wrapper {
         }
       }
     }
-  }
 
-  @include responsive($width-small) {
-    div.anthology-detail-cover {
-      height: 300px;
-    }
-  }
-  @include responsive($width-medium) {
-    div.anthology-detail-cover {
-      height: 400px;
-    }
-  }
 
-  @include responsive($width-large) {
-    div.anthology-detail-cover {
-      height: 500px;
-    }
   }
 
   section {
@@ -135,8 +97,9 @@ div.anthology-detail-wrapper {
     margin-right: auto;
     margin-top: 64px;
     margin-bottom: 64px;
-    .anghology-detail-content-container{
+    .anthology-detail-content-container {
       width: 100%;
+
     }
   }
 }

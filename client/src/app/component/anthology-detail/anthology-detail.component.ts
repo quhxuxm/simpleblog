@@ -9,6 +9,7 @@ import {AnthologyDetail} from '../../vo/anthology-detail';
 })
 export class AnthologyDetailComponent implements OnInit {
   anthology: AnthologyDetail;
+  displayColumns = ['title', 'createDate', 'updateDate'];
 
   constructor(private anthologyDetailService: AnthologyDetailService) {
   }

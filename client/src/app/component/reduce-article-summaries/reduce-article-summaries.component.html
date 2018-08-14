@@ -1,0 +1,44 @@
+<div class="reduce-article-summaries-container">
+  <mat-accordion [displayMode]="'flat'" class="reduce-article-summaries-accordion">
+    <mat-expansion-panel
+      *ngFor="let articleSummary of articleSummaries">
+      <mat-expansion-panel-header class="reduce-article-summaries-accordion-panel-header">
+        <mat-panel-title class="reduce-article-summaries-accordion-panel-header-title">
+          <a routerLink="/article/{{articleSummary.id}}">
+            {{articleSummary.title}}
+          </a>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <section>
+        <header>
+          <span class="label">更新于:</span>
+          <span class="date">{{articleSummary.updateDate | date: 'shortDate':'zh-Hans' }}</span>
+        </header>
+        <article>
+          {{articleSummary.summary}}
+        </article>
+        <footer>
+          <a routerLink="/article/praise/{{articleSummary.id}}">
+            <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
+            <span>{{articleSummary.praiseNumber}}</span>
+          </a>
+          <a routerLink="/article/bookmark/{{articleSummary.id}}">
+            <fa-icon [icon]="['fas','bookmark']"></fa-icon>
+            <span>{{articleSummary.bookmarkNumber}}</span>
+          </a>
+          <a>
+            <fa-icon [icon]="['fas','eye']"></fa-icon>
+            <span>{{articleSummary.viewNumber}}</span>
+          </a>
+          <a routerLink="/article/{{articleSummary.id}}">
+            <fa-icon [icon]="['fas','comment-alt']"></fa-icon>
+            <span>{{articleSummary.commentNumber}}</span>
+          </a>
+        </footer>
+      </section>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-paginator class="reduce-article-summaries-paginator" [pageSize]="pageSize" [hidePageSize]="true"
+                 [length]="totalNumber">
+  </mat-paginator>
+</div>

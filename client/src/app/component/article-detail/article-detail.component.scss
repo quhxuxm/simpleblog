@@ -1,34 +1,13 @@
 @import "../../../common";
 div.article-detail-wrapper {
-  div.article-detail-cover {
-    width: 100%;
-    height: 280px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-items: center;
-    background-position: center;
-    background-size: auto;
+  .article-detail-banner {
+    .article-detail-banner-content {
 
-    div.mask {
-      width: 100%;
-      height: 100%;
-      background-color: #000000;
-      opacity: 0.5;
-      z-index: 1;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    div.content {
-      z-index: 2;
       display: flex;
       flex-direction: column;
       justify-items: start;
       align-items: center;
-      position: absolute;
-      left: 0;
-      top: 0;
+
       width: 100%;
       height: 100%;
       justify-content: space-around;
@@ -101,7 +80,7 @@ div.article-detail-wrapper {
             margin: 8px;
           }
         }
-        .tooltip{
+        .tooltip {
           background: $global_color_highlight_bg_normal;
         }
       }

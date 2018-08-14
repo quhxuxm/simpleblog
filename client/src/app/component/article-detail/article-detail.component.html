@@ -1,8 +1,6 @@
 <div class="article-detail-wrapper">
-  <div class="article-detail-cover"
-       style="background-image: url('https://material.angular.io/assets/img/examples/shiba2.jpg')">
-    <div class="mask"></div>
-    <div class="content">
+  <app-banner bannerImgUrl="https://material.angular.io/assets/img/examples/shiba2.jpg" class="article-detail-banner">
+    <div class="article-detail-banner-content">
       <h1>{{article.title}}</h1>
       <span class="author-info">
         作者<a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>，更新于 {{article.updateDate|date: 'shortDate':'zh-Hans'}}
@@ -15,21 +13,20 @@
           <fa-icon [icon]="['fas','thumbs-up']"></fa-icon>
           <span>{{article.praiseNumber}}</span>
         </button>
-
         <button mat-stroked-button color="primary">
           <fa-icon [icon]="['fas','bookmark']"></fa-icon>
           <span>{{article.bookmarkNumber}}</span>
         </button>
       </div>
     </div>
-  </div>
+  </app-banner>
   <section>
     <article>
       {{article.content}}
     </article>
     <div class="article-detail-tags-container">
       <span>标签：</span>
-       <a routerLink="/" *ngFor="let tag of article.tags;let i=index" class="{{i >=3 ? 'hide-for-small':''}}">
+      <a routerLink="/" *ngFor="let tag of article.tags;let i=index" class="{{i >=3 ? 'hide-for-small':''}}">
         {{tag}}
       </a>
     </div>
@@ -52,12 +49,13 @@
       </div>
       <div class="article-detail-comment-container">
         <header>
-            {{article.commentNumber}}条评论
+          {{article.commentNumber}}条评论
         </header>
         <section>
           <ul class="comment-list">
             <li class="comment-item-container">
-              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <img class="article-detail-commenter-icon"
+                   src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
               <div class="comment-item-content">
                 <div class="commenter-nick-name">
                   <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
@@ -69,9 +67,9 @@
                 </div>
               </div>
             </li>
-
             <li class="comment-item-container">
-              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <img class="article-detail-commenter-icon"
+                   src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
               <div class="comment-item-content">
                 <div class="commenter-nick-name">
                   <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
@@ -83,9 +81,9 @@
                 </div>
               </div>
             </li>
-
             <li class="comment-item-container">
-              <img class="article-detail-commenter-icon" src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <img class="article-detail-commenter-icon"
+                   src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
               <div class="comment-item-content">
                 <div class="commenter-nick-name">
                   <a routerLink="/author/{{article.authorId}}">{{article.authorNickName}}</a>
