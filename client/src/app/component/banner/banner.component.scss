@@ -6,8 +6,10 @@ div.banner-container {
   position: relative;
   align-items: start;
   justify-items: start;
-  background-position: center;
-  background-size: auto;
+  background-position: 50% 50% !important;
+  background-size: cover !important;
+  background-origin: border-box !important;
+  background-color: transparent;
 
   div.mask {
     width: 100%;
