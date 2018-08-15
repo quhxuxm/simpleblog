@@ -2,14 +2,11 @@
 section.article-summary-card {
   overflow: hidden;
   padding: 16px;
-  //border: 1px solid mat-color($mat-gray, 300);
   border-radius: 6px;
   background-color: $global_color_card_bg;
-  //box-shadow: 0 0 5px mat-color($mat-grey, 600);
 
   header {
-    border-bottom: 1px solid mat-color($mat-gray, 300);
-
+    border-bottom: 1px solid $global_color_border;
     padding-bottom: 16px;
     margin-bottom: 16px;
     display: flex;
@@ -25,7 +22,6 @@ section.article-summary-card {
       align-items: start;
       justify-items: center;
       margin-left: 8px;
-      //max-width: 80%;
       overflow: hidden;
       width: 100%;
       .article-summary-author-nickname-and-update-date {
@@ -35,28 +31,31 @@ section.article-summary-card {
         align-items: center;
         width: 100%;
         a.article-summary-author-nickname {
-          font-size: 0.9em;
+          font-size: $global_font_size_normal;
           margin-bottom: 8px;
-          color: mat-color($mat-gray, 800);
+          color: $global_color_text_light;
+        }
+        a.article-summary-author-nickname:hover {
+          color: $global_color_text_normal;
         }
         span {
           margin-left: auto;
           justify-self: end;
-          font-size: 0.8em;
-          color: mat-color($mat-gray, 500);
+          font-size: $global_font_size_smaller;
+          color: $global_color_text_light;
           margin-bottom: 8px;
         }
       }
 
       .article-summary-tags-container {
-        color: mat-color($mat-gray, 500);
+        color: $global_color_text_light;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-items: start;
         overflow: hidden;
         a {
-          font-size: 0.8em;
+          font-size: $global_font_size_smaller;
           margin-left: 8px;
           display: inline-block;
           text-overflow: ellipsis;
@@ -66,10 +65,10 @@ section.article-summary-card {
           margin-left: 0;
         }
         a:visited {
-          color: mat-color($mat-gray, 500);
+          color: $global_color_text_light;
         }
         a:hover {
-          color: mat-color($mat-gray, 800);
+          color: $global_color_text_normal;
         }
         a.hide-on-small {
           display: none;
@@ -79,17 +78,16 @@ section.article-summary-card {
             display: inline-block;
           }
         }
-
       }
       a.article-summary-author-follower:hover {
-        color: mat-color($mat-gray, 800);
+        color: $global_color_text_normal;
       }
     }
   }
 
   article {
     a.article-summary-title {
-      font-size: 1.5em;
+      font-size: $global_font_size_bigger2;
       font-weight: lighter;
       display: inline-block;
       text-overflow: ellipsis;
@@ -99,7 +97,7 @@ section.article-summary-card {
       word-break: break-word;
       text-align: left;
       margin-bottom: 16px;
-      color: mat-color($mat-gray, 800);
+      color: $global_color_text_normal;
       text-decoration: none;
     }
 
@@ -107,19 +105,22 @@ section.article-summary-card {
       height: 200px;
       margin-left: -16px;
       margin-right: -16px;
-      background-position: center;
       cursor: pointer;
+      background-position: 50% 50% !important;
+      background-size: cover !important;
+      background-origin: border-box !important;
+      background-color: transparent;
     }
 
     section.article-summary-content {
       width: 100%;
       text-align: start;
-      max-height: 10em;
-      min-height: 6em;
-      font-size: 14px;
+      max-height: 130px;
+      min-height: 84px;
+      font-size: $global_font_size_normal;
       overflow-y: hidden;
       white-space: pre-wrap;
-      line-height: 20px;
+      line-height: $global_line_height_normal;
       margin-top: 16px;
       margin-bottom: 16px;
     }
@@ -133,7 +134,7 @@ section.article-summary-card {
     button {
       max-width: 120px;
       overflow: hidden;
-      font-size: 0.7em;
+      font-size: $global_font_size_smaller;
       text-overflow: ellipsis;
     }
 
@@ -154,7 +155,7 @@ section.article-summary-card {
     }
 
     a {
-      font-size: 0.9em;
+      font-size: $global_font_size_smaller;
       cursor: pointer;
       color: $global_color_text_light;
       text-decoration: none;
@@ -164,10 +165,8 @@ section.article-summary-card {
       word-wrap: break-word;
       word-break: break-all;
       overflow: hidden;
-      height: 1em;
       span {
         display: none;
-        font-size: 0.7em;
         text-align: start;
         word-wrap: break-word;
         word-break: break-all;

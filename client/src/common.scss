@@ -1,8 +1,8 @@
 //Customize colors
 @import "theme";
-$global_color_bg_normal: mat-color($mat-gray,100);
-$global_color_bg_darker: mat-color($mat-gray,200);
-$global_color_highlight_bg_normal: mat-color($mat-yellow,200);
+$global_color_bg_normal: mat-color($mat-gray, 100);
+$global_color_bg_darker: mat-color($mat-gray, 200);
+$global_color_highlight_bg_normal: mat-color($mat-yellow, 200);
 $global_color_border: mat-color($mat-gray, 300);
 
 $global_color_text_normal: mat-color($mat-gray, 800);
@@ -12,9 +12,15 @@ $global_color_text_high_light: mat-color($mat-yellow, 300);
 $global_color_text_high_light_hover: mat-color($mat-yellow, 500);
 $global_color_button_bg_high_light: mat-color($mat-yellow, 300);
 $global_color_card_bg: #FFFFFF;
-$global_font_family_special: "SimSun";
 
 
+$global_font_size_smaller: 12px;
+$global_font_size_normal: 14px;
+$global_font_size_bigger1: 18px;
+$global_font_size_bigger2: 22px;
+
+$global_line_height_normal:22px;
+$global_line_height_bigger:28px;
 @mixin content-flex-layout($direction: column, $align: center) {
   display: flex;
   justify-items: start;

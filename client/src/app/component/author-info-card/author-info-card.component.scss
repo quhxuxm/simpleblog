@@ -17,35 +17,35 @@
     color: $global_color_text_normal;
     margin-top: 16px;
     span.label {
-      font-size: 14px;
+      font-size: $global_font_size_normal;
       font-weight: bold;
       color: $global_color_text_light;
     }
     a.nickname {
       color: $global_color_text_normal;
-      font-size: 20px;
-      //margin-top: 16px;
-      //font-weight: bold;
-      font-family: $global_font_family_special;
+      font-size: $global_font_size_bigger1;
+    }
+    a.nickname:hover {
+      color: $global_color_text_normal;
     }
     a.nickname:visited {
       color: $global_color_text_normal;
     }
     div.description {
-      font-size: 14px;
+      font-size: $global_font_size_normal;
       line-height: 22px;
       color: $global_color_text_light;
       margin-top: 16px;
       margin-right: 16px;
+      height: 70px;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     button.follow-btn {
       margin-top: 16px;
-      background-color: $global_color_button_bg_high_light;
-      border: 1px solid $global_color_border;
     }
   }
 }
-
 @include responsive($width-small) {
   .author-info-card {
     flex-direction: row;
@@ -59,13 +59,6 @@
       max-height: 152px;
       margin-top: 0;
       justify-content: space-around;
-
-      .description{
-        text-overflow: ellipsis;
-        height: 80px;
-        overflow: hidden;
-
-      }
     }
   }
 }
